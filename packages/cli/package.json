@@ -1,0 +1,36 @@
+{
+  "name": "@unnamed-ui/cli",
+  "version": "0.0.1",
+  "description": "CLI tool for unnamed-ui",
+  "type": "module",
+  "bin": {
+    "unnamed-cli": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "cli",
+    "unnamed-ui"
+  ],
+  "dependencies": {
+    "chalk": "5.6.2",
+    "commander": "^12.0.0",
+    "cross-spawn": "7.0.6"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "6.0.6",
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
