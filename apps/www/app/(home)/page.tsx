@@ -9,7 +9,15 @@ export default function HomePage() {
         <Link href="/docs" className="font-medium underline">
           /docs
         </Link>{" "}
-        and see the documentation.
+        and see the design system documentation.
+      </p>
+
+      <p>
+        You can open{" "}
+        <Link href="/libs" className="font-medium underline">
+          /libs
+        </Link>{" "}
+        and see the ai chat framework documentation.
       </p>
     </div>
   );
