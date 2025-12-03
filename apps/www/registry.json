@@ -26,6 +26,16 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
