@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpIcon } from "lucide-react";
 
 import { Button } from "@/registry/wuhan/ui/button";
