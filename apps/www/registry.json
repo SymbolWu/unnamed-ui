@@ -1,5 +1,4 @@
 {
-  "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "unnnamed-ui",
   "homepage": "https://unnamed-ui.vercel.app/",
   "items": [
@@ -34,6 +33,53 @@
         {
           "path": "registry/wuhan/ui/textarea.tsx",
           "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "prompt-01",
+      "type": "registry:block",
+      "description": "A simple prompt.",
+      "registryDependencies": ["textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/prompt-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "meta": {},
+      "categories": []
+    },
+    {
+      "name": "prompt-default",
+      "type": "registry:example",
+      "registryDependencies": ["textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/prompt-default.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "prompt-active",
+      "type": "registry:example",
+      "registryDependencies": ["textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/prompt-active.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "prompt-disabled",
+      "type": "registry:example",
+      "registryDependencies": ["textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/prompt-disabled.tsx",
+          "type": "registry:example"
         }
       ]
     }

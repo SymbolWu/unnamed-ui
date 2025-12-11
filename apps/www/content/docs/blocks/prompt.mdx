@@ -2,3 +2,69 @@
 title: Prompt
 author: AF
 ---
+
+<ComponentPreview name="prompt-demo" description="A prompt" className="mb-4" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/prompt-01.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the following dependencies:</Step>
+
+```bash
+npm install @radix-ui/react-slot
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="prompt-demo" title="registry/wuhan/blocks/prompt-01.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Examples
+
+### Default
+
+<ComponentPreview
+  name="prompt-default"
+  description="A prompt"
+  className="mb-4"
+/>
+
+### Active
+
+<ComponentPreview
+  name="prompt-active"
+  description="A prompt"
+  className="mb-4"
+/>
+### Disabled
+
+<ComponentPreview
+  name="prompt-disabled"
+  description="A prompt"
+  className="mb-4"
+/>
