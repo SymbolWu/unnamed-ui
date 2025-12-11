@@ -1,0 +1,433 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+@import "./themes.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* 字体 */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  
+  /* 圆角 - 使用 CSS 变量，可以在主题中覆盖 */
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 10px);
+  --radius-circle: 999px;
+  
+  /* 间距 */
+  --spacing: 4px;
+  
+  /* 颜色映射到 Tailwind */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --color-code-highlight: var(--code-highlight);
+  --color-code-number: var(--code-number);
+  --color-selection: var(--selection);
+  --color-selection-foreground: var(--selection-foreground);
+  
+  /* 品牌色 */
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  
+  /* 成功/警告/错误色 */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+}
+
+:root {
+  /* 基础圆角 - Medium 主题 */
+  --radius: 6px;
+  
+  /* 背景和前景 */
+  --background: #ffffff;
+  --foreground: #1e1d26;
+  
+  /* 卡片 */
+  --card: #ffffff;
+  --card-foreground: #1e1d26;
+  
+  /* 弹出层 */
+  --popover: #ffffff;
+  --popover-foreground: #1e1d26;
+  
+  /* 主色 - 使用品牌色 */
+  --primary: #4a56ff;
+  --primary-foreground: #ffffff;
+  
+  /* 次要色 */
+  --secondary: #f0f0f4;
+  --secondary-foreground: #1e1d26;
+  
+  /* 静音色 */
+  --muted: #f0f0f4;
+  --muted-foreground: #666473;
+  
+  /* 强调色 */
+  --accent: #f0f0f4;
+  --accent-foreground: #1e1d26;
+  
+  /* 破坏性操作 */
+  --destructive: #ff494f;
+  --destructive-foreground: #ffffff;
+  
+  /* 边框和输入 */
+  --border: #e1e0e7;
+  --input: #e1e0e7;
+  --ring: #d0ddff;
+  
+  /* 表面 */
+  --surface: #f9f9fb;
+  --surface-foreground: #1e1d26;
+  
+  /* 代码块 */
+  --code: #f9f9fb;
+  --code-foreground: #1e1d26;
+  --code-highlight: #f0f0f4;
+  --code-number: #9e9ca6;
+  
+  /* 文本选择 */
+  --selection: #1e1d26;
+  --selection-foreground: #ffffff;
+  
+  /* 品牌色 - Light 主题 */
+  --brand-50: #f7f9ff;
+  --brand-100: #edf2ff;
+  --brand-200: #dfe9ff;
+  --brand-300: #d0ddff;
+  --brand-400: #9ca9ff;
+  --brand-500: #7381ff;
+  --brand-600: #4a56ff;
+  --brand-700: #343ad9;
+  --brand-800: #2222b3;
+  --brand-900: #18148c;
+  
+  /* 语义化颜色 - Light 主题 */
+  --success: #06ba7e;
+  --success-foreground: #ffffff;
+  --warning: #fb7934;
+  --warning-foreground: #ffffff;
+  --error: #ff494f;
+  --error-foreground: #ffffff;
+  
+  /* 文本颜色 */
+  --text-title: #1e1d26;
+  --text-primary: #403f4d;
+  --text-secondary: #666473;
+  --text-tertiary: #9e9ca6;
+  --text-disable: #aaa8b3;
+  --text-placeholder: #aaa8b3;
+  
+  /* 容器背景 */
+  --bg-container: #ffffff;
+  --bg-page: #ffffff;
+  --bg-page-brand: #f7f9ff;
+  --bg-page-neutral: #f9f9fb;
+  
+  /* 阴影 */
+  --shadow-basic: 0 1px 10px 0 #0000000d, 0 4px 5px 0 #00000014, 0 2px 4px -1px #0000001f;
+  --shadow-medium: 0 3px 14px 2px #0000000d, 0 8px 10px 1px #0000000f, 0 5px 5px -3px #0000001a;
+  --shadow-high: 0 6px 30px 5px #0000000d, 0 16px 24px 2px #0000000a, 0 8px 10px -5px #0000001f;
+  --shadow-focus: 0 0 0 2px #d0ddff;
+}
+
+.dark {
+  /* 背景和前景 */
+  --background: #141414;
+  --foreground: #b2afba;
+  
+  /* 卡片 */
+  --card: #1b1a1d;
+  --card-foreground: #b2afba;
+  
+  /* 弹出层 */
+  --popover: #1b1a1d;
+  --popover-foreground: #b2afba;
+  
+  /* 主色 - 使用品牌色 */
+  --primary: #424cdc;
+  --primary-foreground: #ffffff;
+  
+  /* 次要色 */
+  --secondary: #232326;
+  --secondary-foreground: #b2afba;
+  
+  /* 静音色 */
+  --muted: #232326;
+  --muted-foreground: #908e97;
+  
+  /* 强调色 */
+  --accent: #232326;
+  --accent-foreground: #b2afba;
+  
+  /* 破坏性操作 */
+  --destructive: #dc4146;
+  --destructive-foreground: #ffffff;
+  
+  /* 边框和输入 */
+  --border: #313136;
+  --input: #313136;
+  --ring: #283283;
+  
+  /* 表面 */
+  --surface: #1b1a1d;
+  --surface-foreground: #908e97;
+  
+  /* 代码块 */
+  --code: #1b1a1d;
+  --code-foreground: #b2afba;
+  --code-highlight: #232326;
+  --code-number: #7c7a85;
+  
+  /* 文本选择 */
+  --selection: #b2afba;
+  --selection-foreground: #141414;
+  
+  /* 品牌色 - Dark 主题 */
+  --brand-50: #12172a;
+  --brand-100: #192152;
+  --brand-200: #20286f;
+  --brand-300: #283283;
+  --brand-400: #2c327e;
+  --brand-500: #373fad;
+  --brand-600: #424cdc;
+  --brand-700: #6a76e8;
+  --brand-800: #95a2f3;
+  --brand-900: #bfc8f8;
+  
+  /* 语义化颜色 - Dark 主题 */
+  --success: #08a16e;
+  --success-foreground: #ffffff;
+  --warning: #d86a2f;
+  --warning-foreground: #ffffff;
+  --error: #dc4146;
+  --error-foreground: #ffffff;
+  
+  /* 文本颜色 */
+  --text-title: #b2afba;
+  --text-primary: #a3a1ab;
+  --text-secondary: #908e97;
+  --text-tertiary: #7c7a85;
+  --text-disable: #4b4a50;
+  --text-placeholder: #4b4a50;
+  
+  /* 容器背景 */
+  --bg-container: #141414;
+  --bg-page: #141414;
+  --bg-page-brand: #12172a;
+  --bg-page-neutral: #1b1a1d;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  ::selection {
+    @apply bg-selection text-selection-foreground;
+  }
+  
+  html {
+    @apply overscroll-y-none scroll-smooth;
+  }
+  
+  body {
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    @apply bg-background text-foreground;
+  }
+  
+  a:active,
+  button:active {
+    @apply opacity-60 md:opacity-100;
+  }
+}
+
+@utility theme-container {
+  @apply font-sans;
+}
+
+@utility container-wrapper {
+  @apply mx-auto w-full px-2;
+}
+
+@utility container {
+  @apply mx-auto max-w-[1400px] px-4 lg:px-8;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility step {
+  counter-increment: step;
+  @apply relative;
+
+  &:before {
+    @apply text-muted-foreground right-0 mr-2 hidden size-7 items-center justify-center rounded-full text-center -indent-px font-mono text-sm font-medium md:absolute;
+    content: counter(step);
+  }
+}
+
+@layer components {
+  .steps {
+    &:first-child {
+      @apply !mt-0;
+    }
+
+    &:first-child > h3:first-child {
+      @apply !mt-0;
+    }
+
+    > h3 {
+      @apply !mt-16;
+    }
+
+    > h3 + p {
+      @apply !mt-2;
+    }
+  }
+
+  [data-rehype-pretty-code-figure] {
+    background-color: var(--color-code);
+    color: var(--color-code-foreground);
+    border-radius: var(--radius-lg);
+    border-width: 0px;
+    border-color: var(--border);
+    margin-top: calc(var(--spacing) * 6);
+    overflow: hidden;
+    font-size: 12px;
+    outline: none;
+    position: relative;
+    @apply -mx-1 md:-mx-1;
+
+    &:has([data-rehype-pretty-code-title]) [data-slot="copy-button"] {
+      top: calc(var(--spacing) * 1.5) !important;
+    }
+  }
+
+  [data-rehype-pretty-code-title] {
+    border-bottom: color-mix(in oklab, var(--border) 30%, transparent);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-block: calc(var(--spacing) * 2.5);
+    padding-inline: calc(var(--spacing) * 4);
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--color-code-foreground);
+  }
+
+  [data-line-numbers] {
+    display: grid;
+    min-width: 100%;
+    white-space: pre;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    counter-reset: line;
+    box-decoration-break: clone;
+  }
+
+  [data-line-numbers] [data-line]::before {
+    font-size: 12px;
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: calc(var(--spacing) * 16);
+    padding-right: calc(var(--spacing) * 6);
+    text-align: right;
+    color: var(--color-code-number);
+    background-color: var(--color-code);
+    position: sticky;
+    left: 0;
+  }
+
+  [data-line-numbers] [data-highlighted-line][data-line]::before {
+    background-color: var(--color-code-highlight);
+  }
+
+  [data-line] {
+    padding-top: calc(var(--spacing) * 0.5);
+    padding-bottom: calc(var(--spacing) * 0.5);
+    min-height: calc(var(--spacing) * 1);
+    width: 100%;
+    display: inline-block;
+  }
+
+  [data-line] span {
+    color: var(--shiki-light);
+
+    @variant dark {
+      color: var(--shiki-dark) !important;
+    }
+  }
+
+  [data-highlighted-line],
+  [data-highlighted-chars] {
+    position: relative;
+    background-color: var(--color-code-highlight);
+  }
+
+  [data-highlighted-line] {
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      content: "";
+      background-color: color-mix(
+        in oklab,
+        var(--muted-foreground) 50%,
+        transparent
+      );
+    }
+  }
+
+  [data-highlighted-chars] {
+    border-radius: var(--radius-sm);
+    padding-inline: 0.3rem;
+    padding-block: 0.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,237 @@
+/* 默认主题 - 问学智能体 */
+/* 使用默认品牌色，已在 globals.css 中定义 */
+
+/* 圆角主题 - Small */
+.theme-radius-small,
+.theme-radius-small .theme-container,
+.theme-radius-small [data-radix-popper-content-wrapper] {
+  --radius: 4px;
+}
+
+/* 圆角主题 - Medium (默认) */
+.theme-radius-medium,
+.theme-radius-medium .theme-container,
+.theme-radius-medium [data-radix-popper-content-wrapper] {
+  --radius: 6px;
+}
+
+/* 圆角主题 - Large */
+.theme-radius-large,
+.theme-radius-large .theme-container,
+.theme-radius-large [data-radix-popper-content-wrapper] {
+  --radius: 8px;
+}
+
+/* 圆角主题 - None */
+.theme-radius-none,
+.theme-radius-none .theme-container,
+.theme-radius-none [data-radix-popper-content-wrapper] {
+  --radius: 0;
+}
+
+/* 字体主题 - PingFang SC (中文) */
+.theme-font-pingfang .theme-container,
+.theme-font-pingfang [data-radix-popper-content-wrapper] {
+  --font-sans: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* 字体主题 - Helvetica Neue (英文) */
+.theme-font-helvetica .theme-container,
+.theme-font-helvetica [data-radix-popper-content-wrapper] {
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 字体主题 - Source Han Sans SC (显示字体) */
+.theme-font-display .theme-container,
+.theme-font-display [data-radix-popper-content-wrapper] {
+  --font-sans: "Source Han Sans SC", "PingFang SC", sans-serif;
+}
+
+/* 品牌色主题变体 - 如果需要不同的品牌色配置 */
+.theme-brand .theme-container,
+.theme-brand [data-radix-popper-content-wrapper] {
+  --primary: var(--brand-600);
+  --primary-foreground: var(--brand-50);
+  --ring: var(--brand-300);
+
+  @variant dark {
+    --primary: var(--brand-600);
+    --primary-foreground: var(--brand-50);
+    --ring: var(--brand-300);
+  }
+}
+
+/* 成功色主题 */
+.theme-success .theme-container,
+.theme-success [data-radix-popper-content-wrapper] {
+  --primary: var(--success);
+  --primary-foreground: #ffffff;
+  --ring: #b9ecd1;
+
+  @variant dark {
+    --primary: var(--success);
+    --primary-foreground: #ffffff;
+    --ring: #114a32;
+  }
+}
+
+/* 警告色主题 */
+.theme-warning .theme-container,
+.theme-warning [data-radix-popper-content-wrapper] {
+  --primary: var(--warning);
+  --primary-foreground: #ffffff;
+  --ring: #ffcaac;
+
+  @variant dark {
+    --primary: var(--warning);
+    --primary-foreground: #ffffff;
+    --ring: #57270e;
+  }
+}
+
+/* 错误色主题 */
+.theme-error .theme-container,
+.theme-error [data-radix-popper-content-wrapper] {
+  --primary: var(--error);
+  --primary-foreground: #ffffff;
+  --ring: #ffcbc7;
+
+  @variant dark {
+    --primary: var(--error);
+    --primary-foreground: #ffffff;
+    --ring: #690310;
+  }
+}
+
+/* AI 渐变背景主题 */
+.theme-ai,
+.theme-ai .theme-container,
+.theme-ai [data-radix-popper-content-wrapper] {
+  --ai-bg: linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%);
+  --ai-light: linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%);
+  --ai-light-hover: linear-gradient(90deg, #d5ebff 0%, #dfe0ff 30%, #f2daff 60%, #ffdafe 100%);
+  --ai-light-active: linear-gradient(90deg, #abd5ff 0%, #c1c0ff 30%, #e3b5ff 60%, #feb5ff 100%);
+  --ai-general: linear-gradient(90deg, #2e8cff 0%, #6b61ff 30%, #a647ff 60%, #e945ff 100%);
+  --ai-general-hover: linear-gradient(90deg, #82beff 0%, #a3a0ff 30%, #d191ff 60%, #f98fff 100%);
+  --ai-general-active: linear-gradient(90deg, #2172db 0%, #584ddb 30%, #8636db 60%, #c235db 100%);
+  
+  /* 应用到背景 */
+  --background: var(--ai-bg);
+  
+  /* 应用到卡片背景 */
+  --card: var(--ai-light);
+}
+
+/* AI 主题下的按钮样式 - 使用 background-image 来应用渐变 */
+.theme-ai [data-slot="button"] {
+  /* 默认按钮使用渐变 */
+  background-image: var(--ai-general);
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+}
+
+.theme-ai [data-slot="button"]:hover {
+  background-image: var(--ai-general-hover);
+  background-color: transparent;
+}
+
+.theme-ai [data-slot="button"]:active {
+  background-image: var(--ai-general-active);
+  background-color: transparent;
+}
+
+/* 覆盖 Tailwind 的 bg-primary 类 */
+.theme-ai [data-slot="button"][class*="bg-primary"] {
+  background-image: var(--ai-general) !important;
+  background-color: transparent !important;
+}
+
+.theme-ai [data-slot="button"][class*="bg-primary"]:hover {
+  background-image: var(--ai-general-hover) !important;
+  background-color: transparent !important;
+}
+
+.theme-ai [data-slot="button"][class*="bg-primary"]:active {
+  background-image: var(--ai-general-active) !important;
+  background-color: transparent !important;
+}
+
+/* AI 主题下的卡片样式 */
+.theme-ai [data-slot="card"] {
+  background-image: var(--ai-light) !important;
+  background-color: transparent !important;
+  border-color: transparent;
+}
+
+.theme-ai [data-slot="card"]:hover {
+  background-image: var(--ai-light-hover) !important;
+  background-color: transparent !important;
+}
+
+/* AI 主题下的页面背景 */
+.theme-ai .theme-container {
+  background-image: var(--ai-bg) !important;
+  background-color: transparent !important;
+}
+
+/* 缩放主题 - 响应式字体和间距 */
+.theme-scaled .theme-container,
+.theme-scaled [data-radix-popper-content-wrapper] {
+  @media (min-width: 1024px) {
+    --radius: 6px;
+    --text-lg: 1rem;
+    --text-xl: 1.1rem;
+    --text-2xl: 1.2rem;
+    --text-3xl: 1.3rem;
+    --text-4xl: 1.4rem;
+    --text-5xl: 1.5rem;
+    --text-6xl: 1.6rem;
+    --text-7xl: 1.7rem;
+    --text-8xl: 1.8rem;
+    --text-base: 0.85rem;
+    --text-sm: 0.8rem;
+    --spacing: 0.2rem;
+  }
+
+  [data-slot="select-trigger"],
+  [data-slot="toggle-group-item"] {
+    --spacing: 0.2rem;
+  }
+
+  [data-slot="card"] {
+    border-radius: var(--radius);
+    padding-block: calc(var(--spacing) * 4);
+    gap: calc(var(--spacing) * 2);
+  }
+
+  [data-slot="card"].pb-0 {
+    padding-bottom: 0;
+  }
+}
+
+/* 组合主题示例 - 可以组合多个主题类 */
+.theme-rounded-none .theme-container,
+.theme-rounded-none [data-radix-popper-content-wrapper] {
+  --radius: 0;
+}
+
+.theme-rounded-small .theme-container,
+.theme-rounded-small [data-radix-popper-content-wrapper] {
+  --radius: 4px;
+}
+
+.theme-rounded-medium .theme-container,
+.theme-rounded-medium [data-radix-popper-content-wrapper] {
+  --radius: 6px;
+}
+
+.theme-rounded-large .theme-container,
+.theme-rounded-large [data-radix-popper-content-wrapper] {
+  --radius: 8px;
+}
+
+.theme-rounded-full .theme-container,
+.theme-rounded-full [data-radix-popper-content-wrapper] {
+  --radius: 999px;
+}

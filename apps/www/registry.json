@@ -82,6 +82,50 @@
           "type": "registry:example"
         }
       ]
+    },
+    {
+      "name": "prompt-composed-demo",
+      "type": "registry:example",
+      "registryDependencies": ["prompt-01", "textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/prompt-composed-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "button-demo",
+      "type": "registry:example",
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/button-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "textarea-demo",
+      "type": "registry:example",
+      "registryDependencies": ["textarea"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/textarea-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "prompt-demo",
+      "type": "registry:example",
+      "registryDependencies": ["prompt-01", "textarea", "button"],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/prompt-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
     }
   ]
 }
