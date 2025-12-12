@@ -34,10 +34,6 @@ const SHADOW_THEMES = [
   { name: "shadow-high", label: "高阴影" },
 ] as const;
 
-const BORDER_WIDTH_THEMES = [
-  { name: "border-thin", label: "细边框" },
-  { name: "border-medium", label: "中等边框" },
-] as const;
 
 const FONT_THEMES = [
   { name: "font-pingfang", label: "PingFang 字体" },
@@ -56,7 +52,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
         radius: "radius-medium",
         spacing: null,
         shadow: null,
-        borderWidth: null,
         font: null,
       };
     }
@@ -66,7 +61,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
       radius: themes.find(t => RADIUS_THEMES.some(rt => rt.name === t)) || "radius-medium",
       spacing: themes.find(t => SPACING_THEMES.some(st => st.name === t)) || null,
       shadow: themes.find(t => SHADOW_THEMES.some(st => st.name === t)) || null,
-      borderWidth: themes.find(t => BORDER_WIDTH_THEMES.some(bt => bt.name === t)) || null,
       font: themes.find(t => FONT_THEMES.some(ft => ft.name === t)) || null,
     };
   };
@@ -76,7 +70,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
   const [radiusTheme, setRadiusTheme] = useState(currentThemes.radius);
   const [spacingTheme, setSpacingTheme] = useState<string | null>(currentThemes.spacing);
   const [shadowTheme, setShadowTheme] = useState<string | null>(currentThemes.shadow);
-  const [borderWidthTheme, setBorderWidthTheme] = useState<string | null>(currentThemes.borderWidth);
   const [fontTheme, setFontTheme] = useState<string | null>(currentThemes.font);
   
   // 初始化时设置默认主题
@@ -93,20 +86,18 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
     setRadiusTheme(themes.radius);
     setSpacingTheme(themes.spacing);
     setShadowTheme(themes.shadow);
-    setBorderWidthTheme(themes.borderWidth);
     setFontTheme(themes.font);
   }, [activeTheme]);
 
   // 组合主题
   const updateTheme = (
-    type: "color" | "radius" | "spacing" | "shadow" | "borderWidth" | "font",
+    type: "color" | "radius" | "spacing" | "shadow" | "font",
     value: string | null
   ) => {
     let newColorTheme = colorTheme;
     let newRadiusTheme = radiusTheme;
     let newSpacingTheme = spacingTheme;
     let newShadowTheme = shadowTheme;
-    let newBorderWidthTheme = borderWidthTheme;
     let newFontTheme = fontTheme;
 
     if (type === "color") {
@@ -121,9 +112,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
     } else if (type === "shadow") {
       newShadowTheme = value;
       setShadowTheme(newShadowTheme);
-    } else if (type === "borderWidth") {
-      newBorderWidthTheme = value;
-      setBorderWidthTheme(newBorderWidthTheme);
     } else if (type === "font") {
       newFontTheme = value;
       setFontTheme(newFontTheme);
@@ -148,10 +136,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
     // 可选：阴影主题
     if (newShadowTheme) {
       themes.push(newShadowTheme);
-    }
-    // 可选：边框宽度主题
-    if (newBorderWidthTheme) {
-      themes.push(newBorderWidthTheme);
     }
     // 可选：字体主题
     if (newFontTheme) {
@@ -270,38 +254,6 @@ export function ThemeSelector({ className }: React.ComponentProps<"div">) {
               className={cn(
                 "text-xs",
                 shadowTheme === theme.name && "bg-primary text-primary-foreground"
-              )}
-            >
-              {theme.label}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      {/* 边框宽度主题 */}
-      <div>
-        <h4 className="text-xs font-medium mb-2 text-muted-foreground">边框宽度</h4>
-        <div className="flex flex-wrap gap-2">
-          <Button
-            variant={borderWidthTheme === null ? "default" : "outline"}
-            size="sm"
-            onClick={() => updateTheme("borderWidth", null)}
-            className={cn(
-              "text-xs",
-              borderWidthTheme === null && "bg-primary text-primary-foreground"
-            )}
-          >
-            默认边框
-          </Button>
-          {BORDER_WIDTH_THEMES.map((theme) => (
-            <Button
-              key={theme.name}
-              variant={borderWidthTheme === theme.name ? "default" : "outline"}
-              size="sm"
-              onClick={() => updateTheme("borderWidth", theme.name)}
-              className={cn(
-                "text-xs",
-                borderWidthTheme === theme.name && "bg-primary text-primary-foreground"
               )}
             >
               {theme.label}

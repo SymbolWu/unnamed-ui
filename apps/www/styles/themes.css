@@ -111,20 +111,6 @@
   --shadow-high: 0 24px 120px 20px #0000000d, 0 64px 96px 8px #0000000a, 0 32px 40px -20px #0000001f;
 }
 
-/* 边框宽度主题 - Thin (细边框) - 默认 */
-.theme-border-thin,
-.theme-border-thin .theme-container,
-.theme-border-thin [data-radix-popper-content-wrapper] {
-  --border-width: 1px;
-}
-
-/* 边框宽度主题 - Medium (中等边框) */
-.theme-border-medium,
-.theme-border-medium .theme-container,
-.theme-border-medium [data-radix-popper-content-wrapper] {
-  --border-width: 2px;
-}
-
 /* 字体主题 - PingFang SC (中文) */
 .theme-font-pingfang .theme-container,
 .theme-font-pingfang [data-radix-popper-content-wrapper] {

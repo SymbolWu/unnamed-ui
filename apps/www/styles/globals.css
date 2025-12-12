@@ -466,11 +466,6 @@
     @apply border-border outline-ring/50;
   }
   
-  /* 应用边框宽度变量到所有有 border 类的元素 */
-  .border,
-  [class*="border"]:not([class*="border-0"]):not([class*="border-none"]):not([class*="border-t"]):not([class*="border-r"]):not([class*="border-b"]):not([class*="border-l"]):not([class*="border-x"]):not([class*="border-y"]) {
-    border-width: var(--border-width) !important;
-  }
   
   ::selection {
     @apply bg-selection text-selection-foreground;
