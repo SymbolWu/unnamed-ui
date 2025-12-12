@@ -14,11 +14,14 @@ import {
   PromptTextarea,
   PromptButton,
   PromptContainer,
-  PromptRegion,
   PromptInputRegion,
   PromptActionBar,
+  PromptAttachmentButton,
+  PromptModeButton,
+  PromptSendButton,
 } from "@/registry/wuhan/blocks/prompt-01";
-import { Send, Paperclip, Brain } from "lucide-react";
+import { AttachmentCard, AttachmentList } from "@/registry/wuhan/blocks/attachment-list-01";
+import { Send, Paperclip, Brain, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // ==================== 业务特定的类型定义 ====================
@@ -42,49 +45,53 @@ interface Mode {
 // 这些组件基于原语构建，提供业务特定的便捷封装
 // 但用户仍然可以完全自定义或直接使用原语
 
-interface AttachmentListProps {
+interface AttachmentListWrapperProps {
   attachments: Attachment[];
   onRemove?: (id: string) => void;
 }
 
-function AttachmentList({ attachments, onRemove }: AttachmentListProps) {
+function AttachmentListWrapper({ attachments, onRemove }: AttachmentListWrapperProps) {
   if (attachments.length === 0) return null;
 
   return (
-    <PromptRegion bordered verticalPadding="sm">
+    <AttachmentList bordered verticalPadding="sm">
       {attachments.map((attachment) => {
         const Icon = attachment.icon || Paperclip;
+        // 判断是否为图片
+        const isImage = !!attachment.thumbnail;
+        // 提取文件类型
+        const fileType = attachment.name?.split('.').pop()?.toUpperCase() || '';
+        
         return (
-          <PromptButton
+          <AttachmentCard
             key={attachment.id}
             variant="outline"
             size="sm"
-            className="gap-2 h-10 px-2 py-1.5"
-            onClick={() => onRemove?.(attachment.id)}
-          >
-            {attachment.thumbnail ? (
-              <img
-                src={attachment.thumbnail}
-                alt={attachment.name}
-                className="size-6 rounded object-cover shrink-0"
-              />
-            ) : (
-              <Icon className="size-4 shrink-0" />
-            )}
-            <div className="flex flex-col items-start min-w-0 flex-1 justify-center">
-              <span className="text-sm font-medium truncate w-full leading-tight">
-                {attachment.name}
-              </span>
-              {attachment.size && (
-                <span className="text-xs text-muted-foreground leading-tight">
-                  {attachment.size}
-                </span>
-              )}
-            </div>
-          </PromptButton>
+            icon={
+              attachment.thumbnail ? (
+                <img
+                  src={attachment.thumbnail}
+                  alt={attachment.name}
+                  className={isImage ? "w-full h-full object-cover" : "size-10 object-cover"}
+                />
+              ) : (
+                <Icon className="size-4" />
+              )
+            }
+            name={attachment.name}
+            fileType={fileType}
+            fileSize={attachment.size}
+            isImage={isImage}
+            deleteIcon={<X />}
+            onDelete={(e) => {
+              e.stopPropagation();
+              onRemove?.(attachment.id);
+            }}
+            onClick={() => {}}
+          />
         );
       })}
-    </PromptRegion>
+    </AttachmentList>
   );
 }
 
@@ -103,34 +110,14 @@ function ModeSelector({ modes, selectedModes, onToggle }: ModeSelectorProps) {
         const Icon = mode.icon;
         const isActive = selectedModes.includes(mode.id);
         return (
-          <PromptButton
+          <PromptModeButton
             key={mode.id}
-            variant={isActive ? "default" : "outline"}
-            size="sm"
-            aria-pressed={isActive}
-            className={cn(
-              "gap-1.5 transition-all duration-200",
-              isActive && "shadow-sm ring-1 ring-primary/20"
-            )}
+            selected={isActive}
+            icon={Icon && <Icon className="size-4" />}
             onClick={() => onToggle(mode.id)}
           >
-            {Icon && (
-              <Icon
-                className={cn(
-                  "size-4 transition-opacity duration-200",
-                  isActive ? "opacity-100" : "opacity-60"
-                )}
-              />
-            )}
-            <span
-              className={cn(
-                "transition-all duration-200",
-                isActive ? "font-medium" : "font-normal"
-              )}
-            >
-              {mode.label}
-            </span>
-          </PromptButton>
+            {mode.label}
+          </PromptModeButton>
         );
       })}
     </div>
@@ -157,6 +144,7 @@ interface ComposedPromptProps {
   onAttach?: () => void;
   onSend?: () => void;
   sendDisabled?: boolean;
+  generating?: boolean;
 
   // 样式
   className?: string;
@@ -175,6 +163,7 @@ export function ComposedPrompt({
   onAttach,
   onSend,
   sendDisabled,
+  generating = false,
   className,
   maxWidth = "max-w-2xl",
 }: ComposedPromptProps) {
@@ -182,7 +171,7 @@ export function ComposedPrompt({
     <PromptContainer className={cn(maxWidth, className)}>
       {/* 附件列表 */}
       {attachments.length > 0 && (
-        <AttachmentList
+        <AttachmentListWrapper
           attachments={attachments}
           onRemove={onAttachmentRemove}
         />
@@ -201,37 +190,34 @@ export function ComposedPrompt({
       <PromptActionBar
         className={cn(
           "flex items-center",
-          modes.length > 0 ? "justify-between" : "justify-end"
+          (modes.length > 0 || onAttach) ? "justify-between" : "justify-end"
         )}
       >
-        {modes.length > 0 && (
-          <ModeSelector
-            modes={modes}
-            selectedModes={selectedModes}
-            onToggle={onModeToggle || (() => {})}
-          />
-        )}
         <div className="flex items-center gap-2">
           {onAttach && (
-            <PromptButton
-              variant="ghost"
-              size="icon"
+            <PromptAttachmentButton
+              icon={<Paperclip className="size-4" />}
               onClick={onAttach}
               aria-label="Attach file"
-            >
-              <Paperclip className="size-4" />
-            </PromptButton>
+            />
           )}
+          {modes.length > 0 && (
+            <ModeSelector
+              modes={modes}
+              selectedModes={selectedModes}
+              onToggle={onModeToggle || (() => {})}
+            />
+          )}
+        </div>
+        <div className="flex items-center gap-2">
           {onSend && (
-            <PromptButton
-              variant="default"
-              size="icon"
+            <PromptSendButton
               disabled={sendDisabled}
+              generating={generating}
+              sendIcon={<Send className="size-4 text-white" />}
+              generatingIcon={<Loader2 className="size-4 text-white animate-spin" />}
               onClick={onSend}
-              aria-label="Send"
-            >
-              <Send className="size-4" />
-            </PromptButton>
+            />
           )}
         </div>
       </PromptActionBar>

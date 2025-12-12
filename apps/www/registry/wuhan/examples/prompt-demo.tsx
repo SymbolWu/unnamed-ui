@@ -25,11 +25,53 @@ export default function PromptDemo() {
       name: "document.pdf",
       size: "1.5 MB",
       icon: FileText,
-    }
+    },
+    {
+      id: "attachment-3",
+      name: "presentation.pptx",
+      size: "5.8 MB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-4",
+      name: "spreadsheet.xlsx",
+      size: "892 KB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-5",
+      name: "video-demo.mp4",
+      size: "15.2 MB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-6",
+      name: "design-mockup.fig",
+      size: "3.4 MB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-7",
+      name: "code-archive.zip",
+      size: "1.2 MB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-8",
+      name: "meeting-notes.docx",
+      size: "456 KB",
+      icon: FileText,
+    },
+    {
+      id: "attachment-9",
+      name: "image.jpg",
+      size: "1.2 MB",
+      icon: Image,
+    },
   ]);
 
   const modes = [
-    { id: "web-search", label: "联网搜索", icon: Search },
+    // { id: "web-search", label: "联网搜索", icon: Search },
     { id: "deep-think", label: "深度思考", icon: Brain },
   ];
 
