@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import { ComposedSender } from "@/registry/wuhan/examples/sender/sender-composed-demo";
-import { 
-  Search, 
-  Brain, 
-  FileText,
-  Image,
-} from "lucide-react";
+import { Search, Brain, FileText, Image } from "lucide-react";
 
 export default function SenderDemo() {
   const [value, setValue] = useState("");
@@ -94,7 +89,7 @@ export default function SenderDemo() {
           setSelectedModes((prev) =>
             prev.includes(modeId)
               ? prev.filter((id) => id !== modeId)
-              : [...prev, modeId]
+              : [...prev, modeId],
           )
         }
         onAttach={() => console.log("打开附件选择器")}

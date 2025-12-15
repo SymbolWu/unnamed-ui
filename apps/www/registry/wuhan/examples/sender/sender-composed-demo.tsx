@@ -2,7 +2,7 @@
 
 /**
  * 示例：基于原语组件构建便捷的组合组件
- * 
+ *
  * 这个示例展示了如何：
  * 1. 基于原语组件构建业务特定的组合组件
  * 2. 保持完全的可定制性
@@ -20,7 +20,10 @@ import {
   SenderModeButton,
   SenderSendButton,
 } from "@/registry/wuhan/blocks/sender/sender-01";
-import { AttachmentCard, AttachmentList } from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
+import {
+  AttachmentCard,
+  AttachmentList,
+} from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
 import { Send, Paperclip, Brain, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +53,10 @@ interface AttachmentListWrapperProps {
   onRemove?: (id: string) => void;
 }
 
-function AttachmentListWrapper({ attachments, onRemove }: AttachmentListWrapperProps) {
+function AttachmentListWrapper({
+  attachments,
+  onRemove,
+}: AttachmentListWrapperProps) {
   if (attachments.length === 0) return null;
 
   return (
@@ -60,8 +66,8 @@ function AttachmentListWrapper({ attachments, onRemove }: AttachmentListWrapperP
         // 判断是否为图片
         const isImage = !!attachment.thumbnail;
         // 提取文件类型
-        const fileType = attachment.name?.split('.').pop()?.toUpperCase() || '';
-        
+        const fileType = attachment.name?.split(".").pop()?.toUpperCase() || "";
+
         return (
           <AttachmentCard
             key={attachment.id}
@@ -72,7 +78,11 @@ function AttachmentListWrapper({ attachments, onRemove }: AttachmentListWrapperP
                 <img
                   src={attachment.thumbnail}
                   alt={attachment.name}
-                  className={isImage ? "w-full h-full object-cover" : "size-10 object-cover"}
+                  className={
+                    isImage
+                      ? "w-full h-full object-cover"
+                      : "size-10 object-cover"
+                  }
                 />
               ) : (
                 <Icon className="size-4" />
@@ -190,7 +200,7 @@ export function ComposedSender({
       <SenderActionBar
         className={cn(
           "flex items-center",
-          (modes.length > 0 || onAttach) ? "justify-between" : "justify-end"
+          modes.length > 0 || onAttach ? "justify-between" : "justify-end",
         )}
       >
         <div className="flex items-center gap-2">
@@ -215,7 +225,9 @@ export function ComposedSender({
               disabled={sendDisabled}
               generating={generating}
               sendIcon={<Send className="size-4 text-white" />}
-              generatingIcon={<Loader2 className="size-4 text-white animate-spin" />}
+              generatingIcon={
+                <Loader2 className="size-4 text-white animate-spin" />
+              }
               onClick={onSend}
             />
           )}
@@ -260,7 +272,7 @@ export default function SenderComposedDemo() {
           setSelectedModes((prev) =>
             prev.includes(modeId)
               ? prev.filter((id) => id !== modeId)
-              : [...prev, modeId]
+              : [...prev, modeId],
           )
         }
         onAttach={() => console.log("打开附件选择器")}

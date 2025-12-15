@@ -14,4 +14,56 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "message-01",
+    type: "registry:block",
+    title: "Message",
+    description: "AI and user message components",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "blocks/message/message-01.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "prompt-01",
+    type: "registry:block",
+    title: "Prompt",
+    description: "Prompt input component",
+    registryDependencies: ["textarea", "button"],
+    files: [
+      {
+        path: "blocks/prompt/prompt-01.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "sender-01",
+    type: "registry:block",
+    title: "Sender",
+    description: "Message sender component",
+    registryDependencies: ["textarea", "button"],
+    files: [
+      {
+        path: "blocks/sender/sender-01.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
+  {
+    name: "attachment-list-01",
+    type: "registry:block",
+    title: "Attachment List",
+    description: "Attachment list component",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "blocks/attachment-list/attachment-list-01.tsx",
+        type: "registry:component",
+      },
+    ],
+  },
 ];

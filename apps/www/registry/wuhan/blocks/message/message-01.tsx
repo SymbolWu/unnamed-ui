@@ -73,15 +73,10 @@ export interface AIMessageProps extends AIMessagePrimitiveProps {
 export const MessageAIPrimitive = React.forwardRef<
   HTMLDivElement,
   AIMessagePrimitiveProps
->(({ 
-  children, 
-  feedback, 
-  className, 
-  ...props 
-}, ref) => {
+>(({ children, feedback, className, ...props }, ref) => {
   return (
-    <div 
-      className="[&_*]:!box-border w-fit max-w-full" 
+    <div
+      className="[&_*]:!box-border w-fit max-w-full"
       ref={ref}
       role="article"
       aria-label="AI message"
@@ -98,7 +93,7 @@ export const MessageAIPrimitive = React.forwardRef<
           "leading-[var(--line-height-2)]",
           "tracking-[0px]",
           "text-[var(--text-icon-text-primary,#403F4D)]",
-          className
+          className,
         )}
         style={{
           fontSize: "var(--font-size-2)",
@@ -109,7 +104,7 @@ export const MessageAIPrimitive = React.forwardRef<
         {children}
       </div>
       {feedback && (
-        <div 
+        <div
           className="[&_*]:!box-border"
           role="group"
           aria-label="Message feedback"
@@ -129,15 +124,10 @@ MessageAIPrimitive.displayName = "MessageAIPrimitive";
 export const MessageUserPrimitive = React.forwardRef<
   HTMLDivElement,
   UserMessagePrimitiveProps
->(({ 
-  children, 
-  feedback, 
-  className, 
-  ...props 
-}, ref) => {
+>(({ children, feedback, className, ...props }, ref) => {
   return (
-    <div 
-      className="[&_*]:!box-border w-fit max-w-full" 
+    <div
+      className="[&_*]:!box-border w-fit max-w-full"
       ref={ref}
       role="article"
       aria-label="User message"
@@ -155,7 +145,7 @@ export const MessageUserPrimitive = React.forwardRef<
           "leading-[var(--line-height-2)]",
           "tracking-[0px]",
           "text-[var(--text-icon-text-primary,#403F4D)]",
-          className
+          className,
         )}
         style={{
           fontSize: "var(--font-size-2)",
@@ -166,7 +156,7 @@ export const MessageUserPrimitive = React.forwardRef<
         {children}
       </div>
       {feedback && (
-        <div 
+        <div
           className="mt-[var(--gap-md)] [&_*]:!box-border"
           role="group"
           aria-label="Message feedback"
@@ -185,47 +175,50 @@ MessageUserPrimitive.displayName = "MessageUserPrimitive";
  * AI 消息组件
  * @public
  */
-export const AIMessage = React.forwardRef<
-  HTMLDivElement,
-  AIMessageProps
->(({ 
-  children, 
-  status = "idle",
-  errorMessage,
-  generatingContent,
-  errorContent,
-  className,
-  ...props 
-}, ref) => {
-  const content = React.useMemo(() => {
-    if (status === "generating") {
-      return generatingContent !== undefined ? generatingContent : children;
-    }
-    if (status === "failed") {
-      return errorContent !== undefined ? errorContent : errorMessage;
-    }
-    return children;
-  }, [status, generatingContent, errorContent, errorMessage, children]);
+export const AIMessage = React.forwardRef<HTMLDivElement, AIMessageProps>(
+  (
+    {
+      children,
+      status = "idle",
+      errorMessage,
+      generatingContent,
+      errorContent,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const content = React.useMemo(() => {
+      if (status === "generating") {
+        return generatingContent !== undefined ? generatingContent : children;
+      }
+      if (status === "failed") {
+        return errorContent !== undefined ? errorContent : errorMessage;
+      }
+      return children;
+    }, [status, generatingContent, errorContent, errorMessage, children]);
 
-  const ariaLive = status === "generating" ? "polite" : undefined;
-  const ariaLabel = status === "generating" 
-    ? "AI message generating" 
-    : status === "failed"
-    ? "AI message failed"
-    : "AI message";
+    const ariaLive = status === "generating" ? "polite" : undefined;
+    const ariaLabel =
+      status === "generating"
+        ? "AI message generating"
+        : status === "failed"
+          ? "AI message failed"
+          : "AI message";
 
-  return (
-    <MessageAIPrimitive
-      ref={ref}
-      className={className}
-      aria-live={ariaLive}
-      aria-label={ariaLabel}
-      {...props}
-    >
-      {content}
-    </MessageAIPrimitive>
-  );
-});
+    return (
+      <MessageAIPrimitive
+        ref={ref}
+        className={className}
+        aria-live={ariaLive}
+        aria-label={ariaLabel}
+        {...props}
+      >
+        {content}
+      </MessageAIPrimitive>
+    );
+  },
+);
 AIMessage.displayName = "AIMessage";
 
 /**

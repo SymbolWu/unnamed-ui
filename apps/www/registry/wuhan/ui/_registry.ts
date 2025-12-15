@@ -55,6 +55,49 @@ export const ui: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "card",
+    type: "registry:ui",
+    files: [
+      {
+        path: "ui/card.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
+  {
+    name: "dialog",
+    type: "registry:ui",
+    dependencies: ["@radix-ui/react-dialog"],
+    files: [
+      {
+        path: "ui/dialog.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
+  {
+    name: "drawer",
+    type: "registry:ui",
+    dependencies: ["vaul", "@radix-ui/react-dialog"],
+    files: [
+      {
+        path: "ui/drawer.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
+  {
+    name: "tabs",
+    type: "registry:ui",
+    dependencies: ["@radix-ui/react-tabs"],
+    files: [
+      {
+        path: "ui/tabs.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
 
   // {
   //   name: "accordion",

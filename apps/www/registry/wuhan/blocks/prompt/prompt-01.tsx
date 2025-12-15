@@ -32,7 +32,7 @@ export const TextareaPrimitive = React.forwardRef<
         "min-h-[calc(var(--line-height-2)*2)]",
         "max-h-[calc(var(--line-height-2)*5)]",
         "overflow-y-auto",
-        className
+        className,
       )}
     />
   );
@@ -72,7 +72,7 @@ export const ContainerPrimitive = React.forwardRef<
         "rounded-[var(--radius-2xl)]",
         "p-[var(--padding-com-lg)]",
         "gap-[var(--gap-xl)]",
-        className
+        className,
       )}
       {...props}
     >
@@ -112,7 +112,9 @@ export function RegionPrimitive({
     lg: "py-3",
   };
 
-  const borderClasses = bordered ? "border-b border-[var(--border-neutral)]" : "";
+  const borderClasses = bordered
+    ? "border-b border-[var(--border-neutral)]"
+    : "";
 
   return (
     <div
@@ -120,7 +122,7 @@ export function RegionPrimitive({
         "flex flex-wrap items-center gap-2",
         paddingClasses[verticalPadding],
         borderClasses,
-        className
+        className,
       )}
       {...props}
     >
@@ -133,7 +135,9 @@ export function RegionPrimitive({
  * 上传附件按钮样式原语
  * 提供上传附件按钮的基础样式
  */
-export interface AttachmentButtonPrimitiveProps extends React.ComponentProps<typeof Button> {
+export interface AttachmentButtonPrimitiveProps extends React.ComponentProps<
+  typeof Button
+> {
   /**
    * 附件图标（建议使用 React.ReactElement 类型的图标组件）
    */
@@ -157,7 +161,7 @@ export const AttachmentButtonPrimitive = React.forwardRef<
         "bg-[var(--bg-container)]",
         "border-[var(--border-neutral)]",
         "hover:bg-[var(--bg-neutral-light-hover)] transition-colors",
-        className
+        className,
       )}
     >
       {icon}
@@ -170,7 +174,9 @@ AttachmentButtonPrimitive.displayName = "AttachmentButtonPrimitive";
  * 模式按钮样式原语（如深度思考、联网搜索等）
  * 提供模式选择按钮的基础样式和状态
  */
-export interface ModeButtonPrimitiveProps extends React.ComponentProps<typeof Button> {
+export interface ModeButtonPrimitiveProps extends React.ComponentProps<
+  typeof Button
+> {
   /**
    * 是否选中状态
    */
@@ -200,8 +206,9 @@ export const ModeButtonPrimitive = React.forwardRef<
         // 基础状态：无背景色（透明）
         !selected && "bg-transparent hover:bg-[var(--bg-neutral-light-hover)]",
         // selected 状态
-        selected && "bg-[var(--bg-brand-light)] border-[var(--border-brand-light-hover)] hover:bg-[var(--bg-brand-light)]",
-        className
+        selected &&
+          "bg-[var(--bg-brand-light)] border-[var(--border-brand-light-hover)] hover:bg-[var(--bg-brand-light)]",
+        className,
       )}
       aria-pressed={selected}
     >
@@ -211,7 +218,7 @@ export const ModeButtonPrimitive = React.forwardRef<
             "flex items-center",
             selected
               ? "text-[var(--text-brand)]"
-              : "text-[var(--text-primary)]"
+              : "text-[var(--text-primary)]",
           )}
         >
           {icon}
@@ -223,7 +230,7 @@ export const ModeButtonPrimitive = React.forwardRef<
             "text-sm",
             selected
               ? "text-[var(--text-brand)]"
-              : "text-[var(--text-primary)]"
+              : "text-[var(--text-primary)]",
           )}
         >
           {children}
@@ -238,7 +245,9 @@ ModeButtonPrimitive.displayName = "ModeButtonPrimitive";
  * 发送按钮样式原语
  * 提供圆形发送按钮的基础样式和状态
  */
-export interface SendButtonPrimitiveProps extends React.ComponentProps<typeof Button> {
+export interface SendButtonPrimitiveProps extends React.ComponentProps<
+  typeof Button
+> {
   /**
    * 是否正在生成中
    */
@@ -256,31 +265,43 @@ export interface SendButtonPrimitiveProps extends React.ComponentProps<typeof Bu
 export const SendButtonPrimitive = React.forwardRef<
   HTMLButtonElement,
   SendButtonPrimitiveProps
->(({ generating = false, sendIcon, generatingIcon, disabled, className, ...props }, ref) => {
-  const isDisabled = disabled || generating;
-  
-  return (
-    <Button
-      ref={ref}
-      {...props}
-      disabled={isDisabled}
-      className={cn(
-        "w-8 h-8 rounded-full p-2 gap-2",
-        "bg-[var(--bg-brand)]",
-        "text-[var(--text-inverse)]",
-        "transition-opacity",
-        // 禁用状态：添加透明度（使用 bg-mask 的 alpha 值 0.8）
-        isDisabled && !generating && "opacity-80",
-        // 生成中状态：完全不透明
-        generating && "opacity-100",
-        className
-      )}
-      aria-label={generating ? "Generating" : "Send"}
-    >
-      {generating ? (generatingIcon || sendIcon) : sendIcon}
-    </Button>
-  );
-});
+>(
+  (
+    {
+      generating = false,
+      sendIcon,
+      generatingIcon,
+      disabled,
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const isDisabled = disabled || generating;
+
+    return (
+      <Button
+        ref={ref}
+        {...props}
+        disabled={isDisabled}
+        className={cn(
+          "w-8 h-8 rounded-full p-2 gap-2",
+          "bg-[var(--bg-brand)]",
+          "text-[var(--text-inverse)]",
+          "transition-opacity",
+          // 禁用状态：添加透明度（使用 bg-mask 的 alpha 值 0.8）
+          isDisabled && !generating && "opacity-80",
+          // 生成中状态：完全不透明
+          generating && "opacity-100",
+          className,
+        )}
+        aria-label={generating ? "Generating" : "Send"}
+      >
+        {generating ? generatingIcon || sendIcon : sendIcon}
+      </Button>
+    );
+  },
+);
 SendButtonPrimitive.displayName = "SendButtonPrimitive";
 
 /**
@@ -308,7 +329,9 @@ export function InputRegionPrimitive({
 }: InputRegionPrimitiveProps) {
   return (
     <div className={cn("flex items-end gap-2", className)} {...props}>
-      {attachmentButton && <div className="flex items-center">{attachmentButton}</div>}
+      {attachmentButton && (
+        <div className="flex items-center">{attachmentButton}</div>
+      )}
       <div className="flex-1 relative">{children}</div>
       {actions && <div className="flex items-center gap-2">{actions}</div>}
     </div>

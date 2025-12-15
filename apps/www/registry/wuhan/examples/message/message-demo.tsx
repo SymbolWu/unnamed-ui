@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ComposedMessageList, MessageItem } from "@/registry/wuhan/examples/message/message-composed-demo";
+import {
+  ComposedMessageList,
+  MessageItem,
+} from "@/registry/wuhan/examples/message/message-composed-demo";
 
 export default function MessageDemo() {
   const [messages, setMessages] = useState<MessageItem[]>([
@@ -48,7 +51,10 @@ export default function MessageDemo() {
     },
   ]);
 
-  const handleFeedbackChange = (id: string, feedback: Partial<MessageItem["feedback"]>) => {
+  const handleFeedbackChange = (
+    id: string,
+    feedback: Partial<MessageItem["feedback"]>,
+  ) => {
     setMessages((prev) =>
       prev.map((msg) =>
         msg.id === id
@@ -59,8 +65,8 @@ export default function MessageDemo() {
                 ...feedback,
               },
             }
-          : msg
-      )
+          : msg,
+      ),
     );
   };
 

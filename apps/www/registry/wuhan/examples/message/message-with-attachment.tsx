@@ -1,6 +1,9 @@
 "use client";
 
-import { UserMessage, AIMessage } from "@/registry/wuhan/blocks/message/message-01";
+import {
+  UserMessage,
+  AIMessage,
+} from "@/registry/wuhan/blocks/message/message-01";
 import { AttachmentCard } from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
 import { FileText } from "lucide-react";
 
@@ -10,9 +13,7 @@ export default function MessageWithAttachment() {
       {/* AI 消息：带附件的消息 */}
       <div className="flex justify-start w-full">
         <div className="w-fit max-w-full flex flex-col gap-2">
-          <AIMessage>
-            这是 AI 消息
-          </AIMessage>
+          <AIMessage>这是 AI 消息</AIMessage>
         </div>
       </div>
 
@@ -28,12 +29,9 @@ export default function MessageWithAttachment() {
             fileSize="14kb"
             onClick={() => {}}
           />
-          <UserMessage>
-            这是用户消息，上方有附件
-          </UserMessage>
+          <UserMessage>这是用户消息，上方有附件</UserMessage>
         </div>
       </div>
     </div>
   );
 }
-

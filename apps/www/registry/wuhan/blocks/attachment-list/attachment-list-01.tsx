@@ -21,11 +21,20 @@ const SCROLL_PADDING = 4; // 滚动容器的垂直内边距（px）
  * 附件卡片样式原语
  * 提供单个附件卡片的基础样式
  */
-export interface AttachmentCardPrimitiveProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'name'> {
+export interface AttachmentCardPrimitiveProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "name"
+> {
   /**
    * Button variant (继承自 Button 组件)
    */
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?:
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   /**
    * Button size (继承自 Button 组件)
    */
@@ -63,114 +72,135 @@ export interface AttachmentCardPrimitiveProps extends Omit<React.HTMLAttributes<
 export const AttachmentCardPrimitive = React.forwardRef<
   HTMLDivElement,
   AttachmentCardPrimitiveProps
->(({ icon, name, fileType, fileSize, isImage = false, deleteIcon, onDelete, variant, size, className, children, ...props }, ref) => {
-  const displayText = fileType && fileSize ? `${fileType}·${fileSize}` : fileSize || fileType;
-  
-  return (
-    <div
-      ref={ref}
-      {...props}
-      role="button"
-      tabIndex={props.onClick ? 0 : undefined}
-      className={cn(
-        buttonVariants({ variant, size }),
-        "relative",
-        "flex items-center",
-        !isImage && "gap-[var(--gap-sm)]",
-        !isImage && "px-[var(--padding-com-md)]",
-        "bg-[var(--bg-neutral-light)]",
-        "rounded-xl",
-        "transition-colors",
-        isImage ? "w-14 h-14 p-0" : "max-w-[200px] h-14",
-        "group/card",
-        "cursor-pointer",
-        "overflow-visible",
-        className
-      )}
-    >
-      {/* 左侧图片/图标 */}
-      {icon && (
-        <div
-          className={cn(
-            "shrink-0",
-            isImage ? "w-full h-full rounded-xl" : "rounded-lg bg-[var(--bg-container)] w-10 h-10",
-            "flex items-center justify-center",
-            "overflow-hidden"
-          )}
-        >
-          {icon}
-        </div>
-      )}
-      
-      {/* 右侧文件信息（仅非图片类型显示） */}
-      {!isImage && (name || displayText) && (
-        <div className="flex flex-col items-start min-w-0 flex-1 justify-center overflow-hidden">
-          {name && (
-            <span
-              className={cn(
-                "font-[var(--font-family-cn)]",
-                "font-[var(--font-weight-400)]",
-                "text-[var(--font-size-3)]",
-                "leading-[var(--line-height-2)]",
-                "truncate w-full",
-                "group-hover/card:whitespace-normal group-hover/card:break-words group-hover/card:overflow-visible",
-                "transition-all"
-              )}
-              title={name}
-            >
-              {name}
-            </span>
-          )}
-          {displayText && (
-            <span
-              className={cn(
-                "font-[var(--font-family-cn)]",
-                "font-[var(--font-weight-400)]",
-                "text-[var(--font-size-1)]",
-                "leading-[var(--line-height-1)]",
-                "text-[var(--text-tertiary)]"
-              )}
-            >
-              {displayText}
-            </span>
-          )}
-        </div>
-      )}
-      
-      {deleteIcon && onDelete && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(e);
-          }}
-          className={cn(
-            "absolute",
-            "-top-1 -right-1",
-            "z-10",
-            "w-5 h-5",
-            "rounded-full",
-            "bg-[var(--bg-container)]",
-            "border border-[var(--border-neutral)]",
-            "shadow-sm",
-            "flex items-center justify-center",
-            "opacity-0 pointer-events-none",
-            "group-hover/card:opacity-100 group-hover/card:pointer-events-auto",
-            "transition-opacity duration-150",
-            "hover:bg-[var(--bg-neutral-light-hover)]",
-            "transition-colors"
-          )}
-          aria-label="Delete attachment"
-          onMouseDown={(e) => e.stopPropagation()}
-        >
-          {deleteIcon}
-        </button>
-      )}
-      
-      {children}
-    </div>
-  );
-});
+>(
+  (
+    {
+      icon,
+      name,
+      fileType,
+      fileSize,
+      isImage = false,
+      deleteIcon,
+      onDelete,
+      variant,
+      size,
+      className,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const displayText =
+      fileType && fileSize ? `${fileType}·${fileSize}` : fileSize || fileType;
+
+    return (
+      <div
+        ref={ref}
+        {...props}
+        role="button"
+        tabIndex={props.onClick ? 0 : undefined}
+        className={cn(
+          buttonVariants({ variant, size }),
+          "relative",
+          "flex items-center",
+          !isImage && "gap-[var(--gap-sm)]",
+          !isImage && "px-[var(--padding-com-md)]",
+          "bg-[var(--bg-neutral-light)]",
+          "rounded-xl",
+          "transition-colors",
+          isImage ? "w-14 h-14 p-0" : "max-w-[200px] h-14",
+          "group/card",
+          "cursor-pointer",
+          "overflow-visible",
+          className,
+        )}
+      >
+        {/* 左侧图片/图标 */}
+        {icon && (
+          <div
+            className={cn(
+              "shrink-0",
+              isImage
+                ? "w-full h-full rounded-xl"
+                : "rounded-lg bg-[var(--bg-container)] w-10 h-10",
+              "flex items-center justify-center",
+              "overflow-hidden",
+            )}
+          >
+            {icon}
+          </div>
+        )}
+
+        {/* 右侧文件信息（仅非图片类型显示） */}
+        {!isImage && (name || displayText) && (
+          <div className="flex flex-col items-start min-w-0 flex-1 justify-center overflow-hidden">
+            {name && (
+              <span
+                className={cn(
+                  "font-[var(--font-family-cn)]",
+                  "font-[var(--font-weight-400)]",
+                  "text-[var(--font-size-3)]",
+                  "leading-[var(--line-height-2)]",
+                  "truncate w-full",
+                  "group-hover/card:whitespace-normal group-hover/card:break-words group-hover/card:overflow-visible",
+                  "transition-all",
+                )}
+                title={name}
+              >
+                {name}
+              </span>
+            )}
+            {displayText && (
+              <span
+                className={cn(
+                  "font-[var(--font-family-cn)]",
+                  "font-[var(--font-weight-400)]",
+                  "text-[var(--font-size-1)]",
+                  "leading-[var(--line-height-1)]",
+                  "text-[var(--text-tertiary)]",
+                )}
+              >
+                {displayText}
+              </span>
+            )}
+          </div>
+        )}
+
+        {deleteIcon && onDelete && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(e);
+            }}
+            className={cn(
+              "absolute",
+              "-top-1 -right-1",
+              "z-10",
+              "w-5 h-5",
+              "rounded-full",
+              "bg-[var(--bg-container)]",
+              "border border-[var(--border-neutral)]",
+              "shadow-sm",
+              "flex items-center justify-center",
+              "opacity-0 pointer-events-none",
+              "group-hover/card:opacity-100 group-hover/card:pointer-events-auto",
+              "transition-opacity duration-150",
+              "hover:bg-[var(--bg-neutral-light-hover)]",
+              "transition-colors",
+            )}
+            aria-label="Delete attachment"
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            {deleteIcon}
+          </button>
+        )}
+
+        {children}
+      </div>
+    );
+  },
+);
 AttachmentCardPrimitive.displayName = "AttachmentCardPrimitive";
 
 /**
@@ -218,24 +248,28 @@ export function AttachmentListPrimitive({
     lg: "py-3",
   };
 
-  const borderClasses = bordered ? "border-b border-[var(--border-neutral)]" : "";
+  const borderClasses = bordered
+    ? "border-b border-[var(--border-neutral)]"
+    : "";
 
   // 检查滚动状态
   const checkScrollability = React.useCallback(() => {
     if (!scrollContainerRef.current) return;
 
     const scrollContainer = scrollContainerRef.current;
-    
+
     const scrollLeft = scrollContainer.scrollLeft;
     const scrollWidth = scrollContainer.scrollWidth;
     const clientWidth = scrollContainer.clientWidth;
 
     // 检查内容是否超出容器宽度（添加容差处理浮点数精度问题）
     const needsScroll = scrollWidth > clientWidth + SCROLL_THRESHOLD;
-    
+
     if (needsScroll) {
       setCanScrollLeft(scrollLeft > SCROLL_THRESHOLD);
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - SCROLL_THRESHOLD);
+      setCanScrollRight(
+        scrollLeft < scrollWidth - clientWidth - SCROLL_THRESHOLD,
+      );
     } else {
       setCanScrollLeft(false);
       setCanScrollRight(false);
@@ -249,12 +283,12 @@ export function AttachmentListPrimitive({
 
     checkScrollability();
     scrollContainer.addEventListener("scroll", checkScrollability);
-    
+
     // 监听窗口大小变化和内容变化
     const resizeObserver = new ResizeObserver(() => {
       checkScrollability();
     });
-    
+
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
     }
@@ -290,7 +324,7 @@ export function AttachmentListPrimitive({
         "relative w-full max-w-full",
         borderClasses,
         paddingClasses[verticalPadding],
-        className
+        className,
       )}
       {...props}
     >
@@ -298,7 +332,10 @@ export function AttachmentListPrimitive({
       <div
         ref={scrollContainerRef}
         className="overflow-x-auto overflow-y-visible no-scrollbar relative"
-        style={{ paddingTop: `${SCROLL_PADDING}px`, paddingBottom: `${SCROLL_PADDING}px` }}
+        style={{
+          paddingTop: `${SCROLL_PADDING}px`,
+          paddingBottom: `${SCROLL_PADDING}px`,
+        }}
       >
         <div className="flex items-center gap-2 w-max min-w-full">
           {children}
@@ -331,7 +368,7 @@ export function AttachmentListPrimitive({
               "p-[var(--padding-com-xs)]",
               "flex items-center justify-center",
               "hover:bg-[var(--bg-neutral-light-hover)]",
-              "transition-colors"
+              "transition-colors",
             )}
             aria-label="Scroll left"
           >
@@ -366,7 +403,7 @@ export function AttachmentListPrimitive({
               "p-[var(--padding-com-xs)]",
               "flex items-center justify-center",
               "hover:bg-[var(--bg-neutral-light-hover)]",
-              "transition-colors"
+              "transition-colors",
             )}
             aria-label="Scroll right"
           >
