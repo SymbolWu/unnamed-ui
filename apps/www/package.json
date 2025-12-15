@@ -2,6 +2,7 @@
   "name": "www",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,11 +10,11 @@
     "postinstall": "fumadocs-mdx",
     "lint": "biome check",
     "format": "biome format --write",
-    "registry:build": "shadcn build"
+    "registry:shadcn:build": "shadcn build",
+    "registry:build": "tsx --tsconfig ./tsconfig.scripts.json ./scripts/build-registry.mts && npx prettier --log-level silent --write \"registry/**/*.{ts,tsx,json,mdx}\" --cache"
   },
   "dependencies": {
     "@radix-ui/react-collapsible": "1.1.12",
-    "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-separator": "1.1.8",
     "@radix-ui/react-slot": "1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
@@ -25,15 +26,14 @@
     "fumadocs-mdx": "13.0.7",
     "fumadocs-ui": "16.0.10",
     "lucide-react": "^0.552.0",
-    "next": "16.0.1",
-    "next-themes": "^0.4.6",
+    "next": "16.0.7",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "rimraf": "6.1.2",
     "shadcn": "3.5.0",
     "shiki": "3.19.0",
     "tailwind-merge": "3.4.0",
     "ts-morph": "27.0.2",
-    "vaul": "^1.1.2",
     "zod": "^3.25.76"
   },
   "devDependencies": {
@@ -44,7 +44,9 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "postcss": "^8.5.6",
+    "prettier": "^3.4.2",
     "tailwindcss": "^4.1.16",
+    "tsx": "4.21.0",
     "typescript": "^5.9.3"
   }
 }

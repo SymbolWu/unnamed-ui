@@ -1,3 +1,5 @@
+"use client";
+
 import { Textarea } from "@/registry/wuhan/ui/textarea";
 
 export default function TextareaDemo() {
