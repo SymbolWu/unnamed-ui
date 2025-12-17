@@ -696,6 +696,21 @@
     text-rendering: optimizeLegibility;
     @apply bg-background text-foreground;
   }
+
+  /* /themes 页面：只用 CSS 禁止“最外层滚动”，把滚动交给左右列内部容器。
+   * 通过 :has() 检测页面根节点标记，避免影响站点其它页面。
+   */
+  html:has([data-themes-page]),
+  body:has([data-themes-page]) {
+    height: 100dvh;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  /* 关键：让 flex 子级允许缩小，内部 overflow-y-auto 才能生效，不会把外层撑出滚动条 */
+  body:has([data-themes-page]) > * {
+    min-height: 0;
+  }
   
   a:active,
   button:active {
@@ -705,6 +720,36 @@
 
 @utility theme-container {
   @apply font-sans;
+}
+
+/* 让主题变量 `--border-width` 真正影响到组件边框宽度。
+ * 说明：Tailwind 的 `.border` / `.border-*` 默认会写死 1px/2px，
+ * 我们在 utilities layer 里覆盖它们，使其跟随 CSS 变量。
+ */
+@layer utilities {
+  .border {
+    border-width: var(--border-width);
+  }
+  .border-x {
+    border-left-width: var(--border-width);
+    border-right-width: var(--border-width);
+  }
+  .border-y {
+    border-top-width: var(--border-width);
+    border-bottom-width: var(--border-width);
+  }
+  .border-t {
+    border-top-width: var(--border-width);
+  }
+  .border-r {
+    border-right-width: var(--border-width);
+  }
+  .border-b {
+    border-bottom-width: var(--border-width);
+  }
+  .border-l {
+    border-left-width: var(--border-width);
+  }
 }
 
 @utility container-wrapper {

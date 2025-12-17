@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Check, Copy } from "lucide-react"
+import { Check, Copy, Download } from "lucide-react"
 import { useThemeConfig } from "@/components/active-theme"
 import { Button } from "@/registry/wuhan/ui/button"
 import {
@@ -53,65 +53,75 @@ function getCSSVariableValue(variableName: string, isDark: boolean = false): str
   return value
 }
 
-// Helper function to convert HEX/RGB to OKLCH (simplified, approximate)
-function hexToOklch(hex: string): string {
+// Helper function to convert HEX/RGB to OKLCH (sRGB -> OKLab -> OKLCH)
+// This is much more accurate than the previous simplified approximation.
+function hexToOklch(input: string): string {
   // If already OKLCH format, return as is
-  if (hex.startsWith("oklch(")) return hex
-  
-  // Validate input
-  if (!hex || typeof hex !== "string") return "oklch(0 0 0)"
-  
-  // Check if it's a valid HEX color
-  const hexMatch = hex.match(/^#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})$/)
-  if (!hexMatch) {
-    // If not a valid HEX, try to parse as RGB/RGBA
-    const rgbMatch = hex.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
-    if (rgbMatch) {
-      const r = parseInt(rgbMatch[1], 10) / 255
-      const g = parseInt(rgbMatch[2], 10) / 255
-      const b = parseInt(rgbMatch[3], 10) / 255
-      
-      const l = 0.2126 * r + 0.7152 * g + 0.0722 * b
-      const c = Math.sqrt((r - l) ** 2 + (g - l) ** 2 + (b - l) ** 2) * 0.5
-      const h = Math.atan2(b - g, r - g) * (180 / Math.PI)
-      
-      if (isNaN(l) || isNaN(c) || isNaN(h)) {
-        return "oklch(0 0 0)"
-      }
-      
-      return `oklch(${l.toFixed(3)} ${c.toFixed(3)} ${h.toFixed(1)})`
-    }
-    // If still not valid, return default
-    return "oklch(0 0 0)"
+  if (input.startsWith("oklch(")) return input
+
+  if (!input || typeof input !== "string") return "oklch(0 0 0)"
+  const v = input.trim()
+
+  // Parse HEX (#rgb / #rrggbb)
+  let hex = v
+  const hex3 = hex.match(/^#([0-9A-Fa-f]{3})$/)
+  if (hex3) {
+    const s = hex3[1]
+    hex = `#${s[0]}${s[0]}${s[1]}${s[1]}${s[2]}${s[2]}`
   }
-  
-  // Normalize 3-digit HEX to 6-digit
-  const normalizedHex = hex.length === 4 
-    ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-    : hex
-  
-  // Convert HEX to RGB
-  const r = parseInt(normalizedHex.slice(1, 3), 16) / 255
-  const g = parseInt(normalizedHex.slice(3, 5), 16) / 255
-  const b = parseInt(normalizedHex.slice(5, 7), 16) / 255
-  
-  // Validate RGB values
-  if (isNaN(r) || isNaN(g) || isNaN(b)) {
-    return "oklch(0 0 0)"
+  const hex6 = hex.match(/^#([0-9A-Fa-f]{6})$/)
+
+  let r = 0
+  let g = 0
+  let b = 0
+
+  if (hex6) {
+    r = Number.parseInt(hex.slice(1, 3), 16)
+    g = Number.parseInt(hex.slice(3, 5), 16)
+    b = Number.parseInt(hex.slice(5, 7), 16)
+  } else {
+    // Fallback: parse rgb()/rgba()
+    const rgbMatch = v.match(/rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)/i)
+    if (!rgbMatch) return "oklch(0 0 0)"
+    r = Number.parseInt(rgbMatch[1], 10)
+    g = Number.parseInt(rgbMatch[2], 10)
+    b = Number.parseInt(rgbMatch[3], 10)
   }
-  
-  // Simplified conversion (this is approximate)
-  // In production, you'd want a proper color conversion library
-  const l = 0.2126 * r + 0.7152 * g + 0.0722 * b
-  const c = Math.sqrt((r - l) ** 2 + (g - l) ** 2 + (b - l) ** 2) * 0.5
-  const h = Math.atan2(b - g, r - g) * (180 / Math.PI)
-  
-  // Validate final values
-  if (isNaN(l) || isNaN(c) || isNaN(h)) {
-    return "oklch(0 0 0)"
+
+  if ([r, g, b].some((n) => Number.isNaN(n))) return "oklch(0 0 0)"
+
+  // sRGB -> linear RGB
+  const toLinear = (c255: number) => {
+    const c = c255 / 255
+    return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
   }
-  
-  return `oklch(${l.toFixed(3)} ${c.toFixed(3)} ${h.toFixed(1)})`
+  const rL = toLinear(r)
+  const gL = toLinear(g)
+  const bL = toLinear(b)
+
+  // linear sRGB -> LMS (OKLab)
+  const l = 0.4122214708 * rL + 0.5363325363 * gL + 0.0514459929 * bL
+  const m = 0.2119034982 * rL + 0.6806995451 * gL + 0.1073969566 * bL
+  const s = 0.0883024619 * rL + 0.2817188376 * gL + 0.6299787005 * bL
+
+  const l_ = Math.cbrt(l)
+  const m_ = Math.cbrt(m)
+  const s_ = Math.cbrt(s)
+
+  const L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+  const a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
+  const b2 = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
+
+  const C = Math.sqrt(a * a + b2 * b2)
+  let H = (Math.atan2(b2, a) * 180) / Math.PI
+  if (H < 0) H += 360
+
+  const chroma = C < 0.0001 ? 0 : C
+  const hue = C < 0.0001 ? 0 : H
+
+  // Higher precision reduces visible/round-trip errors (e.g. #bc01b6 -> #bc02b6).
+  // CSS accepts more decimals; we keep it compact but precise.
+  return `oklch(${L.toFixed(5)} ${chroma.toFixed(5)} ${hue.toFixed(3)})`
 }
 
 // Helper function to convert HEX/RGB to HSL
@@ -210,33 +220,63 @@ function hexToHsl(hex: string): string {
   return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`
 }
 
-// Get theme colors from CSS variables
-function getThemeColors(isDark: boolean = false): Record<string, string> {
+function isPaletteScaleVar(name: string): boolean {
+  return /^(neutral|brand|success|warning|error)-\d+$/.test(name)
+}
+
+function normalizeColorForCompare(value: string): string | null {
+  const v = value.trim()
+  if (!v || v.includes("var(")) return null
+
+  // Normalize hex (#rgb/#rrggbb) to lowercase #rrggbb
+  const hex3 = v.match(/^#([0-9a-fA-F]{3})$/)
+  if (hex3) {
+    const r = hex3[1][0]
+    const g = hex3[1][1]
+    const b = hex3[1][2]
+    return `#${r}${r}${g}${g}${b}${b}`.toLowerCase()
+  }
+  const hex6 = v.match(/^#([0-9a-fA-F]{6})$/)
+  if (hex6) return `#${hex6[1]}`.toLowerCase()
+
+  // Normalize rgb/rgba to rgba(r,g,b,a)
+  const rgb = v.match(/rgba?\(\s*(\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\s*\)/i)
+  if (rgb) {
+    const r = Number.parseInt(rgb[1], 10)
+    const g = Number.parseInt(rgb[2], 10)
+    const b = Number.parseInt(rgb[3], 10)
+    const a = rgb[4] == null ? 1 : Number.parseFloat(rgb[4])
+    if ([r, g, b, a].some((n) => Number.isNaN(n))) return null
+    const aKey = Math.round(a * 1000) / 1000
+    return `rgba(${r},${g},${b},${aKey})`
+  }
+
+  return null
+}
+
+function buildBestVarByColor(vars: Record<string, string>): Map<string, string> {
+  const out = new Map<string, string>()
+  for (const [name, value] of Object.entries(vars)) {
+    const key = normalizeColorForCompare(value)
+    if (!key) continue
+    const existing = out.get(key)
+    if (!existing) {
+      out.set(key, name)
+      continue
+    }
+    // Prefer palette scales (brand-600 etc.) as alias targets.
+    if (isPaletteScaleVar(name) && !isPaletteScaleVar(existing)) {
+      out.set(key, name)
+    }
+  }
+  return out
+}
+
+// Get all CSS variables from :root or .dark
+function getAllCSSVariables(isDark: boolean = false): Record<string, string> {
   if (typeof window === "undefined") return {}
   
-  const colorKeys = [
-    "background",
-    "foreground",
-    "card",
-    "card-foreground",
-    "popover",
-    "popover-foreground",
-    "primary",
-    "primary-foreground",
-    "secondary",
-    "secondary-foreground",
-    "muted",
-    "muted-foreground",
-    "accent",
-    "accent-foreground",
-    "destructive",
-    "destructive-foreground",
-    "border",
-    "input",
-    "ring",
-  ]
-  
-  const colors: Record<string, string> = {}
+  const variables: Record<string, string> = {}
   
   // Create a temporary element with the appropriate dark mode class
   const tempEl = document.createElement("div")
@@ -250,107 +290,208 @@ function getThemeColors(isDark: boolean = false): Record<string, string> {
   
   document.body.appendChild(tempEl)
   
-  for (const key of colorKeys) {
-    let value = getComputedStyle(tempEl).getPropertyValue(`--${key}`).trim()
-    
-    // Resolve var() references recursively (max 10 iterations to avoid infinite loops)
-    let iterations = 0
-    while (value.startsWith("var(") && iterations < 10) {
-      const varName = value.match(/var\(--([^)]+)\)/)?.[1]
-      if (varName) {
-        const resolved = getComputedStyle(tempEl).getPropertyValue(`--${varName}`).trim()
-        if (resolved && resolved !== value) {
-          value = resolved
-          iterations++
-        } else {
-          break
-        }
-      } else {
-        break
-      }
-    }
-    
-    // If still a var() reference, try to get the computed color value directly
-    if (value.startsWith("var(") || !value) {
-      // Set the CSS variable on the element and read the computed color
-      tempEl.style.backgroundColor = `var(--${key})`
-      const computed = getComputedStyle(tempEl).backgroundColor
-      
-      if (computed && computed !== "rgba(0, 0, 0, 0)" && computed !== "transparent") {
-        // Convert rgba() to hex
-        const rgb = computed.match(/\d+/g)
-        if (rgb && rgb.length >= 3) {
-          value = `#${parseInt(rgb[0], 10).toString(16).padStart(2, "0")}${parseInt(rgb[1], 10).toString(16).padStart(2, "0")}${parseInt(rgb[2], 10).toString(16).padStart(2, "0")}`
-        } else {
-          value = computed
-        }
-      } else {
-        // Fallback: try to get computed color using color property
-        tempEl.style.color = `var(--${key})`
-        const computedColor = getComputedStyle(tempEl).color
-        if (computedColor && computedColor !== "rgba(0, 0, 0, 0)") {
-          const rgb = computedColor.match(/\d+/g)
-          if (rgb && rgb.length >= 3) {
-            value = `#${parseInt(rgb[0], 10).toString(16).padStart(2, "0")}${parseInt(rgb[1], 10).toString(16).padStart(2, "0")}${parseInt(rgb[2], 10).toString(16).padStart(2, "0")}`
-          } else {
-            value = computedColor
+  // Get all CSS variables from computed styles
+  const computedStyles = getComputedStyle(tempEl)
+  
+  // Get all CSS custom properties (variables that start with --)
+  // We'll iterate through common variable names and also try to get all from the stylesheet
+  const allVariableNames = new Set<string>()
+  
+  // First, try to get variables from stylesheets
+  try {
+    for (const stylesheet of Array.from(document.styleSheets)) {
+      try {
+        for (const rule of Array.from(stylesheet.cssRules || [])) {
+          if (rule instanceof CSSStyleRule) {
+            const selector = rule.selectorText
+            const selectors = selector.split(",").map((s) => s.trim())
+            const matchesTarget = isDark
+              ? selectors.some((s) => s === ".dark" || s.startsWith(".dark") || s.includes(".dark"))
+              : selectors.some((s) => s === ":root" || s === "html" || s.includes(":root"))
+
+            if (matchesTarget) {
+              for (const prop of rule.style) {
+                if (prop.startsWith("--")) {
+                  // Store keys WITHOUT leading `--` so we don't read `----foo` later.
+                  allVariableNames.add(prop.replace(/^--/, ""))
+                }
+              }
+            }
           }
         }
-      }
-      // Reset styles
-      tempEl.style.backgroundColor = ""
-      tempEl.style.color = ""
-    }
-    
-    // Convert RGB/RGBA to hex if needed
-    if (value && !value.startsWith("#") && !value.startsWith("oklch(") && !value.startsWith("hsl(") && value.match(/^rgba?\(/)) {
-      const rgb = value.match(/\d+/g)
-      if (rgb && rgb.length >= 3) {
-        value = `#${parseInt(rgb[0], 10).toString(16).padStart(2, "0")}${parseInt(rgb[1], 10).toString(16).padStart(2, "0")}${parseInt(rgb[2], 10).toString(16).padStart(2, "0")}`
+      } catch (e) {
+        // Cross-origin stylesheets may throw errors, ignore them
       }
     }
-    
-    // Ensure we have a valid color value
-    if (!value || value === "" || value.startsWith("var(")) {
-      // Use a fallback default color based on the key
-      if (key.includes("background") || key.includes("card") || key.includes("popover")) {
-        value = isDark ? "#141414" : "#ffffff"
-      } else if (key.includes("foreground")) {
-        value = isDark ? "#b2afba" : "#1e1d26"
-      } else {
-        value = "#000000"
-      }
+  } catch (e) {
+    // Some browsers may restrict access to stylesheets
+  }
+  
+  // Fallback: get variables from computed styles (this gets all variables that are actually used)
+  // We'll also manually add common variable names to ensure we get them all
+  const commonVariableNames = [
+    // Radius
+    "radius", "radius-sm", "radius-md", "radius-lg", "radius-xl", "radius-2xl", "radius-circle",
+    // Colors - basic
+    "background", "foreground", "card", "card-foreground", "popover", "popover-foreground",
+    "primary", "primary-foreground", "secondary", "secondary-foreground",
+    "muted", "muted-foreground", "accent", "accent-foreground",
+    "destructive", "destructive-foreground", "border", "input", "ring",
+    "surface", "surface-foreground", "code", "code-foreground", "code-highlight", "code-number",
+    "selection", "selection-foreground",
+    // Neutral colors
+    "neutral-0", "neutral-10", "neutral-50", "neutral-100", "neutral-200", "neutral-300",
+    "neutral-400", "neutral-500", "neutral-600", "neutral-700", "neutral-800", "neutral-900", "neutral-1000",
+    // Brand colors
+    "brand-50", "brand-100", "brand-200", "brand-300", "brand-400", "brand-500",
+    "brand-600", "brand-700", "brand-800", "brand-900", "brand-1000",
+    // Success colors
+    "success-50", "success-100", "success-200", "success-300", "success-400", "success-500",
+    "success-600", "success-700", "success-800", "success-900", "success-1000", "success", "success-foreground",
+    // Warning colors
+    "warning-50", "warning-100", "warning-200", "warning-300", "warning-400", "warning-500",
+    "warning-600", "warning-700", "warning-800", "warning-900", "warning-1000", "warning-10000", "warning", "warning-foreground",
+    // Error colors
+    "error-50", "error-100", "error-200", "error-300", "error-400", "error-500",
+    "error-600", "error-700", "error-800", "error-900", "error-1000", "error-10000", "error", "error-foreground",
+    // Text colors
+    "text-primary", "text-secondary", "text-tertiary", "text-disable", "text-placeholder",
+    "text-brand", "text-brand-hover", "text-brand-active", "text-title", "text-inverse",
+    "text-success", "text-success-hover", "text-success-active",
+    "text-warning", "text-warning-hover", "text-warning-active",
+    "text-error", "text-error-hover", "text-error-active",
+    // Background colors
+    "bg-container", "bg-neutral-light", "bg-neutral-light-hover", "bg-neutral-light-active",
+    "bg-brand-light", "bg-brand-light-hover", "bg-brand-light-active",
+    "bg-brand", "bg-brand-hover", "bg-brand-active",
+    "bg-container-disable",
+    "bg-success", "bg-success-light", "bg-success-light-hover", "bg-success-light-active",
+    "bg-success-hover", "bg-success-active",
+    "bg-warning", "bg-warning-light", "bg-warning-light-hover", "bg-warning-light-active",
+    "bg-warning-hover", "bg-warning-active",
+    "bg-error", "bg-error-light", "bg-error-light-hover", "bg-error-light-active",
+    "bg-error-hover", "bg-error-active",
+    "bg-neutral", "bg-neutral-hover", "bg-neutral-active",
+    "bg-mask", "bg-page", "bg-page-brand", "bg-page-neutral",
+    // Border colors
+    "border-brand", "border-brand-hover", "border-brand-active",
+    "border-brand-light", "border-brand-light-hover",
+    "border-neutral",
+    "border-success", "border-success-hover", "border-success-active",
+    "border-success-light", "border-success-light-hover",
+    "border-warning", "border-warning-hover", "border-warning-active",
+    "border-warning-light", "border-warning-light-hover",
+    "border-error", "border-error-hover", "border-error-active",
+    "border-error-light", "border-error-light-hover",
+    "divider-neutral-basic", "divider-neutral-strong",
+    // Other
+    "focusring-brand", "shadow-basic", "shadow-medium", "shadow-high", "shadow-focus",
+    "border-width",
+    "ai-bg", "ai-light", "ai-light-hover", "ai-light-active",
+    "ai-general", "ai-general-hover", "ai-general-active",
+    // Font
+    "font-family-en", "font-family-cn", "font-family-display", "font-sans", "font-mono",
+    "font-weight-400", "font-weight-600",
+    "font-size-1", "font-size-2", "font-size-3", "font-size-4", "font-size-5",
+    "font-size-6", "font-size-7", "font-size-8", "font-size-9",
+    "line-height-1", "line-height-2", "line-height-3", "line-height-4", "line-height-5",
+    "line-height-6", "line-height-7", "line-height-8", "line-height-9",
+    // Spacing
+    "space-1", "space-2", "space-3", "space-4", "space-5", "space-6",
+    "space-7", "space-8", "space-9", "space-10", "space-11", "space-12",
+    "spacing",
+    "margin-com-2xs", "margin-com-xs", "margin-com-sm", "margin-com-md",
+    "margin-com-lg", "margin-com-xl", "margin-com-2xl", "margin-com-3xl",
+    "padding-com-2xs", "padding-com-xs", "padding-com-sm", "padding-com-md",
+    "padding-com-lg", "padding-com-xl", "padding-com-2xl", "padding-com-3xl",
+    "gap-2xs", "gap-xs", "gap-sm", "gap-md", "gap-lg", "gap-xl", "gap-2xl",
+    "size-com-xs", "size-com-sm", "size-com-md", "size-com-lg",
+  ]
+  
+  // Add all common variable names
+  commonVariableNames.forEach(name => allVariableNames.add(name))
+  
+  // Get values for all variables
+  for (const varName of allVariableNames) {
+    const value = computedStyles.getPropertyValue(`--${varName}`).trim()
+    if (value) {
+      variables[varName] = value
     }
-    
-    colors[key] = value
   }
   
   document.body.removeChild(tempEl)
   
+  return variables
+}
+
+// Get theme colors from CSS variables (kept for backward compatibility)
+function getThemeColors(isDark: boolean = false): Record<string, string> {
+  const allVars = getAllCSSVariables(isDark)
+  // Return only the basic color keys for backward compatibility
+  const colorKeys = [
+    "background", "foreground", "card", "card-foreground", "popover", "popover-foreground",
+    "primary", "primary-foreground", "secondary", "secondary-foreground",
+    "muted", "muted-foreground", "accent", "accent-foreground",
+    "destructive", "destructive-foreground", "border", "input", "ring",
+  ]
+  
+  const colors: Record<string, string> = {}
+  for (const key of colorKeys) {
+    if (allVars[key]) {
+      colors[key] = allVars[key]
+    }
+  }
+  
   return colors
 }
 
-function getThemeCodeOKLCH(radius: number): string {
-  const lightColors = getThemeColors(false)
-  const darkColors = getThemeColors(true)
+function getThemeCodeOKLCH(
+  radius: string | number,
+  lightVars: Record<string, string>,
+  darkVars: Record<string, string>,
+): string {
+  const lightBest = buildBestVarByColor(lightVars)
+  const darkBest = buildBestVarByColor(darkVars)
+
+  // Use radius as-is (should be a CSS value like "6px")
+  const radiusValue = typeof radius === "number" ? `${radius}px` : radius
   
   const rootSection =
-    ":root {\n  --radius: " +
-    radius +
-    "rem;\n" +
-    Object.entries(lightColors)
+    ":root {\n" +
+    `  --radius: ${radiusValue};\n` +
+    Object.entries(lightVars)
+      .sort(([a], [b]) => a.localeCompare(b))
       .map((entry) => {
+        const key = entry[0]
         const value = entry[1]
-        const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
-        return "  --" + entry[0] + ": " + oklch + ";"
+        const norm = normalizeColorForCompare(value)
+        const best = norm ? lightBest.get(norm) : null
+        if (best && best !== key) {
+          return "  --" + key + ": var(--" + best + ");"
+        }
+        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+          const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
+          return "  --" + key + ": " + oklch + ";"
+        }
+        return "  --" + key + ": " + value + ";"
       })
       .join("\n") +
     "\n}\n\n.dark {\n" +
-    Object.entries(darkColors)
+    Object.entries(darkVars)
+      .sort(([a], [b]) => a.localeCompare(b))
       .map((entry) => {
+        const key = entry[0]
         const value = entry[1]
-        const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
-        return "  --" + entry[0] + ": " + oklch + ";"
+        const norm = normalizeColorForCompare(value)
+        const best = norm ? darkBest.get(norm) : null
+        if (best && best !== key) {
+          return "  --" + key + ": var(--" + best + ");"
+        }
+        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+          const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
+          return "  --" + key + ": " + oklch + ";"
+        }
+        return "  --" + key + ": " + value + ";"
       })
       .join("\n") +
     "\n}\n"
@@ -358,27 +499,63 @@ function getThemeCodeOKLCH(radius: number): string {
   return rootSection
 }
 
-function getThemeCodeHSLV4(radius: number): string {
-  const lightColors = getThemeColors(false)
-  const darkColors = getThemeColors(true)
+function getThemeCodeHSLV4(
+  radius: string | number,
+  lightVars: Record<string, string>,
+  darkVars: Record<string, string>,
+): string {
+  const lightBest = buildBestVarByColor(lightVars)
+  const darkBest = buildBestVarByColor(darkVars)
+
+  // Use radius as-is (should be a CSS value like "6px")
+  const radiusValue = typeof radius === "number" ? `${radius}px` : radius
   
   const rootSection =
-    ":root {\n  --radius: " +
-    radius +
-    "rem;\n" +
-    Object.entries(lightColors)
+    ":root {\n" +
+    `  --radius: ${radiusValue};\n` +
+    Object.entries(lightVars)
+      .sort(([a], [b]) => a.localeCompare(b))
       .map((entry) => {
+        const key = entry[0]
         const value = entry[1]
-        const hsl = value.startsWith("hsl(") || value.includes("%") ? value : hexToHsl(value || "#000000")
-        return "  --" + entry[0] + ": hsl(" + hsl + ");"
+        const norm = normalizeColorForCompare(value)
+        const best = norm ? lightBest.get(norm) : null
+        if (best && best !== key) {
+          return "  --" + key + ": var(--" + best + ");"
+        }
+        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+          // hexToHsl returns "H S% L%"; wrap into hsl(...)
+          const hslTriplet = value.startsWith("hsl(") ? value : hexToHsl(value || "#000000")
+          const out = value.startsWith("hsl(") ? value : `hsl(${hslTriplet})`
+          return "  --" + key + ": " + out + ";"
+        }
+        // If user provided raw "H S% L%" value, wrap it.
+        if (isPaletteScaleVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
+          return "  --" + key + ": hsl(" + value + ");"
+        }
+        return "  --" + key + ": " + value + ";"
       })
       .join("\n") +
     "\n}\n\n.dark {\n" +
-    Object.entries(darkColors)
+    Object.entries(darkVars)
+      .sort(([a], [b]) => a.localeCompare(b))
       .map((entry) => {
+        const key = entry[0]
         const value = entry[1]
-        const hsl = value.startsWith("hsl(") || value.includes("%") ? value : hexToHsl(value || "#000000")
-        return "  --" + entry[0] + ": hsl(" + hsl + ");"
+        const norm = normalizeColorForCompare(value)
+        const best = norm ? darkBest.get(norm) : null
+        if (best && best !== key) {
+          return "  --" + key + ": var(--" + best + ");"
+        }
+        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+          const hslTriplet = value.startsWith("hsl(") ? value : hexToHsl(value || "#000000")
+          const out = value.startsWith("hsl(") ? value : `hsl(${hslTriplet})`
+          return "  --" + key + ": " + out + ";"
+        }
+        if (isPaletteScaleVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
+          return "  --" + key + ": hsl(" + value + ");"
+        }
+        return "  --" + key + ": " + value + ";"
       })
       .join("\n") +
     "\n}\n"
@@ -386,9 +563,24 @@ function getThemeCodeHSLV4(radius: number): string {
   return rootSection
 }
 
-function getThemeCodeV3(radius: number): string {
-  const lightColors = getThemeColors(false)
-  const darkColors = getThemeColors(true)
+function getThemeCodeV3(
+  radius: string | number,
+  lightColors: Record<string, string>,
+  darkColors: Record<string, string>,
+): string {
+  // Convert radius to rem if it's in px
+  let radiusRem = "0.5rem"
+  if (typeof radius === "string") {
+    const match = radius.match(/([\d.]+)px/)
+    if (match) {
+      const px = parseFloat(match[1])
+      radiusRem = `${px / 16}rem`
+    } else if (radius.includes("rem")) {
+      radiusRem = radius
+    }
+  } else {
+    radiusRem = `${radius}rem`
+  }
   
   return `@layer base {
   :root {
@@ -411,7 +603,7 @@ function getThemeCodeV3(radius: number): string {
     --border: ${lightColors.border || "214.3 31.8% 91.4%"};
     --input: ${lightColors.input || "214.3 31.8% 91.4%"};
     --ring: ${lightColors.ring || "222.2 84% 4.9%"};
-    --radius: ${radius}rem;
+    --radius: ${radiusRem};
   }
 
   .dark {
@@ -453,9 +645,9 @@ function CustomizerCode({ themeName }: { themeName: string }) {
   const [tailwindVersion, setTailwindVersion] = React.useState("v4-oklch")
   const { resolvedTheme } = useTheme()
   
-  // Get radius value from CSS
+  // Get radius value from CSS (keep original value)
   const radiusValue = React.useMemo(() => {
-    if (typeof window === "undefined") return 0.5
+    if (typeof window === "undefined") return "6px"
     
     const tempEl = document.createElement("div")
     tempEl.style.position = "fixed"
@@ -466,14 +658,7 @@ function CustomizerCode({ themeName }: { themeName: string }) {
     const radius = getComputedStyle(tempEl).getPropertyValue("--radius").trim()
     document.body.removeChild(tempEl)
     
-    if (radius) {
-      const match = radius.match(/([\d.]+)/)
-      if (match) {
-        const px = parseFloat(match[1])
-        return px / 16 // Convert px to rem
-      }
-    }
-    return 0.5
+    return radius || "6px"
   }, [])
 
   React.useEffect(() => {
@@ -484,25 +669,111 @@ function CustomizerCode({ themeName }: { themeName: string }) {
     }
   }, [hasCopied])
 
-  const lightColors = React.useMemo(() => getThemeColors(false), [resolvedTheme])
-  const darkColors = React.useMemo(() => getThemeColors(true), [resolvedTheme])
+  const lightVars = React.useMemo(() => getAllCSSVariables(false), [resolvedTheme])
+  const darkVars = React.useMemo(() => getAllCSSVariables(true), [resolvedTheme])
+
+  const lightColors = React.useMemo(() => {
+    const keys = [
+      "background",
+      "foreground",
+      "card",
+      "card-foreground",
+      "popover",
+      "popover-foreground",
+      "primary",
+      "primary-foreground",
+      "secondary",
+      "secondary-foreground",
+      "muted",
+      "muted-foreground",
+      "accent",
+      "accent-foreground",
+      "destructive",
+      "destructive-foreground",
+      "border",
+      "input",
+      "ring",
+    ] as const
+    const out: Record<string, string> = {}
+    for (const k of keys) {
+      const v = lightVars[k]
+      if (v) out[k] = v
+    }
+    return out
+  }, [lightVars])
+
+  const darkColors = React.useMemo(() => {
+    const keys = [
+      "background",
+      "foreground",
+      "card",
+      "card-foreground",
+      "popover",
+      "popover-foreground",
+      "primary",
+      "primary-foreground",
+      "secondary",
+      "secondary-foreground",
+      "muted",
+      "muted-foreground",
+      "accent",
+      "accent-foreground",
+      "destructive",
+      "destructive-foreground",
+      "border",
+      "input",
+      "ring",
+    ] as const
+    const out: Record<string, string> = {}
+    for (const k of keys) {
+      const v = darkVars[k]
+      if (v) out[k] = v
+    }
+    return out
+  }, [darkVars])
+
+  const codeOKLCH = React.useMemo(
+    () => getThemeCodeOKLCH(radiusValue, lightVars, darkVars),
+    [radiusValue, lightVars, darkVars],
+  )
+  const codeHSL = React.useMemo(
+    () => getThemeCodeHSLV4(radiusValue, lightVars, darkVars),
+    [radiusValue, lightVars, darkVars],
+  )
+  const codeV3 = React.useMemo(
+    () => getThemeCodeV3(radiusValue, lightColors, darkColors),
+    [radiusValue, lightColors, darkColors],
+  )
 
   const getCodeForVersion = (version: string) => {
     switch (version) {
       case "v4-oklch":
-        return getThemeCodeOKLCH(radiusValue)
+        return codeOKLCH
       case "v4-hsl":
-        return getThemeCodeHSLV4(radiusValue)
+        return codeHSL
       case "v3":
-        return getThemeCodeV3(radiusValue)
+        return codeV3
       default:
-        return getThemeCodeOKLCH(radiusValue)
+        return codeOKLCH
     }
   }
 
   const handleCopy = (version: string) => {
     navigator.clipboard.writeText(getCodeForVersion(version))
     setHasCopied(true)
+  }
+
+  const handleDownload = (version: string) => {
+    const code = getCodeForVersion(version)
+    const blob = new Blob([code], { type: "text/css" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `theme-${version}.css`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   }
 
   return (
@@ -524,64 +795,30 @@ function CustomizerCode({ themeName }: { themeName: string }) {
               app/globals.css
             </figcaption>
             <pre className="no-scrollbar max-h-[300px] min-w-0 overflow-x-auto px-4 py-3.5 outline-none md:max-h-[450px] relative">
-              <Button
-                data-slot="copy-button"
-                size="icon"
-                variant="ghost"
-                className="bg-code text-code-foreground absolute top-3 right-2 z-10 size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => handleCopy("v4-oklch")}
-              >
-                <span className="sr-only">Copy</span>
-                {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
-              </Button>
-              <code className="text-code-foreground">
-                <span className="line text-code-foreground">
-                  &nbsp;:root &#123;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;&nbsp;&nbsp;--radius: {radiusValue}rem;
-                </span>
-                <br />
-                {Object.entries(lightColors).map(([key, value]) => {
-                  const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
-                  return (
-                    <React.Fragment key={key}>
-                      <span className="line text-code-foreground">
-                        &nbsp;&nbsp;&nbsp;--{key}: <ColorIndicator color={value || "#000000"} />{" "}
-                        {oklch};
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  )
-                })}
-                <span className="line text-code-foreground">
-                  &nbsp;&#125;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;.dark &#123;
-                </span>
-                <br />
-                {Object.entries(darkColors).map(([key, value]) => {
-                  const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
-                  return (
-                    <React.Fragment key={key}>
-                      <span className="line text-code-foreground">
-                        &nbsp;&nbsp;&nbsp;--{key}: <ColorIndicator color={value || "#000000"} />{" "}
-                        {oklch};
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  )
-                })}
-                <span className="line text-code-foreground">
-                  &nbsp;&#125;
-                </span>
+              <div className="absolute top-3 right-2 z-10 flex gap-1">
+                <Button
+                  data-slot="copy-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleCopy("v4-oklch")}
+                >
+                  <span className="sr-only">Copy</span>
+                  {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                </Button>
+                <Button
+                  data-slot="download-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleDownload("v4-oklch")}
+                >
+                  <span className="sr-only">Download</span>
+                  <Download className="size-4" />
+                </Button>
+              </div>
+              <code className="text-code-foreground whitespace-pre">
+                {codeOKLCH}
               </code>
             </pre>
           </figure>
@@ -593,64 +830,30 @@ function CustomizerCode({ themeName }: { themeName: string }) {
               app/globals.css
             </figcaption>
             <pre className="no-scrollbar max-h-[300px] min-w-0 overflow-x-auto px-4 py-3.5 outline-none md:max-h-[450px] relative">
-              <Button
-                data-slot="copy-button"
-                size="icon"
-                variant="ghost"
-                className="bg-code text-code-foreground absolute top-3 right-2 z-10 size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => handleCopy("v4-hsl")}
-              >
-                <span className="sr-only">Copy</span>
-                {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
-              </Button>
-              <code className="text-code-foreground">
-                <span className="line text-code-foreground">
-                  &nbsp;:root &#123;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;&nbsp;&nbsp;--radius: {radiusValue}rem;
-                </span>
-                <br />
-                {Object.entries(lightColors).map(([key, value]) => {
-                  const hsl = value.startsWith("hsl(") || value.includes("%") ? value : hexToHsl(value || "#000000")
-                  return (
-                    <React.Fragment key={key}>
-                      <span className="line text-code-foreground">
-                        &nbsp;&nbsp;&nbsp;--{key}: <ColorIndicator color={value || "#000000"} />{" "}
-                        hsl({hsl});
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  )
-                })}
-                <span className="line text-code-foreground">
-                  &nbsp;&#125;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;
-                </span>
-                <br />
-                <span className="line text-code-foreground">
-                  &nbsp;.dark &#123;
-                </span>
-                <br />
-                {Object.entries(darkColors).map(([key, value]) => {
-                  const hsl = value.startsWith("hsl(") || value.includes("%") ? value : hexToHsl(value || "#000000")
-                  return (
-                    <React.Fragment key={key}>
-                      <span className="line text-code-foreground">
-                        &nbsp;&nbsp;&nbsp;--{key}: <ColorIndicator color={value || "#000000"} />{" "}
-                        hsl({hsl});
-                      </span>
-                      <br />
-                    </React.Fragment>
-                  )
-                })}
-                <span className="line text-code-foreground">
-                  &nbsp;&#125;
-                </span>
+              <div className="absolute top-3 right-2 z-10 flex gap-1">
+                <Button
+                  data-slot="copy-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleCopy("v4-hsl")}
+                >
+                  <span className="sr-only">Copy</span>
+                  {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                </Button>
+                <Button
+                  data-slot="download-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleDownload("v4-hsl")}
+                >
+                  <span className="sr-only">Download</span>
+                  <Download className="size-4" />
+                </Button>
+              </div>
+              <code className="text-code-foreground whitespace-pre">
+                {codeHSL}
               </code>
             </pre>
           </figure>
@@ -662,18 +865,30 @@ function CustomizerCode({ themeName }: { themeName: string }) {
               app/globals.css
             </figcaption>
             <pre className="no-scrollbar max-h-[300px] min-w-0 overflow-x-auto px-4 py-3.5 outline-none md:max-h-[450px] relative">
-              <Button
-                data-slot="copy-button"
-                size="icon"
-                variant="ghost"
-                className="bg-code text-code-foreground absolute top-3 right-2 z-10 size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
-                onClick={() => handleCopy("v3")}
-              >
-                <span className="sr-only">Copy</span>
-                {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
-              </Button>
+              <div className="absolute top-3 right-2 z-10 flex gap-1">
+                <Button
+                  data-slot="copy-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleCopy("v3")}
+                >
+                  <span className="sr-only">Copy</span>
+                  {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                </Button>
+                <Button
+                  data-slot="download-button"
+                  size="icon"
+                  variant="ghost"
+                  className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+                  onClick={() => handleDownload("v3")}
+                >
+                  <span className="sr-only">Download</span>
+                  <Download className="size-4" />
+                </Button>
+              </div>
               <code className="text-code-foreground whitespace-pre">
-                {getThemeCodeV3(radiusValue)}
+                {codeV3}
               </code>
             </pre>
           </figure>

@@ -262,9 +262,8 @@ export const SendButtonPrimitive = React.forwardRef<
         aria-label={generating ? "Generating" : "Send"}
       >
         {generating
-          ? (generatingContent ?? children ?? (
-              <Loader2 className="size-4 animate-spin" />
-            ))
+          ? (generatingContent ??
+            children ?? <Loader2 className="size-4 animate-spin" />)
           : (children ?? <Send className="size-4" />)}
       </Button>
     );

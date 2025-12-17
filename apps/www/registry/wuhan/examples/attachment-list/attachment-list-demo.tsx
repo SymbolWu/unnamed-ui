@@ -3,8 +3,15 @@
 import { useMemo, useState } from "react";
 import {
   AttachmentCard,
+  AttachmentCardContent,
+  AttachmentCardDeleteButton,
+  AttachmentCardLeading,
+  AttachmentCardMeta,
+  AttachmentCardTitle,
   AttachmentList,
+  AttachmentLoadingIndicator,
 } from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
+import { cn } from "@/lib/utils";
 import { FileText, X } from "lucide-react";
 
 type DemoAttachment = {
@@ -14,6 +21,7 @@ type DemoAttachment = {
   fileSize?: string;
   isImage?: boolean;
   loading?: boolean;
+  thumbnail?: string;
 };
 
 export default function AttachmentListDemo() {
@@ -22,11 +30,13 @@ export default function AttachmentListDemo() {
       {
         id: "img-1",
         isImage: true,
+        thumbnail: "https://placehold.co/56x56",
         name: "image.png",
       },
       {
         id: "img-uploading",
         isImage: true,
+        thumbnail: "https://placehold.co/56x56",
         name: "uploading.jpg",
         loading: true,
       },
@@ -51,35 +61,71 @@ export default function AttachmentListDemo() {
 
   return (
     <div className="w-full max-w-full">
-      <AttachmentList className="max-w-full" bordered>
-        {items.map((item) => (
-          <AttachmentCard
-            key={item.id}
-            variant="outline"
-            size="sm"
-            isImage={item.isImage}
-            loading={item.loading}
-            icon={
-              item.isImage ? (
-                <div className="w-full h-full bg-[var(--bg-neutral-light-hover)] flex items-center justify-center">
-                  <span className="text-[10px] text-[var(--text-tertiary)]">
-                    IMG
-                  </span>
-                </div>
-              ) : (
-                <FileText className="size-4" />
-              )
-            }
-            name={item.name}
-            fileType={item.fileType}
-            fileSize={item.fileSize}
-            deleteIcon={<X className="w-3 h-3 text-[var(--text-tertiary)]" />}
-            onDelete={() =>
-              setItems((prev) => prev.filter((x) => x.id !== item.id))
-            }
-            onClick={() => {}}
-          />
-        ))}
+      <AttachmentList className="max-w-full">
+        {items.map((item) => {
+          const meta =
+            item.fileType && item.fileSize
+              ? `${item.fileType}·${item.fileSize}`
+              : item.fileSize || item.fileType;
+
+          return (
+            <AttachmentCard
+              key={item.id}
+              variant="outline"
+              size="sm"
+              className={cn(
+                "h-14",
+                "flex items-center",
+                item.isImage
+                  ? "w-14 p-0 bg-transparent"
+                  : "max-w-[200px] px-[var(--padding-com-md)] gap-[var(--gap-sm)]",
+              )}
+              onClick={() => {}}
+            >
+              <AttachmentCardLeading
+                className={cn(
+                  item.isImage
+                    ? "w-full h-full rounded-xl overflow-hidden"
+                    : "rounded-lg bg-[var(--bg-container)] w-10 h-10",
+                )}
+              >
+                {item.loading ? (
+                  <AttachmentLoadingIndicator />
+                ) : item.isImage ? (
+                  <img
+                    className="w-full h-full object-cover"
+                    src={item.thumbnail}
+                    alt={item.name}
+                  />
+                ) : (
+                  <FileText className="size-4" />
+                )}
+              </AttachmentCardLeading>
+
+              {!item.isImage && (
+                <AttachmentCardContent>
+                  {item.name && (
+                    <AttachmentCardTitle title={item.name}>
+                      {item.name}
+                    </AttachmentCardTitle>
+                  )}
+                  {meta && <AttachmentCardMeta>{meta}</AttachmentCardMeta>}
+                </AttachmentCardContent>
+              )}
+
+              <AttachmentCardDeleteButton
+                aria-label="Delete attachment"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setItems((prev) => prev.filter((x) => x.id !== item.id));
+                }}
+              >
+                <X className="w-3 h-3 text-[var(--text-tertiary)]" />
+              </AttachmentCardDeleteButton>
+            </AttachmentCard>
+          );
+        })}
       </AttachmentList>
     </div>
   );
