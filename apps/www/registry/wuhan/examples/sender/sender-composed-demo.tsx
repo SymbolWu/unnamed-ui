@@ -22,6 +22,11 @@ import {
 } from "@/registry/wuhan/blocks/sender/sender-01";
 import {
   AttachmentCard,
+  AttachmentCardContent,
+  AttachmentCardDeleteButton,
+  AttachmentCardLeading,
+  AttachmentCardMeta,
+  AttachmentCardTitle,
   AttachmentList,
 } from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
 import { Send, Paperclip, Brain, Loader2, X } from "lucide-react";
@@ -60,21 +65,40 @@ function AttachmentListWrapper({
   if (attachments.length === 0) return null;
 
   return (
-    <AttachmentList bordered verticalPadding="sm">
+    <AttachmentList>
       {attachments.map((attachment) => {
         const Icon = attachment.icon || Paperclip;
         // 判断是否为图片
         const isImage = !!attachment.thumbnail;
         // 提取文件类型
         const fileType = attachment.name?.split(".").pop()?.toUpperCase() || "";
+        const meta =
+          fileType && attachment.size
+            ? `${fileType}·${attachment.size}`
+            : attachment.size || fileType;
 
         return (
           <AttachmentCard
             key={attachment.id}
             variant="outline"
             size="sm"
-            icon={
-              attachment.thumbnail ? (
+            className={cn(
+              "h-14",
+              "flex items-center",
+              isImage
+                ? "w-14 p-0"
+                : "max-w-[200px] px-[var(--padding-com-md)] gap-[var(--gap-sm)]",
+            )}
+            onClick={() => {}}
+          >
+            <AttachmentCardLeading
+              className={cn(
+                isImage
+                  ? "w-full h-full rounded-xl"
+                  : "rounded-lg bg-[var(--bg-container)] w-10 h-10",
+              )}
+            >
+              {attachment.thumbnail ? (
                 <img
                   src={attachment.thumbnail}
                   alt={attachment.name}
@@ -86,19 +110,29 @@ function AttachmentListWrapper({
                 />
               ) : (
                 <Icon className="size-4" />
-              )
-            }
-            name={attachment.name}
-            fileType={fileType}
-            fileSize={attachment.size}
-            isImage={isImage}
-            deleteIcon={<X />}
-            onDelete={(e) => {
-              e.stopPropagation();
-              onRemove?.(attachment.id);
-            }}
-            onClick={() => {}}
-          />
+              )}
+            </AttachmentCardLeading>
+
+            {!isImage && (
+              <AttachmentCardContent>
+                <AttachmentCardTitle title={attachment.name}>
+                  {attachment.name}
+                </AttachmentCardTitle>
+                {meta && <AttachmentCardMeta>{meta}</AttachmentCardMeta>}
+              </AttachmentCardContent>
+            )}
+
+            <AttachmentCardDeleteButton
+              aria-label="Delete attachment"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemove?.(attachment.id);
+              }}
+            >
+              <X className="w-3 h-3 text-[var(--text-tertiary)]" />
+            </AttachmentCardDeleteButton>
+          </AttachmentCard>
         );
       })}
     </AttachmentList>
@@ -123,6 +157,7 @@ function ModeSelector({ modes, selectedModes, onToggle }: ModeSelectorProps) {
           <SenderModeButton
             key={mode.id}
             selected={isActive}
+            type="button"
             onClick={() => onToggle(mode.id)}
           >
             {Icon && <Icon className="size-4" />}
@@ -177,8 +212,17 @@ export function ComposedSender({
   className,
   maxWidth = "max-w-2xl",
 }: ComposedSenderProps) {
+  const canSend = !!value.trim() && !sendDisabled && !generating;
+
   return (
-    <SenderContainer className={cn(maxWidth, className)}>
+    <SenderContainer
+      className={cn(maxWidth, className)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (!canSend) return;
+        onSend?.();
+      }}
+    >
       {/* 附件列表 */}
       {attachments.length > 0 && (
         <AttachmentListWrapper
@@ -205,7 +249,11 @@ export function ComposedSender({
       >
         <div className="flex items-center gap-2">
           {onAttach && (
-            <SenderAttachmentButton onClick={onAttach} aria-label="Attach file">
+            <SenderAttachmentButton
+              type="button"
+              onClick={onAttach}
+              aria-label="Attach file"
+            >
               <Paperclip className="size-4" />
             </SenderAttachmentButton>
           )}
@@ -220,9 +268,9 @@ export function ComposedSender({
         <div className="flex items-center gap-2">
           {onSend && (
             <SenderSendButton
+              type="submit"
               disabled={sendDisabled}
               generating={generating}
-              onClick={onSend}
               generatingContent={
                 <Loader2 className="size-4 text-white animate-spin" />
               }
