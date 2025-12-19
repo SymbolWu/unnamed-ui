@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Copy, RotateCcw, Search } from "lucide-react";
+import { Copy, RotateCcw, Search, Upload } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { useThemeConfig } from "@/components/active-theme";
@@ -404,7 +404,7 @@ export function ThemeStudioPanel({ className }: { className?: string }) {
   const [query, setQuery] = React.useState("");
   const [rawJson, setRawJson] = React.useState("");
   const [isEditingRawJson, setIsEditingRawJson] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState<"color" | "palette" | "other">("color");
+  const [activeTab, setActiveTab] = React.useState<"color" | "palette" | "other" | "advanced">("color");
 
   const activeOverrides = overridesByMode[mode];
   const appliedRef = React.useRef<ThemeOverrides>({});
@@ -667,6 +667,119 @@ export function ThemeStudioPanel({ className }: { className?: string }) {
     }
   }, [rawJson, mode]);
 
+  // 解析设计令牌格式（Design Tokens Format）
+  // 格式：{ Light: { Brand: { "brand-900": { "$value": "#..." } } }, Dark: { ... } }
+  const parseDesignTokensFormat = React.useCallback((jsonData: unknown): OverridesByMode => {
+    const result: OverridesByMode = { light: {}, dark: {} };
+
+    if (!isNonEmptyObject(jsonData)) return result;
+
+    const processColorGroup = (group: Record<string, unknown>, target: ThemeOverrides) => {
+      for (const [key, value] of Object.entries(group)) {
+        if (isNonEmptyObject(value) && "$value" in value && typeof value.$value === "string") {
+          target[key] = value.$value;
+        }
+      }
+    };
+
+    // 处理 Light 主题
+    if ("Light" in jsonData && isNonEmptyObject(jsonData.Light)) {
+      const light = jsonData.Light;
+      const colorGroups = ["Brand", "Neutral", "Success", "Warning", "Error"] as const;
+      for (const groupName of colorGroups) {
+        if (groupName in light && isNonEmptyObject(light[groupName])) {
+          processColorGroup(light[groupName] as Record<string, unknown>, result.light);
+        }
+      }
+    }
+
+    // 处理 Dark 主题
+    if ("Dark" in jsonData && isNonEmptyObject(jsonData.Dark)) {
+      const dark = jsonData.Dark;
+      const colorGroups = ["Brand", "Neutral", "Success", "Warning", "Error"] as const;
+      for (const groupName of colorGroups) {
+        if (groupName in dark && isNonEmptyObject(dark[groupName])) {
+          processColorGroup(dark[groupName] as Record<string, unknown>, result.dark);
+        }
+      }
+    }
+
+    return result;
+  }, []);
+
+  // 解析主题覆盖格式（Theme Overrides Format）
+  // 格式1：{ light: { "brand-900": "#...", ... }, dark: { ... } }
+  // 格式2：{ "brand-900": "#...", ... } （扁平对象，只应用到当前模式）
+  const parseThemeOverridesFormat = React.useCallback(
+    (jsonData: unknown, currentMode: keyof OverridesByMode): OverridesByMode => {
+      const result: OverridesByMode = { light: {}, dark: {} };
+
+      if (!isNonEmptyObject(jsonData)) return result;
+
+      const cleanMode = (obj: Record<string, unknown>): ThemeOverrides => {
+        const out: ThemeOverrides = {};
+        for (const [k, v] of Object.entries(obj)) {
+          if (typeof v === "string" && v.trim()) out[k] = v.trim();
+        }
+        return out;
+      };
+
+      // 格式1：包含 light/dark 键
+      if ("light" in jsonData || "dark" in jsonData) {
+        const lightObj = isNonEmptyObject((jsonData as any).light) ? (jsonData as any).light : {};
+        const darkObj = isNonEmptyObject((jsonData as any).dark) ? (jsonData as any).dark : {};
+        return { light: cleanMode(lightObj), dark: cleanMode(darkObj) };
+      }
+
+      // 格式2：扁平对象，只应用到当前模式
+      const clean = cleanMode(jsonData as Record<string, unknown>);
+      result[currentMode] = clean;
+      return result;
+    },
+    [],
+  );
+
+  // 自动检测并解析多种格式
+  const parseTokenFile = React.useCallback(
+    (jsonData: unknown, currentMode: keyof OverridesByMode): OverridesByMode => {
+      if (!isNonEmptyObject(jsonData)) return { light: {}, dark: {} };
+
+      // 优先检测设计令牌格式（包含 Light/Dark 顶层键）
+      if ("Light" in jsonData || "Dark" in jsonData) {
+        return parseDesignTokensFormat(jsonData);
+      }
+
+      // 否则按主题覆盖格式解析
+      return parseThemeOverridesFormat(jsonData, currentMode);
+    },
+    [parseDesignTokensFormat, parseThemeOverridesFormat],
+  );
+
+  const handleFileUpload = React.useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const jsonData = JSON.parse(text);
+        const parsed = parseTokenFile(jsonData, mode);
+        
+        setOverridesByMode(parsed);
+        setRawJson(stringifyOverridesByMode(parsed));
+        
+        // 重置文件输入，允许重复上传同一文件
+        event.target.value = "";
+      } catch (error) {
+        console.error("Failed to parse file:", error);
+        // 可以添加错误提示
+      }
+    },
+    [parseTokenFile, mode],
+  );
+
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
   const getPxVar = React.useCallback(
     (key: string, fallback: number) => {
       const inlineOrOverride = activeOverrides[key] ?? readInlineCssVar(key) ?? "";
@@ -732,6 +845,7 @@ export function ThemeStudioPanel({ className }: { className?: string }) {
             <TabsTrigger value="color">颜色</TabsTrigger>
             <TabsTrigger value="palette">基础色卡</TabsTrigger>
             <TabsTrigger value="other">其他</TabsTrigger>
+            <TabsTrigger value="advanced">高级</TabsTrigger>
           </TabsList>
         </div>
 
@@ -855,63 +969,136 @@ export function ThemeStudioPanel({ className }: { className?: string }) {
           <SectionCard title="主题组合" description="组合 preset class（圆角/间距/阴影/字体）。">
             <ThemeSelector />
           </SectionCard>
+        </TabsContent>
 
-          <SectionCard title="高级" description="批量导入/导出（默认收起，避免干扰普通用户）。">
-            <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="advanced-io">
-                <AccordionTrigger>Import / Export</AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="text-sm font-medium">JSON</div>
-                      <div className="flex items-center gap-2">
-                        <Button variant="default" size="sm" onClick={applyRawJson}>
-                          Apply
-                        </Button>
-                        <Button variant="outline" size="sm" onClick={resetAll}>
-                          Clear
-                        </Button>
+        <TabsContent value="advanced" className="mt-4 space-y-4">
+          <SectionCard title="导入/导出" description="批量导入/导出主题配置。">
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-sm font-medium">上传文件导入</div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="gap-2"
+                  >
+                    <Upload className="size-4" />
+                    选择文件
+                  </Button>
+                </div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".json"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                <div className="space-y-1.5">
+                  <p className="text-muted-foreground text-xs">
+                    支持上传 JSON 格式的主题文件，系统会自动检测格式并解析。
+                  </p>
+                  <details className="text-muted-foreground text-xs">
+                    <summary className="cursor-pointer hover:text-foreground">支持的格式</summary>
+                    <div className="mt-2 space-y-2 pl-4">
+                      <div>
+                        <div className="font-medium mb-1">格式1：设计令牌格式（Design Tokens）</div>
+                        <pre className="bg-muted/50 p-2 rounded text-[10px] overflow-x-auto">
+{`{
+  "Light": {
+    "Brand": {
+      "brand-900": { "$value": "#00142b" },
+      "brand-600": { "$value": "#00589f" }
+    },
+    "Neutral": { ... },
+    "Success": { ... },
+    "Warning": { ... },
+    "Error": { ... }
+  },
+  "Dark": { ... }
+}`}
+                        </pre>
+                      </div>
+                      <div>
+                        <div className="font-medium mb-1">格式2：主题覆盖格式（双模式）</div>
+                        <pre className="bg-muted/50 p-2 rounded text-[10px] overflow-x-auto">
+{`{
+  "light": {
+    "brand-900": "#00142b",
+    "brand-600": "#00589f"
+  },
+  "dark": {
+    "brand-900": "#12172a",
+    "brand-600": "#424cdc"
+  }
+}`}
+                        </pre>
+                      </div>
+                      <div>
+                        <div className="font-medium mb-1">格式3：主题覆盖格式（单模式）</div>
+                        <pre className="bg-muted/50 p-2 rounded text-[10px] overflow-x-auto">
+{`{
+  "brand-900": "#00142b",
+  "brand-600": "#00589f",
+  "neutral-0": "#ffffff"
+}`}
+                        </pre>
+                        <p className="text-[10px] mt-1">（扁平对象，只应用到当前模式）</p>
                       </div>
                     </div>
-                    <Textarea
-                      value={rawJson}
-                      onChange={(e) => setRawJson(e.target.value)}
-                      onFocus={() => setIsEditingRawJson(true)}
-                      onBlur={() => setIsEditingRawJson(false)}
-                      className="min-h-40 font-mono text-xs"
-                    />
+                  </details>
+                </div>
+              </div>
 
-                    <Separator />
+              <Separator />
 
-                    <div className="space-y-2">
-                      <div className="text-sm font-medium">Overrides</div>
-                      {modifiedCount === 0 ? (
-                        <div className="text-muted-foreground text-sm">No overrides yet.</div>
-                      ) : (
-                        <div className="space-y-2">
-                          {Object.keys(activeOverrides)
-                            .sort((a, b) => a.localeCompare(b))
-                            .map((k) => (
-                              <div
-                                key={k}
-                                className="flex items-center justify-between gap-2 rounded-md border bg-muted/10 px-3 py-2"
-                              >
-                                <div className="min-w-0">
-                                  <div className="text-sm font-medium">--{k}</div>
-                                  <div className="text-muted-foreground text-xs truncate">{activeOverrides[k]}</div>
-                                </div>
-                                <Button variant="outline" size="sm" onClick={() => setOverride(k, "")}>
-                                  reset
-                                </Button>
-                              </div>
-                            ))}
+              <div className="flex items-center justify-between gap-2">
+                <div className="text-sm font-medium">JSON</div>
+                <div className="flex items-center gap-2">
+                  <Button variant="default" size="sm" onClick={applyRawJson}>
+                    Apply
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={resetAll}>
+                    Clear
+                  </Button>
+                </div>
+              </div>
+              <Textarea
+                value={rawJson}
+                onChange={(e) => setRawJson(e.target.value)}
+                onFocus={() => setIsEditingRawJson(true)}
+                onBlur={() => setIsEditingRawJson(false)}
+                className="min-h-40 font-mono text-xs"
+              />
+
+              <Separator />
+
+              <div className="space-y-2">
+                <div className="text-sm font-medium">Overrides</div>
+                {modifiedCount === 0 ? (
+                  <div className="text-muted-foreground text-sm">No overrides yet.</div>
+                ) : (
+                  <div className="space-y-2">
+                    {Object.keys(activeOverrides)
+                      .sort((a, b) => a.localeCompare(b))
+                      .map((k) => (
+                        <div
+                          key={k}
+                          className="flex items-center justify-between gap-2 rounded-md border bg-muted/10 px-3 py-2"
+                        >
+                          <div className="min-w-0">
+                            <div className="text-sm font-medium">--{k}</div>
+                            <div className="text-muted-foreground text-xs truncate">{activeOverrides[k]}</div>
+                          </div>
+                          <Button variant="outline" size="sm" onClick={() => setOverride(k, "")}>
+                            reset
+                          </Button>
                         </div>
-                      )}
-                    </div>
+                      ))}
                   </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                )}
+              </div>
+            </div>
           </SectionCard>
         </TabsContent>
       </Tabs>
