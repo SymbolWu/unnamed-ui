@@ -103,7 +103,7 @@ export const WelcomeTextPrimitive = React.forwardRef<
       className={cn(
         "text-[var(--text-primary)]",
         "font-semibold",
-        "font-size-4 leading-[var(--line-height-4)] tracking-[0px]",
+        "text-xl leading-[var(--line-height-4)] tracking-[0px]",
         "[&_*]:!box-border",
         className,
       )}
