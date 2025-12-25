@@ -112,7 +112,11 @@ async function buildRegistryJsonFile(styleName: string) {
 
   const registry = parseResult.data
 
-  // 3. Fix the path for registry items.
+  // 3. Fix the path for registry items and convert block dependencies to full URLs.
+  // Get the base URL for the registry (can be configured via environment variable)
+  const registryBaseUrl = process.env.REGISTRY_BASE_URL || "http://localhost:3001"
+  const registryPath = styleName === "new-york-v4" ? `/r/styles/${styleName}` : `/r/${styleName}`
+  
   const fixedRegistry = {
     ...registry,
     items: registry.items.map((item) => {
@@ -123,9 +127,28 @@ async function buildRegistryJsonFile(styleName: string) {
         }
       })
 
+      // Convert block component dependencies to full URLs
+      const fixedDependencies = item.registryDependencies?.map((dep) => {
+        // If already a full URL, keep it as is
+        if (typeof dep === "string" && dep.startsWith("http")) {
+          return dep
+        }
+        
+        // Check if this dependency is a block component in the same registry
+        const depItem = registry.items.find((i) => i.name === dep)
+        if (depItem && depItem.type === "registry:block") {
+          // Convert block component dependency to full URL
+          return `${registryBaseUrl}${registryPath}/${dep}.json`
+        }
+        
+        // Keep UI components and other dependencies as-is
+        return dep
+      })
+
       return {
         ...item,
         files,
+        registryDependencies: fixedDependencies,
       }
     }),
   }

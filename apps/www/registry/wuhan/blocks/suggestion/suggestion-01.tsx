@@ -102,7 +102,7 @@ export const SuggestionButton = React.forwardRef<
       <QuickActionButton
         ref={ref}
         aria-label={resolvedAriaLabel}
-        className={cn("font-size-1","gap-[var(--gap-xs)]", className)}
+        className={cn("font-size-1", "gap-[var(--gap-xs)]", className)}
         {...props}
       >
         <span>{children}</span>

@@ -7,11 +7,13 @@ import {
   QuickActionIcon,
 } from "@/registry/wuhan/blocks/quick-action/quick-action-01";
 import { cn } from "@/lib/utils";
+import { Sparkles } from "lucide-react";
 
 // ==================== 类型定义 ====================
-
+//无icon给一个默认的icon
+const defaultIcon = <Sparkles className="size-4" />;
 function withIconSize(icon: React.ReactNode, sizeClassName: string) {
-  if (!React.isValidElement(icon)) return icon;
+  if (!React.isValidElement(icon)) return defaultIcon;
   const el = icon as React.ReactElement<{ className?: string }>;
   return React.cloneElement(el, {
     className: cn(sizeClassName, el.props.className),
@@ -26,13 +28,13 @@ export interface PromptButtonProps extends Omit<
   "children"
 > {
   /**
-   * 图标
+   * 图标(可选)
    */
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   /**
    * 文本内容
    */
-  children: React.ReactNode;
+  children: React.ReactNode | string;
 }
 
 // ==================== 组件 ====================
@@ -71,23 +73,28 @@ PromptGroup.displayName = "PromptGroup";
 export const PromptButton = React.forwardRef<
   HTMLButtonElement,
   PromptButtonProps
->(({ icon, children, className, "aria-label": ariaLabel, ...props }, ref) => {
-  const resolvedAriaLabel =
-    ariaLabel ??
-    (typeof children === "string" || typeof children === "number"
-      ? String(children)
-      : undefined);
+>(
+  (
+    { icon = null, children, className, "aria-label": ariaLabel, ...props },
+    ref,
+  ) => {
+    const resolvedAriaLabel =
+      ariaLabel ??
+      (typeof children === "string" || typeof children === "number"
+        ? String(children)
+        : undefined);
 
-  return (
-    <QuickActionButton
-      ref={ref}
-      aria-label={resolvedAriaLabel}
-      className={className}
-      {...props}
-    >
-      <QuickActionIcon>{withIconSize(icon, "size-4")}</QuickActionIcon>
-      <span>{children}</span>
-    </QuickActionButton>
-  );
-});
+    return (
+      <QuickActionButton
+        ref={ref}
+        aria-label={resolvedAriaLabel}
+        className={className}
+        {...props}
+      >
+        <QuickActionIcon>{withIconSize(icon, "size-4")}</QuickActionIcon>
+        <span>{children}</span>
+      </QuickActionButton>
+    );
+  },
+);
 PromptButton.displayName = "PromptButton";
