@@ -13,8 +13,17 @@ import {
   SenderSendButton,
   SenderTextarea,
 } from "@/registry/wuhan/blocks/sender/sender-01";
-import { Button } from "@/registry/wuhan/ui/button";
-import { BotIcon, Sparkles, Wand2 } from "lucide-react";
+import {
+  QuickActionButton,
+  QuickActionGroup,
+  QuickActionIcon,
+} from "@/registry/wuhan/blocks/quick-action/quick-action-01";
+import { Wand2, Sparkles } from "lucide-react";
+import {
+  WelcomeContainer,
+  WelcomeIcon,
+  WelcomeText,
+} from "@/registry/wuhan/blocks/welcome/welcome-01";
 import { getTimeForIndex } from "../shared";
 import { useChat } from "../hooks/use-chat";
 import type { UseChatHistoryReturn } from "../hooks/use-chat-history";
@@ -28,28 +37,6 @@ import {
   useComposerAttachments,
   type ComposerAttachment,
 } from "../hooks/use-composer-attachments";
-
-function WenxuePromptButton({
-  icon,
-  children,
-  onClick,
-}: {
-  icon: React.ReactNode;
-  children: React.ReactNode;
-  onClick?: () => void;
-}) {
-  return (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={onClick}
-      className="h-[38px] p-[var(--padding-com-md)] gap-[var(--gap-md)] rounded-[var(--radius-lg)] bg-[var(--bg-container)] border border-[var(--border-neutral)] hover:bg-[var(--bg-neutral-light-hover)] transition-colors text-[var(--text-primary)] font-[var(--font-family-cn)] font-[var(--font-weight-400)] font-size-2 leading-[var(--line-height-2)] tracking-[0px]"
-    >
-      <span className="text-[var(--text-brand)]">{icon}</span>
-      <span>{children}</span>
-    </Button>
-  );
-}
 
 function WenxueSender({
   value,
@@ -159,29 +146,31 @@ export function WenxueChat({ history }: { history: UseChatHistoryReturn }) {
       {isEmpty ? (
         <div className="flex-1 min-h-0 flex items-center justify-center">
           <div className="w-full max-w-[800px] flex flex-col items-center gap-6">
-            <div className="flex items-center justify-center gap-2">
-              <div className="inline-flex items-center justify-center size-10 rounded-full bg-[var(--bg-brand-light)] text-[var(--text-brand)] shrink-0">
-                <Wand2 className="size-5" />
-              </div>
-              <div className="text-[var(--text-primary)] font-[var(--font-family-cn)] font-[var(--font-weight-400)] font-size-2 leading-[var(--line-height-2)] tracking-[0px]">
-                你好，我今天能帮你什么？
-              </div>
-            </div>
+            <WelcomeContainer>
+              <WelcomeIcon>
+                <Wand2 />
+              </WelcomeIcon>
+              <WelcomeText>你好，我今天能帮你什么？</WelcomeText>
+            </WelcomeContainer>
 
-            <div className="flex items-center flex-wrap justify-center gap-3">
-              <WenxuePromptButton
-                icon={<Sparkles className="size-4" />}
+            <QuickActionGroup>
+              <QuickActionButton
                 onClick={() => sendWithComposer("帮我总结一下这段内容")}
               >
-                帮我总结一下这段内容
-              </WenxuePromptButton>
-              <WenxuePromptButton
-                icon={<Sparkles className="size-4" />}
+                <QuickActionIcon>
+                  <Sparkles className="size-4" />
+                </QuickActionIcon>
+                <span>帮我总结一下这段内容</span>
+              </QuickActionButton>
+              <QuickActionButton
                 onClick={() => sendWithComposer("给我列一个学习计划")}
               >
-                给我列一个学习计划
-              </WenxuePromptButton>
-            </div>
+                <QuickActionIcon>
+                  <Sparkles className="size-4" />
+                </QuickActionIcon>
+                <span>给我列一个学习计划</span>
+              </QuickActionButton>
+            </QuickActionGroup>
 
             <div className="w-full">
               <WenxueSender
