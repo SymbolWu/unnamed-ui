@@ -1655,7 +1655,8 @@
       "registryDependencies": [
         "style",
         "textarea",
-        "button"
+        "button",
+        "toggle-button-01"
       ],
       "files": [
         {
@@ -1754,13 +1755,31 @@
       "registryDependencies": [
         "style",
         "button",
-        "sidebar-01"
+        "sidebar-01",
+        "toggle-button-01"
       ],
       "files": [
         {
           "path": "registry/wuhan/blocks/feedback/feedback-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/feedback-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-button-01",
+      "type": "registry:block",
+      "title": "Toggle Button",
+      "description": "Toggle button component for selection and mode switching",
+      "registryDependencies": [
+        "style",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/toggle-button/toggle-button-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/toggle-button-01.tsx"
         }
       ]
     },
@@ -2248,6 +2267,20 @@
           "path": "registry/wuhan/examples/feedback/feedback-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/feedback-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-button-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "toggle-button-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/toggle-button/toggle-button-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/toggle-button-demo.tsx"
         }
       ]
     }
