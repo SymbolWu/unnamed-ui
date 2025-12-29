@@ -394,7 +394,7 @@ const SidebarHistoryListPrimitive = React.forwardRef<
         "gap-[var(--gap-md)]",
         "overflow-y-auto",
         "overflow-x-hidden",
-        "pr-[var(--padding-com-sm)]",
+        "w-full",
         className,
       )}
       {...props}

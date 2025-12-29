@@ -17,7 +17,7 @@ const HistoryItemPrimitive = React.forwardRef<
   }
 >(({ className, type = "button", asChild, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
-  
+
   return (
     <Comp
       ref={ref}
