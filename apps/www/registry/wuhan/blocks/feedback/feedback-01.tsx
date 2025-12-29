@@ -8,19 +8,21 @@ import {
   SidebarHistorySearchInput,
 } from "@/registry/wuhan/blocks/sidebar/sidebar-01";
 import { Button } from "@/registry/wuhan/ui/button";
+import {
+  ToggleButtonPrimitive,
+  ToggleButtonGroupPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 
 // ==================== 类型定义 ====================
 
 /**
- * 反馈按钮原语属性
+ * 反馈按钮原语属性（已废弃，请使用 ToggleButtonPrimitive）
+ * @deprecated 请使用 ToggleButtonPrimitive from toggle-button block
  * @public
  */
-interface FeedbackButtonPrimitiveProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /**
-   * 是否选中状态
-   */
-  selected?: boolean;
-}
+interface FeedbackButtonPrimitiveProps extends React.ComponentProps<
+  typeof ToggleButtonPrimitive
+> {}
 
 /**
  * 反馈容器原语属性
@@ -37,8 +39,10 @@ interface FeedbackContainerPrimitiveProps extends React.HTMLAttributes<HTMLDivEl
  * 反馈头部原语属性
  * @public
  */
-interface FeedbackHeaderPrimitiveProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+interface FeedbackHeaderPrimitiveProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "title"
+> {
   /**
    * 标题文本
    */
@@ -50,26 +54,13 @@ interface FeedbackHeaderPrimitiveProps
 }
 
 /**
- * 反馈按钮组原语属性
+ * 反馈按钮组原语属性（已废弃，请使用 ToggleButtonGroupPrimitive）
+ * @deprecated 请使用 ToggleButtonGroupPrimitive from toggle-button block
  * @public
  */
-interface FeedbackButtonGroupPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * 反馈选项列表
-   */
-  options?: Array<{
-    id: string;
-    label: React.ReactNode;
-  }>;
-  /**
-   * 选中的选项ID
-   */
-  selectedId?: string;
-  /**
-   * 选项改变回调
-   */
-  onOptionChange?: (id: string) => void;
-}
+interface FeedbackButtonGroupPrimitiveProps extends React.ComponentProps<
+  typeof ToggleButtonGroupPrimitive
+> {}
 
 /**
  * 反馈输入框原语属性
@@ -187,85 +178,28 @@ const FeedbackHeaderPrimitive = React.forwardRef<
 FeedbackHeaderPrimitive.displayName = "FeedbackHeaderPrimitive";
 
 /**
- * 反馈按钮样式原语
+ * 反馈按钮样式原语（已废弃，请使用 ToggleButtonPrimitive）
+ * @deprecated 请使用 ToggleButtonPrimitive from toggle-button block
  * @public
  */
 const FeedbackButtonPrimitive = React.forwardRef<
   HTMLButtonElement,
   FeedbackButtonPrimitiveProps
->(({ className, selected = false, children, ...props }, ref) => {
-  return (
-    <button
-      ref={ref}
-      type="button"
-      className={cn(
-        "[&_*]:!box-border",
-        "h-8",
-        "rounded-[var(--radius-lg)]",
-        "border",
-        "px-[var(--padding-com-md)]",
-        "gap-1", // gap: 4px
-        "transition-colors",
-        "font-[var(--font-family-cn)]",
-        "text-sm",
-        "leading-normal",
-        "tracking-[0px]",
-        "inline-flex items-center justify-center",
-        // default 状态
-        !selected && [
-          "bg-[var(--bg-container)]",
-          "border-[var(--border-neutral)]",
-          "text-[var(--text-secondary)]",
-          "hover:bg-[var(--bg-neutral-light)]",
-          "hover:border-[var(--border-neutral)]",
-          "hover:text-[var(--text-secondary)]",
-        ],
-        // selected 状态
-        selected && [
-          "bg-[var(--bg-container)]",
-          "border-[var(--border-brand-light-hover)]",
-          "text-[var(--text-brand)]",
-        ],
-        className,
-      )}
-      aria-pressed={selected}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+>(({ variant = "default", ...props }, ref) => {
+  return <ToggleButtonPrimitive ref={ref} variant={variant} {...props} />;
 });
 FeedbackButtonPrimitive.displayName = "FeedbackButtonPrimitive";
 
 /**
- * 反馈按钮组样式原语
+ * 反馈按钮组样式原语（已废弃，请使用 ToggleButtonGroupPrimitive）
+ * @deprecated 请使用 ToggleButtonGroupPrimitive from toggle-button block
  * @public
  */
 const FeedbackButtonGroupPrimitive = React.forwardRef<
   HTMLDivElement,
   FeedbackButtonGroupPrimitiveProps
->(({ className, options = [], selectedId, onOptionChange, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        "[&_*]:!box-border",
-        "flex flex-wrap gap-2",
-        className,
-      )}
-      {...props}
-    >
-      {options.map((option) => (
-        <FeedbackButtonPrimitive
-          key={option.id}
-          selected={selectedId === option.id}
-          onClick={() => onOptionChange?.(option.id)}
-        >
-          {option.label}
-        </FeedbackButtonPrimitive>
-      ))}
-    </div>
-  );
+>(({ variant = "default", ...props }, ref) => {
+  return <ToggleButtonGroupPrimitive ref={ref} variant={variant} {...props} />;
 });
 FeedbackButtonGroupPrimitive.displayName = "FeedbackButtonGroupPrimitive";
 
@@ -298,11 +232,15 @@ const FeedbackInputPrimitive = React.forwardRef<
   FeedbackInputPrimitiveProps
 >(({ className, ...props }, ref) => {
   return (
-    <SidebarHistorySearchContainer className={cn("w-full",
-    "rounded-[var(--radius-md)]",
-    "px-[var(--padding-com-md)]",
-    "py-[var(--padding-com-xss)]",
-    className)}>
+    <SidebarHistorySearchContainer
+      className={cn(
+        "w-full",
+        "rounded-[var(--radius-md)]",
+        "px-[var(--padding-com-md)]",
+        "py-[var(--padding-com-xss)]",
+        className,
+      )}
+    >
       <SidebarHistorySearchInput ref={ref} {...props} />
     </SidebarHistorySearchContainer>
   );

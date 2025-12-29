@@ -1,0 +1,171 @@
+---
+title: Toggle Button
+description: Toggle button component for selection and mode switching
+author: AF
+---
+
+<ComponentPreview
+  name="toggle-button-demo"
+  description="Toggle button component with default and compact variants"
+  className="mb-4"
+/>
+
+Toggle Button 组件提供了用于选择和多选场景的开关按钮样式原语，支持两种变体样式。适用于反馈选项选择、模式切换（如深度思考、联网搜索）等场景。
+
+## Features
+
+- **两种变体样式**：
+  - `default`: 默认样式，用于反馈组件等场景（高度 32px）
+  - `compact`: 紧凑样式，用于 sender 组件等场景（高度使用 CSS 变量）
+- **单选和多选模式**：支持单选按钮组和多选按钮组
+- **选中状态**：清晰的选中/未选中视觉反馈
+- **灵活组合**：所有组件都是样式原语，可以根据需求自由组合使用
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/toggle-button-01.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource
+  name="toggle-button-demo"
+  title="registry/wuhan/examples/toggle-button/toggle-button-demo.tsx"
+/>
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Components
+
+Toggle Button 组件由多个样式原语组成，每个原语都可以独立使用：
+
+### Button Primitives
+
+- **ToggleButtonPrimitive** - 单个开关按钮（支持 default、hover、selected 三种状态）
+- **ToggleButtonGroupPrimitive** - 开关按钮组（管理多个开关按钮，支持单选和多选模式）
+
+## Variants
+
+### Default Variant
+
+默认样式适用于反馈组件等场景，具有以下特点：
+- 高度：32px (`h-8`)
+- 内边距：使用 CSS 变量 `var(--padding-com-md)`
+- 未选中状态：中性边框和背景
+- 选中状态：品牌色边框和文字
+
+### Compact Variant
+
+紧凑样式适用于 sender 组件等场景，具有以下特点：
+- 高度：使用 CSS 变量 `var(--size-com-md)`
+- 内边距：`px-3`
+- 未选中状态：透明背景，中性边框
+- 选中状态：品牌色浅背景和边框
+
+## Examples
+
+### Default Variant
+
+默认样式的开关按钮示例：
+
+<ComponentPreview
+  name="toggle-button-demo"
+  description="Toggle button with default variant"
+  className="mb-4"
+/>
+
+### Compact Variant
+
+紧凑样式的开关按钮示例（常用于 sender 组件）：
+
+<ComponentPreview
+  name="toggle-button-demo"
+  description="Toggle button with compact variant"
+  className="mb-4"
+/>
+
+## Usage
+
+### Single Toggle Button
+
+```tsx
+import { ToggleButtonPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
+
+// 默认样式
+<ToggleButtonPrimitive>未选中</ToggleButtonPrimitive>
+<ToggleButtonPrimitive selected>已选中</ToggleButtonPrimitive>
+
+// 紧凑样式
+<ToggleButtonPrimitive variant="compact">未选中</ToggleButtonPrimitive>
+<ToggleButtonPrimitive variant="compact" selected>已选中</ToggleButtonPrimitive>
+```
+
+### Single Selection Group
+
+单选按钮组（适用于反馈组件等场景）：
+
+```tsx
+import { ToggleButtonGroupPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
+
+const options = [
+  { id: "harmful", label: "有害/不安全" },
+  { id: "false", label: "信息虚假" },
+  { id: "inappropriate", label: "内容不当" },
+];
+
+<ToggleButtonGroupPrimitive
+  options={options}
+  selectedId={selectedOption}
+  onOptionChange={setSelectedOption}
+  variant="default"
+/>
+```
+
+### Multiple Selection Group
+
+多选按钮组（适用于 sender 组件的模式切换等场景）：
+
+```tsx
+import { ToggleButtonGroupPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
+
+const modeOptions = [
+  { id: "web-search", label: "联网搜索" },
+  { id: "deep-think", label: "深度思考" },
+];
+
+<ToggleButtonGroupPrimitive
+  options={modeOptions}
+  selectedIds={selectedModes}
+  multiple
+  onOptionsChange={setSelectedModes}
+  variant="compact"
+/>
+```
+
+## Related Components
+
+- **Feedback** - 反馈组件使用了 Toggle Button 的 default 变体
+- **Sender** - Sender 组件使用了 Toggle Button 的 compact 变体
+

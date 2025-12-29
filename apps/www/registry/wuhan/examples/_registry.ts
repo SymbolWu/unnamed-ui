@@ -428,4 +428,17 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // toggle-button examples
+  {
+    name: "toggle-button-demo",
+    type: "registry:example",
+    registryDependencies: ["toggle-button-01"],
+    files: [
+      {
+        path: "examples/toggle-button/toggle-button-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/toggle-button-demo.tsx",
+      },
+    ],
+  },
 ];

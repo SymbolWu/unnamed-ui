@@ -54,5 +54,9 @@
   {
     "name": "feedback-01",
     "description": "Feedback component for reporting issues"
+  },
+  {
+    "name": "toggle-button-01",
+    "description": "Toggle button component for selection and mode switching"
   }
 ]

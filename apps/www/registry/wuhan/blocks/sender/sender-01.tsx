@@ -5,6 +5,7 @@ import { Textarea } from "@/registry/wuhan/ui/textarea";
 import { Button } from "@/registry/wuhan/ui/button";
 import { cn } from "@/lib/utils";
 import { Loader2, Paperclip, ArrowUp } from "lucide-react";
+import { ToggleButtonPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 
 // ==================== 类型定义 ====================
 // 完全通用的类型，不强制任何业务概念
@@ -33,6 +34,9 @@ export const TextareaPrimitive = React.forwardRef<
         "min-h-[calc(var(--line-height-2)*2)]",
         "max-h-[calc(var(--line-height-2)*5)]",
         "overflow-y-auto",
+        "leading-[var(--line-height-2)]",
+        // 光标颜色使用主题色
+        "caret-[var(--primary)]",
         className,
       )}
     />
@@ -167,42 +171,14 @@ AttachmentButtonPrimitive.displayName = "AttachmentButtonPrimitive";
 /**
  * 模式按钮样式原语（如深度思考、联网搜索等）
  * 提供模式选择按钮的基础样式和状态
+ * @deprecated 请使用 ToggleButtonPrimitive from toggle-button block with variant="compact"
  */
-export interface ModeButtonPrimitiveProps extends React.ComponentProps<
-  typeof Button
-> {
-  /**
-   * 是否选中状态
-   */
-  selected?: boolean;
-}
 
 export const ModeButtonPrimitive = React.forwardRef<
   HTMLButtonElement,
-  ModeButtonPrimitiveProps
->(({ selected = false, children, className, ...props }, ref) => {
-  return (
-    <Button
-      ref={ref}
-      {...props}
-      className={cn(
-        "rounded-lg gap-1 px-3 border border-[var(--border-neutral)]",
-        "transition-colors",
-        "h-[var(--size-com-md)]",
-        "text-sm",
-        // 基础状态：无背景色（透明）
-        !selected && "bg-transparent hover:bg-[var(--bg-neutral-light-hover)]",
-        // selected 状态
-        selected &&
-          "bg-[var(--bg-brand-light)] border-[var(--border-brand-light-hover)] hover:bg-[var(--bg-brand-light)]",
-        selected ? "text-[var(--text-brand)]" : "text-[var(--text-primary)]",
-        className,
-      )}
-      aria-pressed={selected}
-    >
-      {children}
-    </Button>
-  );
+  React.ComponentProps<typeof ToggleButtonPrimitive>
+>(({ variant = "compact", ...props }, ref) => {
+  return <ToggleButtonPrimitive ref={ref} variant={variant} {...props} />;
 });
 ModeButtonPrimitive.displayName = "ModeButtonPrimitive";
 

@@ -114,7 +114,7 @@ async function buildRegistryJsonFile(styleName: string) {
 
   // 3. Fix the path for registry items and convert block dependencies to full URLs.
   // Get the base URL for the registry (can be configured via environment variable)
-  const registryBaseUrl = process.env.REGISTRY_BASE_URL || "http://localhost:3001"
+  const registryBaseUrl = process.env.REGISTRY_BASE_URL || "http://localhost:3000"
   const registryPath = styleName === "new-york-v4" ? `/r/styles/${styleName}` : `/r/${styleName}`
   
   const fixedRegistry = {

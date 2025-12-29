@@ -106,7 +106,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Sender",
     description: "Message sender component",
-    registryDependencies: ["style", "textarea", "button"],
+    registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
     files: [
       {
         path: "blocks/sender/sender-01.tsx",
@@ -190,12 +190,26 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Feedback",
     description: "Feedback component for reporting issues",
-    registryDependencies: ["style", "button", "sidebar-01"],
+    registryDependencies: ["style", "button", "sidebar-01", "toggle-button-01"],
     files: [
       {
         path: "blocks/feedback/feedback-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/feedback-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "toggle-button-01",
+    type: "registry:block",
+    title: "Toggle Button",
+    description: "Toggle button component for selection and mode switching",
+    registryDependencies: ["style", "button"],
+    files: [
+      {
+        path: "blocks/toggle-button/toggle-button-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/toggle-button-01.tsx",
       },
     ],
   },

@@ -404,7 +404,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "sender-01",
       description: "Message sender component",
       type: "registry:block",
-      registryDependencies: ["style", "textarea", "button"],
+      registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
       files: [
         {
           path: "registry/wuhan/blocks/sender/sender-01.tsx",
@@ -556,7 +556,12 @@ export const Index: Record<string, Record<string, any>> = {
       name: "feedback-01",
       description: "Feedback component for reporting issues",
       type: "registry:block",
-      registryDependencies: ["style", "button", "sidebar-01"],
+      registryDependencies: [
+        "style",
+        "button",
+        "sidebar-01",
+        "toggle-button-01",
+      ],
       files: [
         {
           path: "registry/wuhan/blocks/feedback/feedback-01.tsx",
@@ -567,6 +572,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/blocks/feedback/feedback-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "toggle-button-01": {
+      name: "toggle-button-01",
+      description: "Toggle button component for selection and mode switching",
+      type: "registry:block",
+      registryDependencies: ["style", "button"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/toggle-button/toggle-button-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/toggle-button-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/toggle-button/toggle-button-01.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -1422,6 +1452,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/feedback/feedback-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "toggle-button-demo": {
+      name: "toggle-button-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["toggle-button-01"],
+      files: [
+        {
+          path: "registry/wuhan/examples/toggle-button/toggle-button-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/toggle-button-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/toggle-button/toggle-button-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
