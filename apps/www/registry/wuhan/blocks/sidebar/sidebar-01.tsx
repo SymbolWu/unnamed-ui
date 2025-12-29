@@ -309,6 +309,13 @@ const SidebarHistorySearchContainer = React.forwardRef<
         "bg-[var(--bg-container)]",
         "flex items-center",
         "min-w-0",
+        "transition-all",
+        "duration-300",
+        "ease-in-out",
+        "hover:border-[var(--border-brand)]",
+        "focus-within:border-[var(--border-brand)]",
+        "focus-within:ring-2",
+        "focus-within:ring-[var(--ring)]",
         className,
       )}
       {...props}
