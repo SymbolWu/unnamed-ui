@@ -4,56 +4,12 @@ import { useState } from "react";
 import {
   AIMessage,
   UserMessage,
+  LoadingDots,
+  MessageGeneratingPrimitive,
+  MessageFailedPrimitive,
 } from "@/registry/wuhan/blocks/message/message-01";
 import { Button } from "@/registry/wuhan/ui/button";
 import { AlertCircle, RefreshCw } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-// 三个圆点的加载动画组件
-function LoadingDots() {
-  return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-          @keyframes loading-dot-bounce {
-            0%, 80%, 100% {
-              transform: scale(1);
-              opacity: 0.5;
-            }
-            40% {
-              transform: scale(1);
-              opacity: 1;
-            }
-          }
-        `,
-        }}
-      />
-      <div className="flex items-center gap-1">
-        <div
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "loading-dot-bounce 1.4s ease-in-out infinite",
-            animationDelay: "-0.32s",
-          }}
-        />
-        <div
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "loading-dot-bounce 1.4s ease-in-out infinite",
-            animationDelay: "-0.16s",
-          }}
-        />
-        <div
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "loading-dot-bounce 1.4s ease-in-out infinite",
-          }}
-        />
-      </div>
-    </>
-  );
-}
 
 export default function MessageWithStatus() {
   const [status, setStatus] = useState<"idle" | "generating" | "failed">(
@@ -93,13 +49,21 @@ export default function MessageWithStatus() {
         </div>
       </div>
 
-      {/* 示例 2: 生成中状态 - 使用默认内容 */}
+      {/* 示例 2: 生成中状态 - 使用原语组件 */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium text-[var(--text-secondary)]">
-          生成中状态（默认）
+          生成中状态（使用原语组件）
         </h3>
         <div className="flex justify-start w-full">
-          <AIMessage status="generating">正在生成中</AIMessage>
+          <AIMessage
+            status="generating"
+            generatingContent={
+              <MessageGeneratingPrimitive
+                indicator={<LoadingDots />}
+                text="正在思考中..."
+              />
+            }
+          />
         </div>
       </div>
 
@@ -112,12 +76,9 @@ export default function MessageWithStatus() {
           <AIMessage
             status="generating"
             generatingContent={
-              <div className="flex items-center gap-2">
-                <LoadingDots />
-                <span className="text-[var(--text-secondary)]">
-                  正在思考中...
-                </span>
-              </div>
+              <span className="text-[var(--text-secondary)]">
+                正在生成回复，请稍候...
+              </span>
             }
           >
             原始内容（不会显示）
@@ -137,20 +98,21 @@ export default function MessageWithStatus() {
         </div>
       </div>
 
-      {/* 示例 5: 生成失败状态 - 自定义错误内容 */}
+      {/* 示例 5: 生成失败状态 - 使用原语组件 */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium text-[var(--text-secondary)]">
-          生成失败状态（自定义）
+          生成失败状态（使用原语组件）
         </h3>
         <div className="flex justify-start w-full">
           <AIMessage
             status="failed"
-            errorMessage="生成失败，请稍后重试"
             errorContent={
-              <div className="flex items-center gap-2">
-                <AlertCircle className="size-4 text-destructive" />
-                <span className="text-destructive">生成失败，请稍后重试</span>
-              </div>
+              <MessageFailedPrimitive
+                icon={
+                  <AlertCircle className="size-4 text-[var(--text-error)]" />
+                }
+                message="生成失败，请稍后重试"
+              />
             }
           >
             原始内容（不会显示）
@@ -158,32 +120,32 @@ export default function MessageWithStatus() {
         </div>
       </div>
 
-      {/* 示例 6: 生成失败状态 - 带重试按钮 */}
+      {/* 示例 6: 生成失败状态 - 带重试按钮（使用原语组件） */}
       <div className="space-y-2">
         <h3 className="text-sm font-medium text-[var(--text-secondary)]">
-          生成失败状态（带重试）
+          生成失败状态（带重试，使用原语组件）
         </h3>
         <div className="flex justify-start w-full">
           <AIMessage
             status="failed"
             errorContent={
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
+              <MessageFailedPrimitive
+                icon={
                   <AlertCircle className="size-4 text-[var(--text-error)]" />
-                  <span className="text-[var(--text-error)]">
-                    生成失败，请稍后重试
-                  </span>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleRetry}
-                  className="w-fit"
-                >
-                  <RefreshCw className="size-3 mr-1" />
-                  重试
-                </Button>
-              </div>
+                }
+                message="生成失败，请稍后重试"
+                actions={
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRetry}
+                    className="w-fit"
+                  >
+                    <RefreshCw className="size-3 mr-1" />
+                    重试
+                  </Button>
+                }
+              />
             }
           >
             原始内容（不会显示）
@@ -198,30 +160,30 @@ export default function MessageWithStatus() {
           <AIMessage
             status={status}
             generatingContent={
-              <div className="flex items-center gap-2">
-                <LoadingDots />
-                <span className="text-[var(--text-secondary)]">
-                  正在生成回复...
-                </span>
-              </div>
+              <MessageGeneratingPrimitive
+                indicator={<LoadingDots />}
+                text="正在生成回复..."
+              />
             }
             errorMessage="生成失败，请稍后重试"
             errorContent={
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
+              <MessageFailedPrimitive
+                icon={
                   <AlertCircle className="size-4 text-[var(--text-error)]" />
-                  <span className="text-[var(--text-error)]">生成失败</span>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleRetry}
-                  className="w-fit"
-                >
-                  <RefreshCw className="size-3 mr-1" />
-                  重试
-                </Button>
-              </div>
+                }
+                message="生成失败"
+                actions={
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRetry}
+                    className="w-fit"
+                  >
+                    <RefreshCw className="size-3 mr-1" />
+                    重试
+                  </Button>
+                }
+              />
             }
           >
             {status === "idle" && "这是一条正常的 AI 消息回复。"}

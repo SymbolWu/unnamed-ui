@@ -5,6 +5,11 @@ import {
   UserMessage,
 } from "@/registry/wuhan/blocks/message/message-01";
 import { Button } from "@/registry/wuhan/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/registry/wuhan/ui/tooltip";
 import { ThumbsUp, ThumbsDown, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,22 +22,55 @@ export default function MessageWithFeedback() {
       <div className="flex justify-start w-full">
         <AIMessage
           feedback={
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" className="h-8">
-                <ThumbsUp
-                  className={cn("size-4", "text-[var(--text-secondary)]")}
-                />
-              </Button>
-              <Button variant="ghost" size="sm" className="h-8">
-                <ThumbsDown
-                  className={cn("size-4", "text-[var(--text-secondary)]")}
-                />
-              </Button>
-              <Button variant="ghost" size="sm" className="h-8">
-                <Copy
-                  className={cn("size-4", "text-[var(--text-secondary)]")}
-                />
-              </Button>
+            <div className="flex items-center gap-[var(--gap-xs)]">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 !px-1 cursor-pointer"
+                  >
+                    <ThumbsUp
+                      className={cn("size-4", "text-[var(--text-secondary)]")}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>点赞</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 !px-1 cursor-pointer"
+                  >
+                    <ThumbsDown
+                      className={cn("size-4", "text-[var(--text-secondary)]")}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>踩</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 !px-1 cursor-pointer"
+                  >
+                    <Copy
+                      className={cn("size-4", "text-[var(--text-secondary)]")}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>复制</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           }
         >

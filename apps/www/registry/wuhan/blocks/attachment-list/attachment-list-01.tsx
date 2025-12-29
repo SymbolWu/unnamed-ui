@@ -12,7 +12,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // ==================== 常量定义 ====================
 const SCROLL_THRESHOLD = 1; // 滚动检测容差（处理浮点数精度问题）
 const SCROLL_RATIO = 0.8; // 每次滚动容器宽度的比例
-const SCROLL_PADDING = 4; // 滚动容器的垂直内边距（px）
+const SCROLL_PADDING = 0; // 滚动容器的垂直内边距（px）
 
 // ==================== 样式原语层（Primitives）====================
 // 这些组件只提供样式，不包含任何逻辑和业务假设
@@ -263,7 +263,43 @@ function AttachmentListPrimitive({
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(false);
+  const [contentHeight, setContentHeight] = React.useState(0);
   const rafIdRef = React.useRef<number | null>(null);
+
+  // 判断 children 是否有内容
+  const hasContent = React.useMemo(() => {
+    if (children == null) return false;
+    if (typeof children === "string") return children.trim().length > 0;
+    if (typeof children === "number") return true;
+    if (Array.isArray(children)) {
+      return children.some((child) => {
+        if (child == null) return false;
+        if (typeof child === "string") return child.trim().length > 0;
+        if (typeof child === "number") return true;
+        return true;
+      });
+    }
+    return true;
+  }, [children]);
+
+  // 检查内容高度
+  const checkContentHeight = React.useCallback(() => {
+    const contentContainer = contentRef.current;
+    if (!contentContainer) {
+      setContentHeight(0);
+      return;
+    }
+    const height = contentContainer.offsetHeight;
+    setContentHeight(height);
+  }, []);
+
+  // 判断是否需要应用 SCROLL_PADDING
+  // 滚动按钮高度为56px，使用居中定位，需要至少28px的上边距和下边距
+  // 只有当内容高度足够（大于滚动按钮高度56px的一半，即28px）时才应用
+  const SCROLL_BUTTON_HEIGHT = 56;
+  const MIN_CONTENT_HEIGHT_FOR_PADDING = SCROLL_BUTTON_HEIGHT / 2; // 28px
+  const shouldApplyPadding =
+    hasContent && contentHeight >= MIN_CONTENT_HEIGHT_FOR_PADDING;
 
   // 检查滚动状态
   const checkScrollability = React.useCallback(() => {
@@ -289,7 +325,10 @@ function AttachmentListPrimitive({
       setCanScrollLeft(false);
       setCanScrollRight(false);
     }
-  }, []);
+
+    // 同时检查内容高度
+    checkContentHeight();
+  }, [checkContentHeight]);
 
   // 调度滚动检查
   const scheduleCheckScrollability = React.useCallback(() => {
@@ -371,8 +410,8 @@ function AttachmentListPrimitive({
         onScroll={scheduleCheckScrollability}
         className="overflow-x-auto overflow-y-visible no-scrollbar relative [&::-webkit-scrollbar]:hidden"
         style={{
-          paddingTop: `${SCROLL_PADDING}px`,
-          paddingBottom: `${SCROLL_PADDING}px`,
+          paddingTop: shouldApplyPadding ? `${SCROLL_PADDING}px` : "0px",
+          paddingBottom: shouldApplyPadding ? `${SCROLL_PADDING}px` : "0px",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
