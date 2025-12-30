@@ -7,11 +7,13 @@ import {
   SenderButton,
   SenderContainer,
   SenderInputRegion,
-  SenderModeButton,
   SenderRegion,
   SenderSendButton,
   SenderTextarea,
 } from "@/registry/wuhan/blocks/sender/sender-01";
+import {
+  ToggleButtonPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 import { ComposedMessageList, type MessageItem } from "@/registry/wuhan/examples/message/message-composed-demo";
 import { ComposedSender } from "@/registry/wuhan/examples/sender/sender-composed-demo";
 import { Button } from "@/registry/wuhan/ui/button";
@@ -250,22 +252,24 @@ function PrimitivesShowcase() {
                     <SenderRegion bordered className="justify-between">
                       <div className="text-sm font-medium">模式</div>
                       <div className="flex items-center gap-2">
-                        <SenderModeButton
+                        <ToggleButtonPrimitive
                           type="button"
+                          variant="compact"
                           selected={mode === "web"}
                           onClick={() => setMode(mode === "web" ? null : "web")}
                         >
                           <Brain className="size-4" />
                           联网搜索
-                        </SenderModeButton>
-                        <SenderModeButton
+                        </ToggleButtonPrimitive>
+                        <ToggleButtonPrimitive
                           type="button"
+                          variant="compact"
                           selected={mode === "think"}
                           onClick={() => setMode(mode === "think" ? null : "think")}
                         >
                           <Brain className="size-4" />
                           深度思考
-                        </SenderModeButton>
+                        </ToggleButtonPrimitive>
                       </div>
                     </SenderRegion>
                   )}
@@ -291,22 +295,24 @@ function PrimitivesShowcase() {
                     <div className="flex items-center gap-2 min-w-0">
                       {canModes && modePlacement === "actionbar" && (
                         <>
-                          <SenderModeButton
+                          <ToggleButtonPrimitive
                             type="button"
+                            variant="compact"
                             selected={mode === "web"}
                             onClick={() => setMode(mode === "web" ? null : "web")}
                           >
                             <Brain className="size-4" />
                             联网搜索
-                          </SenderModeButton>
-                          <SenderModeButton
+                          </ToggleButtonPrimitive>
+                          <ToggleButtonPrimitive
                             type="button"
+                            variant="compact"
                             selected={mode === "think"}
                             onClick={() => setMode(mode === "think" ? null : "think")}
                           >
                             <Brain className="size-4" />
                             深度思考
-                          </SenderModeButton>
+                          </ToggleButtonPrimitive>
                         </>
                       )}
 

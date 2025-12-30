@@ -9,10 +9,12 @@ import { AIMessage, UserMessage } from "@/registry/wuhan/blocks/message/message-
 import {
   SenderActionBar,
   SenderContainer,
-  SenderModeButton,
   SenderSendButton,
   SenderTextarea,
 } from "@/registry/wuhan/blocks/sender/sender-01";
+import {
+  ToggleButtonPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 import { Button } from "@/registry/wuhan/ui/button";
 import { Brain, Globe, Search, Sparkles } from "lucide-react";
 import { getTimeForIndex } from "../shared";
@@ -88,8 +90,9 @@ function XiaoboSender({
       <SenderActionBar className="flex items-center justify-between">
         {/* 深度思考和联网搜索：未选中时使用 bg-[var(--bg-neutral-light)] */}
         <div className="flex items-center gap-2">
-          <SenderModeButton
+          <ToggleButtonPrimitive
             type="button"
+            variant="compact"
             selected={deepThink}
             onClick={onToggleDeepThink}
             className={cn(
@@ -100,9 +103,10 @@ function XiaoboSender({
           >
             <Brain className="size-4" />
             深度思考
-          </SenderModeButton>
-          <SenderModeButton
+          </ToggleButtonPrimitive>
+          <ToggleButtonPrimitive
             type="button"
+            variant="compact"
             selected={webSearch}
             onClick={onToggleWebSearch}
             className={cn(
@@ -113,7 +117,7 @@ function XiaoboSender({
           >
             <Globe className="size-4" />
             联网搜索
-          </SenderModeButton>
+          </ToggleButtonPrimitive>
         </div>
 
         <div className="flex items-center gap-2">

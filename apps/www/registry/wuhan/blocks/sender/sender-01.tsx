@@ -171,9 +171,9 @@ AttachmentButtonPrimitive.displayName = "AttachmentButtonPrimitive";
 /**
  * 模式按钮样式原语（如深度思考、联网搜索等）
  * 提供模式选择按钮的基础样式和状态
- * @deprecated 请使用 ToggleButtonPrimitive from toggle-button block with variant="compact"
+ * 注意：这是 ToggleButtonPrimitive 的别名，默认使用 compact 变体
+ * 为了向后兼容保留此导出，建议直接使用 ToggleButtonPrimitive from toggle-button block
  */
-
 export const ModeButtonPrimitive = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof ToggleButtonPrimitive>
