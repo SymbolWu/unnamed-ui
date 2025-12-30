@@ -6,10 +6,12 @@ import {
   SenderActionBar,
   SenderAttachmentButton,
   SenderContainer,
-  SenderModeButton,
   SenderSendButton,
   SenderTextarea,
 } from "@/registry/wuhan/blocks/sender/sender-01";
+import {
+  ToggleButtonPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 import { Button } from "@/registry/wuhan/ui/button";
 import {
   BarChart3,
@@ -102,14 +104,14 @@ function ZijinSender({
       <SenderActionBar className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <SenderAttachmentButton type="button" onClick={onAttach} />
-          <SenderModeButton type="button" selected={deepThink} onClick={onToggleDeepThink}>
+          <ToggleButtonPrimitive type="button" variant="compact" selected={deepThink} onClick={onToggleDeepThink}>
             <Brain className="size-4" />
             深度思考
-          </SenderModeButton>
-          <SenderModeButton type="button" selected={webSearch} onClick={onToggleWebSearch}>
+          </ToggleButtonPrimitive>
+          <ToggleButtonPrimitive type="button" variant="compact" selected={webSearch} onClick={onToggleWebSearch}>
             <Globe className="size-4" />
             联网搜索
-          </SenderModeButton>
+          </ToggleButtonPrimitive>
         </div>
 
         <div className="flex items-center gap-2">

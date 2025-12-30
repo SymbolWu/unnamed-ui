@@ -67,9 +67,11 @@ Feedback 组件由多个样式原语组成，每个原语都可以独立使用�
 
 ### Button Primitives
 
-- **FeedbackButtonPrimitive** - 反馈选项按钮（支持 default、hover、selected 三种状态）
-- **FeedbackButtonGroupPrimitive** - 反馈按钮组（管理多个反馈选项）
+- **FeedbackButtonPrimitive** - 反馈选项按钮（已废弃，请使用 `ToggleButtonPrimitive` from `toggle-button` block with `variant="default"`）
+- **FeedbackButtonGroupPrimitive** - 反馈按钮组（已废弃，请使用 `ToggleButtonGroupPrimitive` from `toggle-button` block with `variant="default"`）
 - **FeedbackSubmitButtonPrimitive** - 提交按钮（品牌色按钮）
+
+> **注意**：`FeedbackButtonPrimitive` 和 `FeedbackButtonGroupPrimitive` 已废弃，为了向后兼容仍然保留。建议直接使用 `ToggleButtonPrimitive` 和 `ToggleButtonGroupPrimitive` from `toggle-button` block。
 
 ### Input Primitives
 

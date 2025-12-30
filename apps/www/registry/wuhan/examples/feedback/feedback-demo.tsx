@@ -4,11 +4,13 @@ import * as React from "react";
 import {
   FeedbackContainerPrimitive,
   FeedbackHeaderPrimitive,
-  FeedbackButtonGroupPrimitive,
   FeedbackInputContainerPrimitive,
   FeedbackInputPrimitive,
   FeedbackSubmitButtonPrimitive,
 } from "@/registry/wuhan/blocks/feedback/feedback-01";
+import {
+  ToggleButtonGroupPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 
 export default function FeedbackDemo() {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
@@ -43,10 +45,11 @@ export default function FeedbackDemo() {
               onClose={() => console.log("关闭")}
             />
 
-            <FeedbackButtonGroupPrimitive
+            <ToggleButtonGroupPrimitive
               options={feedbackOptions}
               selectedId={selectedOption}
               onOptionChange={setSelectedOption}
+              variant="default"
             />
 
             <FeedbackInputContainerPrimitive>
