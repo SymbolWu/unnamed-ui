@@ -377,12 +377,13 @@ const ExecutionResultItemHeaderPrimitive = React.forwardRef<
           "[&_*]:!box-border",
           "flex items-center justify-between",
           "w-full",
+          "gap-[var(--gap-xs)]",
           "cursor-pointer",
           className,
         )}
         {...props}
       >
-        <div className="flex items-center gap-[var(--gap-md)]">{children}</div>
+        <div className="flex items-center gap-[var(--gap-md)] flex-1 overflow-hidden text-ellipsis whitespace-nowrap">{children}</div>
         <div className="flex items-center gap-[var(--gap-xs)] text-[var(--text-secondary)]">
           {arrow}
         </div>
@@ -418,14 +419,6 @@ const ExecutionResultItemTitlePrimitive = React.forwardRef<
   HTMLSpanElement,
   ExecutionResultItemTitlePrimitiveProps
 >(({ className, children, ...props }, ref) => {
-  //   font-family: Font-family/font family-CN;
-  // font-weight: 600;
-  // font-style: Semibold;
-  // font-size: Font size/font size-2;
-  // leading-trim: NONE;
-  // line-height: Line height/line height-2;
-  // letter-spacing: 0px;
-
   return (
     <span
       ref={ref}
@@ -470,8 +463,7 @@ const ExecutionResultItemImagePrimitive = React.forwardRef<
     />
   );
 });
-ExecutionResultItemImagePrimitive.displayName =
-  "ExecutionResultItemImagePrimitive";
+ExecutionResultItemImagePrimitive.displayName = "ExecutionResultItemImagePrimitive";
 
 /**
  * 执行结果列表项工具名称样式原语
@@ -488,9 +480,9 @@ const ExecutionResultItemToolNamePrimitive = React.forwardRef<
         "font-[var(--font-family-cn)]",
         "text-sm",
         "leading-[var(--line-height-2)]",
-        "font-semibold",
-        "font-weight-600",
         "text-[var(--text-primary)]",
+        "flex-1",
+        "overflow-hidden text-ellipsis whitespace-nowrap",
         className,
       )}
       {...props}
@@ -499,8 +491,7 @@ const ExecutionResultItemToolNamePrimitive = React.forwardRef<
     </span>
   );
 });
-ExecutionResultItemToolNamePrimitive.displayName =
-  "ExecutionResultItemToolNamePrimitive";
+ExecutionResultItemToolNamePrimitive.displayName = "ExecutionResultItemToolNamePrimitive";
 
 /**
  * 执行结果列表项内容样式原语
@@ -545,24 +536,35 @@ const ExecutionResultSectionPrimitive = React.forwardRef<
     return (
       <div
         ref={ref}
-        className={cn("[&_*]:!box-border", "flex flex-col", className)}
+        className={cn(
+          "[&_*]:!box-border",
+          "flex flex-col",
+          className,
+        )}
         {...props}
       >
         {(title || showCopyIcon) && (
-          <div
-            className={cn(
-              "flex items-center justify-between",
-              "gap-[var(--gap-md)]",
-              "bg-[var(--bg-container-secondary)]",
-              "p-[var(--padding-com-sm)]",
-              "pr-[var(--padding-com-md)]",
-              "pb-[var(--padding-com-sm)]",
-              "pl-[var(--padding-com-md)]",
-              "rounded-t-[var(--radius-md)]",
-              "border-b-[1px] border-[var(--border-neutral)]",
-              className,
-            )}
-          >
+          // gap: 8;
+          // angle: 0 deg;
+          // opacity: 1;
+          // padding-top: Padding/padding-com-sm;
+          // padding-right: Padding/padding-com-md;
+          // padding-bottom: Padding/padding-com-sm;
+          // padding-left: Padding/padding-com-md;
+          // border-top-left-radius: 8px;
+          // border-top-right-radius: 8px;
+          // border-bottom-width: 1px;
+
+          <div className={cn("flex items-center justify-between",
+            "gap-[var(--gap-md)]",
+            "bg-[var(--bg-container-secondary)]",
+            "p-[var(--padding-com-sm)]",
+            "pr-[var(--padding-com-md)]",
+            "pb-[var(--padding-com-sm)]",
+            "pl-[var(--padding-com-md)]",
+            "rounded-t-[var(--radius-md)]",
+            "border-b-[1px] border-[var(--border-neutral)]",
+            className)}>
             {title && (
               <ExecutionResultSectionTitlePrimitive>
                 {title}
@@ -584,7 +586,7 @@ const ExecutionResultSectionPrimitive = React.forwardRef<
           // padding-left: Padding/padding-com-md;
           // border-bottom-right-radius: 8px;
           // border-bottom-left-radius: 8px;
-
+          
           <div
             className={cn(
               "font-[var(--font-family-cn)]",
@@ -596,12 +598,11 @@ const ExecutionResultSectionPrimitive = React.forwardRef<
               "py-[var(--padding-com-sm)]",
               "px-[var(--padding-com-md)]",
               "rounded-b-[var(--radius-md)]",
-              className,
-            )}
-          >
+              className)}>
+
             {children}
           </div>
-        )}
+          )}
       </div>
     );
   },
