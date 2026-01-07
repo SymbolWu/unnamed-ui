@@ -12,7 +12,7 @@ import {
 
 export default function DeepThinkingDemo() {
   return (
-    <div className="space-y-4 w-full max-w-2xl">
+    <div className="space-y-4 w-full h-full max-w-2xl">
       <DeepThinkingContainerPrimitive defaultOpen>
         <DeepThinkingHeaderPrimitive
           arrow={

@@ -18,8 +18,8 @@ import {
   SenderActionBar,
   SenderAttachmentButton,
   SenderSendButton,
+  SenderModeButton,
 } from "@/registry/wuhan/blocks/sender/sender-01";
-import { ToggleButtonPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 import {
   AttachmentCard,
   AttachmentCardContent,
@@ -168,16 +168,15 @@ function ModeSelector({ modes, selectedModes, onToggle }: ModeSelectorProps) {
         const Icon = mode.icon;
         const isActive = selectedModes.includes(mode.id);
         return (
-          <ToggleButtonPrimitive
+          <SenderModeButton
             key={mode.id}
             selected={isActive}
             type="button"
-            variant="compact"
             onClick={() => onToggle(mode.id)}
           >
             {Icon && <Icon className="size-4" />}
             {mode.label}
-          </ToggleButtonPrimitive>
+          </SenderModeButton>
         );
       })}
     </div>

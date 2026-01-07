@@ -503,4 +503,29 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // execution-result examples
+  {
+    name: "execution-result-demo",
+    type: "registry:example",
+    registryDependencies: ["execution-result-01"],
+    files: [
+      {
+        path: "examples/execution-result/execution-result-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/execution-result-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "execution-result-default",
+    type: "registry:example",
+    registryDependencies: ["execution-result-01"],
+    files: [
+      {
+        path: "examples/execution-result/execution-result-default.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/execution-result-default.tsx",
+      },
+    ],
+  },
 ];

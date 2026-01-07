@@ -242,4 +242,19 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "execution-result-01",
+    type: "registry:block",
+    title: "Execution Result",
+    description:
+      "Execution result block for displaying function call results with collapsible items",
+    registryDependencies: ["style", "collapsible"],
+    files: [
+      {
+        path: "blocks/execution-result/execution-result-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/execution-result-01.tsx",
+      },
+    ],
+  },
 ];

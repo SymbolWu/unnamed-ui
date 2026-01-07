@@ -412,7 +412,7 @@
   --border-brand-active: var(--brand-700);
   --border-brand-light: var(--brand-300);
   --border-brand-light-hover: var(--brand-400);
-  --border-neutral: var(--neutral-300);
+  --border-neutral: var(--neutral-200);
   --border-success: var(--success-600);
   --border-success-hover: var(--success-500);
   --border-success-active: var(--success-700);
@@ -428,8 +428,8 @@
   --border-error-active: var(--error-700);
   --border-error-light: var(--error-300);
   --border-error-light-hover: var(--error-400);
-  --divider-neutral-basic: var(--neutral-300);
-  --divider-neutral-strong: var(--neutral-400);
+  --divider-neutral-basic: var(--neutral-200);
+  --divider-neutral-strong: var(--neutral-300);
   
   /* ==================== Focusring 聚焦环 - Light 主题 ==================== */
   --focusring-brand: var(--brand-300);
@@ -645,7 +645,7 @@
   --border-brand-active: var(--brand-500);
   --border-brand-light: var(--brand-300);
   --border-brand-light-hover: var(--brand-400);
-  --border-neutral: var(--neutral-300);
+  --border-neutral: var(--neutral-200);
   --border-success: var(--success-600);
   --border-success-hover: var(--success-700);
   --border-success-active: var(--success-500);
@@ -661,8 +661,8 @@
   --border-error-active: var(--error-500);
   --border-error-light: var(--error-300);
   --border-error-light-hover: var(--error-400);
-  --divider-neutral-basic: var(--neutral-300);
-  --divider-neutral-strong: var(--neutral-400);
+  --divider-neutral-basic: var(--neutral-200);
+  --divider-neutral-strong: var(--neutral-300);
   
   /* ==================== Focusring 聚焦环 - Dark 主题 ==================== */
   --focusring-brand: var(--brand-300);

@@ -333,7 +333,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-300)",
+          "border-neutral": "var(--neutral-200)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -349,8 +349,8 @@
           "border-error-active": "var(--error-700)",
           "border-error-light": "var(--error-300)",
           "border-error-light-hover": "var(--error-400)",
-          "divider-neutral-basic": "var(--neutral-300)",
-          "divider-neutral-strong": "var(--neutral-400)",
+          "divider-neutral-basic": "var(--neutral-200)",
+          "divider-neutral-strong": "var(--neutral-300)",
           "focusring-brand": "var(--brand-300)",
           "shadow-focus": "0 0 0 2px #d0ddff",
           "ai-bg": "linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%)",
@@ -677,7 +677,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-300)",
+          "border-neutral": "var(--neutral-200)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -693,8 +693,8 @@
           "border-error-active": "var(--error-700)",
           "border-error-light": "var(--error-300)",
           "border-error-light-hover": "var(--error-400)",
-          "divider-neutral-basic": "var(--neutral-300)",
-          "divider-neutral-strong": "var(--neutral-400)",
+          "divider-neutral-basic": "var(--neutral-200)",
+          "divider-neutral-strong": "var(--neutral-300)",
           "focusring-brand": "var(--brand-300)",
           "shadow-focus": "0 0 0 2px #d0ddff",
           "ai-bg": "linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%)",
@@ -1038,7 +1038,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-300)",
+          "border-neutral": "var(--neutral-200)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -1054,8 +1054,8 @@
           "border-error-active": "var(--error-700)",
           "border-error-light": "var(--error-300)",
           "border-error-light-hover": "var(--error-400)",
-          "divider-neutral-basic": "var(--neutral-300)",
-          "divider-neutral-strong": "var(--neutral-400)",
+          "divider-neutral-basic": "var(--neutral-200)",
+          "divider-neutral-strong": "var(--neutral-300)",
           "focusring-brand": "var(--brand-300)",
           "shadow-focus": "0 0 0 2px #d0ddff",
           "ai-bg": "linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%)",
@@ -1382,7 +1382,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-300)",
+          "border-neutral": "var(--neutral-200)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -1398,8 +1398,8 @@
           "border-error-active": "var(--error-700)",
           "border-error-light": "var(--error-300)",
           "border-error-light-hover": "var(--error-400)",
-          "divider-neutral-basic": "var(--neutral-300)",
-          "divider-neutral-strong": "var(--neutral-400)",
+          "divider-neutral-basic": "var(--neutral-200)",
+          "divider-neutral-strong": "var(--neutral-300)",
           "focusring-brand": "var(--brand-300)",
           "shadow-focus": "0 0 0 2px #d0ddff",
           "ai-bg": "linear-gradient(90deg, #eff7ff 0%, #f4f4ff 30%, #f8edff 60%, #fff2ff 100%)",
@@ -1819,6 +1819,23 @@
           "path": "registry/wuhan/blocks/tooltip/tooltip-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/tooltip-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "execution-result-01",
+      "type": "registry:block",
+      "title": "Execution Result",
+      "description": "Execution result block for displaying function call results with collapsible items",
+      "registryDependencies": [
+        "style",
+        "collapsible"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/execution-result/execution-result-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/execution-result-01.tsx"
         }
       ]
     },
@@ -2391,6 +2408,34 @@
           "path": "registry/wuhan/examples/tooltip/tooltip-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/tooltip-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "execution-result-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "execution-result-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/execution-result/execution-result-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/execution-result-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "execution-result-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "execution-result-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/execution-result/execution-result-default.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/execution-result-default.tsx"
         }
       ]
     }
