@@ -6,7 +6,7 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/registry/wuhan/ui/collapsible";
+} from "@/components/ui/collapsible";
 import { Copy } from "lucide-react";
 
 // ==================== 类型定义 ====================
