@@ -13,7 +13,7 @@ import {
 
 export default function DeepThinkingDefault() {
   return (
-    <div className="space-y-4 w-full max-w-2xl">
+    <div className="space-y-4 w-full h-full max-w-2xl">
       {/* 思考中状态 */}
       <DeepThinkingContainerPrimitive>
         <DeepThinkingHeaderPrimitive
@@ -25,7 +25,9 @@ export default function DeepThinkingDefault() {
         >
           <DeepThinkingIconPrimitive>
             <ThinkingDotsPrimitive />
-            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">深度思考中</DeepThinkingTitlePrimitive>
+            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">
+              深度思考中
+            </DeepThinkingTitlePrimitive>
           </DeepThinkingIconPrimitive>
         </DeepThinkingHeaderPrimitive>
         <DeepThinkingContentPrimitive>

@@ -490,4 +490,42 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // tooltip examples
+  {
+    name: "tooltip-demo",
+    type: "registry:example",
+    registryDependencies: ["tooltip-01", "button"],
+    files: [
+      {
+        path: "examples/tooltip/tooltip-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/tooltip-demo.tsx",
+      },
+    ],
+  },
+  // execution-result examples
+  {
+    name: "execution-result-demo",
+    type: "registry:example",
+    registryDependencies: ["execution-result-01"],
+    files: [
+      {
+        path: "examples/execution-result/execution-result-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/execution-result-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "execution-result-default",
+    type: "registry:example",
+    registryDependencies: ["execution-result-01"],
+    files: [
+      {
+        path: "examples/execution-result/execution-result-default.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/execution-result-default.tsx",
+      },
+    ],
+  },
 ];

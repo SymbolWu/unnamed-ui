@@ -8,7 +8,10 @@ import {
   FeedbackInputPrimitive,
   FeedbackSubmitButtonPrimitive,
 } from "@/registry/wuhan/blocks/feedback/feedback-01";
-import { ToggleButtonGroupPrimitive } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
+import {
+  ToggleButtonGroupPrimitive,
+  ToggleButtonPrimitive,
+} from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 
 export default function FeedbackDemo() {
   const [selectedOption, setSelectedOption] = React.useState<string>("");
@@ -43,12 +46,18 @@ export default function FeedbackDemo() {
               onClose={() => console.log("关闭")}
             />
 
-            <ToggleButtonGroupPrimitive
-              options={feedbackOptions}
-              selectedId={selectedOption}
-              onOptionChange={setSelectedOption}
-              variant="default"
-            />
+            <ToggleButtonGroupPrimitive>
+              {feedbackOptions.map((option) => (
+                <ToggleButtonPrimitive
+                  key={option.id}
+                  selected={selectedOption === option.id}
+                  onClick={() => setSelectedOption(option.id)}
+                  variant="default"
+                >
+                  {option.label}
+                </ToggleButtonPrimitive>
+              ))}
+            </ToggleButtonGroupPrimitive>
 
             <FeedbackInputContainerPrimitive>
               <FeedbackInputPrimitive

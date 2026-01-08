@@ -12,7 +12,7 @@ import {
 
 export default function DeepThinkingDemo() {
   return (
-    <div className="space-y-4 w-full max-w-2xl">
+    <div className="space-y-4 w-full h-full max-w-2xl">
       <DeepThinkingContainerPrimitive defaultOpen>
         <DeepThinkingHeaderPrimitive
           arrow={
@@ -23,7 +23,9 @@ export default function DeepThinkingDemo() {
         >
           <DeepThinkingIconPrimitive>
             <Sparkles className="size-4 text-[var(--text-brand)]" />
-            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">深度思考中</DeepThinkingTitlePrimitive>
+            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">
+              深度思考中
+            </DeepThinkingTitlePrimitive>
           </DeepThinkingIconPrimitive>
         </DeepThinkingHeaderPrimitive>
         <DeepThinkingContentPrimitive>

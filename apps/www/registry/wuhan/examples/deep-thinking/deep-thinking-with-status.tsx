@@ -12,7 +12,7 @@ import {
 
 export default function DeepThinkingWithStatus() {
   return (
-    <div className="space-y-4 w-full max-w-2xl">
+    <div className="space-y-4 w-full h-full max-w-2xl">
       {/* 思考中 */}
       <DeepThinkingContainerPrimitive defaultOpen>
         <DeepThinkingHeaderPrimitive
@@ -24,7 +24,9 @@ export default function DeepThinkingWithStatus() {
         >
           <DeepThinkingIconPrimitive>
             <Sparkles className="size-4 text-[var(--text-brand)]" />
-            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">深度思考中</DeepThinkingTitlePrimitive>
+            <DeepThinkingTitlePrimitive className="text-[var(--text-secondary)]">
+              深度思考中
+            </DeepThinkingTitlePrimitive>
           </DeepThinkingIconPrimitive>
         </DeepThinkingHeaderPrimitive>
         <DeepThinkingContentPrimitive>
@@ -63,7 +65,7 @@ export default function DeepThinkingWithStatus() {
           }
         >
           <DeepThinkingIconPrimitive>
-          <Sparkles className="size-4 text-[var(--text-brand)]" />
+            <Sparkles className="size-4 text-[var(--text-brand)]" />
             <DeepThinkingTitlePrimitive>思考失败</DeepThinkingTitlePrimitive>
           </DeepThinkingIconPrimitive>
         </DeepThinkingHeaderPrimitive>

@@ -195,15 +195,15 @@ FeedbackButtonPrimitive.displayName = "FeedbackButtonPrimitive";
 
 /**
  * 反馈按钮组样式原语
- * 注意：这是 ToggleButtonGroupPrimitive 的别名，默认使用 default 变体
+ * 注意：这是 ToggleButtonGroupPrimitive 的别名
  * 为了向后兼容保留此导出，建议直接使用 ToggleButtonGroupPrimitive from toggle-button block
  * @public
  */
 const FeedbackButtonGroupPrimitive = React.forwardRef<
   HTMLDivElement,
   FeedbackButtonGroupPrimitiveProps
->(({ variant = "default", ...props }, ref) => {
-  return <ToggleButtonGroupPrimitive ref={ref} variant={variant} {...props} />;
+>(({ ...props }, ref) => {
+  return <ToggleButtonGroupPrimitive ref={ref} {...props} />;
 });
 FeedbackButtonGroupPrimitive.displayName = "FeedbackButtonGroupPrimitive";
 

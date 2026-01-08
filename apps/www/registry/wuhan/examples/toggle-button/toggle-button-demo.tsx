@@ -19,9 +19,9 @@ export default function ToggleButtonDemo() {
   ];
 
   const modeOptions = [
-    { id: "web-search", label: "联网搜索" },
-    { id: "deep-think", label: "深度思考" },
-    { id: "creative", label: "创意模式" },
+    { id: "web-search", label: "联网搜索", icon: Brain },
+    { id: "deep-think", label: "深度思考", icon: Zap },
+    { id: "creative", label: "创意模式", icon: Sparkles },
   ];
 
   return (
@@ -46,12 +46,18 @@ export default function ToggleButtonDemo() {
             <p className="text-xs text-[var(--text-tertiary)] mb-2">
               单选按钮组示例（反馈组件场景）
             </p>
-            <ToggleButtonGroupPrimitive
-              options={feedbackOptions}
-              selectedId={selectedOption}
-              onOptionChange={setSelectedOption}
-              variant="default"
-            />
+            <ToggleButtonGroupPrimitive>
+              {feedbackOptions.map((option) => (
+                <ToggleButtonPrimitive
+                  key={option.id}
+                  selected={selectedOption === option.id}
+                  onClick={() => setSelectedOption(option.id)}
+                  variant="default"
+                >
+                  {option.label}
+                </ToggleButtonPrimitive>
+              ))}
+            </ToggleButtonGroupPrimitive>
           </div>
         </div>
       </div>
@@ -82,23 +88,30 @@ export default function ToggleButtonDemo() {
             <p className="text-xs text-[var(--text-tertiary)] mb-2">
               多选按钮组示例（Sender组件场景）
             </p>
-            <ToggleButtonGroupPrimitive
-              options={modeOptions.map((opt) => ({
-                id: opt.id,
-                label: (
-                  <>
-                    {opt.id === "web-search" && <Brain className="size-4" />}
-                    {opt.id === "deep-think" && <Zap className="size-4" />}
-                    {opt.id === "creative" && <Sparkles className="size-4" />}
-                    {opt.label}
-                  </>
-                ),
-              }))}
-              selectedIds={selectedModes}
-              multiple
-              onOptionsChange={setSelectedModes}
-              variant="compact"
-            />
+            <ToggleButtonGroupPrimitive>
+              {modeOptions.map((option) => {
+                const Icon = option.icon;
+                const isSelected = selectedModes.includes(option.id);
+                return (
+                  <ToggleButtonPrimitive
+                    key={option.id}
+                    selected={isSelected}
+                    multiple
+                    onClick={() => {
+                      setSelectedModes((prev) =>
+                        prev.includes(option.id)
+                          ? prev.filter((id) => id !== option.id)
+                          : [...prev, option.id],
+                      );
+                    }}
+                    variant="compact"
+                  >
+                    <Icon className="size-4" />
+                    {option.label}
+                  </ToggleButtonPrimitive>
+                );
+              })}
+            </ToggleButtonGroupPrimitive>
           </div>
         </div>
       </div>
@@ -114,12 +127,18 @@ export default function ToggleButtonDemo() {
               反馈组件中的使用
             </p>
             <div className="p-4 bg-[var(--bg-page-secondary)] rounded-lg">
-              <ToggleButtonGroupPrimitive
-                options={feedbackOptions}
-                selectedId={selectedOption}
-                onOptionChange={setSelectedOption}
-                variant="default"
-              />
+              <ToggleButtonGroupPrimitive>
+                {feedbackOptions.map((option) => (
+                  <ToggleButtonPrimitive
+                    key={option.id}
+                    selected={selectedOption === option.id}
+                    onClick={() => setSelectedOption(option.id)}
+                    variant="default"
+                  >
+                    {option.label}
+                  </ToggleButtonPrimitive>
+                ))}
+              </ToggleButtonGroupPrimitive>
             </div>
           </div>
 
@@ -128,23 +147,30 @@ export default function ToggleButtonDemo() {
               Sender组件中的使用
             </p>
             <div className="p-4 bg-[var(--bg-page-secondary)] rounded-lg">
-              <ToggleButtonGroupPrimitive
-                options={modeOptions.map((opt) => ({
-                  id: opt.id,
-                  label: (
-                    <>
-                      {opt.id === "web-search" && <Brain className="size-4" />}
-                      {opt.id === "deep-think" && <Zap className="size-4" />}
-                      {opt.id === "creative" && <Sparkles className="size-4" />}
-                      {opt.label}
-                    </>
-                  ),
-                }))}
-                selectedIds={selectedModes}
-                multiple
-                onOptionsChange={setSelectedModes}
-                variant="compact"
-              />
+              <ToggleButtonGroupPrimitive>
+                {modeOptions.map((option) => {
+                  const Icon = option.icon;
+                  const isSelected = selectedModes.includes(option.id);
+                  return (
+                    <ToggleButtonPrimitive
+                      key={option.id}
+                      selected={isSelected}
+                      multiple
+                      onClick={() => {
+                        setSelectedModes((prev) =>
+                          prev.includes(option.id)
+                            ? prev.filter((id) => id !== option.id)
+                            : [...prev, option.id],
+                        );
+                      }}
+                      variant="compact"
+                    >
+                      <Icon className="size-4" />
+                      {option.label}
+                    </ToggleButtonPrimitive>
+                  );
+                })}
+              </ToggleButtonGroupPrimitive>
             </div>
           </div>
         </div>

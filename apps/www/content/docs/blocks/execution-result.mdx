@@ -1,0 +1,163 @@
+---
+title: Execution Result
+description: Execution result block for displaying function call results with collapsible items
+author: AF
+---
+
+<ComponentPreview name="execution-result-demo" description="Execution result block with collapsible items" className="mb-4" />
+
+Execution Result 组件提供了一个可折叠的执行结果展示块，适用于显示函数调用结果、API 请求响应等场景。
+
+## Features
+
+- **可折叠交互**：点击列表项头部可展开或收起详细信息
+- **请求响应展示**：每个执行项可展示请求和响应两部分内容
+- **复制功能**：支持一键复制请求或响应内容
+- **状态展示**：支持成功、失败、进行中等不同状态
+- **自定义样式**：支持自定义图标、标题等
+- **样式隔离**：组件样式不受外部框架影响
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/execution-result-01.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="execution-result-demo" title="registry/wuhan/examples/execution-result/execution-result-demo.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Examples
+
+### Default
+
+基础的执行结果展示，包含不同状态（成功、失败、进行中）。
+
+<ComponentPreview
+  name="execution-result-default"
+  description="Basic execution result examples with different states"
+  className="mb-4"
+/>
+
+## API Reference
+
+### ExecutionResultContainerPrimitive
+
+执行结果容器组件，用于包裹整个执行结果列表。
+
+**Props:**
+
+- `children` - 子元素
+- `className` - 自定义样式类名
+
+### ExecutionResultTitlePrimitive
+
+执行结果标题组件，用于显示总体执行状态。
+
+**Props:**
+
+- `children` - 标题内容
+- `className` - 自定义样式类名
+
+### ExecutionResultItemPrimitive
+
+执行结果列表项容器组件，支持展开/收起。
+
+**Props:**
+
+- `children` - 子元素
+- `defaultOpen` - 是否默认展开
+- `open` - 控制展开状态
+- `onOpenChange` - 展开状态变化回调
+- `className` - 自定义样式类名
+
+### ExecutionResultItemHeaderPrimitive
+
+执行结果列表项头部组件。
+
+**Props:**
+
+- `children` - 左侧内容（通常是图标和标题）
+- `arrow` - 右侧内容（通常是箭头图标）
+- `className` - 自定义样式类名
+
+### ExecutionResultItemIconPrimitive
+
+执行结果列表项图标容器组件。
+
+**Props:**
+
+- `children` - 图标内容
+- `className` - 自定义样式类名
+
+### ExecutionResultItemTitlePrimitive
+
+执行结果列表项标题组件。
+
+**Props:**
+
+- `children` - 标题内容
+- `className` - 自定义样式类名
+
+### ExecutionResultItemContentPrimitive
+
+执行结果列表项内容容器组件。
+
+**Props:**
+
+- `children` - 内容
+- `className` - 自定义样式类名
+
+### ExecutionResultSectionPrimitive
+
+执行结果区块组件（请求/响应部分）。
+
+**Props:**
+
+- `title` - 区块标题
+- `showCopyIcon` - 是否显示复制图标（默认 true）
+- `onCopy` - 复制回调
+- `children` - 内容
+- `className` - 自定义样式类名
+
+### ExecutionResultCopyIconPrimitive
+
+执行结果复制图标组件。
+
+**Props:**
+
+- `onCopy` - 复制回调
+- `className` - 自定义样式类名
+
+### ExecutionResultArrowPrimitive
+
+执行结果箭头图标组件。
+
+**Props:**
+
+- `children` - 箭头内容（默认为 ">"）
+- `className` - 自定义样式类名
+
