@@ -350,9 +350,6 @@ const ExecutionResultItemPrimitive = React.forwardRef<
             "overflow-hidden",
             "flex flex-col",
             "gap-[var(--gap-md)]",
-            "p-[var(--padding-com-lg)]",
-            "hover:bg-[var(--bg-neutral-light)]",
-            "transition-colors",
             className,
           )}
           {...props}
@@ -384,6 +381,9 @@ const ExecutionResultItemHeaderPrimitive = React.forwardRef<
           "gap-[var(--gap-xs)]",
           "cursor-pointer",
           "group", // 添加 group 类以支持子元素的状态选择
+          "p-[var(--padding-com-lg)]",
+          "hover:bg-[var(--bg-neutral-light)]",
+          "transition-colors",
           className,
         )}
         {...props}
@@ -518,6 +518,8 @@ const ExecutionResultItemContentPrimitive = React.forwardRef<
           "[&_*]:!box-border",
           "flex flex-col",
           "gap-[var(--gap-md)]",
+          "px-[var(--padding-com-lg)]",
+          "pb-[var(--padding-com-lg)]",
           className,
         )}
         {...props}
@@ -595,7 +597,8 @@ const ExecutionResultSectionPrimitive = React.forwardRef<
               "bg-[var(--bg-neutral-light)]",
               "py-[var(--padding-com-sm)]",
               "px-[var(--padding-com-md)]",
-              "rounded-b-[var(--radius-md)]",
+              "rounded-[var(--radius-md)]",
+              (title || showCopyIcon) && "rounded-b-[var(--radius-md)]",
               "max-h-[calc(var(--line-height-1)*8)]", // 8行的高度
               "overflow-y-auto",
               "overflow-x-hidden",
