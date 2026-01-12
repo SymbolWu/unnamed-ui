@@ -45,9 +45,10 @@ export const TextareaPrimitive = React.forwardRef<
           {
             className: cn(
               textareaClassName,
-              (props.children as React.ReactElement<{ className?: string }>).props?.className
+              (props.children as React.ReactElement<{ className?: string }>)
+                .props?.className,
             ),
-          }
+          },
         )
       : props.children;
 
@@ -59,12 +60,7 @@ export const TextareaPrimitive = React.forwardRef<
   }
 
   return (
-    <Textarea
-      ref={ref}
-      rows={rows}
-      {...props}
-      className={textareaClassName}
-    />
+    <Textarea ref={ref} rows={rows} {...props} className={textareaClassName} />
   );
 });
 TextareaPrimitive.displayName = "TextareaPrimitive";

@@ -34,6 +34,27 @@ export default function ExecutionResultDefault() {
         </ExecutionResultTitlePrimitive>
 
         <ExecutionResultContentPrimitive>
+          <ExecutionResultItemPrimitive>
+            <ExecutionResultItemHeaderPrimitive
+              arrow={
+                <ExecutionResultArrowPrimitive>
+                  <ChevronDown className="size-4" />
+                </ExecutionResultArrowPrimitive>
+              }
+            >
+              <ExecutionResultItemIconPrimitive>
+                <CheckCircle2 className="size-4 text-[var(--text-success)]" />
+              </ExecutionResultItemIconPrimitive>
+              <ExecutionResultItemTitlePrimitive>
+                思考完成
+              </ExecutionResultItemTitlePrimitive>
+            </ExecutionResultItemHeaderPrimitive>
+            <ExecutionResultItemContentPrimitive>
+              <ExecutionResultSectionPrimitive showCopyIcon={false}>
+                用户想要了解AI发展的趋势，这是一个比较开放的问题，需要从多个维度来概括当前的主要方向。考虑到用户可能不是专业人士，应该用清晰的结构和易懂的语言来组织信息。
+              </ExecutionResultSectionPrimitive>
+            </ExecutionResultItemContentPrimitive>
+          </ExecutionResultItemPrimitive>
           <ExecutionResultItemPrimitive defaultOpen>
             <ExecutionResultItemHeaderPrimitive
               arrow={
@@ -195,7 +216,7 @@ export default function ExecutionResultDefault() {
             </ExecutionResultArrowPrimitive>
           }
         >
-          执行中，调用1个组件
+          执行中，调用2个组件
         </ExecutionResultTitlePrimitive>
 
         <ExecutionResultContentPrimitive>
@@ -222,6 +243,27 @@ export default function ExecutionResultDefault() {
                 }
               >
                 {JSON.stringify({ data: "处理中..." }, null, 2)}
+              </ExecutionResultSectionPrimitive>
+            </ExecutionResultItemContentPrimitive>
+          </ExecutionResultItemPrimitive>
+          <ExecutionResultItemPrimitive>
+            <ExecutionResultItemHeaderPrimitive
+              arrow={
+                <ExecutionResultArrowPrimitive>
+                  <ChevronDown className="size-4" />
+                </ExecutionResultArrowPrimitive>
+              }
+            >
+              <ExecutionResultItemIconPrimitive>
+                <Loader2 className="size-4 text-[var(--text-brand)] animate-spin" />
+              </ExecutionResultItemIconPrimitive>
+              <ExecutionResultItemTitlePrimitive>
+                思考中
+              </ExecutionResultItemTitlePrimitive>
+            </ExecutionResultItemHeaderPrimitive>
+            <ExecutionResultItemContentPrimitive>
+              <ExecutionResultSectionPrimitive showCopyIcon={false}>
+                用户想要了解AI发展的趋势，这是一个比较开放的问题，需要从多个维度来概括当前的主要方向。考虑到用户可能不是专业人士，应该用清晰的结构和易懂的语言来组织信息。
               </ExecutionResultSectionPrimitive>
             </ExecutionResultItemContentPrimitive>
           </ExecutionResultItemPrimitive>

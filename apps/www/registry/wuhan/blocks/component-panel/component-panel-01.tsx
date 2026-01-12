@@ -91,13 +91,16 @@ interface ComponentPanelListPrimitiveProps extends React.HTMLAttributes<HTMLDivE
  * 组件面板列表项原语属性
  * @public
  */
-type ComponentPanelListItemPrimitiveProps = React.ComponentPropsWithoutRef<typeof ToggleButtonPrimitive>;
+type ComponentPanelListItemPrimitiveProps = React.ComponentPropsWithoutRef<
+  typeof ToggleButtonPrimitive
+>;
 
 /**
  * 组件面板列表项图标占位符原语属性
  * @public
  */
-type ComponentPanelListItemIconPrimitiveProps = React.HTMLAttributes<HTMLDivElement>;
+type ComponentPanelListItemIconPrimitiveProps =
+  React.HTMLAttributes<HTMLDivElement>;
 
 // ==================== 样式原语组件 ====================
 
