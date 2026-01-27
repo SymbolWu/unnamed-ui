@@ -12,9 +12,13 @@ export function Preview() {
       return null
     }
 
-    // 特殊处理 "all-blocks"
+    // 特殊处理 "all-blocks" 和 "recruitment-blocks"
     if (params.item === "all-blocks") {
       return "/preview/all-blocks"
+    }
+
+    if (params.item === "recruitment-blocks") {
+      return "/preview/recruitment-blocks"
     }
 
     // 如果 item 名称以 -01 结尾，认为是 block，使用 block 路由

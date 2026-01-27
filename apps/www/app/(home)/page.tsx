@@ -39,8 +39,8 @@ export default async function HomePage() {
       data-slot="layout"
       className="relative z-10 flex min-h-svh flex-col"
     >
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center gap-4 px-4">
+      <header className="sticky top-0 z-50 w-full  bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 items-center gap-4 px-8 !w-full !max-w-full">
           <div className="mr-4 flex items-center gap-2">
             <Link href="/">
               <span className="font-bold text-lg">unnamed-ui</span>

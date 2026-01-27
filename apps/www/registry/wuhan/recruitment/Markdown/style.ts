@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { XMarkdown } from "@ant-design/x-markdown";
-import { cssVar } from "../utils/cssVar";
 
 export const StyledMarkdownWrapper = styled(XMarkdown)`
   /* Layout: container should fill available width */
@@ -10,62 +9,62 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
 
   /* Typography: headings */
   h1 {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size-heading-1", { prefix: "ant" })};
-    line-height: ${cssVar("line-height-heading-1", { prefix: "ant" })};
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-5);
+    line-height: var(--line-height-5);
     font-weight: 600;
-    margin-top: ${cssVar("margin-com-2xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-2xl) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   h2 {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size-heading-2", { prefix: "ant" })};
-    line-height: ${cssVar("line-height-heading-2", { prefix: "ant" })};
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-4);
+    line-height: var(--line-height-4);
     font-weight: 600;
-    margin-top: ${cssVar("margin-com-2xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-2xl) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   h3 {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size-heading-3", { prefix: "ant" })};
-    line-height: ${cssVar("line-height-heading-3", { prefix: "ant" })};
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-3);
+    line-height: var(--line-height-4);
     font-weight: 600;
-    margin-top: ${cssVar("margin-com-2xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-2xl) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   /* Typography: paragraph */
   p {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size", { prefix: "ant" })};
-    line-height: ${cssVar("line-height", { prefix: "ant" })};
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-3);
+    line-height: var(--line-height-4);
     font-weight: 400;
-    margin-top: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-md) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   /* Blockquote: left bar + tertiary text */
   blockquote {
-    font-family: ${cssVar("font-family", { prefix: "ant" })} !important;
+    font-family: var(--font-family-cn) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    font-size: ${cssVar("font-size-3", { prefix: "ant" })} !important;
-    line-height: ${cssVar("line-height-4", { prefix: "ant" })} !important;
+    font-size: var(--font-size-3) !important;
+    line-height: var(--line-height-4) !important;
     letter-spacing: 0 !important;
-    color: ${cssVar("color-text-tertiary", { prefix: "ant" })} !important;
-    border-left: 2px solid ${cssVar("color-fill-tertiary", { prefix: "ant" })} !important;
+    color: var(--text-tertiary) !important;
+    border-left: 2px solid var(--bg-neutral-light-active) !important;
     margin: 0 !important;
-    padding-left: ${cssVar("padding-com-lg", { prefix: "ant" })} !important;
+    padding-left: var(--padding-com-lg) !important;
   }
 
   /* Lists: spacing + nested bullets */
   ul,
   ol {
-    margin-left: ${cssVar("margin-xs", { prefix: "ant" })} !important;
-    margin-top: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-left: var(--margin-com-xs) !important;
+    margin-top: var(--margin-com-md) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   /* 2nd-level ul bullets */
@@ -80,11 +79,11 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
 
   /* List item */
   li {
-    font-size: ${cssVar("font-size", { prefix: "ant" })};
-    line-height: ${cssVar("line-height-4", { prefix: "ant" })};
+    font-size: var(--font-size-3);
+    line-height: var(--line-height-4);
     font-weight: 400;
-    margin-top: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-md", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-md) !important;
+    margin-bottom: var(--margin-com-md) !important;
   }
 
   /* Tables: basic typography */
@@ -94,48 +93,42 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
   }
   /* Table header */
   th {
-    color: ${cssVar("color-text-base", { prefix: "ant" })} !important;
-    font-family: ${cssVar("font-family", { prefix: "ant" })} !important;
+    color: var(--text-title) !important;
+    font-family: var(--font-family-cn) !important;
     font-weight: 600 !important;
-    font-size: ${cssVar("font-size-sm", { prefix: "ant" })} !important;
-    line-height: ${cssVar("line-height-sm", { prefix: "ant" })} !important;
-    background: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })} !important;
-    padding: ${cssVar("padding-com-lg", { prefix: "ant" })} !important;
+    font-size: var(--font-size-2) !important;
+    line-height: var(--line-height-2) !important;
+    background: var(--bg-neutral-light) !important;
+    padding: var(--padding-com-lg) !important;
   }
 
   /* Table cell */
   td {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size-sm", { prefix: "ant" })} !important;
-    line-height: ${cssVar("line-height-sm", { prefix: "ant" })} !important;
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-2) !important;
+    line-height: var(--line-height-2) !important;
     font-weight: 400;
-    background-color: ${cssVar("color-bg-container", {
-      prefix: "ant",
-    })} !important;
-    color: ${cssVar("color-text", { prefix: "ant" })} !important;
+    background-color: var(--bg-container) !important;
+    color: var(--text-primary) !important;
   }
 
   /* Table caption */
   caption {
-    font-family: ${cssVar("font-family", { prefix: "ant" })};
-    font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
-    line-height: ${cssVar("line-height-xs", { prefix: "ant" })};
+    font-family: var(--font-family-cn);
+    font-size: var(--font-size-1);
+    line-height: var(--line-height-1);
     font-weight: 400;
   }
 
   .ant-codeHighlighter {
-    font-size: ${cssVar("font-size-xs", { prefix: "ant" })} !important;
-    line-height: ${cssVar("line-height-xs", { prefix: "ant" })} !important;
-    border-radius: ${cssVar("border-radius-lg", { prefix: "ant" })} !important;
-    padding-top: ${cssVar("padding-com-md", { prefix: "ant" })} !important;
-    padding-right: ${cssVar("padding-com-md", { prefix: "ant" })} !important;
-    padding-bottom: ${cssVar("padding-com-md", { prefix: "ant" })} !important;
-    padding-left: ${cssVar("padding-com-md", { prefix: "ant" })} !important;
-    background-color: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })} !important;
+    font-size: var(--font-size-1) !important;
+    line-height: var(--line-height-1) !important;
+    border-radius: var(--radius-lg) !important;
+    padding-top: var(--padding-com-md) !important;
+    padding-right: var(--padding-com-md) !important;
+    padding-bottom: var(--padding-com-md) !important;
+    padding-left: var(--padding-com-md) !important;
+    background-color: var(--bg-neutral-light) !important;
   }
   .ant-codeHighlighter-header {
     padding: 0;
@@ -164,19 +157,19 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
     background: transparent !important;
   }
   .ant-codeHighlighter .ant-codeHighlighter-header-title {
-    font-family: ${cssVar("font-family-code", { prefix: "ant" })}!important;
+    font-family: var(--font-mono) !important;
     font-weight: 400;
-    font-size: ${cssVar("font-size-xs", { prefix: "ant" })}!important;
+    font-size: var(--font-size-1) !important;
   }
 
   /* Inline code */
   code {
-    font-family: 'Menlo, SFMono-Regular, Consolas, "Liberation Mono", monospace';
-    font-size: ${cssVar("font-size-xs", { prefix: "ant" })}!important;
-    line-height: ${cssVar("line-height-xs", { prefix: "ant" })}!important;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1) !important;
+    line-height: var(--line-height-1) !important;
     font-weight: 400;
-    margin-top: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-xl) !important;
+    margin-bottom: var(--margin-com-xl) !important;
   }
 
   /* Code block (note: further overridden by StyledCodeScroll) */
@@ -185,8 +178,8 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
     overflow-x: auto !important;
     white-space: pre-wrap !important;
     word-wrap: break-word !important;
-    margin-top: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-xl) !important;
+    margin-bottom: var(--margin-com-xl) !important;
   }
 
   pre code {
@@ -232,8 +225,8 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
   table th,
   table td {
     border: none !important;
-    border-bottom: 1px solid ${cssVar("color-border", { prefix: "ant" })} !important;
-    padding: ${cssVar("padding-com-lg", { prefix: "ant" })} !important;
+    border-bottom: 1px solid var(--border-neutral) !important;
+    padding: var(--padding-com-lg) !important;
     box-sizing: border-box !important;
   }
 
@@ -245,20 +238,20 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
   /* Tables: keep left/right padding for edge columns */
   table th:first-child,
   table td:first-child {
-    padding-left: ${cssVar("padding-com-lg", { prefix: "ant" })} !important;
+    padding-left: var(--padding-com-lg) !important;
   }
 
   table th:last-child,
   table td:last-child {
-    padding-right: ${cssVar("padding-com-lg", { prefix: "ant" })} !important;
+    padding-right: var(--padding-com-lg) !important;
   }
 
   /* Divider */
   hr {
-    margin-top: ${cssVar("margin-com-2xl", { prefix: "ant" })} !important;
-    margin-bottom: ${cssVar("margin-com-2xl", { prefix: "ant" })} !important;
+    margin-top: var(--margin-com-2xl) !important;
+    margin-bottom: var(--margin-com-2xl) !important;
     border: none !important;
-    border-top: 1px solid ${cssVar("color-border-secondary", { prefix: "ant" })} !important;
+    border-top: 1px solid var(--divider-neutral-basic) !important;
     background: none !important;
     height: 0 !important;
   }
@@ -284,38 +277,31 @@ export const StyledMarkdownWrapper = styled(XMarkdown)`
 
   /* Mermaid */
   .ant-mermaid {
-    padding: ${cssVar("padding-com-md", { prefix: "ant" })} !important;
+    padding: var(--padding-com-md) !important;
   }
 
   /* Sources 引用样式 */
   .ant-sources-title-wrapper {
     height: 16px !important;
     min-width: 16px !important;
-    border-radius: ${cssVar("border-radius-circle", {
-      prefix: "ant",
-    })} !important;
+    border-radius: var(--radius-circle) !important;
     box-sizing: border-box;
     opacity: 1 !important;
-    padding-right: ${cssVar("padding-com-xs", { prefix: "ant" })}!important;
-    padding-left: ${cssVar("padding-com-xs", { prefix: "ant" })}!important;
-    gap: ${cssVar("size-sm", { prefix: "ant" })} !important;
-    background: ${cssVar("container-bg-container-placeholder", {
-      prefix: "ant",
-    })} !important;
+    padding-right: var(--padding-com-xs) !important;
+    padding-left: var(--padding-com-xs) !important;
+    gap: var(--gap-sm) !important;
+    background: var(--bg-container-disable) !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-family: ${cssVar("font-family", { prefix: "ant" })} !important;
+    font-family: var(--font-family-cn) !important;
     font-weight: 400 !important;
     font-style: normal !important;
-    font-size: ${cssVar("font-size-xs", { prefix: "ant" })} !important;
+    font-size: var(--font-size-1) !important;
     line-height: 1 !important;
     letter-spacing: 0 !important;
     text-align: center !important;
     vertical-align: middle !important;
-    color: ${cssVar("color-text", {
-      prefix: "ant",
-      fallback: "#403f4d",
-    })} !important;
+    color: var(--text-primary, #403f4d) !important;
   }
 `;

@@ -33,9 +33,9 @@ export function GridStatisticView(props: GridStatisticViewProps) {
   };
   return (
     <Flex gap={8} vertical>
-      {processStatisticList?.map((item) => {
+      {processStatisticList?.map((item, itemIndex) => {
         return (
-          <Row>
+          <Row key={`row-${itemIndex}-${item.stage}`}>
             <Col>
               <StyledStageGrid align="center" justify="center">
                 <div className="label">{getStageLabel(item.stage)}</div>

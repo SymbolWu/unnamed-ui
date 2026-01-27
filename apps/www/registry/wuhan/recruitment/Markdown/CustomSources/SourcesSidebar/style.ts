@@ -1,5 +1,12 @@
-import styled from "styled-components";
-import { cssVar, multiLineEllipsis } from "../../../utils/cssVar";
+import styled, { css } from "styled-components";
+
+// 多行文本溢出显示省略号
+const multiLineEllipsis = (lines: number) => css`
+  display: -webkit-box;
+  -webkit-line-clamp: ${lines};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
 
 export const StyledSourcesSidebar = styled.div`
   display: flex;
@@ -7,17 +14,16 @@ export const StyledSourcesSidebar = styled.div`
   height: 100%;
   min-height: 100%;
   width: 400px;
-  background: ${cssVar("color-bg-container", { prefix: "ant" })};
+  background: var(--bg-container);
 `;
 
 export const StyledSourcesSidebarTabs = styled.div`
   display: flex;
   align-items: center;
-  padding-left: ${cssVar("padding-md", { prefix: "ant" })};
-  padding-right: ${cssVar("padding-md", { prefix: "ant" })};
-  border-bottom: 1px solid
-    ${cssVar("color-border-secondary", { prefix: "ant" })};
-  gap: ${cssVar("size-md", { prefix: "ant" })};
+  padding-left: var(--padding-com-md);
+  padding-right: var(--padding-com-md);
+  border-bottom: 1px solid var(--divider-neutral-basic);
+  gap: var(--gap-md);
 `;
 
 export const StyledSourcesSidebarClose = styled.button`
@@ -31,15 +37,15 @@ export const StyledSourcesSidebarClose = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${cssVar("border-radius", { prefix: "ant" })};
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
 
   &:hover {
-    background-color: ${cssVar("color-fill-tertiary", { prefix: "ant" })};
-    color: ${cssVar("color-text", { prefix: "ant" })};
+    background-color: var(--bg-neutral-light-active);
+    color: var(--text-primary);
   }
 
   svg {
@@ -53,17 +59,15 @@ interface StyledSourcesTabProps {
 }
 
 export const StyledSourcesTab = styled.button<StyledSourcesTabProps>`
-  padding: ${cssVar("padding-sm", { prefix: "ant" })} 0;
+  padding: var(--padding-com-sm) 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-sm", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-2);
   font-weight: 400;
   color: ${(props) =>
-    props.$active
-      ? cssVar("text-brand", { prefix: "ant", fallback: "#4A56FF" })
-      : cssVar("color-text-secondary", { prefix: "ant" })};
+    props.$active ? "var(--text-brand)" : "var(--text-secondary)"};
   position: relative;
   transition: color 0.2s ease;
 
@@ -75,53 +79,46 @@ export const StyledSourcesTab = styled.button<StyledSourcesTabProps>`
     right: 0;
     height: 2px;
     background: ${(props) =>
-      props.$active
-        ? cssVar("text-brand", { prefix: "ant", fallback: "#4A56FF" })
-        : "transparent"};
+      props.$active ? "var(--text-brand)" : "transparent"};
     transition: background-color 0.2s ease;
   }
 
   &:hover {
     color: ${(props) =>
-      props.$active
-        ? cssVar("text-brand", { prefix: "ant", fallback: "#4A56FF" })
-        : cssVar("color-text", { prefix: "ant" })};
+      props.$active ? "var(--text-brand)" : "var(--text-primary)"};
   }
 `;
 
 export const StyledSourcesSidebarList = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: ${cssVar("padding-md", { prefix: "ant" })};
+  padding: var(--padding-com-md);
   display: flex;
   flex-direction: column;
-  gap: ${cssVar("gap-md", { prefix: "ant" })};
+  gap: var(--gap-md);
 `;
 
 export const StyledSourcesListItem = styled.div`
   width: 100%;
-  background: ${cssVar("color-bg-container", { prefix: "ant" })};
-  border-radius: ${cssVar("radius-xl", { prefix: "ant" })};
-  padding: ${cssVar("padding-com-md", { prefix: "ant" })};
+  background: var(--bg-container);
+  border-radius: var(--radius-xl);
+  padding: var(--padding-com-md);
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: ${cssVar("gap-xs", { prefix: "ant" })};
+  gap: var(--gap-xs);
   transition: background-color 0.2s ease;
 
   &:hover {
-    background: ${cssVar("color-fill-quaternary", {
-      prefix: "ant",
-      fallback: "#fafafa",
-    })};
+    background: var(--bg-container-secondary);
   }
 `;
 
 export const StyledSourcesListItemHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: ${cssVar("size-xs", { prefix: "ant" })};
+  gap: var(--gap-xs);
 `;
 
 export const StyledSourcesListItemNumber = styled.span`
@@ -131,30 +128,27 @@ export const StyledSourcesListItemNumber = styled.span`
   height: 16px;
   min-width: 16px;
   box-sizing: border-box;
-  border-radius: ${cssVar("border-radius-circle", { prefix: "ant" })};
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
+  border-radius: var(--radius-circle);
+  font-family: var(--font-family-cn);
   font-weight: 400;
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
+  font-size: var(--font-size-1);
   line-height: 1;
   letter-spacing: 0;
   text-align: center;
   vertical-align: middle;
-  padding-right: ${cssVar("padding-com-xs", { prefix: "ant" })};
-  padding-left: ${cssVar("padding-com-xs", { prefix: "ant" })};
+  padding-right: var(--padding-com-xs);
+  padding-left: var(--padding-com-xs);
   user-select: none;
   /* 内部来源未选中样式 */
-  background: ${cssVar("container-bg-neutral-light-hover", {
-    prefix: "ant",
-    fallback: "#E8E7ED",
-  })};
-  color: ${cssVar("color-text", { prefix: "ant", fallback: "#403F4D" })};
+  background: var(--bg-neutral-light-hover);
+  color: var(--text-primary);
   flex-shrink: 0;
 `;
 
 export const StyledSourcesListItemSiteInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: ${cssVar("size-xs", { prefix: "ant" })};
+  gap: var(--gap-xs);
   flex: 1;
   min-width: 0;
 `;
@@ -170,7 +164,7 @@ export const StyledSourcesListItemLogo = styled.div`
   img {
     width: 16px;
     height: 16px;
-    border-radius: ${cssVar("border-radius-circle", { prefix: "ant" })};
+    border-radius: var(--radius-circle);
   }
 
   svg {
@@ -180,11 +174,11 @@ export const StyledSourcesListItemLogo = styled.div`
 `;
 
 export const StyledSourcesListItemSiteName = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-2);
   font-weight: 400;
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  color: var(--text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -193,20 +187,20 @@ export const StyledSourcesListItemSiteName = styled.div`
 `;
 
 export const StyledSourcesListItemTitle = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-sm", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-2);
   font-weight: 600;
-  color: ${cssVar("color-text", { prefix: "ant" })};
-  margin-bottom: ${cssVar("margin-xs", { prefix: "ant" })};
+  color: var(--text-primary);
+  margin-bottom: var(--margin-com-xs);
   ${multiLineEllipsis(2)};
 `;
 
 export const StyledSourcesListItemDescription = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-2);
   font-weight: 400;
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  color: var(--text-secondary);
   ${multiLineEllipsis(3)};
 `;

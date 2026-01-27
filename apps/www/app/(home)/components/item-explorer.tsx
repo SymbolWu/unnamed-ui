@@ -19,10 +19,11 @@ export function ItemExplorer({
   const [params, setParams] = useHomeSearchParams()
   const searchParams = useSearchParams()
 
-  // 只显示"chat"选项
+  // 显示两个选项：chat 和 recruitment
   const displayItems = React.useMemo(() => {
     return [
       { name: "all-blocks", title: "chat", type: "registry:block" },
+      { name: "recruitment-blocks", title: "recruitment", type: "registry:block" },
     ]
   }, [])
 
@@ -35,9 +36,10 @@ export function ItemExplorer({
   }, [searchParams, setParams])
 
   const currentItem = React.useMemo(() => {
-    // 默认选中 "all-blocks"
-    return { name: "all-blocks", title: "chat", type: "registry:block" }
-  }, [])
+    const urlItem = searchParams.get("item")
+    const item = displayItems.find((item) => item.name === urlItem) || displayItems[0]
+    return item
+  }, [searchParams, displayItems])
 
   return (
     <aside className="sticky z-30 hidden h-[calc(100svh-var(--header-height)-2rem)] w-64 overflow-y-auto overscroll-none bg-transparent xl:flex">
@@ -58,11 +60,9 @@ export function ItemExplorer({
                     onClick={() => setParams({ item: item.name })}
                     className={cn(
                       "relative h-[26px] w-full cursor-pointer overflow-visible rounded-md border border-transparent px-2 text-left text-sm font-normal transition-colors",
-                      "hover:bg-accent hover:text-accent-foreground",
+                      "hover:bg-[var(--color-fd-background)] hover:text-accent-foreground",
                       item.name === currentItem?.name &&
-                        "bg-accent text-accent-foreground border-accent",
-                      // "chat"选项特殊样式
-                      item.name === "all-blocks" && "font-semibold"
+                        "bg-[var(--color-fd-background)] text-accent-foreground font-semibold"
                     )}
                   >
                     {item.title}

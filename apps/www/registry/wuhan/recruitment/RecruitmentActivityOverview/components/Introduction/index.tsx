@@ -39,7 +39,7 @@ export function RecruitmentActivityOverviewIntroduction(
               <StyledDescriptionText>任务进度：</StyledDescriptionText>
               <StyledProgress
                 percent={dataSource?.introductionData?.progress ?? 0}
-                strokeWidth={14}
+                size={14}
                 strokeColor={conicColors}
                 percentPosition={{ align: "center", type: "inner" }}
                 classNames={{ indicator: "process-indicator" }}

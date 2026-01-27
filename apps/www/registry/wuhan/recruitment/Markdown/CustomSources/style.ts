@@ -1,6 +1,12 @@
-import styled from "styled-components";
-import { cssVar, multiLineEllipsis } from "../../utils/cssVar";
-// import { cssVar, multiLineEllipsis } from '@scaffold/ui';
+import styled, { css } from "styled-components";
+
+// 多行文本溢出显示省略号
+const multiLineEllipsis = (lines: number) => css`
+  display: -webkit-box;
+  -webkit-line-clamp: ${lines};
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`;
 
 export const StyledCustomSourcesWrapper = styled.div`
   display: inline-block;
@@ -19,10 +25,10 @@ export const StyledSourceMarker = styled.span<StyledSourceMarkerProps>`
   height: 16px;
   min-width: 16px;
   box-sizing: border-box;
-  border-radius: ${cssVar("border-radius-circle", { prefix: "ant" })};
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
+  border-radius: var(--radius-circle);
+  font-family: var(--font-family-cn);
   font-weight: 400;
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
+  font-size: var(--font-size-1);
   /* 使用与 height 相同的 line-height，确保文本在容器内垂直居中 */
   line-height: 16px;
   letter-spacing: 0;
@@ -32,8 +38,8 @@ export const StyledSourceMarker = styled.span<StyledSourceMarkerProps>`
   /* 重置 sup 标签的默认位置偏移 */
   position: relative;
   top: 0;
-  padding-right: ${cssVar("padding-com-xs", { prefix: "ant" })};
-  padding-left: ${cssVar("padding-com-xs", { prefix: "ant" })};
+  padding-right: var(--padding-com-xs);
+  padding-left: var(--padding-com-xs);
   cursor: pointer;
   user-select: none;
   transition:
@@ -46,46 +52,46 @@ export const StyledSourceMarker = styled.span<StyledSourceMarkerProps>`
   ${(props) =>
     !props.$isExternal &&
     !props.$isSelected &&
-    `
-    background: ${cssVar("container-bg-neutral-light-hover", { prefix: "ant", fallback: "#E8E7ED" })};
-    color: ${cssVar("color-text", { prefix: "ant", fallback: "#403F4D" })};
-  `}
+    css`
+      background: var(--bg-neutral-light-hover);
+      color: var(--text-primary);
+    `}
 
   /* 内部来源 - 选中 */
   ${(props) =>
     !props.$isExternal &&
     props.$isSelected &&
-    `
-    background: ${cssVar("container-bg-neutral", { prefix: "ant", fallback: "#403F4D" })};
-    color: ${cssVar("text-inverse", { prefix: "ant", fallback: "#FFFFFF" })};
-  `}
+    css`
+      background: var(--bg-neutral);
+      color: var(--text-inverse);
+    `}
 
   /* 外部来源 - 未选中 */
   ${(props) =>
     props.$isExternal &&
     !props.$isSelected &&
-    `
-    background: ${cssVar("container-bg-brand-light-hover", { prefix: "ant", fallback: "#DFE9FF" })};
-    color: ${cssVar("text-brand", { prefix: "ant", fallback: "#4A56FF" })};
-  `}
+    css`
+      background: var(--bg-brand-light-hover);
+      color: var(--text-brand);
+    `}
 
   /* 外部来源 - 选中 */
   ${(props) =>
     props.$isExternal &&
     props.$isSelected &&
-    `
-    background: ${cssVar("container-bg-brand", { prefix: "ant", fallback: "#4A56FF" })};
-    color: ${cssVar("text-inverse", { prefix: "ant", fallback: "#FFFFFF" })};
-  `}
+    css`
+      background: var(--bg-brand);
+      color: var(--text-inverse);
+    `}
 
   /* 默认状态（如果没有指定 props，使用内部来源未选中样式） */
   ${(props) =>
     props.$isExternal === undefined &&
     props.$isSelected === undefined &&
-    `
-    background: ${cssVar("container-bg-neutral-light-hover", { prefix: "ant", fallback: "#E8E7ED" })};
-    color: ${cssVar("color-text", { prefix: "ant", fallback: "#403F4D" })};
-  `}
+    css`
+      background: var(--bg-neutral-light-hover);
+      color: var(--text-primary);
+    `}
 `;
 
 export const StyledSourceCard = styled.div`
@@ -93,18 +99,14 @@ export const StyledSourceCard = styled.div`
   z-index: 1000;
   width: 320px;
   max-width: calc(100vw - 32px);
-  background: ${cssVar("color-bg-container", { prefix: "ant" })};
-  border: 1px solid ${cssVar("color-border", { prefix: "ant" })};
-  border-radius: ${cssVar("radius-lg", { prefix: "ant" })};
-  box-shadow: ${cssVar("box-shadow-secondary", { prefix: "ant" })};
-  padding: ${cssVar("padding-md", { prefix: "ant" })};
+  background: var(--bg-container);
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-lg);
+  padding: var(--padding-com-md);
   box-sizing: border-box;
   cursor: pointer;
   animation: fadeIn 0.2s ease-in-out;
-  box-shadow:
-    0 9 28 8 rgba(0, 0, 0, 0.05),
-    0 6 16 0 rgba(0, 0, 0, 0.08),
-    0 3 6 -4px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-medium);
 
   @keyframes fadeIn {
     from {
@@ -118,7 +120,7 @@ export const StyledSourceCard = styled.div`
   }
 
   &:hover {
-    box-shadow: ${cssVar("box-shadow-tertiary", { prefix: "ant" })};
+    box-shadow: var(--shadow-high);
   }
 `;
 
@@ -126,27 +128,27 @@ export const StyledSourceCardHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${cssVar("margin-xs", { prefix: "ant" })};
-  gap: ${cssVar("size-sm", { prefix: "ant" })};
+  margin-bottom: var(--margin-com-xs);
+  gap: var(--gap-sm);
 `;
 
 export const StyledSourceCardContent = styled.div`
   width: 320px;
   max-width: calc(100vw - 32px);
-  background: ${cssVar("color-bg-container", { prefix: "ant" })};
-  border-radius: ${cssVar("radius-xl", { prefix: "ant" })};
-  padding: ${cssVar("padding-com-md", { prefix: "ant" })};
+  background: var(--bg-container);
+  border-radius: var(--radius-xl);
+  padding: var(--padding-com-md);
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: ${cssVar("gap-xs", { prefix: "ant" })};
+  gap: var(--gap-xs);
 `;
 
 export const StyledSourceCardSiteInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: ${cssVar("size-xs", { prefix: "ant" })};
+  gap: var(--gap-xs);
   flex: 1;
   min-width: 0;
 `;
@@ -160,16 +162,16 @@ export const StyledSourceCardLogo = styled.div`
   justify-content: center;
 
   img {
-    border-radius: ${cssVar("border-radius-circle", { prefix: "ant" })};
+    border-radius: var(--radius-circle);
   }
 `;
 
 export const StyledSourceCardSiteName = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-2);
   font-weight: 400;
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  color: var(--text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -183,32 +185,32 @@ export const StyledSourceCardAction = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${cssVar("border-radius", { prefix: "ant" })};
+  border-radius: var(--radius-md);
   cursor: pointer;
   flex-shrink: 0;
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  color: var(--text-secondary);
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: ${cssVar("color-fill-tertiary", { prefix: "ant" })};
+    background-color: var(--bg-neutral-light-active);
   }
 `;
 
 export const StyledSourceCardTitle = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-sm", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-2);
+  line-height: var(--line-height-2);
   font-weight: 600;
-  color: ${cssVar("color-text", { prefix: "ant" })};
-  margin-bottom: ${cssVar("margin-xs", { prefix: "ant" })};
+  color: var(--text-primary);
+  margin-bottom: var(--margin-com-xs);
   ${multiLineEllipsis(2)};
 `;
 
 export const StyledSourceCardDescription = styled.div`
-  font-family: ${cssVar("font-family", { prefix: "ant" })};
-  font-size: ${cssVar("font-size-xs", { prefix: "ant" })};
-  line-height: ${cssVar("line-height-2", { prefix: "ant" })};
+  font-family: var(--font-family-cn);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-2);
   font-weight: 400;
-  color: ${cssVar("color-text-secondary", { prefix: "ant" })};
+  color: var(--text-secondary);
   ${multiLineEllipsis(3)};
 `;

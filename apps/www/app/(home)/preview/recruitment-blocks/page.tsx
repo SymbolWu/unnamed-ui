@@ -1,0 +1,94 @@
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { Index } from "@/registry/__index__"
+import { getRecruitmentBlockDemos } from "@/app/(home)/lib/api"
+
+const getCachedRecruitmentBlockDemos = React.cache(async () => {
+  return await getRecruitmentBlockDemos("wuhan")
+})
+
+function ExampleWrapper({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div className="bg-background w-full">
+      <div
+        data-slot="example-wrapper"
+        className={cn(
+          "mx-auto grid min-h-screen w-full max-w-5xl min-w-0 content-start items-stretch gap-8 p-4 pt-2 sm:gap-12 sm:p-6 md:grid-cols-2 md:gap-8 lg:p-12 2xl:max-w-6xl",
+          className
+        )}
+        {...props}
+      />
+    </div>
+  )
+}
+
+function Example({
+  title,
+  children,
+  className,
+  containerClassName,
+  ...props
+}: React.ComponentProps<"div"> & {
+  title?: string
+  containerClassName?: string
+}) {
+  return (
+    <div
+      data-slot="example"
+      className={cn(
+        "mx-auto flex w-full max-w-lg min-w-0 flex-col gap-1 self-stretch lg:max-w-none h-full",
+        containerClassName
+      )}
+      {...props}
+    >
+      {title && (
+        <div className="text-muted-foreground px-1.5 py-2 text-xs font-medium flex-shrink-0">
+          {title}
+        </div>
+      )}
+      <div
+        data-slot="example-content"
+        className={cn(
+          "bg-background text-foreground flex min-w-0 flex-1 flex-col items-start gap-6 border border-dashed p-4 sm:p-6 *:[div:not([class*='w-'])]:w-full min-h-[400px] max-h-[600px] overflow-y-auto",
+          className
+        )}
+      >
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default async function RecruitmentBlocksPage() {
+  const demos = await getCachedRecruitmentBlockDemos()
+
+  return (
+    <ExampleWrapper>
+      {demos.map(({ blockName, demoName }) => {
+        // 尝试获取 demo 组件，如果没有则获取 block 组件本身
+        const Component = Index.wuhan?.[demoName]?.component || Index.wuhan?.[blockName]?.component
+
+        if (!Component) {
+          return null
+        }
+
+        const title = blockName.replace(/-/g, " ")
+
+        return (
+          <Example key={blockName} title={title}>
+            <React.Suspense
+              fallback={
+                <div className="flex items-center justify-center h-full min-h-[200px] text-muted-foreground">
+                  Loading...
+                </div>
+              }
+            >
+              <Component />
+            </React.Suspense>
+          </Example>
+        )
+      })}
+    </ExampleWrapper>
+  )
+}
+
