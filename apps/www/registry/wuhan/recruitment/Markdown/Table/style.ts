@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { cssVar } from "../../utils/cssVar";
-// import { cssVar } from '@scaffold/ui';
 
 /**
  * Markdown 表格（Web Chat）：
@@ -12,12 +10,12 @@ export const StyledMarkdownTableWrapper = styled.div`
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  margin-top: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
-  margin-bottom: ${cssVar("margin-com-xl", { prefix: "ant" })} !important;
+  margin-top: var(--margin-com-xl) !important;
+  margin-bottom: var(--margin-com-xl) !important;
 
-  border: 1px solid ${cssVar("color-border", { prefix: "ant" })};
-  border-radius: ${cssVar("border-radius-lg", { prefix: "ant" })};
-  background: ${cssVar("color-bg-container", { prefix: "ant" })};
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-lg);
+  background: var(--bg-container);
 
   &:hover .md-table-toolbar {
     opacity: 1;
@@ -36,7 +34,7 @@ export const StyledMarkdownTableScroll = styled.div`
   max-height: 282px;
 
   /* 让圆角裁切生效（避免 sticky 单元格溢出破坏圆角） */
-  border-radius: ${cssVar("border-radius-lg", { prefix: "ant" })};
+  border-radius: var(--radius-lg);
 `;
 
 export const StyledMarkdownTable = styled.table`
@@ -51,12 +49,9 @@ export const StyledMarkdownTable = styled.table`
 
   th,
   td {
-    padding: ${cssVar("padding-sm", { prefix: "ant" })}
-      ${cssVar("padding", { prefix: "ant" })};
-    border-right: 1px solid
-      ${cssVar("color-border-secondary", { prefix: "ant" })};
-    border-bottom: 1px solid
-      ${cssVar("color-border-secondary", { prefix: "ant" })};
+    padding: var(--padding-com-sm) var(--padding-com-xl);
+    border-right: 1px solid var(--divider-neutral-basic);
+    border-bottom: 1px solid var(--divider-neutral-basic);
     white-space: nowrap;
     text-align: left;
     background: inherit;
@@ -71,9 +66,7 @@ export const StyledMarkdownTable = styled.table`
     position: sticky;
     top: 0;
     z-index: 2;
-    background: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })};
+    background: var(--bg-neutral-light);
     font-weight: 600;
   }
 
@@ -85,21 +78,17 @@ export const StyledMarkdownTable = styled.table`
     /* 提高层级，避免阴影被后面的单元格盖住 */
     z-index: 4;
     /* 固定列需要自己有背景，否则会透出后面的列 */
-    background: ${cssVar("color-bg-container", { prefix: "ant" })};
+    background: var(--bg-container);
   }
 
   thead th:first-child {
     z-index: 5;
-    background: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })};
+    background: var(--bg-neutral-light);
   }
 
   /* 斑马纹时首列背景跟随行背景 */
   tbody tr:nth-child(even) td:first-child {
-    background: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })};
+    background: var(--bg-neutral-light);
   }
 
   /* 固定首列右侧阴影：用 ::after 画在最上层 */
@@ -125,28 +114,20 @@ export const StyledMarkdownTable = styled.table`
   }
 
   tbody tr {
-    background: ${cssVar("color-bg-container", { prefix: "ant" })};
+    background: var(--bg-container);
     transition: background-color 0.2s ease;
   }
 
   tbody tr:nth-child(even) {
-    background: ${cssVar("color-bg-container-neutral-light", {
-      prefix: "ant",
-    })};
+    background: var(--bg-neutral-light);
   }
 
   tbody tr:hover {
-    background: ${cssVar("color-fill-quaternary", {
-      prefix: "ant",
-      fallback: "#fafafa",
-    })};
+    background: var(--bg-container-secondary);
   }
 
   tbody tr:nth-child(even):hover {
-    background: ${cssVar("color-fill-tertiary", {
-      prefix: "ant",
-      fallback: "#f5f5f5",
-    })};
+    background: var(--bg-neutral-light-hover);
   }
 
   tbody tr:last-child td {
@@ -157,23 +138,18 @@ export const StyledMarkdownTable = styled.table`
 /** hover 工具栏（下载/复制） */
 export const StyledCodeToolbar = styled.div`
   position: absolute;
-  top: ${cssVar("padding-com-md", { prefix: "ant" })};
-  right: ${cssVar("padding-com-md", { prefix: "ant" })};
+  top: var(--padding-com-md);
+  right: var(--padding-com-md);
   height: 28px;
   display: flex;
   align-items: center;
-  gap: ${cssVar("size-xxs", { prefix: "ant" })}; /* gap: 2 */
-  padding: ${cssVar("padding-xxs", { prefix: "ant" })};
+  gap: var(--gap-2xs);
+  padding: var(--padding-com-2xs);
 
-  background: ${cssVar("container-bg-container", { prefix: "ant" })};
-  border: 1px solid ${cssVar("color-border", { prefix: "ant" })};
-  border-radius: ${cssVar("border-radius-lg", {
-    prefix: "ant",
-  })}; /* radius-lg */
-  box-shadow: ${cssVar("--ant-box-shadow", {
-    fallback:
-      "0px 1px 10px rgba(0, 0, 0, 0.05), 0px 4px 5px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.12)",
-  })};
+  background: var(--bg-container);
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-basic);
 
   opacity: 0;
   pointer-events: none;
@@ -185,8 +161,8 @@ export const StyledCodeToolbar = styled.div`
 export const StyledCodeToolButton = styled.button`
   width: 24px;
   height: 24px;
-  padding: ${cssVar("size-xs", { prefix: "ant" })}; /* padding: 4 */
-  border-radius: ${cssVar("border-radius", { prefix: "ant" })}; /* radius-md */
+  padding: var(--padding-com-xs);
+  border-radius: var(--radius-md);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -195,7 +171,7 @@ export const StyledCodeToolButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${cssVar("color-fill-tertiary", { prefix: "ant" })};
+    background: var(--bg-neutral-light-active);
   }
 
   svg {

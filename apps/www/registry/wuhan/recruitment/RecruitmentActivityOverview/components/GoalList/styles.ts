@@ -9,7 +9,6 @@ export const StyledGoalPositionTitle = styled.div`
 `;
 
 export const StyledGoalPositionDescription = styled.div`
-  height: 44px;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;

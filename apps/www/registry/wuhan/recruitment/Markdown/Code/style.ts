@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { cssVar } from "../../utils/cssVar";
 
 /** 代码块外层容器：hover 显示工具栏 */
 export const StyledCodeBlock = styled.div`
@@ -21,10 +20,8 @@ export const StyledCodeScroll = styled.div`
   max-height: 320px;
   overflow: auto;
   box-sizing: border-box;
-  border-radius: ${cssVar("border-radius-lg", { prefix: "ant" })} !important;
-  background-color: ${cssVar("color-bg-container-neutral-light", {
-    prefix: "ant",
-  })} !important;
+  border-radius: var(--radius-lg) !important;
+  background-color: var(--bg-neutral-light) !important;
   /* 覆盖 Markdown 全局 pre-wrap，确保横向滚动条生效 */
   pre,
   pre code {
@@ -51,24 +48,18 @@ export const StyledCodeScroll = styled.div`
 /** hover 工具栏（下载/复制） */
 export const StyledCodeToolbar = styled.div`
   position: absolute;
-  top: ${cssVar("padding-com-md", { prefix: "ant" })};
-  right: ${cssVar("padding-com-md", { prefix: "ant" })};
+  top: var(--padding-com-md);
+  right: var(--padding-com-md);
   height: 28px;
   display: flex;
   align-items: center;
-  gap: ${cssVar("size-xxs", { prefix: "ant" })}; /* gap: 2 */
-  padding: ${cssVar("padding-xxs", { prefix: "ant" })};
+  gap: var(--gap-2xs);
+  padding: var(--padding-com-2xs);
 
-  background: ${cssVar("container-bg-container", { prefix: "ant" })};
-  border: 1px solid ${cssVar("color-border", { prefix: "ant" })};
-  border-radius: ${cssVar("border-radius-lg", {
-    prefix: "ant",
-  })}; /* radius-lg */
-  box-shadow: ${cssVar("--ant-box-shadow", {
-    // @ts-ignore
-    fallback:
-      "0px 1px 10px rgba(0, 0, 0, 0.05), 0px 4px 5px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.12)",
-  })};
+  background: var(--bg-container);
+  border: 1px solid var(--border-neutral);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-basic);
 
   opacity: 0;
   pointer-events: none;
@@ -80,8 +71,8 @@ export const StyledCodeToolbar = styled.div`
 export const StyledCodeToolButton = styled.button`
   width: 24px;
   height: 24px;
-  padding: ${cssVar("size-xs", { prefix: "ant" })}; /* padding: 4 */
-  border-radius: ${cssVar("border-radius", { prefix: "ant" })}; /* radius-md */
+  padding: var(--padding-com-xs);
+  border-radius: var(--radius-md);
   border: none;
   background: transparent;
   cursor: pointer;
@@ -90,7 +81,7 @@ export const StyledCodeToolButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${cssVar("color-fill-tertiary", { prefix: "ant" })};
+    background: var(--bg-neutral-light-active);
   }
 
   svg {
