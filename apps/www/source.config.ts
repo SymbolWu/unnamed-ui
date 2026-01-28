@@ -26,15 +26,15 @@ export const docs = defineDocs({
   },
 });
 
-export const libs = defineDocs({
-  dir: "content/libs",
-  docs: {
-    schema: frontmatterSchema,
-    postprocess: {
-      includeProcessedMarkdown: true,
-    },
-  },
-  meta: {
-    schema: metaSchema,
-  },
-});
+// export const libs = defineDocs({
+//   dir: "content/libs",
+//   docs: {
+//     schema: frontmatterSchema,
+//     postprocess: {
+//       includeProcessedMarkdown: true,
+//     },
+//   },
+//   meta: {
+//     schema: metaSchema,
+//   },
+// });
