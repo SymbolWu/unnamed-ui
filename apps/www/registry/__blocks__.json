@@ -76,6 +76,14 @@
     "description": "Component panel with tabs (全部, MCP, 工具, 工作流) and toggle button list"
   },
   {
+    "name": "task-list-01",
+    "description": "Task list component with checkable items for task management"
+  },
+  {
+    "name": "intervene-form-01",
+    "description": "Intervene form component for user input and interaction"
+  },
+  {
     "name": "action-dropdown",
     "description": "操作下拉菜单组件"
   },
