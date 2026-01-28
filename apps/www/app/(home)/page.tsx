@@ -2,6 +2,8 @@ import { type Metadata } from "next"
 import Link from "next/link"
 import { Button } from "@/registry/wuhan/ui/button"
 import { Separator } from "@/registry/wuhan/ui/separator"
+import { Customizer } from "./components/customizer"
+import { DesignSystemClassApplier } from "./components/design-system-class-applier"
 import { ItemExplorer } from "./components/item-explorer"
 import { ItemPicker } from "./components/item-picker"
 import { Preview } from "./components/preview"
@@ -63,8 +65,12 @@ export default async function HomePage() {
       </header>
       <main className="flex flex-1 flex-col pb-16 sm:pb-0">
         <div className="flex w-full flex-1 flex-col gap-2 p-6 pt-1 pb-4 sm:gap-2 sm:pt-2 md:flex-row md:pb-6 2xl:gap-6">
+          <DesignSystemClassApplier />
           <ItemExplorer items={filteredItems} />
           <Preview />
+          <aside className="sticky top-[calc(var(--header-height)+1rem)] hidden h-[calc(100svh-var(--header-height)-2rem)] shrink-0 md:flex">
+            <Customizer />
+          </aside>
         </div>
       </main>
     </div>
