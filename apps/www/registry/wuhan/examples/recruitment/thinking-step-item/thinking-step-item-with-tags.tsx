@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 import { Database, Search, FileText } from "lucide-react";
 
 export default function ThinkingStepItemWithTags() {

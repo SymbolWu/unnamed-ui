@@ -15,15 +15,45 @@ import {
   CollapsibleTrigger,
 } from "@/registry/wuhan/ui/collapsible";
 
-const BOX_BORDER = "[&_*]:!box-border";
+const BOX_BORDER = "box-border [&>*]:box-border";
 
 // ==================== 类型定义 ====================
 
 /**
- * 执行步骤状态类型
+ * 统一状态语义（组件库层）
  * @public
  */
-type ThinkingStepItemStatus = "loading" | "success" | "error" | "cancel";
+type ThinkingSemanticStatus =
+  | "idle"
+  | "running"
+  | "success"
+  | "error"
+  | "cancelled";
+
+/**
+ * 执行步骤状态类型（兼容旧状态）
+ * @public
+ */
+type ThinkingStepItemStatus = ThinkingSemanticStatus | "loading" | "cancel";
+
+const resolveThinkingStepItemStatus = (
+  status: ThinkingStepItemStatus | undefined,
+): ThinkingSemanticStatus => {
+  switch (status) {
+    case "loading":
+      return "running";
+    case "cancel":
+      return "cancelled";
+    case "success":
+    case "error":
+    case "idle":
+    case "running":
+    case "cancelled":
+      return status;
+    default:
+      return "running";
+  }
+};
 
 /**
  * 文件项状态类型
@@ -38,8 +68,7 @@ type ThinkingStepItemFileStatus = "loading" | "ready" | "error";
  * 执行步骤容器原语属性
  * @public
  */
-interface ThinkingStepItemContainerPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemContainerPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 子元素
    */
@@ -50,8 +79,7 @@ interface ThinkingStepItemContainerPrimitiveProps
  * 执行步骤原语属性
  * @public
  */
-interface ThinkingStepItemPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 子元素
    */
@@ -87,8 +115,7 @@ interface ThinkingStepItemPrimitiveProps
  * 执行步骤头部原语属性
  * @public
  */
-interface ThinkingStepItemHeaderPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemHeaderPrimitiveProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * 左侧内容（图标、标题等）
    */
@@ -103,14 +130,21 @@ interface ThinkingStepItemHeaderPrimitiveProps
    * 右侧内容（折叠箭头等）
    */
   trailing?: React.ReactNode;
+  /**
+   * 按钮禁用状态（仅在可折叠时生效）
+   */
+  disabled?: boolean;
+  /**
+   * 按钮类型（仅在可折叠时生效）
+   */
+  type?: "button" | "submit" | "reset";
 }
 
 /**
  * 执行步骤内容原语属性
  * @public
  */
-interface ThinkingStepItemContentPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemContentPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容
    */
@@ -127,8 +161,7 @@ interface ThinkingStepItemContentPrimitiveProps
  * 执行步骤状态图标原语属性
  * @public
  */
-interface ThinkingStepItemStatusIconPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemStatusIconPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 状态
    */
@@ -143,8 +176,7 @@ interface ThinkingStepItemStatusIconPrimitiveProps
  * 执行步骤标题原语属性
  * @public
  */
-interface ThinkingStepItemTitlePrimitiveProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface ThinkingStepItemTitlePrimitiveProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * 标题内容
    */
@@ -155,8 +187,7 @@ interface ThinkingStepItemTitlePrimitiveProps
  * 执行步骤内容列表原语属性
  * @public
  */
-interface ThinkingStepItemContentListPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemContentListPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容项列表
    */
@@ -167,8 +198,7 @@ interface ThinkingStepItemContentListPrimitiveProps
  * 执行步骤内容项原语属性
  * @public
  */
-interface ThinkingStepItemContentItemPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemContentItemPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 是否是最后一项
    */
@@ -183,8 +213,7 @@ interface ThinkingStepItemContentItemPrimitiveProps
  * 时间轴原语属性
  * @public
  */
-interface ThinkingStepItemTimelinePrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemTimelinePrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 是否是最后一项
    */
@@ -195,8 +224,7 @@ interface ThinkingStepItemTimelinePrimitiveProps
  * 内容区域原语属性
  * @public
  */
-interface ThinkingStepItemContentAreaPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemContentAreaPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容
    */
@@ -207,8 +235,7 @@ interface ThinkingStepItemContentAreaPrimitiveProps
  * 普通内容原语属性
  * @public
  */
-interface ThinkingStepItemRegularContentPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemRegularContentPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容
    */
@@ -219,8 +246,10 @@ interface ThinkingStepItemRegularContentPrimitiveProps
  * 工具调用块原语属性
  * @public
  */
-interface ThinkingStepItemToolCallPrimitiveProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "title" | "content"> {
+interface ThinkingStepItemToolCallPrimitiveProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "title" | "content"
+> {
   /**
    * 工具图标
    */
@@ -239,8 +268,7 @@ interface ThinkingStepItemToolCallPrimitiveProps
  * 工具调用图标原语属性
  * @public
  */
-interface ThinkingStepItemToolCallIconPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemToolCallIconPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 图标内容
    */
@@ -251,8 +279,7 @@ interface ThinkingStepItemToolCallIconPrimitiveProps
  * 工具调用标题原语属性
  * @public
  */
-interface ThinkingStepItemToolCallTitlePrimitiveProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface ThinkingStepItemToolCallTitlePrimitiveProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * 标题内容
    */
@@ -263,8 +290,7 @@ interface ThinkingStepItemToolCallTitlePrimitiveProps
  * 工具调用内容原语属性
  * @public
  */
-interface ThinkingStepItemToolCallContentPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemToolCallContentPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容
    */
@@ -275,8 +301,7 @@ interface ThinkingStepItemToolCallContentPrimitiveProps
  * 文件列表原语属性
  * @public
  */
-interface ThinkingStepItemFileListPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemFileListPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 文件列表数据
    */
@@ -298,14 +323,32 @@ interface ThinkingStepItemFileListPrimitiveProps
    * 默认显示的文件数量（超过后显示查看更多）
    */
   defaultVisibleCount?: number;
+  /**
+   * 文案配置（展开/收起）
+   */
+  labels?: ThinkingStepItemFileListLabels;
+}
+
+/**
+ * 文件列表文案配置
+ * @public
+ */
+interface ThinkingStepItemFileListLabels {
+  /**
+   * 展开按钮文案
+   */
+  expandFiles?: React.ReactNode;
+  /**
+   * 收起按钮文案
+   */
+  collapseFiles?: React.ReactNode;
 }
 
 /**
  * 文件项原语属性
  * @public
  */
-interface ThinkingStepItemFileItemPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepItemFileItemPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 文件图标（工具头像）
    */
@@ -324,8 +367,7 @@ interface ThinkingStepItemFileItemPrimitiveProps
  * 展开/收起按钮原语属性
  * @public
  */
-interface ThinkingStepItemExpandButtonPrimitiveProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ThinkingStepItemExpandButtonPrimitiveProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * 是否展开
    */
@@ -386,11 +428,13 @@ const ThinkingStepItemPrimitive = React.forwardRef<
     },
     ref,
   ) => {
+    const resolvedStatus = resolveThinkingStepItemStatus(status);
     const node = (
       <div
         ref={ref}
         className={cn(BOX_BORDER, "w-full", "group/step-item", className)}
         data-status={status}
+        data-semantic-status={resolvedStatus}
         data-collapsible={collapsible ? "true" : "false"}
         {...props}
       >
@@ -420,31 +464,68 @@ ThinkingStepItemPrimitive.displayName = "ThinkingStepItemPrimitive";
 const ThinkingStepItemHeaderPrimitive = React.forwardRef<
   HTMLDivElement,
   ThinkingStepItemHeaderPrimitiveProps
->(({ children, trailing, collapsible = false, className, ...props }, ref) => {
-  const headerNode = (
-    <div
-      ref={ref}
-      className={cn(
-        BOX_BORDER,
-        "flex items-center",
-        "w-full",
-        collapsible ? "cursor-pointer" : "cursor-default",
-        "transition-colors",
-        "gap-[var(--gap-md)]",
-        className,
-      )}
-      data-collapsible={collapsible ? "true" : "false"}
-      {...props}
-    >
-      {children}
-      {trailing && <div className="ml-auto">{trailing}</div>}
-    </div>
-  );
+>(
+  (
+    {
+      children,
+      trailing,
+      collapsible = false,
+      className,
+      type: _type,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
+    if (!collapsible) {
+      return (
+        <div
+          ref={ref}
+          className={cn(
+            BOX_BORDER,
+            "group/step-item-trigger",
+            "flex items-center",
+            "w-full",
+            "cursor-default",
+            "transition-colors",
+            "gap-[var(--gap-md)]",
+            className,
+          )}
+          data-collapsible="false"
+          {...props}
+        >
+          {children}
+          {trailing && <div className="ml-auto">{trailing}</div>}
+        </div>
+      );
+    }
 
-  if (!collapsible) return headerNode;
-
-  return <CollapsibleTrigger asChild>{headerNode}</CollapsibleTrigger>;
-});
+    return (
+      <CollapsibleTrigger asChild>
+        <button
+          ref={ref as React.ForwardedRef<HTMLButtonElement>}
+          type="button"
+          disabled={disabled}
+          className={cn(
+            BOX_BORDER,
+            "group/step-item-trigger",
+            "flex items-center",
+            "w-full",
+            "cursor-pointer",
+            "transition-colors",
+            "gap-[var(--gap-md)]",
+            className,
+          )}
+          data-collapsible="true"
+          {...props}
+        >
+          {children}
+          {trailing && <div className="ml-auto">{trailing}</div>}
+        </button>
+      </CollapsibleTrigger>
+    );
+  },
+);
 ThinkingStepItemHeaderPrimitive.displayName = "ThinkingStepItemHeaderPrimitive";
 
 /**
@@ -455,18 +536,21 @@ const ThinkingStepItemStatusIconPrimitive = React.forwardRef<
   HTMLDivElement,
   ThinkingStepItemStatusIconPrimitiveProps
 >(({ status = "loading", className, children, ...props }, ref) => {
-  const iconMap = {
-    loading: <Loader2 className="size-4 animate-spin" />,
+  const resolvedStatus = resolveThinkingStepItemStatus(status);
+  const iconMap: Record<ThinkingSemanticStatus, React.ReactNode> = {
+    idle: <Circle className="size-4" />,
+    running: <Loader2 className="size-4 animate-spin" />,
     success: <CheckCircle2 className="size-4" />,
     error: <CircleAlert className="size-4" />,
-    cancel: <Circle className="size-4" />,
+    cancelled: <Circle className="size-4" />,
   };
 
-  const colorMap = {
-    loading: "text-[var(--text-brand)]",
+  const colorMap: Record<ThinkingSemanticStatus, string> = {
+    idle: "text-[var(--text-tertiary)]",
+    running: "text-[var(--text-brand)]",
     success: "text-[var(--text-success)]",
     error: "text-[var(--text-error)]",
-    cancel: "text-[var(--text-tertiary)]",
+    cancelled: "text-[var(--text-tertiary)]",
   };
 
   return (
@@ -475,13 +559,14 @@ const ThinkingStepItemStatusIconPrimitive = React.forwardRef<
       className={cn(
         "flex items-center justify-center",
         "size-4",
-        colorMap[status],
+        colorMap[resolvedStatus],
         className,
       )}
       data-status={status}
+      data-semantic-status={resolvedStatus}
       {...props}
     >
-      {children || iconMap[status]}
+      {children || iconMap[resolvedStatus]}
     </div>
   );
 });
@@ -533,6 +618,7 @@ const ThinkingStepItemCollapseArrowPrimitive = React.forwardRef<
         "text-[var(--text-primary)]",
         "group-hover/step-item:text-[var(--text-brand)]",
         "transition-all duration-200",
+        "group-data-[state=open]/step-item-trigger:rotate-180",
         "data-[state=open]:rotate-180",
         "flex items-center justify-center",
         className,
@@ -872,19 +958,23 @@ const ThinkingStepItemToolCallContentPrimitive = React.forwardRef<
 ThinkingStepItemToolCallContentPrimitive.displayName =
   "ThinkingStepItemToolCallContentPrimitive";
 
-/**
- * 文件列表样式原语
- * @public
- */
-const ThinkingStepItemFileListPrimitive = React.forwardRef<
-  HTMLDivElement,
-  ThinkingStepItemFileListPrimitiveProps
->(({ files = [], defaultVisibleCount = 6, className, ...props }, ref) => {
+const DEFAULT_FILE_LIST_LABELS: ThinkingStepItemFileListLabels = {
+  expandFiles: "查看更多",
+  collapseFiles: "收起",
+};
+
+const useCollapsibleFileList = (
+  files: ThinkingStepItemFileListPrimitiveProps["files"],
+  defaultVisibleCount: number,
+) => {
   const [expanded, setExpanded] = React.useState(false);
   const [needsToggle, setNeedsToggle] = React.useState(false);
-  const [visibleCount, setVisibleCount] = React.useState(() => files.length);
+  const [visibleCount, setVisibleCount] = React.useState(() =>
+    Math.min(files?.length ?? 0, defaultVisibleCount),
+  );
   const wrapRef = React.useRef<HTMLDivElement | null>(null);
   const prevWidthRef = React.useRef<number | null>(null);
+  const listId = React.useId();
 
   const getRowCount = React.useCallback(() => {
     const el = wrapRef.current;
@@ -899,22 +989,22 @@ const ThinkingStepItemFileListPrimitive = React.forwardRef<
     if (expanded) return;
     // 重置到“渲染全部文件项（无按钮）”的测量态
     setNeedsToggle(false);
-    setVisibleCount(files.length);
-  }, [expanded, files.length]);
+    setVisibleCount(files?.length ?? 0);
+  }, [expanded, files?.length]);
 
   React.useLayoutEffect(() => {
     if (expanded) return;
     // 仅在“测量态（渲染全部文件项且无按钮）”下计算是否溢出两行
     if (needsToggle) return;
-    if (visibleCount !== files.length) return;
+    if (visibleCount !== (files?.length ?? 0)) return;
 
     const rowCount = getRowCount();
     if (rowCount > 2) {
       setNeedsToggle(true);
       // 进入折叠态计算：从最大值开始收敛，确保“刚好两排（含按钮）”
-      setVisibleCount(files.length);
+      setVisibleCount(files?.length ?? 0);
     }
-  }, [expanded, files.length, getRowCount, needsToggle, visibleCount]);
+  }, [expanded, files?.length, getRowCount, needsToggle, visibleCount]);
 
   // 折叠态：确保（文件项 + 更多按钮）最多两行，并且按钮与文件项处于同一行（flex-wrap）
   React.useLayoutEffect(() => {
@@ -937,12 +1027,12 @@ const ThinkingStepItemFileListPrimitive = React.forwardRef<
 
       prevWidthRef.current = nextWidth;
       setNeedsToggle(false);
-      setVisibleCount(files.length);
+      setVisibleCount(files?.length ?? 0);
     });
     ro.observe(el);
 
     return () => ro.disconnect();
-  }, [expanded, files.length, needsToggle]);
+  }, [expanded, files?.length, needsToggle]);
 
   React.useLayoutEffect(() => {
     if (expanded) return;
@@ -957,45 +1047,84 @@ const ThinkingStepItemFileListPrimitive = React.forwardRef<
     setVisibleCount((c) => Math.max(0, c - 1));
   }, [expanded, getRowCount, needsToggle, visibleCount]);
 
-  const resolvedVisibleCount = expanded ? files.length : visibleCount;
-  const visibleFiles = files.slice(0, resolvedVisibleCount);
+  const resolvedVisibleCount = expanded
+    ? (files?.length ?? 0)
+    : Math.max(0, visibleCount);
+  const visibleFiles = (files ?? []).slice(0, resolvedVisibleCount);
 
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        BOX_BORDER,
-        "flex flex-col",
-        "gap-[var(--gap-xs)]",
-        className,
-      )}
-      {...props}
-    >
-      {/* 文件列表 + 更多按钮：同一行（flex-wrap），默认最多两排 */}
+  return {
+    listId,
+    wrapRef,
+    visibleFiles,
+    expanded,
+    setExpanded,
+    needsToggle,
+  };
+};
+
+/**
+ * 文件列表样式原语
+ * @public
+ */
+const ThinkingStepItemFileListPrimitive = React.forwardRef<
+  HTMLDivElement,
+  ThinkingStepItemFileListPrimitiveProps
+>(
+  (
+    { files = [], defaultVisibleCount = 6, labels, className, ...props },
+    ref,
+  ) => {
+    const {
+      listId,
+      wrapRef,
+      visibleFiles,
+      expanded,
+      setExpanded,
+      needsToggle,
+    } = useCollapsibleFileList(files, defaultVisibleCount);
+    const resolvedLabels = { ...DEFAULT_FILE_LIST_LABELS, ...labels };
+
+    return (
       <div
-        ref={wrapRef}
-        className={cn("flex flex-wrap", "gap-[var(--gap-xs)]")}
-      >
-        {visibleFiles.map((file, index) => (
-          <ThinkingStepItemFileItemPrimitive
-            key={`${file.name}-${index}`}
-            icon={file.icon}
-            status={file.status}
-            name={file.name}
-          />
-        ))}
-        {needsToggle && (
-          <ThinkingStepItemExpandButtonPrimitive
-            expanded={expanded}
-            onToggle={() => setExpanded((v) => !v)}
-          >
-            {expanded ? "收起" : "查看更多"}
-          </ThinkingStepItemExpandButtonPrimitive>
+        ref={ref}
+        className={cn(
+          BOX_BORDER,
+          "flex flex-col",
+          "gap-[var(--gap-xs)]",
+          className,
         )}
+        {...props}
+      >
+        {/* 文件列表 + 更多按钮：同一行（flex-wrap），默认最多两排 */}
+        <div
+          ref={wrapRef}
+          id={listId}
+          className={cn("flex flex-wrap", "gap-[var(--gap-xs)]")}
+        >
+          {visibleFiles.map((file, index) => (
+            <ThinkingStepItemFileItemPrimitive
+              key={`${file.name}-${index}`}
+              icon={file.icon}
+              status={file.status}
+              name={file.name}
+            />
+          ))}
+          {needsToggle && (
+            <ThinkingStepItemExpandButtonPrimitive
+              expanded={expanded}
+              aria-controls={listId}
+              onToggle={() => setExpanded((v) => !v)}
+            >
+              {expanded
+                ? resolvedLabels.collapseFiles
+                : resolvedLabels.expandFiles}
+            </ThinkingStepItemExpandButtonPrimitive>
+          )}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  },
+);
 ThinkingStepItemFileListPrimitive.displayName =
   "ThinkingStepItemFileListPrimitive";
 
@@ -1093,6 +1222,7 @@ const ThinkingStepItemExpandButtonPrimitive = React.forwardRef<
       ref={ref}
       type="button"
       onClick={onToggle}
+      aria-expanded={expanded}
       className={cn(
         BOX_BORDER,
         "h-6",
@@ -1124,156 +1254,10 @@ const ThinkingStepItemExpandButtonPrimitive = React.forwardRef<
 ThinkingStepItemExpandButtonPrimitive.displayName =
   "ThinkingStepItemExpandButtonPrimitive";
 
-// ==================== 业务组件层（可选） ====================
-
-/**
- * 执行步骤组件属性
- * @public
- */
-interface ThinkingStepItemProps
-  extends Omit<ThinkingStepItemPrimitiveProps, "children" | "title"> {
-  /**
-   * 步骤标题
-   */
-  title: React.ReactNode;
-  /**
-   * 步骤内容项列表
-   */
-  items?: Array<{
-    /**
-     * 用于 React 渲染的稳定 key（推荐传入，避免使用数组下标）
-     */
-    key?: React.Key;
-    /**
-     * 普通内容
-     */
-    content?: React.ReactNode;
-    /**
-     * 工具调用
-     */
-    toolCall?: {
-      icon?: React.ReactNode;
-      title?: React.ReactNode;
-      content?: React.ReactNode;
-    };
-    /**
-     * 文件列表
-     */
-    files?: Array<{
-      icon?: React.ReactNode;
-      status?: ThinkingStepItemFileStatus;
-      name: string;
-    }>;
-  }>;
-  /**
-   * 自定义状态图标
-   */
-  statusIcon?: React.ReactNode;
-  /**
-   * 自定义折叠箭头图标
-   */
-  arrowIcon?: React.ReactNode;
-}
-
-/**
- * 执行步骤业务组件
- * @public
- */
-const ThinkingStepItem = React.forwardRef<
-  HTMLDivElement,
-  ThinkingStepItemProps
->(
-  (
-    {
-      title,
-      items = [],
-      status = "loading",
-      statusIcon,
-      arrowIcon,
-      collapsible = false,
-      defaultOpen,
-      open,
-      onOpenChange,
-      ...props
-    },
-    ref,
-  ) => {
-    const defaultArrowIcon = <ChevronDown className="size-4" />;
-
-    return (
-      <ThinkingStepItemPrimitive
-        ref={ref}
-        status={status}
-        collapsible={collapsible}
-        defaultOpen={defaultOpen}
-        open={open}
-        onOpenChange={onOpenChange}
-        {...props}
-      >
-        <ThinkingStepItemHeaderPrimitive
-          collapsible={collapsible}
-          trailing={
-            collapsible ? (
-              <ThinkingStepItemCollapseArrowPrimitive>
-                {arrowIcon || defaultArrowIcon}
-              </ThinkingStepItemCollapseArrowPrimitive>
-            ) : null
-          }
-        >
-          <ThinkingStepItemStatusIconPrimitive status={status}>
-            {statusIcon}
-          </ThinkingStepItemStatusIconPrimitive>
-          <ThinkingStepItemTitlePrimitive>
-            {title}
-          </ThinkingStepItemTitlePrimitive>
-        </ThinkingStepItemHeaderPrimitive>
-        {items.length > 0 && (
-          <ThinkingStepItemContentPrimitive collapsible={collapsible}>
-            <ThinkingStepItemContentListPrimitive>
-              {items.map((item, index) => (
-                <ThinkingStepItemContentItemPrimitive
-                  key={item.key ?? index}
-                  isLast={index === items.length - 1}
-                >
-                  <ThinkingStepItemTimelinePrimitive
-                    isLast={index === items.length - 1}
-                  />
-                  <ThinkingStepItemContentAreaPrimitive>
-                    {(item.content ?? null) !== null &&
-                    item.content !== undefined ? (
-                      <ThinkingStepItemRegularContentPrimitive>
-                        {item.content}
-                      </ThinkingStepItemRegularContentPrimitive>
-                    ) : status === "loading" ? (
-                      <ThinkingStepItemRegularContentPrimitive className="animate-pulse">
-                        思考中...
-                      </ThinkingStepItemRegularContentPrimitive>
-                    ) : null}
-                    {item.toolCall && (
-                      <ThinkingStepItemToolCallPrimitive
-                        icon={item.toolCall.icon}
-                        title={item.toolCall.title}
-                        content={item.toolCall.content}
-                      />
-                    )}
-                    {item.files && item.files.length > 0 && (
-                      <ThinkingStepItemFileListPrimitive files={item.files} />
-                    )}
-                  </ThinkingStepItemContentAreaPrimitive>
-                </ThinkingStepItemContentItemPrimitive>
-              ))}
-            </ThinkingStepItemContentListPrimitive>
-          </ThinkingStepItemContentPrimitive>
-        )}
-      </ThinkingStepItemPrimitive>
-    );
-  },
-);
-ThinkingStepItem.displayName = "ThinkingStepItem";
-
 // ==================== 统一导出 ====================
 
 export type {
+  ThinkingSemanticStatus,
   ThinkingStepItemStatus,
   ThinkingStepItemFileStatus,
   ThinkingStepItemContainerPrimitiveProps,
@@ -1292,9 +1276,9 @@ export type {
   ThinkingStepItemToolCallTitlePrimitiveProps,
   ThinkingStepItemToolCallContentPrimitiveProps,
   ThinkingStepItemFileListPrimitiveProps,
+  ThinkingStepItemFileListLabels,
   ThinkingStepItemFileItemPrimitiveProps,
   ThinkingStepItemExpandButtonPrimitiveProps,
-  ThinkingStepItemProps,
 };
 
 export {
@@ -1317,5 +1301,4 @@ export {
   ThinkingStepItemFileListPrimitive,
   ThinkingStepItemFileItemPrimitive,
   ThinkingStepItemExpandButtonPrimitive,
-  ThinkingStepItem,
 };

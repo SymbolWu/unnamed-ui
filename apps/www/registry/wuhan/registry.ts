@@ -3,6 +3,7 @@ import { z } from "zod";
 
 // import { themes } from "../themes"
 import { blocks } from "./blocks/_registry";
+import { composed } from "./composed/_registry";
 // import { charts } from "./charts/_registry"
 import { examples } from "./examples/_registry";
 // import { hooks } from "./hooks/_registry"
@@ -46,6 +47,7 @@ export const registry = {
       },
       ...ui,
       ...blocks,
+      ...composed,
       ...recruitmentBlocks, // Recruitment blocks - easy to remove
       // ...charts,
       // ...lib,

@@ -16,7 +16,7 @@ Thinking Process 组件是一个可折叠的思考块，用于展示 **单个思
 ## Quick Start
 
 ```tsx
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
 
 export function Example() {
   return (
@@ -54,7 +54,7 @@ export function Example() {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-process-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-process.json
 ```
 
 </TabsContent>
@@ -65,7 +65,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-process-01.json
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="thinking-process-demo" title="registry/wuhan/examples/recruitment/thinking-process/thinking-process-demo.tsx" />
+<ComponentSource name="thinking-process" title="registry/wuhan/composed/thinking-process/thinking-process.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -112,7 +112,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-process-01.json
 ### 基础用法
 
 ```tsx
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
 
 // 已完成状态 - 显示时间
 <ThinkingStep
@@ -175,7 +175,7 @@ import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-
 当你需要在内容区域实现「文字 → 子步骤列表 → 文字」这种穿插渲染时，推荐使用 `contentBlocks`：
 
 ```tsx
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
 
 <ThinkingStep
   status="completed"

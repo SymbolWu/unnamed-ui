@@ -1,11 +1,9 @@
 "use client";
 
 import { BookOpen } from "lucide-react";
-import {
-  ThinkingLoadingDotsPrimitive,
-  ThinkingStep,
-} from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
-import type { ThinkingStepItemProps } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingLoadingDotsPrimitive } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
+import type { ThinkingStepItemProps } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 export default function ThinkingProcessDemo() {
   const subSteps = [

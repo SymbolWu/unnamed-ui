@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ComposedSender } from "@/registry/wuhan/examples/sender/sender-composed-demo";
+import { ComposedSender } from "@/registry/wuhan/composed/sender/sender";
 import { Search, Brain, FileText, Image } from "lucide-react";
 
 export default function SenderDemo() {

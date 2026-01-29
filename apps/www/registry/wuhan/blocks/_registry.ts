@@ -33,7 +33,7 @@ export const blocks: Registry["items"] = [
     name: "message-01",
     type: "registry:block",
     title: "Message",
-    description: "AI and user message components",
+    description: "Message primitives (AI/User layout and feedback slots)",
     registryDependencies: ["style", "button"],
     files: [
       {
@@ -105,7 +105,7 @@ export const blocks: Registry["items"] = [
     name: "sender-01",
     type: "registry:block",
     title: "Sender",
-    description: "Message sender component",
+    description: "Sender primitives (input, actions, buttons)",
     registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
     files: [
       {
@@ -217,8 +217,7 @@ export const blocks: Registry["items"] = [
     name: "deep-thinking-01",
     type: "registry:block",
     title: "Deep Thinking",
-    description:
-      "Deep thinking collapsible block for displaying AI thinking process",
+    description: "Deep thinking primitives (container, header, content)",
     registryDependencies: ["style", "collapsible"],
     files: [
       {
@@ -246,8 +245,7 @@ export const blocks: Registry["items"] = [
     name: "execution-result-01",
     type: "registry:block",
     title: "Execution Result",
-    description:
-      "Execution result block for displaying function call results with collapsible items",
+    description: "Execution result primitives (container, items, sections)",
     registryDependencies: ["style", "collapsible"],
     files: [
       {
@@ -261,8 +259,7 @@ export const blocks: Registry["items"] = [
     name: "component-panel-01",
     type: "registry:block",
     title: "Component Panel",
-    description:
-      "Component panel with tabs (全部, MCP, 工具, 工作流) and toggle button list",
+    description: "Component panel primitives (tabs, list, items)",
     registryDependencies: ["style", "tabs", "toggle-button-01"],
     files: [
       {
@@ -277,7 +274,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Thinking Process",
     description:
-      "Multi-stage thinking process component for displaying AI thinking steps with status and time",
+      "Thinking process primitives (container, header, content, status, icons)",
     registryDependencies: ["style", "collapsible"],
     files: [
       {
@@ -292,7 +289,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Thinking Step Item",
     description:
-      "Collapsible execution step item component with status (loading/success/error/cancel), timeline, tool calls, and file list",
+      "Thinking step item primitives (timeline, tool call, file list, status)",
     registryDependencies: ["style", "collapsible"],
     files: [
       {
@@ -306,7 +303,7 @@ export const blocks: Registry["items"] = [
     name: "task-list-01",
     type: "registry:block",
     title: "Task List",
-    description: "Task list component with checkable items for task management",
+    description: "Task list primitives (container, list, items)",
     registryDependencies: ["style"],
     files: [
       {

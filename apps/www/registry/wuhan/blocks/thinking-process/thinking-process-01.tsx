@@ -1,65 +1,64 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import {
-  ThinkingStepItem,
-  ThinkingStepItemContainerPrimitive,
-  type ThinkingStepItemProps,
-} from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/registry/wuhan/ui/collapsible";
 
-const BOX_BORDER = "[&_*]:!box-border";
+const BOX_BORDER = "box-border [&>*]:box-border";
 
 // ==================== 类型定义 ====================
 
 /**
- * 思考步骤状态类型
+ * 统一状态语义（组件库层）
  * @public
  */
-type ThinkingStepStatus = "pending" | "thinking" | "completed" | "cancelled";
+type ThinkingSemanticStatus =
+  | "idle"
+  | "running"
+  | "success"
+  | "error"
+  | "cancelled";
 
 /**
- * ThinkingStep 内容块
- *
- * 设计目标：让使用者可以用数据驱动的方式实现「文字 → 子步骤列表 → 文字」的穿插渲染。
- *
+ * 思考步骤状态类型（兼容旧状态）
  * @public
  */
-type ThinkingStepContentBlock =
-  | {
-      type: "text";
-      content: React.ReactNode;
-      key?: React.Key;
-    }
-  | {
-      type: "subSteps";
-      /**
-       * 子步骤列表：默认会渲染为 `ThinkingStepItemContainerPrimitive` + `ThinkingStepItem`。
-       */
-      steps: Array<ThinkingStepItemProps & { key?: React.Key }>;
-      key?: React.Key;
-    }
-  | {
-      type: "node";
-      /**
-       * 兜底自定义：直接渲染任意 ReactNode。
-       */
-      node: React.ReactNode;
-      key?: React.Key;
-    };
+type ThinkingStepStatus =
+  | ThinkingSemanticStatus
+  | "pending"
+  | "thinking"
+  | "completed";
+
+const resolveThinkingStatus = (
+  status: ThinkingStepStatus | undefined,
+): ThinkingSemanticStatus => {
+  switch (status) {
+    case "pending":
+      return "idle";
+    case "thinking":
+      return "running";
+    case "completed":
+      return "success";
+    case "idle":
+    case "running":
+    case "success":
+    case "error":
+    case "cancelled":
+      return status;
+    default:
+      return "idle";
+  }
+};
 
 /**
  * 思考过程容器原语属性
  * @public
  */
-interface ThinkingProcessContainerPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingProcessContainerPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 子元素
    */
@@ -70,8 +69,7 @@ interface ThinkingProcessContainerPrimitiveProps
  * 思考步骤原语属性
  * @public
  */
-interface ThinkingStepPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 子元素
    */
@@ -98,8 +96,7 @@ interface ThinkingStepPrimitiveProps
  * 思考步骤头部原语属性
  * @public
  */
-interface ThinkingStepHeaderPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepHeaderPrimitiveProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * 左侧内容（图标、状态等）
    */
@@ -108,14 +105,21 @@ interface ThinkingStepHeaderPrimitiveProps
    * 右侧内容（时间、箭头等）
    */
   trailing?: React.ReactNode;
+  /**
+   * 按钮禁用状态
+   */
+  disabled?: boolean;
+  /**
+   * 按钮类型
+   */
+  type?: "button" | "submit" | "reset";
 }
 
 /**
  * 思考步骤内容原语属性
  * @public
  */
-interface ThinkingStepContentPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepContentPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 内容
    */
@@ -126,8 +130,7 @@ interface ThinkingStepContentPrimitiveProps
  * 思考状态标签原语属性
  * @public
  */
-interface ThinkingStatusLabelPrimitiveProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface ThinkingStatusLabelPrimitiveProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * 状态
    */
@@ -142,8 +145,7 @@ interface ThinkingStatusLabelPrimitiveProps
  * 思考时间标签原语属性
  * @public
  */
-interface ThinkingTimeLabelPrimitiveProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface ThinkingTimeLabelPrimitiveProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * 子元素
    */
@@ -154,8 +156,7 @@ interface ThinkingTimeLabelPrimitiveProps
  * 思考图标容器原语属性
  * @public
  */
-interface ThinkingIconContainerPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingIconContainerPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 图标内容
    */
@@ -170,8 +171,7 @@ interface ThinkingIconContainerPrimitiveProps
  * 思考完成提示原语属性
  * @public
  */
-interface ThinkingPersistHintPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingPersistHintPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 提示内容
    */
@@ -182,8 +182,7 @@ interface ThinkingPersistHintPrimitiveProps
  * 思考步骤提示原语属性（显示在 header 下方）
  * @public
  */
-interface ThinkingStepHintPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepHintPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * 提示内容
    */
@@ -194,8 +193,7 @@ interface ThinkingStepHintPrimitiveProps
  * 加载动画点原语属性
  * @public
  */
-interface ThinkingLoadingDotsPrimitiveProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+interface ThinkingLoadingDotsPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 // ==================== 动画原语组件 ====================
 
@@ -295,6 +293,7 @@ const ThinkingStepPrimitive = React.forwardRef<
     },
     ref,
   ) => {
+    const resolvedStatus = resolveThinkingStatus(status);
     return (
       <Collapsible
         defaultOpen={defaultOpen}
@@ -305,6 +304,7 @@ const ThinkingStepPrimitive = React.forwardRef<
           ref={ref}
           className={cn(BOX_BORDER, "w-full", "group/step", className)}
           data-status={status}
+          data-semantic-status={resolvedStatus}
           {...props}
         >
           {children}
@@ -320,13 +320,15 @@ ThinkingStepPrimitive.displayName = "ThinkingStepPrimitive";
  * @public
  */
 const ThinkingStepHeaderPrimitive = React.forwardRef<
-  HTMLDivElement,
+  HTMLButtonElement,
   ThinkingStepHeaderPrimitiveProps
->(({ children, trailing, className, ...props }, ref) => {
+>(({ children, trailing, className, type: _type, disabled, ...props }, ref) => {
   return (
     <CollapsibleTrigger asChild>
-      <div
+      <button
         ref={ref}
+        type="button"
+        disabled={disabled}
         className={cn(
           BOX_BORDER,
           "group/think-step-trigger",
@@ -345,7 +347,7 @@ const ThinkingStepHeaderPrimitive = React.forwardRef<
             {trailing}
           </div>
         )}
-      </div>
+      </button>
     </CollapsibleTrigger>
   );
 });
@@ -401,6 +403,7 @@ const ThinkingStatusLabelPrimitive = React.forwardRef<
   HTMLSpanElement,
   ThinkingStatusLabelPrimitiveProps
 >(({ status = "pending", children, className, ...props }, ref) => {
+  const resolvedStatus = resolveThinkingStatus(status);
   return (
     <span
       ref={ref}
@@ -412,10 +415,11 @@ const ThinkingStatusLabelPrimitive = React.forwardRef<
         "text-[var(--text-title)]",
         "group-hover/step:text-[var(--text-brand)]",
         "transition-colors",
-        status === "thinking" && "animate-pulse",
+        resolvedStatus === "running" && "animate-pulse",
         className,
       )}
       data-status={status}
+      data-semantic-status={resolvedStatus}
       {...props}
     >
       {children}
@@ -461,10 +465,12 @@ const ThinkingIconContainerPrimitive = React.forwardRef<
   HTMLDivElement,
   ThinkingIconContainerPrimitiveProps
 >(({ children, status = "pending", className, ...props }, ref) => {
-  const iconStyles = {
-    pending: "text-[var(--text-tertiary)]",
-    thinking: "text-[var(--text-brand)]",
-    completed: "text-[var(--text-success)]",
+  const resolvedStatus = resolveThinkingStatus(status);
+  const iconStyles: Record<ThinkingSemanticStatus, string> = {
+    idle: "text-[var(--text-tertiary)]",
+    running: "text-[var(--text-brand)]",
+    success: "text-[var(--text-success)]",
+    error: "text-[var(--text-error)]",
     cancelled: "text-[var(--text-tertiary)]",
   };
 
@@ -474,10 +480,11 @@ const ThinkingIconContainerPrimitive = React.forwardRef<
       className={cn(
         "flex items-center justify-center",
         "size-4",
-        iconStyles[status],
+        iconStyles[resolvedStatus],
         className,
       )}
       data-status={status}
+      data-semantic-status={resolvedStatus}
       {...props}
     >
       {children}
@@ -578,280 +585,11 @@ const ThinkingStepHintPrimitive = React.forwardRef<
 });
 ThinkingStepHintPrimitive.displayName = "ThinkingStepHintPrimitive";
 
-// ==================== 业务组件层（可选） ====================
-
-/**
- * 思考步骤组件属性
- * @public
- */
-interface ThinkingStepProps
-  extends Omit<ThinkingStepPrimitiveProps, "children" | "title" | "content"> {
-  /**
-   * 步骤标题
-   */
-  title: React.ReactNode;
-  /**
-   * 步骤内容
-   */
-  content?: React.ReactNode;
-  /**
-   * 内容块（推荐）：支持文字与子步骤列表穿插渲染。
-   *
-   * 规则：当 `contentBlocks` 存在时，将忽略 `content / subSteps / renderSubSteps`。
-   */
-  contentBlocks?: ThinkingStepContentBlock[];
-  /**
-   * 子步骤数据（结构化内容）
-   *
-   * 设计目标：不与具体子组件强耦合，由 `renderSubSteps` 决定如何渲染。
-   */
-  subSteps?: unknown[];
-  /**
-   * 子步骤渲染器。与 `subSteps` 配套使用。
-   *
-   * 说明：为了保持 block 的独立可用性，这里不直接依赖 `thinking-step-item`，
-   *      由业务侧/使用方注入具体渲染实现（例如渲染 `ThinkingStepItem` 列表）。
-   */
-  renderSubSteps?: (subSteps: unknown[]) => React.ReactNode;
-  /**
-   * 时长（秒）
-   */
-  duration?: number;
-  /**
-   * 自定义图标
-   */
-  icon?: React.ReactNode;
-  /**
-   * 自定义箭头图标
-   */
-  arrowIcon?: React.ReactNode;
-  /**
-   * 长耗时提示（显示在 header 下方，并且可随折叠收起/展开）
-   *
-   * 典型文案：处理将需要几分钟，即使您离开页面也会继续进行
-   */
-  hint?: React.ReactNode;
-  /**
-   * 是否为长耗时场景
-   *
-   * - `true` 且未提供 `hint` 时，将使用默认提示文案
-   * - 默认开合策略会按场景 2：默认收起
-   */
-  longRunning?: boolean;
-}
-
-/**
- * 思考步骤业务组件
- * @public
- */
-const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
-  (
-    {
-      title,
-      content,
-      contentBlocks,
-      subSteps,
-      renderSubSteps,
-      duration,
-      status = "pending",
-      icon,
-      arrowIcon,
-      hint,
-      longRunning = false,
-      defaultOpen,
-      open,
-      onOpenChange,
-      ...props
-    },
-    ref,
-  ) => {
-    const defaultArrowIcon = <ChevronDown className="size-4" />;
-
-    // 只有完成状态才显示时间
-    const showDuration = status === "completed" && duration !== undefined;
-    const hasBlocks = Array.isArray(contentBlocks) && contentBlocks.length > 0;
-    const hasSubSteps =
-      !hasBlocks &&
-      typeof renderSubSteps === "function" &&
-      Array.isArray(subSteps) &&
-      subSteps.length > 0;
-    const subStepsNode = hasSubSteps ? renderSubSteps(subSteps) : null;
-    const hasContent = !hasBlocks && content !== undefined && content !== null;
-
-    const blocksNode = hasBlocks ? (
-      <div className="flex flex-col gap-[var(--gap-md)]">
-        {contentBlocks.map((block, index) => {
-          const key = block.key ?? index;
-
-          switch (block.type) {
-            case "text":
-              return <div key={key}>{block.content}</div>;
-            case "subSteps":
-              return (
-                <div key={key} className="whitespace-normal">
-                  <ThinkingStepItemContainerPrimitive>
-                    {[
-                      ...block.steps,
-                      ...(status === "cancelled"
-                        ? ([
-                            {
-                              status: "cancel",
-                              title: "已取消",
-                              items: [],
-                            } satisfies ThinkingStepItemProps,
-                          ] as const)
-                        : []),
-                    ].map((step, stepIndex) => {
-                      const { key: stepKey, ...stepProps } = step;
-                      const fallbackKey =
-                        typeof stepProps.title === "string" ||
-                        typeof stepProps.title === "number"
-                          ? String(stepProps.title)
-                          : stepIndex;
-
-                      return (
-                        <ThinkingStepItem
-                          key={stepKey ?? fallbackKey}
-                          {...stepProps}
-                        />
-                      );
-                    })}
-                  </ThinkingStepItemContainerPrimitive>
-                </div>
-              );
-            case "node":
-              return (
-                <div key={key} className="whitespace-normal">
-                  {block.node}
-                </div>
-              );
-            default:
-              return null;
-          }
-        })}
-      </div>
-    ) : null;
-
-    // 工具调用统计：仅在 contentBlocks 的 subSteps 中自动统计（其它情况建议由业务侧自行传文案到 contentBlocks/text）
-    const toolsUsedCount = hasBlocks
-      ? contentBlocks.reduce((acc, block) => {
-          if (block.type !== "subSteps") return acc;
-          return (
-            acc +
-            block.steps.reduce((stepAcc, step) => {
-              const items = step.items ?? [];
-              return (
-                stepAcc +
-                items.reduce(
-                  (itemAcc, item) => itemAcc + (item.toolCall ? 1 : 0),
-                  0,
-                )
-              );
-            }, 0)
-          );
-        }, 0)
-      : 0;
-
-    const showToolsUsed = toolsUsedCount > 0;
-    const showDurationInHeader = showDuration && !showToolsUsed;
-
-    const resolvedHint =
-      hint ??
-      (longRunning
-        ? "处理将需要几分钟，即使您离开页面也会继续进行"
-        : undefined);
-    const showHint = resolvedHint !== undefined && resolvedHint !== null;
-
-    const hasHintOnly = showHint && !hasBlocks && !hasContent && !subStepsNode;
-
-    // 状态驱动的默认开合策略：仅在非受控且未显式传 defaultOpen 时生效
-    const resolvedDefaultOpen =
-      open === undefined && defaultOpen === undefined
-        ? status === "thinking"
-          ? !longRunning
-          : status === "cancelled"
-        : defaultOpen;
-
-    return (
-      <ThinkingStepPrimitive
-        ref={ref}
-        status={status}
-        defaultOpen={resolvedDefaultOpen}
-        open={open}
-        onOpenChange={onOpenChange}
-        {...props}
-      >
-        <ThinkingStepHeaderPrimitive
-          trailing={
-            <>
-              {showToolsUsed && (
-                <span
-                  className={cn(
-                    "font-[var(--font-family-cn)]",
-                    "font-size-2",
-                    "leading-[var(--line-height-2)]",
-                    "font-normal",
-                    "text-[var(--text-secondary)]",
-                  )}
-                >
-                  已使用{toolsUsedCount}个工具
-                </span>
-              )}
-              {showDurationInHeader && (
-                <ThinkingTimeLabelPrimitive>
-                  {duration}s
-                </ThinkingTimeLabelPrimitive>
-              )}
-              <ThinkingCollapseArrowPrimitive>
-                {arrowIcon || defaultArrowIcon}
-              </ThinkingCollapseArrowPrimitive>
-            </>
-          }
-        >
-          {icon ? (
-            <ThinkingIconContainerPrimitive status={status}>
-              {icon}
-            </ThinkingIconContainerPrimitive>
-          ) : null}
-          <ThinkingStatusLabelPrimitive status={status}>
-            {title}
-          </ThinkingStatusLabelPrimitive>
-        </ThinkingStepHeaderPrimitive>
-        {hasHintOnly ? (
-          <CollapsibleContent>
-            <ThinkingStepHintPrimitive>
-              {resolvedHint}
-            </ThinkingStepHintPrimitive>
-          </CollapsibleContent>
-        ) : null}
-        {(hasBlocks || hasContent || subStepsNode) && (
-          <ThinkingStepContentPrimitive>
-            {hasBlocks && blocksNode}
-            {hasContent && <div>{content}</div>}
-            {subStepsNode && (
-              <div
-                className={cn(
-                  // 覆盖 ContentPrimitive 内部的 `whitespace-pre-wrap` 继承，避免影响子组件布局
-                  "whitespace-normal",
-                  hasContent && "mt-[var(--gap-md)]",
-                )}
-              >
-                {subStepsNode}
-              </div>
-            )}
-          </ThinkingStepContentPrimitive>
-        )}
-      </ThinkingStepPrimitive>
-    );
-  },
-);
-ThinkingStep.displayName = "ThinkingStep";
-
 // ==================== 统一导出 ====================
 
 export type {
+  ThinkingSemanticStatus,
   ThinkingStepStatus,
-  ThinkingStepContentBlock,
   ThinkingProcessContainerPrimitiveProps,
   ThinkingStepPrimitiveProps,
   ThinkingStepHeaderPrimitiveProps,
@@ -862,7 +600,6 @@ export type {
   ThinkingPersistHintPrimitiveProps,
   ThinkingStepHintPrimitiveProps,
   ThinkingLoadingDotsPrimitiveProps,
-  ThinkingStepProps,
 };
 
 export {
@@ -877,5 +614,4 @@ export {
   ThinkingPersistHintPrimitive,
   ThinkingStepHintPrimitive,
   ThinkingLoadingDotsPrimitive,
-  ThinkingStep,
 };

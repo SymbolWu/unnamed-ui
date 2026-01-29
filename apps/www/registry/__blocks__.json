@@ -9,7 +9,7 @@
   },
   {
     "name": "message-01",
-    "description": "AI and user message components"
+    "description": "Message primitives (AI/User layout and feedback slots)"
   },
   {
     "name": "quick-action-01",
@@ -29,7 +29,7 @@
   },
   {
     "name": "sender-01",
-    "description": "Message sender component"
+    "description": "Sender primitives (input, actions, buttons)"
   },
   {
     "name": "attachment-list-01",
@@ -61,7 +61,7 @@
   },
   {
     "name": "deep-thinking-01",
-    "description": "Deep thinking collapsible block for displaying AI thinking process"
+    "description": "Deep thinking primitives (container, header, content)"
   },
   {
     "name": "tooltip-01",
@@ -69,27 +69,59 @@
   },
   {
     "name": "execution-result-01",
-    "description": "Execution result block for displaying function call results with collapsible items"
+    "description": "Execution result primitives (container, items, sections)"
   },
   {
     "name": "component-panel-01",
-    "description": "Component panel with tabs (全部, MCP, 工具, 工作流) and toggle button list"
+    "description": "Component panel primitives (tabs, list, items)"
   },
   {
     "name": "thinking-process-01",
-    "description": "Multi-stage thinking process component for displaying AI thinking steps with status and time"
+    "description": "Thinking process primitives (container, header, content, status, icons)"
   },
   {
     "name": "thinking-step-item-01",
-    "description": "Collapsible execution step item component with status (loading/success/error/cancel), timeline, tool calls, and file list"
+    "description": "Thinking step item primitives (timeline, tool call, file list, status)"
   },
   {
     "name": "task-list-01",
-    "description": "Task list component with checkable items for task management"
+    "description": "Task list primitives (container, list, items)"
   },
   {
     "name": "intervene-form-01",
     "description": "Intervene form component for user input and interaction"
+  },
+  {
+    "name": "message",
+    "description": "Composed AI and user message components"
+  },
+  {
+    "name": "sender",
+    "description": "Composed sender with attachments and modes"
+  },
+  {
+    "name": "task-list",
+    "description": "Composed task list with editable mode"
+  },
+  {
+    "name": "deep-thinking",
+    "description": "Composed deep thinking collapsible block"
+  },
+  {
+    "name": "execution-result",
+    "description": "Composed execution result list with sections"
+  },
+  {
+    "name": "component-panel",
+    "description": "Composed panel with tabs and selectable items"
+  },
+  {
+    "name": "thinking-step-item",
+    "description": "Composed step item with status, timeline, tools, and files"
+  },
+  {
+    "name": "thinking-process",
+    "description": "Composed thinking process with steps and content blocks"
   },
   {
     "name": "action-dropdown",

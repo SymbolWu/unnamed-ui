@@ -18,7 +18,7 @@ Thinking Step Item 组件用于在思考过程内容中展示**子步骤**：状
 ## Quick Start
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 export function Example() {
   return (
@@ -53,7 +53,7 @@ export function Example() {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item.json
 ```
 
 </TabsContent>
@@ -64,7 +64,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="thinking-step-item-demo" title="registry/wuhan/examples/recruitment/thinking-step-item/thinking-step-item-demo.tsx" />
+<ComponentSource name="thinking-step-item" title="registry/wuhan/composed/thinking-step-item/thinking-step-item.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -144,7 +144,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
 ### 基础用法
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 <ThinkingStepItem
   status="success"
@@ -161,10 +161,8 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 ### 多个子步骤
 
 ```tsx
-import {
-  ThinkingStepItemContainerPrimitive,
-  ThinkingStepItem,
-} from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
+import { ThinkingStepItemContainerPrimitive } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
 
 <ThinkingStepItemContainerPrimitive>
   <ThinkingStepItem
@@ -188,7 +186,7 @@ import {
 ### 带工具调用
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 import { Database } from "lucide-react";
 
 <ThinkingStepItem
@@ -210,7 +208,7 @@ import { Database } from "lucide-react";
 ### 带文件列表
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 <ThinkingStepItem
   status="success"
@@ -319,11 +317,9 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 ## 与 Thinking Process 组合使用
 
 ```tsx
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
-import {
-  ThinkingStepItemContainerPrimitive,
-  ThinkingStepItem,
-} from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
+import { ThinkingStepItemContainerPrimitive } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
 
 <ThinkingStep
   status="completed"

@@ -268,7 +268,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-process-demo",
     type: "registry:example",
-    registryDependencies: ["thinking-process-01"],
+    registryDependencies: ["thinking-process"],
     files: [
       {
         path: "examples/recruitment/thinking-process/thinking-process-demo.tsx",
@@ -281,7 +281,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-process-default",
     type: "registry:example",
-    registryDependencies: ["thinking-process-01"],
+    registryDependencies: ["thinking-process"],
     files: [
       {
         path: "examples/recruitment/thinking-process/thinking-process-default.tsx",
@@ -294,7 +294,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-process-with-hint",
     type: "registry:example",
-    registryDependencies: ["thinking-process-01"],
+    registryDependencies: ["thinking-process"],
     files: [
       {
         path: "examples/recruitment/thinking-process/thinking-process-with-hint.tsx",
@@ -307,7 +307,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-process-custom",
     type: "registry:example",
-    registryDependencies: ["thinking-process-01"],
+    registryDependencies: ["thinking-process"],
     files: [
       {
         path: "examples/recruitment/thinking-process/thinking-process-custom.tsx",
@@ -320,7 +320,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-step-item-demo",
     type: "registry:example",
-    registryDependencies: ["thinking-step-item-01"],
+    registryDependencies: ["thinking-step-item"],
     files: [
       {
         path: "examples/recruitment/thinking-step-item/thinking-step-item-demo.tsx",
@@ -333,7 +333,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-step-item-default",
     type: "registry:example",
-    registryDependencies: ["thinking-step-item-01"],
+    registryDependencies: ["thinking-step-item"],
     files: [
       {
         path: "examples/recruitment/thinking-step-item/thinking-step-item-default.tsx",
@@ -346,7 +346,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-step-item-with-attachments",
     type: "registry:example",
-    registryDependencies: ["thinking-step-item-01"],
+    registryDependencies: ["thinking-step-item"],
     files: [
       {
         path: "examples/recruitment/thinking-step-item/thinking-step-item-with-attachments.tsx",
@@ -359,7 +359,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-step-item-with-overflow-files",
     type: "registry:example",
-    registryDependencies: ["thinking-step-item-01"],
+    registryDependencies: ["thinking-step-item"],
     files: [
       {
         path: "examples/recruitment/thinking-step-item/thinking-step-item-with-overflow-files.tsx",
@@ -372,7 +372,7 @@ const recruitmentExamples: Registry["items"] = [
   {
     name: "thinking-step-item-with-tags",
     type: "registry:example",
-    registryDependencies: ["thinking-step-item-01"],
+    registryDependencies: ["thinking-step-item"],
     files: [
       {
         path: "examples/recruitment/thinking-step-item/thinking-step-item-with-tags.tsx",
@@ -556,7 +556,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-demo",
     type: "registry:example",
-    registryDependencies: ["message-01"],
+    registryDependencies: ["message", "message-01", "button"],
     files: [
       {
         path: "examples/message/message-demo.tsx",
@@ -568,7 +568,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-default",
     type: "registry:example",
-    registryDependencies: ["message-01"],
+    registryDependencies: ["message"],
     files: [
       {
         path: "examples/message/message-default.tsx",
@@ -580,7 +580,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-composed-demo",
     type: "registry:example",
-    registryDependencies: ["message-01", "button"],
+    registryDependencies: ["message", "message-01", "button"],
     files: [
       {
         path: "examples/message/message-composed-demo.tsx",
@@ -592,7 +592,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-status",
     type: "registry:example",
-    registryDependencies: ["message-01", "button"],
+    registryDependencies: ["message", "message-01", "button"],
     files: [
       {
         path: "examples/message/message-with-status.tsx",
@@ -604,7 +604,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-attachment",
     type: "registry:example",
-    registryDependencies: ["message-01", "attachment-list-01"],
+    registryDependencies: ["message", "attachment-list-01"],
     files: [
       {
         path: "examples/message/message-with-attachment.tsx",
@@ -616,7 +616,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-feedback",
     type: "registry:example",
-    registryDependencies: ["message-01", "button"],
+    registryDependencies: ["message", "button"],
     files: [
       {
         path: "examples/message/message-with-feedback.tsx",
@@ -628,7 +628,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-avatar-header",
     type: "registry:example",
-    registryDependencies: ["message-01", "avatar-header-01"],
+    registryDependencies: ["message", "avatar-header-01"],
     files: [
       {
         path: "examples/message/message-with-avatar-header.tsx",
@@ -693,7 +693,7 @@ export const examples: Registry["items"] = [
   {
     name: "sender-demo",
     type: "registry:example",
-    registryDependencies: ["sender-01"],
+    registryDependencies: ["sender"],
     files: [
       {
         path: "examples/sender/sender-demo.tsx",
@@ -983,7 +983,7 @@ export const examples: Registry["items"] = [
   {
     name: "deep-thinking-demo",
     type: "registry:example",
-    registryDependencies: ["deep-thinking-01"],
+    registryDependencies: ["deep-thinking"],
     files: [
       {
         path: "examples/deep-thinking/deep-thinking-demo.tsx",
@@ -1007,7 +1007,7 @@ export const examples: Registry["items"] = [
   {
     name: "deep-thinking-with-status",
     type: "registry:example",
-    registryDependencies: ["deep-thinking-01"],
+    registryDependencies: ["deep-thinking"],
     files: [
       {
         path: "examples/deep-thinking/deep-thinking-with-status.tsx",
@@ -1032,7 +1032,7 @@ export const examples: Registry["items"] = [
   {
     name: "component-panel-default",
     type: "registry:example",
-    registryDependencies: ["component-panel-01"],
+    registryDependencies: ["component-panel"],
     files: [
       {
         path: "examples/component-panel/component-panel-default.tsx",
@@ -1058,7 +1058,7 @@ export const examples: Registry["items"] = [
   {
     name: "execution-result-demo",
     type: "registry:example",
-    registryDependencies: ["execution-result-01"],
+    registryDependencies: ["execution-result"],
     files: [
       {
         path: "examples/execution-result/execution-result-demo.tsx",
@@ -1070,7 +1070,7 @@ export const examples: Registry["items"] = [
   {
     name: "execution-result-default",
     type: "registry:example",
-    registryDependencies: ["execution-result-01"],
+    registryDependencies: ["execution-result"],
     files: [
       {
         path: "examples/execution-result/execution-result-default.tsx",
@@ -1106,7 +1106,7 @@ export const examples: Registry["items"] = [
   {
     name: "task-list-composed-demo",
     type: "registry:example",
-    registryDependencies: ["task-list-01"],
+    registryDependencies: ["task-list"],
     files: [
       {
         path: "examples/task-list/task-list-composed-demo.tsx",
