@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
 
 export default function ThinkingProcessDefault() {
   return (

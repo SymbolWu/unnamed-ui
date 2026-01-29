@@ -212,7 +212,7 @@
           "neutral-0": "#ffffff",
           "neutral-10": "#fcfcfd",
           "neutral-50": "#f9f9fb",
-          "neutral-100": "#f0f0f4",
+          "neutral-100": "#F6F6FA",
           "neutral-200": "#e8e7ed",
           "neutral-300": "#e1e0e7",
           "neutral-400": "#aaa8b3",
@@ -387,11 +387,11 @@
           "line-height-7": "44px",
           "line-height-8": "56px",
           "line-height-9": "72px",
-          "radius-sm": "calc(var(--radius) - 2px)",
-          "radius-md": "var(--radius)",
-          "radius-lg": "calc(var(--radius) + 2px)",
-          "radius-xl": "calc(var(--radius) + 6px)",
-          "radius-2xl": "calc(var(--radius) + 10px)",
+          "radius-sm": "4px",
+          "radius-md": "6px",
+          "radius-lg": "8px",
+          "radius-xl": "12px",
+          "radius-2xl": "16px",
           "radius-circle": "999px",
           "space-1": "2px",
           "space-2": "4px",
@@ -556,7 +556,7 @@
           "neutral-0": "#ffffff",
           "neutral-10": "#fcfcfd",
           "neutral-50": "#f9f9fb",
-          "neutral-100": "#f0f0f4",
+          "neutral-100": "#F6F6FA",
           "neutral-200": "#e8e7ed",
           "neutral-300": "#e1e0e7",
           "neutral-400": "#aaa8b3",
@@ -917,7 +917,7 @@
           "neutral-0": "#ffffff",
           "neutral-10": "#fcfcfd",
           "neutral-50": "#f9f9fb",
-          "neutral-100": "#f0f0f4",
+          "neutral-100": "#F6F6FA",
           "neutral-200": "#e8e7ed",
           "neutral-300": "#e1e0e7",
           "neutral-400": "#aaa8b3",
@@ -1092,11 +1092,11 @@
           "line-height-7": "44px",
           "line-height-8": "56px",
           "line-height-9": "72px",
-          "radius-sm": "calc(var(--radius) - 2px)",
-          "radius-md": "var(--radius)",
-          "radius-lg": "calc(var(--radius) + 2px)",
-          "radius-xl": "calc(var(--radius) + 6px)",
-          "radius-2xl": "calc(var(--radius) + 10px)",
+          "radius-sm": "4px",
+          "radius-md": "6px",
+          "radius-lg": "8px",
+          "radius-xl": "12px",
+          "radius-2xl": "16px",
           "radius-circle": "999px",
           "space-1": "2px",
           "space-2": "4px",
@@ -1261,7 +1261,7 @@
           "neutral-0": "#ffffff",
           "neutral-10": "#fcfcfd",
           "neutral-50": "#f9f9fb",
-          "neutral-100": "#f0f0f4",
+          "neutral-100": "#F6F6FA",
           "neutral-200": "#e8e7ed",
           "neutral-300": "#e1e0e7",
           "neutral-400": "#aaa8b3",
@@ -1570,7 +1570,7 @@
       "name": "message-01",
       "type": "registry:block",
       "title": "Message",
-      "description": "AI and user message components",
+      "description": "Message primitives (AI/User layout and feedback slots)",
       "registryDependencies": [
         "style",
         "button"
@@ -1655,7 +1655,7 @@
       "name": "sender-01",
       "type": "registry:block",
       "title": "Sender",
-      "description": "Message sender component",
+      "description": "Sender primitives (input, actions, buttons)",
       "registryDependencies": [
         "style",
         "textarea",
@@ -1792,7 +1792,7 @@
       "name": "deep-thinking-01",
       "type": "registry:block",
       "title": "Deep Thinking",
-      "description": "Deep thinking collapsible block for displaying AI thinking process",
+      "description": "Deep thinking primitives (container, header, content)",
       "registryDependencies": [
         "style",
         "collapsible"
@@ -1826,7 +1826,7 @@
       "name": "execution-result-01",
       "type": "registry:block",
       "title": "Execution Result",
-      "description": "Execution result block for displaying function call results with collapsible items",
+      "description": "Execution result primitives (container, items, sections)",
       "registryDependencies": [
         "style",
         "collapsible"
@@ -1843,7 +1843,7 @@
       "name": "component-panel-01",
       "type": "registry:block",
       "title": "Component Panel",
-      "description": "Component panel with tabs (全部, MCP, 工具, 工作流) and toggle button list",
+      "description": "Component panel primitives (tabs, list, items)",
       "registryDependencies": [
         "style",
         "tabs",
@@ -1861,7 +1861,7 @@
       "name": "thinking-process-01",
       "type": "registry:block",
       "title": "Thinking Process",
-      "description": "Multi-stage thinking process component for displaying AI thinking steps with status and time",
+      "description": "Thinking process primitives (container, header, content, status, icons)",
       "registryDependencies": [
         "style",
         "collapsible"
@@ -1878,7 +1878,7 @@
       "name": "thinking-step-item-01",
       "type": "registry:block",
       "title": "Thinking Step Item",
-      "description": "Collapsible execution step item component with status (loading/success/error/cancel), timeline, tool calls, and file list",
+      "description": "Thinking step item primitives (timeline, tool call, file list, status)",
       "registryDependencies": [
         "style",
         "collapsible"
@@ -1895,7 +1895,7 @@
       "name": "task-list-01",
       "type": "registry:block",
       "title": "Task List",
-      "description": "Task list component with checkable items for task management",
+      "description": "Task list primitives (container, list, items)",
       "registryDependencies": [
         "style"
       ],
@@ -1920,6 +1920,155 @@
           "path": "registry/wuhan/blocks/intervene-form/intervene-form-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/intervene-form-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "message",
+      "type": "registry:block",
+      "title": "Message",
+      "description": "Composed AI and user message components",
+      "registryDependencies": [
+        "message-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/message/message.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/message.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sender",
+      "type": "registry:block",
+      "title": "Sender",
+      "description": "Composed sender with attachments and modes",
+      "registryDependencies": [
+        "sender-01",
+        "attachment-list-01",
+        "quote-content-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/sender/sender.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/sender.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list",
+      "type": "registry:block",
+      "title": "Task List",
+      "description": "Composed task list with editable mode",
+      "registryDependencies": [
+        "task-list-01",
+        "sidebar-01",
+        "feedback-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/task-list/task-list.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/task-list.tsx"
+        },
+        {
+          "path": "registry/wuhan/composed/task-list/ReadonlyList.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/task-list-readonly.tsx"
+        },
+        {
+          "path": "registry/wuhan/composed/task-list/EditableList.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/task-list-editable.tsx"
+        },
+        {
+          "path": "registry/wuhan/composed/task-list/types.ts",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/task-list-types.ts"
+        }
+      ]
+    },
+    {
+      "name": "deep-thinking",
+      "type": "registry:block",
+      "title": "Deep Thinking",
+      "description": "Composed deep thinking collapsible block",
+      "registryDependencies": [
+        "deep-thinking-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/deep-thinking/deep-thinking.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/deep-thinking.tsx"
+        }
+      ]
+    },
+    {
+      "name": "execution-result",
+      "type": "registry:block",
+      "title": "Execution Result",
+      "description": "Composed execution result list with sections",
+      "registryDependencies": [
+        "execution-result-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/execution-result/execution-result.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/execution-result.tsx"
+        }
+      ]
+    },
+    {
+      "name": "component-panel",
+      "type": "registry:block",
+      "title": "Component Panel",
+      "description": "Composed panel with tabs and selectable items",
+      "registryDependencies": [
+        "component-panel-01",
+        "tooltip-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/component-panel/component-panel.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/component-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "thinking-step-item",
+      "type": "registry:block",
+      "title": "Thinking Step Item",
+      "description": "Composed step item with status, timeline, tools, and files",
+      "registryDependencies": [
+        "thinking-step-item-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/thinking-step-item/thinking-step-item.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/thinking-step-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "thinking-process",
+      "type": "registry:block",
+      "title": "Thinking Process",
+      "description": "Composed thinking process with steps and content blocks",
+      "registryDependencies": [
+        "thinking-process-01",
+        "thinking-step-item"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/thinking-process/thinking-process.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/thinking-process.tsx"
         }
       ]
     },
@@ -2370,7 +2519,9 @@
       "name": "message-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "message-01"
+        "message",
+        "message-01",
+        "button"
       ],
       "files": [
         {
@@ -2384,7 +2535,7 @@
       "name": "message-default",
       "type": "registry:example",
       "registryDependencies": [
-        "message-01"
+        "message"
       ],
       "files": [
         {
@@ -2398,6 +2549,7 @@
       "name": "message-composed-demo",
       "type": "registry:example",
       "registryDependencies": [
+        "message",
         "message-01",
         "button"
       ],
@@ -2413,6 +2565,7 @@
       "name": "message-with-status",
       "type": "registry:example",
       "registryDependencies": [
+        "message",
         "message-01",
         "button"
       ],
@@ -2428,7 +2581,7 @@
       "name": "message-with-attachment",
       "type": "registry:example",
       "registryDependencies": [
-        "message-01",
+        "message",
         "attachment-list-01"
       ],
       "files": [
@@ -2443,7 +2596,7 @@
       "name": "message-with-feedback",
       "type": "registry:example",
       "registryDependencies": [
-        "message-01",
+        "message",
         "button"
       ],
       "files": [
@@ -2458,7 +2611,7 @@
       "name": "message-with-avatar-header",
       "type": "registry:example",
       "registryDependencies": [
-        "message-01",
+        "message",
         "avatar-header-01"
       ],
       "files": [
@@ -2530,7 +2683,7 @@
       "name": "sender-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "sender-01"
+        "sender"
       ],
       "files": [
         {
@@ -2857,7 +3010,7 @@
       "name": "deep-thinking-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "deep-thinking-01"
+        "deep-thinking"
       ],
       "files": [
         {
@@ -2885,7 +3038,7 @@
       "name": "deep-thinking-with-status",
       "type": "registry:example",
       "registryDependencies": [
-        "deep-thinking-01"
+        "deep-thinking"
       ],
       "files": [
         {
@@ -2913,7 +3066,7 @@
       "name": "component-panel-default",
       "type": "registry:example",
       "registryDependencies": [
-        "component-panel-01"
+        "component-panel"
       ],
       "files": [
         {
@@ -2942,7 +3095,7 @@
       "name": "execution-result-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "execution-result-01"
+        "execution-result"
       ],
       "files": [
         {
@@ -2956,7 +3109,7 @@
       "name": "execution-result-default",
       "type": "registry:example",
       "registryDependencies": [
-        "execution-result-01"
+        "execution-result"
       ],
       "files": [
         {
@@ -2998,7 +3151,7 @@
       "name": "task-list-composed-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "task-list-01"
+        "task-list"
       ],
       "files": [
         {
@@ -3311,7 +3464,7 @@
       "name": "thinking-process-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-process-01"
+        "thinking-process"
       ],
       "files": [
         {
@@ -3325,7 +3478,7 @@
       "name": "thinking-process-default",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-process-01"
+        "thinking-process"
       ],
       "files": [
         {
@@ -3339,7 +3492,7 @@
       "name": "thinking-process-with-hint",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-process-01"
+        "thinking-process"
       ],
       "files": [
         {
@@ -3353,7 +3506,7 @@
       "name": "thinking-process-custom",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-process-01"
+        "thinking-process"
       ],
       "files": [
         {
@@ -3367,7 +3520,7 @@
       "name": "thinking-step-item-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-step-item-01"
+        "thinking-step-item"
       ],
       "files": [
         {
@@ -3381,7 +3534,7 @@
       "name": "thinking-step-item-default",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-step-item-01"
+        "thinking-step-item"
       ],
       "files": [
         {
@@ -3395,7 +3548,7 @@
       "name": "thinking-step-item-with-attachments",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-step-item-01"
+        "thinking-step-item"
       ],
       "files": [
         {
@@ -3406,10 +3559,24 @@
       ]
     },
     {
+      "name": "thinking-step-item-with-overflow-files",
+      "type": "registry:example",
+      "registryDependencies": [
+        "thinking-step-item"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/recruitment/thinking-step-item/thinking-step-item-with-overflow-files.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/recruitment/thinking-step-item-with-overflow-files.tsx"
+        }
+      ]
+    },
+    {
       "name": "thinking-step-item-with-tags",
       "type": "registry:example",
       "registryDependencies": [
-        "thinking-step-item-01"
+        "thinking-step-item"
       ],
       "files": [
         {

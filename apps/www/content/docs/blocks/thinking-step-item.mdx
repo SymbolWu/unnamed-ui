@@ -6,16 +6,38 @@ author: AF
 
 <ComponentPreview name="thinking-step-item-demo" description="Sub-step items with different states" className="mb-4" />
 
-Thinking Step Item 组件是用于在思考过程内容中展示子步骤的组件，支持多种状态显示、可折叠内容、文件附件和标签列表等功能。
+Thinking Step Item 组件用于在思考过程内容中展示**子步骤**：状态、（可选）折叠详情、工具调用信息与文件附件。
+
+## Overview
+
+- **适用场景**：思考过程拆分、任务流水线、工具调用轨迹、文件处理进度。
+- **两层用法**：
+  - **业务组件 `ThinkingStepItem`**：开箱即用（推荐）。
+  - **Primitives**：在不改内部实现的前提下自定义布局/内容（高级用法）。
+
+## Quick Start
+
+```tsx
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
+
+export function Example() {
+  return (
+    <ThinkingStepItem
+      status="success"
+      title="解析简历信息"
+      items={[{ content: "成功提取了候选人的基本信息、工作经历、教育背景和技能列表。" }]}
+    />
+  );
+}
+```
 
 ## Features
 
 - **四种状态**：loading（加载中）、success（成功）、error（错误）、cancel（取消）
 - **状态图标**：每种状态有专属的图标和颜色
-- **可折叠**：子步骤可以展开/收起查看详细内容
+- **可选折叠**：默认不折叠；需要时可通过 `collapsible` 启用展开/收起
 - **原语化设计**：提供完整的原语组件，高度可定制
-- **说明标签**：支持显示蓝色的"说明："标签
-- **灵活内容**：支持文本、文件附件、标签列表等多种内容形式
+- **灵活内容**：支持文本、工具调用信息、文件附件等组合
 - **Hover 高亮**：鼠标悬停时标题和箭头变为品牌色
 - **样式隔离**：组件样式不受外部框架影响
 
@@ -31,7 +53,7 @@ Thinking Step Item 组件是用于在思考过程内容中展示子步骤的组�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item.json
 ```
 
 </TabsContent>
@@ -42,7 +64,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="thinking-step-item-demo" title="registry/wuhan/examples/recruitment/thinking-step-item/thinking-step-item-demo.tsx" />
+<ComponentSource name="thinking-step-item" title="registry/wuhan/composed/thinking-step-item/thinking-step-item.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 
@@ -74,6 +96,16 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
   className="mb-4"
 />
 
+### File List Overflow
+
+文件列表超出两排时，会出现“查看更多”，并且按钮与文件项处于同一行流式布局。
+
+<ComponentPreview
+  name="thinking-step-item-with-overflow-files"
+  description="File list overflow (2 rows + show more)"
+  className="mb-4"
+/>
+
 ### With Tags
 
 子步骤包含标签列表的展示。
@@ -84,12 +116,35 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item-01.json
   className="mb-4"
 />
 
+## Behavior Spec
+
+### 折叠/展开（受控 vs 非受控）
+
+- 默认 **不启用折叠**：不显示箭头、Header 不可点击、内容（若有）直接展示
+- 启用折叠：传 `collapsible`
+  - **非受控**：使用 `defaultOpen`
+  - **受控**：传 `open` + `onOpenChange`
+  - 同时传入时：由 `open`（受控）决定展示状态
+
+### 文件列表（两排 + 更多同排）
+
+当 `items[].files` 存在时，会渲染文件列表，折叠态行为约定如下：
+
+- **默认折叠态最多两排**（按实际布局换行判断，而不是按数量）
+- **超过两排才出现“查看更多”**
+- “查看更多/收起”按钮与文件项**处于同一行流式布局（flex-wrap 同容器）**
+- 展开后展示全部文件项；按钮文案切换为“收起”
+
+### Loading 占位文案
+
+当 `status="loading"` 且某个 `items[]` 没有提供 `content` 时，会自动使用 `ThinkingStepItemRegularContentPrimitive` 显示 **“思考中...”**，并带有 `animate-pulse` 闪烁效果。
+
 ## Usage
 
 ### 基础用法
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 <ThinkingStepItem
   status="success"
@@ -106,21 +161,19 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 ### 多个子步骤
 
 ```tsx
-import {
-  ThinkingStepItemContainerPrimitive,
-  ThinkingStepItem,
-} from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
+import { ThinkingStepItemContainerPrimitive } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
 
 <ThinkingStepItemContainerPrimitive>
   <ThinkingStepItem
     status="success"
     title="步骤 1"
-    items={[{ content: "已完成" }]}
+    items={[{ key: "step-1", content: "已完成" }]}
   />
   <ThinkingStepItem
     status="loading"
     title="步骤 2"
-    items={[{ content: "正在处理..." }]}
+    items={[{ key: "step-2", content: "正在处理..." }]}
   />
   <ThinkingStepItem
     status="cancel"
@@ -133,7 +186,7 @@ import {
 ### 带工具调用
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 import { Database } from "lucide-react";
 
 <ThinkingStepItem
@@ -155,13 +208,14 @@ import { Database } from "lucide-react";
 ### 带文件列表
 
 ```tsx
-import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
 
 <ThinkingStepItem
   status="success"
   title="处理附件文件"
   items={[
     {
+      key: "attachments",
       content: "已成功解析以下文件：",
       files: [
         { icon: "📄", name: "resume.pdf" },
@@ -193,14 +247,15 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 |------|------|--------|------|
 | `status` | `'loading' \| 'success' \| 'error' \| 'cancel'` | `'loading'` | 步骤状态 |
 | `title` | `React.ReactNode` | - | 步骤标题（必填） |
-| `items` | `Array<{ content?: React.ReactNode; toolCall?: { icon?: React.ReactNode; title?: React.ReactNode; content?: React.ReactNode; }; files?: Array<{ icon?: string; name: string; }>; }>` | `[]` | 步骤内容项列表 |
-| `statusIcon` | `React.ReactNode` | - | 自定义状态图标 |
+| `collapsible` | `boolean` | `false` | 是否启用折叠/展开交互 |
+| `items` | `Array<{ key?: React.Key; content?: React.ReactNode; toolCall?: { icon?: React.ReactNode; title?: React.ReactNode; content?: React.ReactNode; }; files?: Array<{ icon?: React.ReactNode; status?: 'loading' \| 'ready' \| 'error'; name: string; }>; }>` | `[]` | 步骤内容项列表（推荐为每项提供 `key`） |
+| `statusIcon` | `React.ReactNode` | - | 自定义状态图标（优先级高于内置状态图标） |
 | `arrowIcon` | `React.ReactNode` | - | 自定义折叠箭头图标 |
 | `defaultOpen` | `boolean` | `false` | 是否默认展开 |
 | `open` | `boolean` | - | 控制展开状态（受控） |
 | `onOpenChange` | `(open: boolean) => void` | - | 展开状态变化回调 |
 
-### 原语组件
+### Primitives（原语组件）
 
 #### ThinkingStepItemContainerPrimitive
 容器组件，包裹多个步骤，提供统一间距。
@@ -247,6 +302,10 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 #### ThinkingStepItemFileItemPrimitive
 文件项原语，单个文件的展示。
 
+## Design Tokens
+
+组件只消费全局 token（如 `--text-* / --bg-* / --gap-* / --radius-*`），不输出全局样式。主题接入时可通过覆盖 token 完成换肤。
+
 ## 使用场景
 
 - **在 Thinking Process 中使用**：在主思考块的 content 中展示多个子步骤
@@ -258,11 +317,9 @@ import { ThinkingStepItem } from "@/registry/wuhan/blocks/thinking-step-item/thi
 ## 与 Thinking Process 组合使用
 
 ```tsx
-import { ThinkingStep } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
-import {
-  ThinkingStepItemContainerPrimitive,
-  ThinkingStepItem,
-} from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
+import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
+import { ThinkingStepItemContainerPrimitive } from "@/registry/wuhan/blocks/thinking-step-item/thinking-step-item-01";
 
 <ThinkingStep
   status="completed"
@@ -289,3 +346,9 @@ import {
   }
 />
 ```
+
+## Changelog
+
+- `files.icon`：支持从 `string` 扩展为 `React.ReactNode`
+- `statusIcon`：支持覆盖内置状态图标
+- 文件列表折叠逻辑：以“**最多两排 + 更多同排**”为契约（按实际布局判断）

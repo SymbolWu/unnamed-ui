@@ -3,7 +3,7 @@
 import {
   UserMessage,
   AIMessage,
-} from "@/registry/wuhan/blocks/message/message-01";
+} from "@/registry/wuhan/composed/message/message";
 import {
   AttachmentCard,
   AttachmentCardContent,

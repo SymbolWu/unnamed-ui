@@ -4,6 +4,8 @@ import { useState } from "react";
 import {
   AIMessage,
   UserMessage,
+} from "@/registry/wuhan/composed/message/message";
+import {
   LoadingDots,
   MessageGeneratingPrimitive,
   MessageFailedPrimitive,

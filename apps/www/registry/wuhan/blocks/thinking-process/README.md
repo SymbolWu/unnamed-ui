@@ -1,6 +1,6 @@
 # Thinking Process 思考过程
 
-多阶段思考过程组件，用于展示 AI 思考的多个步骤，支持不同状态和时间显示。
+多阶段思考过程组件（原语层），用于展示 AI 思考的多个步骤，支持不同状态和时间显示。
 
 ## 特性
 
@@ -16,10 +16,8 @@
 ### 基础用法
 
 ```tsx
-import {
-  ThinkingProcessContainerPrimitive,
-  ThinkingStep,
-} from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
+import { ThinkingStep } from "@/registry/wuhan/composed/thinking-process/thinking-process";
+import { ThinkingProcessContainerPrimitive } from "@/registry/wuhan/blocks/thinking-process/thinking-process-01";
 
 export default function Example() {
   return (
@@ -27,7 +25,6 @@ export default function Example() {
       <ThinkingStep
         status="thinking"
         title="思考中..."
-        duration={14}
         content="正在分析问题..."
         defaultOpen
       />
@@ -79,7 +76,7 @@ export default function Example() {
 
 ### ThinkingStep
 
-高级业务组件，封装了常用功能。
+业务组件已迁移至 `composed` 目录，开箱即用。
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|

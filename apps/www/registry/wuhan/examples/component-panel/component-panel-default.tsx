@@ -1,20 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  ComponentPanelContainerPrimitive,
-  ComponentPanelTabsListPrimitive,
-  ComponentPanelTabsTriggerPrimitive,
-  ComponentPanelTabsContentPrimitive,
-  ComponentPanelListPrimitive,
-  ComponentPanelListItemPrimitive,
-  ComponentPanelListItemIconPrimitive,
-} from "@/registry/wuhan/blocks/component-panel/component-panel-01";
-import {
-  BlockTooltip,
-  BlockTooltipTrigger,
-  BlockTooltipContent,
-} from "@/registry/wuhan/blocks/tooltip/tooltip-01";
+import { ComponentPanel } from "@/registry/wuhan/composed/component-panel/component-panel";
 
 export default function ComponentPanelDefault() {
   const [allItems, setAllItems] = React.useState({
@@ -54,122 +41,71 @@ export default function ComponentPanelDefault() {
 
   return (
     <div className="space-y-4 w-full h-full max-w-4xl">
-      <ComponentPanelContainerPrimitive defaultValue="all">
-        <ComponentPanelTabsListPrimitive>
-          <ComponentPanelTabsTriggerPrimitive value="all">
-            全部
-          </ComponentPanelTabsTriggerPrimitive>
-          <ComponentPanelTabsTriggerPrimitive value="mcp">
-            MCP
-          </ComponentPanelTabsTriggerPrimitive>
-          <ComponentPanelTabsTriggerPrimitive value="tool">
-            工具
-          </ComponentPanelTabsTriggerPrimitive>
-          <ComponentPanelTabsTriggerPrimitive value="workflow">
-            工作流
-          </ComponentPanelTabsTriggerPrimitive>
-        </ComponentPanelTabsListPrimitive>
-
-        <ComponentPanelTabsContentPrimitive value="all">
-          <ComponentPanelListPrimitive>
-            {Object.entries(allItems).map(([label, selected]) => (
-              <ComponentPanelListItemPrimitive
-                key={label}
-                selected={selected}
-                onClick={() => {
-                  setAllItems((prev) => ({
-                    ...prev,
-                    [label]: !prev[label as keyof typeof prev],
-                  }));
-                }}
-              >
-                <ComponentPanelListItemIconPrimitive />
-                <BlockTooltip>
-                  <BlockTooltipTrigger asChild>
-                    <span className="truncate">{label}</span>
-                  </BlockTooltipTrigger>
-                  <BlockTooltipContent>{label}</BlockTooltipContent>
-                </BlockTooltip>
-              </ComponentPanelListItemPrimitive>
-            ))}
-          </ComponentPanelListPrimitive>
-        </ComponentPanelTabsContentPrimitive>
-
-        <ComponentPanelTabsContentPrimitive value="mcp">
-          <ComponentPanelListPrimitive>
-            {Object.entries(mcpItems).map(([label, selected]) => (
-              <ComponentPanelListItemPrimitive
-                key={label}
-                selected={selected}
-                onClick={() => {
-                  setMcpItems((prev) => ({
-                    ...prev,
-                    [label]: !prev[label as keyof typeof prev],
-                  }));
-                }}
-              >
-                <ComponentPanelListItemIconPrimitive />
-                <BlockTooltip>
-                  <BlockTooltipTrigger asChild>
-                    <span className="truncate">{label}</span>
-                  </BlockTooltipTrigger>
-                  <BlockTooltipContent>{label}</BlockTooltipContent>
-                </BlockTooltip>
-              </ComponentPanelListItemPrimitive>
-            ))}
-          </ComponentPanelListPrimitive>
-        </ComponentPanelTabsContentPrimitive>
-
-        <ComponentPanelTabsContentPrimitive value="tool">
-          <ComponentPanelListPrimitive>
-            {Object.entries(toolItems).map(([label, selected]) => (
-              <ComponentPanelListItemPrimitive
-                key={label}
-                selected={selected}
-                onClick={() => {
-                  setToolItems((prev) => ({
-                    ...prev,
-                    [label]: !prev[label as keyof typeof prev],
-                  }));
-                }}
-              >
-                <ComponentPanelListItemIconPrimitive />
-                <BlockTooltip>
-                  <BlockTooltipTrigger asChild>
-                    <span className="truncate">{label}</span>
-                  </BlockTooltipTrigger>
-                  <BlockTooltipContent>{label}</BlockTooltipContent>
-                </BlockTooltip>
-              </ComponentPanelListItemPrimitive>
-            ))}
-          </ComponentPanelListPrimitive>
-        </ComponentPanelTabsContentPrimitive>
-
-        <ComponentPanelTabsContentPrimitive value="workflow">
-          <ComponentPanelListPrimitive>
-            {Object.entries(workflowItems).map(([label, selected]) => (
-              <ComponentPanelListItemPrimitive
-                key={label}
-                selected={selected}
-                onClick={() => {
-                  setWorkflowItems((prev) => ({
-                    ...prev,
-                    [label]: !prev[label as keyof typeof prev],
-                  }));
-                }}
-              >
-                <ComponentPanelListItemIconPrimitive />
-                <BlockTooltip>
-                  <BlockTooltipTrigger asChild>
-                    <span className="truncate">{label}</span>
-                  </BlockTooltipTrigger>
-                  <BlockTooltipContent>{label}</BlockTooltipContent>
-                </BlockTooltip>
-              </ComponentPanelListItemPrimitive>
-            ))}
-          </ComponentPanelListPrimitive>
-        </ComponentPanelTabsContentPrimitive>
-      </ComponentPanelContainerPrimitive>
+      <ComponentPanel
+        defaultTab="all"
+        tabs={[
+          {
+            id: "all",
+            label: "全部",
+            items: Object.entries(allItems).map(([label, selected]) => ({
+              id: label,
+              label,
+              selected,
+              tooltip: label,
+              onToggle: () =>
+                setAllItems((prev) => ({
+                  ...prev,
+                  [label]: !prev[label as keyof typeof prev],
+                })),
+            })),
+          },
+          {
+            id: "mcp",
+            label: "MCP",
+            items: Object.entries(mcpItems).map(([label, selected]) => ({
+              id: label,
+              label,
+              selected,
+              tooltip: label,
+              onToggle: () =>
+                setMcpItems((prev) => ({
+                  ...prev,
+                  [label]: !prev[label as keyof typeof prev],
+                })),
+            })),
+          },
+          {
+            id: "tool",
+            label: "工具",
+            items: Object.entries(toolItems).map(([label, selected]) => ({
+              id: label,
+              label,
+              selected,
+              tooltip: label,
+              onToggle: () =>
+                setToolItems((prev) => ({
+                  ...prev,
+                  [label]: !prev[label as keyof typeof prev],
+                })),
+            })),
+          },
+          {
+            id: "workflow",
+            label: "工作流",
+            items: Object.entries(workflowItems).map(([label, selected]) => ({
+              id: label,
+              label,
+              selected,
+              tooltip: label,
+              onToggle: () =>
+                setWorkflowItems((prev) => ({
+                  ...prev,
+                  [label]: !prev[label as keyof typeof prev],
+                })),
+            })),
+          },
+        ]}
+      />
     </div>
   );
 }

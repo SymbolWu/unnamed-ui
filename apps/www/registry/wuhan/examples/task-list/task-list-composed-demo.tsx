@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import TaskListComposed from "./task-list-composed";
+import TaskListComposed from "@/registry/wuhan/composed/task-list/task-list";
 
 export default function TaskListComposedDemo() {
   const [dataSource, setDataSource] = useState([

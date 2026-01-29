@@ -17,6 +17,8 @@
 import {
   AIMessage,
   UserMessage,
+} from "@/registry/wuhan/composed/message/message";
+import {
   MessageAIPrimitive,
   MessageUserPrimitive,
 } from "@/registry/wuhan/blocks/message/message-01";

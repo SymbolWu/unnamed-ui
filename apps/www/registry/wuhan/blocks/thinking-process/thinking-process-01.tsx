@@ -8,13 +8,51 @@ import {
   CollapsibleTrigger,
 } from "@/registry/wuhan/ui/collapsible";
 
+const BOX_BORDER = "box-border [&>*]:box-border";
+
 // ==================== 类型定义 ====================
 
 /**
- * 思考步骤状态类型
+ * 统一状态语义（组件库层）
  * @public
  */
-type ThinkingStepStatus = "pending" | "thinking" | "completed" | "cancelled";
+type ThinkingSemanticStatus =
+  | "idle"
+  | "running"
+  | "success"
+  | "error"
+  | "cancelled";
+
+/**
+ * 思考步骤状态类型（兼容旧状态）
+ * @public
+ */
+type ThinkingStepStatus =
+  | ThinkingSemanticStatus
+  | "pending"
+  | "thinking"
+  | "completed";
+
+const resolveThinkingStatus = (
+  status: ThinkingStepStatus | undefined,
+): ThinkingSemanticStatus => {
+  switch (status) {
+    case "pending":
+      return "idle";
+    case "thinking":
+      return "running";
+    case "completed":
+      return "success";
+    case "idle":
+    case "running":
+    case "success":
+    case "error":
+    case "cancelled":
+      return status;
+    default:
+      return "idle";
+  }
+};
 
 /**
  * 思考过程容器原语属性
@@ -58,7 +96,7 @@ interface ThinkingStepPrimitiveProps extends React.HTMLAttributes<HTMLDivElement
  * 思考步骤头部原语属性
  * @public
  */
-interface ThinkingStepHeaderPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ThinkingStepHeaderPrimitiveProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * 左侧内容（图标、状态等）
    */
@@ -67,6 +105,14 @@ interface ThinkingStepHeaderPrimitiveProps extends React.HTMLAttributes<HTMLDivE
    * 右侧内容（时间、箭头等）
    */
   trailing?: React.ReactNode;
+  /**
+   * 按钮禁用状态
+   */
+  disabled?: boolean;
+  /**
+   * 按钮类型
+   */
+  type?: "button" | "submit" | "reset";
 }
 
 /**
@@ -160,51 +206,40 @@ const ThinkingLoadingDotsPrimitive = React.forwardRef<
   ThinkingLoadingDotsPrimitiveProps
 >(({ className, ...props }, ref) => {
   return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @keyframes thinking-loading-pulse {
-              0%, 100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-              }
-              50% {
-                opacity: 1;
-                transform: scale(1);
-              }
-            }
-          `,
-        }}
+    <div
+      ref={ref}
+      className={cn(
+        "inline-flex items-center",
+        "gap-[var(--gap-xs)]",
+        className,
+      )}
+      {...props}
+    >
+      <span
+        className={cn(
+          "rounded-full bg-[var(--bg-brand)]",
+          "w-[var(--space-2)] h-[var(--space-2)]",
+          "animate-[thinking-loading-pulse_1.4s_ease-in-out_infinite]",
+        )}
+        style={{ animationDelay: "0s" }}
       />
-      <div
-        ref={ref}
-        className={cn("inline-flex items-center gap-1", className)}
-        {...props}
-      >
-        <span
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "thinking-loading-pulse 1.4s ease-in-out infinite",
-            animationDelay: "0s",
-          }}
-        />
-        <span
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "thinking-loading-pulse 1.4s ease-in-out infinite",
-            animationDelay: "0.2s",
-          }}
-        />
-        <span
-          className="w-1 h-1 rounded-full bg-[var(--bg-brand)]"
-          style={{
-            animation: "thinking-loading-pulse 1.4s ease-in-out infinite",
-            animationDelay: "0.4s",
-          }}
-        />
-      </div>
-    </>
+      <span
+        className={cn(
+          "rounded-full bg-[var(--bg-brand)]",
+          "w-[var(--space-2)] h-[var(--space-2)]",
+          "animate-[thinking-loading-pulse_1.4s_ease-in-out_infinite]",
+        )}
+        style={{ animationDelay: "0.2s" }}
+      />
+      <span
+        className={cn(
+          "rounded-full bg-[var(--bg-brand)]",
+          "w-[var(--space-2)] h-[var(--space-2)]",
+          "animate-[thinking-loading-pulse_1.4s_ease-in-out_infinite]",
+        )}
+        style={{ animationDelay: "0.4s" }}
+      />
+    </div>
   );
 });
 ThinkingLoadingDotsPrimitive.displayName = "ThinkingLoadingDotsPrimitive";
@@ -223,10 +258,10 @@ const ThinkingProcessContainerPrimitive = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "[&_*]:!box-border",
+        BOX_BORDER,
         "w-full",
         "flex flex-col",
-        "gap-[8px]",
+        "gap-[var(--gap-md)]",
         className,
       )}
       {...props}
@@ -258,6 +293,7 @@ const ThinkingStepPrimitive = React.forwardRef<
     },
     ref,
   ) => {
+    const resolvedStatus = resolveThinkingStatus(status);
     return (
       <Collapsible
         defaultOpen={defaultOpen}
@@ -266,8 +302,9 @@ const ThinkingStepPrimitive = React.forwardRef<
       >
         <div
           ref={ref}
-          className={cn("[&_*]:!box-border", "w-full", "group/step", className)}
+          className={cn(BOX_BORDER, "w-full", "group/step", className)}
           data-status={status}
+          data-semantic-status={resolvedStatus}
           {...props}
         >
           {children}
@@ -283,15 +320,18 @@ ThinkingStepPrimitive.displayName = "ThinkingStepPrimitive";
  * @public
  */
 const ThinkingStepHeaderPrimitive = React.forwardRef<
-  HTMLDivElement,
+  HTMLButtonElement,
   ThinkingStepHeaderPrimitiveProps
->(({ children, trailing, className, ...props }, ref) => {
+>(({ children, trailing, className, type: _type, disabled, ...props }, ref) => {
   return (
     <CollapsibleTrigger asChild>
-      <div
+      <button
         ref={ref}
+        type="button"
+        disabled={disabled}
         className={cn(
-          "[&_*]:!box-border",
+          BOX_BORDER,
+          "group/think-step-trigger",
           "flex items-center",
           "w-full",
           "cursor-pointer",
@@ -302,8 +342,12 @@ const ThinkingStepHeaderPrimitive = React.forwardRef<
         {...props}
       >
         {children}
-        {trailing}
-      </div>
+        {trailing && (
+          <div className="flex items-center gap-[var(--gap-sm)]">
+            {trailing}
+          </div>
+        )}
+      </button>
     </CollapsibleTrigger>
   );
 });
@@ -322,14 +366,14 @@ const ThinkingStepContentPrimitive = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "[&_*]:!box-border",
+          BOX_BORDER,
           "mt-[var(--gap-xs)]",
           "w-full",
           "rounded-[var(--radius-xl)]",
           "border",
-          "border-[var(--Border-border-neutral,#E1E0E7)]",
-          "bg-[var(--Container-bg-container,#FFFFFF)]",
-          "p-[var(--margin-com-xl)]",
+          "border-[var(--border-neutral)]",
+          "bg-[var(--bg-container)]",
+          "p-[var(--padding-com-xl)]",
           className,
         )}
         {...props}
@@ -339,7 +383,7 @@ const ThinkingStepContentPrimitive = React.forwardRef<
             "font-[var(--font-family-cn)]",
             "font-size-2",
             "leading-[var(--line-height-2)]",
-            "text-[var(--text-icon-text-primary,#403F4D)]",
+            "text-[var(--text-primary)]",
             "whitespace-pre-wrap",
           )}
         >
@@ -359,6 +403,7 @@ const ThinkingStatusLabelPrimitive = React.forwardRef<
   HTMLSpanElement,
   ThinkingStatusLabelPrimitiveProps
 >(({ status = "pending", children, className, ...props }, ref) => {
+  const resolvedStatus = resolveThinkingStatus(status);
   return (
     <span
       ref={ref}
@@ -367,13 +412,14 @@ const ThinkingStatusLabelPrimitive = React.forwardRef<
         "font-size-3",
         "leading-[var(--line-height-3)]",
         "font-semibold",
-        "text-[var(--text-icon-text-title,#1E1D26)]",
-        "group-hover/step:text-[var(--text-icon-text-brand,#4A56FF)]",
+        "text-[var(--text-title)]",
+        "group-hover/step:text-[var(--text-brand)]",
         "transition-colors",
-        status === "thinking" && "animate-pulse",
+        resolvedStatus === "running" && "animate-pulse",
         className,
       )}
       data-status={status}
+      data-semantic-status={resolvedStatus}
       {...props}
     >
       {children}
@@ -397,8 +443,8 @@ const ThinkingTimeLabelPrimitive = React.forwardRef<
         "font-[var(--font-family-cn)]",
         "font-size-3",
         "leading-[var(--line-height-3)]",
-        "text-[var(--text-icon-text-title,#1E1D26)]",
-        "group-hover/step:text-[var(--text-icon-text-brand,#4A56FF)]",
+        "text-[var(--text-title)]",
+        "group-hover/step:text-[var(--text-brand)]",
         "font-normal",
         "transition-colors",
         className,
@@ -419,10 +465,12 @@ const ThinkingIconContainerPrimitive = React.forwardRef<
   HTMLDivElement,
   ThinkingIconContainerPrimitiveProps
 >(({ children, status = "pending", className, ...props }, ref) => {
-  const iconStyles = {
-    pending: "text-[var(--text-tertiary)]",
-    thinking: "text-[var(--text-brand)]",
-    completed: "text-[var(--text-success)]",
+  const resolvedStatus = resolveThinkingStatus(status);
+  const iconStyles: Record<ThinkingSemanticStatus, string> = {
+    idle: "text-[var(--text-tertiary)]",
+    running: "text-[var(--text-brand)]",
+    success: "text-[var(--text-success)]",
+    error: "text-[var(--text-error)]",
     cancelled: "text-[var(--text-tertiary)]",
   };
 
@@ -432,10 +480,11 @@ const ThinkingIconContainerPrimitive = React.forwardRef<
       className={cn(
         "flex items-center justify-center",
         "size-4",
-        iconStyles[status],
+        iconStyles[resolvedStatus],
         className,
       )}
       data-status={status}
+      data-semantic-status={resolvedStatus}
       {...props}
     >
       {children}
@@ -456,11 +505,17 @@ const ThinkingCollapseArrowPrimitive = React.forwardRef<
     <div
       ref={ref}
       className={cn(
+        "flex items-center justify-center",
         "size-4",
-        "text-[var(--text-icon-text-title,#1E1D26)]",
-        "group-hover/step:text-[var(--text-icon-text-brand,#4A56FF)]",
+        "text-[var(--text-title)]",
+        "group-hover/step:text-[var(--text-brand)]",
         "transition-all duration-200",
-        "data-[state=open]:rotate-180",
+        // 默认（收起）箭头朝右：ChevronDown + (-90deg) = right
+        "-rotate-90",
+        // 展开（open）箭头朝上：ChevronDown + (-180deg) = up
+        // 兼容：data-state 通常挂在 Trigger（父级）上
+        "group-data-[state=open]/think-step-trigger:-rotate-180",
+        "data-[state=open]:-rotate-180",
         className,
       )}
       {...props}
@@ -483,12 +538,12 @@ const ThinkingPersistHintPrimitive = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "[&_*]:!box-border",
+        BOX_BORDER,
         "w-full",
         "font-[var(--font-family-cn)]",
         "font-size-2",
         "leading-[var(--line-height-2)]",
-        "text-[var(--text-icon-text-secondary,#666473)]",
+        "text-[var(--text-secondary)]",
         "font-normal",
         className,
       )}
@@ -512,13 +567,13 @@ const ThinkingStepHintPrimitive = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "[&_*]:!box-border",
+        BOX_BORDER,
         "w-full",
         "mt-[var(--gap-xs)]",
         "font-[var(--font-family-cn)]",
         "font-size-2",
         "leading-[var(--line-height-2)]",
-        "text-[var(--text-icon-text-secondary,#666473)]",
+        "text-[var(--text-secondary)]",
         "font-normal",
         className,
       )}
@@ -530,122 +585,10 @@ const ThinkingStepHintPrimitive = React.forwardRef<
 });
 ThinkingStepHintPrimitive.displayName = "ThinkingStepHintPrimitive";
 
-// ==================== 业务组件层（可选） ====================
-
-/**
- * 思考步骤组件属性
- * @public
- */
-interface ThinkingStepProps extends Omit<
-  ThinkingStepPrimitiveProps,
-  "children" | "title" | "content"
-> {
-  /**
-   * 步骤标题
-   */
-  title: React.ReactNode;
-  /**
-   * 步骤内容
-   */
-  content?: React.ReactNode;
-  /**
-   * 时长（秒）
-   */
-  duration?: number;
-  /**
-   * 自定义图标
-   */
-  icon?: React.ReactNode;
-  /**
-   * 自定义箭头图标
-   */
-  arrowIcon?: React.ReactNode;
-}
-
-/**
- * 思考步骤业务组件
- * @public
- */
-const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
-  (
-    {
-      title,
-      content,
-      duration,
-      status = "pending",
-      icon,
-      arrowIcon,
-      defaultOpen,
-      open,
-      onOpenChange,
-      ...props
-    },
-    ref,
-  ) => {
-    // 默认不显示图标
-    const defaultIcon = null;
-
-    const defaultArrowIcon = (
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M4 6L8 10L12 6"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    );
-
-    // 只有完成状态才显示时间
-    const showDuration = status === "completed" && duration !== undefined;
-
-    return (
-      <ThinkingStepPrimitive
-        ref={ref}
-        status={status}
-        defaultOpen={defaultOpen}
-        open={open}
-        onOpenChange={onOpenChange}
-        {...props}
-      >
-        <ThinkingStepHeaderPrimitive
-          trailing={
-            <ThinkingCollapseArrowPrimitive>
-              {arrowIcon || defaultArrowIcon}
-            </ThinkingCollapseArrowPrimitive>
-          }
-        >
-          {icon ? (
-            <ThinkingIconContainerPrimitive status={status}>
-              {icon}
-            </ThinkingIconContainerPrimitive>
-          ) : null}
-          <ThinkingStatusLabelPrimitive status={status}>
-            {title}
-          </ThinkingStatusLabelPrimitive>
-          {showDuration && (
-            <ThinkingTimeLabelPrimitive>{duration}s</ThinkingTimeLabelPrimitive>
-          )}
-        </ThinkingStepHeaderPrimitive>
-        {content && (
-          <ThinkingStepContentPrimitive>{content}</ThinkingStepContentPrimitive>
-        )}
-      </ThinkingStepPrimitive>
-    );
-  },
-);
-ThinkingStep.displayName = "ThinkingStep";
-
 // ==================== 统一导出 ====================
 
 export type {
+  ThinkingSemanticStatus,
   ThinkingStepStatus,
   ThinkingProcessContainerPrimitiveProps,
   ThinkingStepPrimitiveProps,
@@ -657,7 +600,6 @@ export type {
   ThinkingPersistHintPrimitiveProps,
   ThinkingStepHintPrimitiveProps,
   ThinkingLoadingDotsPrimitiveProps,
-  ThinkingStepProps,
 };
 
 export {
@@ -672,5 +614,4 @@ export {
   ThinkingPersistHintPrimitive,
   ThinkingStepHintPrimitive,
   ThinkingLoadingDotsPrimitive,
-  ThinkingStep,
 };
