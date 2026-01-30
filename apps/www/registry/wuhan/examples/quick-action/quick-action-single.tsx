@@ -3,7 +3,7 @@
 import {
   QuickActionButton,
   QuickActionIcon,
-} from "@/registry/wuhan/blocks/quick-action/quick-action-01";
+} from "@/registry/wuhan/composed/quick-action/quick-action";
 import { Sparkles } from "lucide-react";
 
 export default function QuickActionSingle() {

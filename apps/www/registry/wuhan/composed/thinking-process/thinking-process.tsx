@@ -84,10 +84,6 @@ interface ThinkingStepLabels {
    */
   longRunningHint?: React.ReactNode;
   /**
-   * 工具统计文案
-   */
-  toolsUsed?: (count: number) => React.ReactNode;
-  /**
    * 取消状态自动追加的子步骤标题
    */
   cancelledStepTitle?: React.ReactNode;
@@ -113,6 +109,7 @@ interface ThinkingStepProps extends Omit<
    * 内容块（推荐）：支持文字与子步骤列表穿插渲染。
    *
    * 规则：当 `contentBlocks` 存在时，将忽略 `content / subSteps / renderSubSteps`。
+   * 即使内容被过滤为空，也不会回退到其他内容来源，以避免出现空内容容器。
    */
   contentBlocks?: ThinkingStepContentBlock[];
   /**
@@ -129,6 +126,12 @@ interface ThinkingStepProps extends Omit<
    * 时长（秒）
    */
   duration?: number;
+  /**
+   * 头部右侧文案（由使用方自定义）
+   *
+   * 典型用法：耗时、工具统计等
+   */
+  headerMeta?: React.ReactNode;
   /**
    * 自定义图标
    */
@@ -174,6 +177,7 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
       subSteps,
       renderSubSteps,
       duration,
+      headerMeta,
       status = "pending",
       icon,
       arrowIcon,
@@ -196,108 +200,112 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
     const resolvedContentId = contentId ?? `thinking-step-content-${autoId}`;
     const resolvedLabels: Required<ThinkingStepLabels> = {
       longRunningHint: "处理将需要几分钟，即使您离开页面也会继续进行",
-      toolsUsed: (count) => `已使用${count}个工具`,
       cancelledStepTitle: "已取消",
       ...labels,
     };
 
     // 只有完成状态才显示时间
     const showDuration = resolvedStatus === "success" && duration !== undefined;
-    const hasBlocks = Array.isArray(contentBlocks) && contentBlocks.length > 0;
+    const hasBlocksProp =
+      Array.isArray(contentBlocks) && contentBlocks.length > 0;
     const hasSubSteps =
-      !hasBlocks &&
+      !hasBlocksProp &&
       typeof renderSubSteps === "function" &&
       Array.isArray(subSteps) &&
       subSteps.length > 0;
     const subStepsNode = hasSubSteps ? renderSubSteps(subSteps) : null;
-    const hasContent = !hasBlocks && content !== undefined && content !== null;
+    const hasContent =
+      !hasBlocksProp &&
+      content !== undefined &&
+      content !== null &&
+      content !== "";
 
-    const blocksNode = hasBlocks ? (
-      <div className="flex flex-col gap-[var(--gap-md)]">
-        {contentBlocks.map((block, index) => {
-          const key = block.key ?? index;
+    const renderedBlocks = hasBlocksProp
+      ? contentBlocks
+          .map((block, index) => {
+            const key = block.key ?? index;
 
-          switch (block.type) {
-            case "text":
-              return <div key={key}>{block.content}</div>;
-            case "subSteps":
-              return (
-                <div key={key} className="whitespace-normal">
-                  <ThinkingStepItemContainerPrimitive>
-                    {[
-                      ...block.steps,
-                      ...(resolvedStatus === "cancelled"
-                        ? ([
-                            {
-                              status: "cancelled",
-                              title: resolvedLabels.cancelledStepTitle,
-                              items: [],
-                            } satisfies ThinkingStepItemProps,
-                          ] as const)
-                        : []),
-                    ].map((step, stepIndex) => {
-                      const { key: stepKey, ...stepProps } = step;
-                      const fallbackKey =
-                        typeof stepProps.title === "string" ||
-                        typeof stepProps.title === "number"
-                          ? String(stepProps.title)
-                          : stepIndex;
+            switch (block.type) {
+              case "text": {
+                if (
+                  block.content === undefined ||
+                  block.content === null ||
+                  block.content === ""
+                ) {
+                  return null;
+                }
+                return <div key={key}>{block.content}</div>;
+              }
+              case "subSteps": {
+                const steps = [
+                  ...block.steps,
+                  ...(resolvedStatus === "cancelled"
+                    ? ([
+                        {
+                          status: "cancelled",
+                          title: resolvedLabels.cancelledStepTitle,
+                          items: [],
+                        } satisfies ThinkingStepItemProps,
+                      ] as const)
+                    : []),
+                ];
 
-                      return (
-                        <ThinkingStepItem
-                          key={stepKey ?? fallbackKey}
-                          {...stepProps}
-                        />
-                      );
-                    })}
-                  </ThinkingStepItemContainerPrimitive>
-                </div>
-              );
-            case "node":
-              return (
-                <div key={key} className="whitespace-normal">
-                  {block.node}
-                </div>
-              );
-            default:
-              return null;
-          }
-        })}
-      </div>
+                if (steps.length === 0) return null;
+
+                return (
+                  <div key={key} className="whitespace-normal">
+                    <ThinkingStepItemContainerPrimitive>
+                      {steps.map((step, stepIndex) => {
+                        const { key: stepKey, ...stepProps } = step;
+                        const fallbackKey =
+                          typeof stepProps.title === "string" ||
+                          typeof stepProps.title === "number"
+                            ? String(stepProps.title)
+                            : stepIndex;
+
+                        return (
+                          <ThinkingStepItem
+                            key={stepKey ?? fallbackKey}
+                            {...stepProps}
+                          />
+                        );
+                      })}
+                    </ThinkingStepItemContainerPrimitive>
+                  </div>
+                );
+              }
+              case "node": {
+                if (block.node === undefined || block.node === null) {
+                  return null;
+                }
+                return (
+                  <div key={key} className="whitespace-normal">
+                    {block.node}
+                  </div>
+                );
+              }
+              default:
+                return null;
+            }
+          })
+          .filter(Boolean)
+      : [];
+    const hasBlocksContent = renderedBlocks.length > 0;
+    const blocksNode = hasBlocksContent ? (
+      <div className="flex flex-col gap-[var(--gap-md)]">{renderedBlocks}</div>
     ) : null;
 
-    // 工具调用统计：仅在 contentBlocks 的 subSteps 中自动统计
-    const toolsUsedCount = hasBlocks
-      ? contentBlocks.reduce((acc, block) => {
-          if (block.type !== "subSteps") return acc;
-          return (
-            acc +
-            block.steps.reduce((stepAcc, step) => {
-              const items = step.items ?? [];
-              return (
-                stepAcc +
-                items.reduce(
-                  (itemAcc, item) => itemAcc + (item.toolCall ? 1 : 0),
-                  0,
-                )
-              );
-            }, 0)
-          );
-        }, 0)
-      : 0;
-
-    const toolsUsedNode =
-      toolsUsedCount > 0 ? resolvedLabels.toolsUsed(toolsUsedCount) : null;
-    const showToolsUsed = toolsUsedCount > 0 && toolsUsedNode !== null;
-    const showDurationInHeader = showDuration && !showToolsUsed;
+    const showHeaderMeta = headerMeta !== undefined && headerMeta !== null;
+    const showDurationInHeader = showDuration && !showHeaderMeta;
 
     const resolvedHint =
       hint ?? (longRunning ? resolvedLabels.longRunningHint : undefined);
     const showHint = resolvedHint !== undefined && resolvedHint !== null;
 
-    const hasHintOnly = showHint && !hasBlocks && !hasContent && !subStepsNode;
+    const hasHintOnly =
+      showHint && !hasBlocksContent && !hasContent && !subStepsNode;
     const hasCollapsibleContent =
-      hasHintOnly || hasBlocks || hasContent || !!subStepsNode;
+      hasHintOnly || hasBlocksContent || hasContent || !!subStepsNode;
 
     // 状态驱动的默认开合策略：仅在非受控且未显式传 defaultOpen 时生效
     const resolvedDefaultOpen =
@@ -321,7 +329,7 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
           aria-controls={hasCollapsibleContent ? resolvedContentId : undefined}
           trailing={
             <>
-              {showToolsUsed && (
+              {showHeaderMeta && (
                 <span
                   className={cn(
                     "font-[var(--font-family-cn)]",
@@ -331,7 +339,7 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
                     "text-[var(--text-secondary)]",
                   )}
                 >
-                  {toolsUsedNode}
+                  {headerMeta}
                 </span>
               )}
               {showDurationInHeader && (
@@ -339,9 +347,12 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
                   {duration}s
                 </ThinkingTimeLabelPrimitive>
               )}
-              <ThinkingCollapseArrowPrimitive>
-                {arrowIcon || defaultArrowIcon}
-              </ThinkingCollapseArrowPrimitive>
+
+              {hasCollapsibleContent && (
+                <ThinkingCollapseArrowPrimitive>
+                  {arrowIcon || defaultArrowIcon}
+                </ThinkingCollapseArrowPrimitive>
+              )}
             </>
           }
         >
@@ -364,12 +375,12 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
             </ThinkingStepHintPrimitive>
           </CollapsibleContent>
         ) : null}
-        {(hasBlocks || hasContent || subStepsNode) && (
+        {(hasBlocksContent || hasContent || subStepsNode) && (
           <ThinkingStepContentPrimitive
             id={resolvedContentId}
             aria-labelledby={resolvedTriggerId}
           >
-            {hasBlocks && blocksNode}
+            {hasBlocksContent && blocksNode}
             {hasContent && <div>{content}</div>}
             {subStepsNode && (
               <div

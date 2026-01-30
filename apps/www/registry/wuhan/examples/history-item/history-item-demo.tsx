@@ -1,12 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  HistoryItemPrimitive,
-  HistoryItemTitlePrimitive,
-  HistoryItemTrailingPrimitive,
-  HistoryItemHoverTrailingPrimitive,
-} from "@/registry/wuhan/blocks/history-item/history-item-01";
+import { HistoryItem } from "@/registry/wuhan/composed/history-item/history-item";
 import { cn } from "@/lib/utils";
 import * as Popover from "@radix-ui/react-popover";
 import { Clock, Pin, Trash2, Ellipsis, Copy } from "lucide-react";
@@ -117,12 +112,10 @@ export default function HistoryItemDemo() {
 
   return (
     <div className="flex flex-col gap-[var(--gap-md)]">
-      <HistoryItemPrimitive
-        data-active={moreOpen1 ? "true" : undefined}
-        aria-label="Default history item"
-      >
-        <HistoryItemTitlePrimitive>默认历史记录项</HistoryItemTitlePrimitive>
-        <HistoryItemTrailingPrimitive>
+      <HistoryItem
+        active={moreOpen1}
+        title="默认历史记录项"
+        trailing={
           <div className="inline-flex items-center gap-[var(--gap-xs)]">
             <HoverMorePopover open={moreOpen1} onOpenChange={setMoreOpen1}>
               <span className="inline-flex items-center" aria-label="More">
@@ -130,31 +123,23 @@ export default function HistoryItemDemo() {
               </span>
             </HoverMorePopover>
           </div>
-        </HistoryItemTrailingPrimitive>
-      </HistoryItemPrimitive>
+        }
+      />
 
-      <HistoryItemPrimitive
-        data-selected="true"
-        aria-label="Selected history item"
-      >
-        <HistoryItemTitlePrimitive>
-          选中状态历史记录项
-        </HistoryItemTitlePrimitive>
-        <HistoryItemTrailingPrimitive>
+      <HistoryItem
+        selected
+        title="选中状态历史记录项"
+        trailing={
           <div className="inline-flex items-center gap-[var(--gap-xs)]">
             <Clock className="size-4" />
           </div>
-        </HistoryItemTrailingPrimitive>
-      </HistoryItemPrimitive>
+        }
+      />
 
-      <HistoryItemPrimitive
-        data-active={moreOpen2 ? "true" : undefined}
-        aria-label="History item with hover actions"
-      >
-        <HistoryItemTitlePrimitive>
-          Hover 展示操作：删除 + 更多(popover)
-        </HistoryItemTitlePrimitive>
-        <HistoryItemHoverTrailingPrimitive>
+      <HistoryItem
+        active={moreOpen2}
+        title="Hover 展示操作：删除 + 更多(popover)"
+        hoverTrailing={
           <div className="inline-flex items-center gap-[var(--gap-xs)]">
             <HoverMorePopover open={moreOpen2} onOpenChange={setMoreOpen2}>
               <span className="inline-flex items-center" aria-label="More">
@@ -162,8 +147,8 @@ export default function HistoryItemDemo() {
               </span>
             </HoverMorePopover>
           </div>
-        </HistoryItemHoverTrailingPrimitive>
-      </HistoryItemPrimitive>
+        }
+      />
     </div>
   );
 }

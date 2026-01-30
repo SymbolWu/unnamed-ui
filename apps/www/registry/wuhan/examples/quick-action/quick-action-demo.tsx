@@ -4,7 +4,7 @@ import {
   QuickActionButton,
   QuickActionGroup,
   QuickActionIcon,
-} from "@/registry/wuhan/blocks/quick-action/quick-action-01";
+} from "@/registry/wuhan/composed/quick-action/quick-action";
 import {
   Sparkles,
   FileText,

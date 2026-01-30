@@ -279,6 +279,19 @@ const recruitmentExamples: Registry["items"] = [
     ],
   },
   {
+    name: "thinking-process-debugging",
+    type: "registry:example",
+    registryDependencies: ["thinking-process"],
+    files: [
+      {
+        path: "examples/recruitment/thinking-process/thinking-process-debugging.tsx",
+        type: "registry:example",
+        target:
+          "components/wuhan/examples/recruitment/thinking-process-debugging.tsx",
+      },
+    ],
+  },
+  {
     name: "thinking-process-default",
     type: "registry:example",
     registryDependencies: ["thinking-process"],
@@ -543,7 +556,7 @@ export const examples: Registry["items"] = [
   {
     name: "welcome-demo",
     type: "registry:example",
-    registryDependencies: ["welcome-01"],
+    registryDependencies: ["welcome"],
     files: [
       {
         path: "examples/welcome/welcome-demo.tsx",
@@ -604,7 +617,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-attachment",
     type: "registry:example",
-    registryDependencies: ["message", "attachment-list-01"],
+    registryDependencies: ["message", "attachment-list"],
     files: [
       {
         path: "examples/message/message-with-attachment.tsx",
@@ -628,7 +641,7 @@ export const examples: Registry["items"] = [
   {
     name: "message-with-avatar-header",
     type: "registry:example",
-    registryDependencies: ["message", "avatar-header-01"],
+    registryDependencies: ["message", "avatar-header"],
     files: [
       {
         path: "examples/message/message-with-avatar-header.tsx",
@@ -641,7 +654,7 @@ export const examples: Registry["items"] = [
   {
     name: "attachment-list-demo",
     type: "registry:example",
-    registryDependencies: ["attachment-list-01"],
+    registryDependencies: ["attachment-list"],
     files: [
       {
         path: "examples/attachment-list/attachment-list-demo.tsx",
@@ -654,7 +667,7 @@ export const examples: Registry["items"] = [
   {
     name: "quote-content-demo",
     type: "registry:example",
-    registryDependencies: ["quote-content-01"],
+    registryDependencies: ["quote-content"],
     files: [
       {
         path: "examples/quote-content/quote-content-demo.tsx",
@@ -667,7 +680,7 @@ export const examples: Registry["items"] = [
   {
     name: "avatar-header-demo",
     type: "registry:example",
-    registryDependencies: ["avatar-header-01"],
+    registryDependencies: ["avatar-header"],
     files: [
       {
         path: "examples/avatar-header/avatar-header-demo.tsx",
@@ -680,7 +693,7 @@ export const examples: Registry["items"] = [
   {
     name: "history-item-demo",
     type: "registry:example",
-    registryDependencies: ["history-item-01", "tooltip"],
+    registryDependencies: ["history-item"],
     files: [
       {
         path: "examples/history-item/history-item-demo.tsx",
@@ -741,7 +754,7 @@ export const examples: Registry["items"] = [
   {
     name: "sender-composed-demo",
     type: "registry:example",
-    registryDependencies: ["sender-01", "attachment-list-01"],
+    registryDependencies: ["sender-01", "attachment-list", "quote-content"],
     files: [
       {
         path: "examples/sender/sender-composed-demo.tsx",
@@ -780,7 +793,7 @@ export const examples: Registry["items"] = [
   {
     name: "prompt-demo",
     type: "registry:example",
-    registryDependencies: ["prompt-01", "prompt-02"],
+    registryDependencies: ["prompt"],
     files: [
       {
         path: "examples/prompt/prompt-demo.tsx",
@@ -792,7 +805,7 @@ export const examples: Registry["items"] = [
   {
     name: "prompt-horizontal",
     type: "registry:example",
-    registryDependencies: ["prompt-01"],
+    registryDependencies: ["prompt"],
     files: [
       {
         path: "examples/prompt/prompt-horizontal.tsx",
@@ -804,7 +817,7 @@ export const examples: Registry["items"] = [
   {
     name: "prompt-vertical",
     type: "registry:example",
-    registryDependencies: ["prompt-02"],
+    registryDependencies: ["prompt"],
     files: [
       {
         path: "examples/prompt/prompt-vertical.tsx",
@@ -817,7 +830,7 @@ export const examples: Registry["items"] = [
   {
     name: "suggestion-demo",
     type: "registry:example",
-    registryDependencies: ["suggestion-01"],
+    registryDependencies: ["suggestion"],
     files: [
       {
         path: "examples/suggestion/suggestion-demo.tsx",
@@ -829,7 +842,7 @@ export const examples: Registry["items"] = [
   {
     name: "suggestion-default",
     type: "registry:example",
-    registryDependencies: ["suggestion-01"],
+    registryDependencies: ["suggestion"],
     files: [
       {
         path: "examples/suggestion/suggestion-default.tsx",
@@ -841,7 +854,7 @@ export const examples: Registry["items"] = [
   {
     name: "suggestion-custom-icon",
     type: "registry:example",
-    registryDependencies: ["suggestion-01"],
+    registryDependencies: ["suggestion"],
     files: [
       {
         path: "examples/suggestion/suggestion-custom-icon.tsx",
@@ -854,7 +867,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-demo",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-demo.tsx",
@@ -866,7 +879,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-default",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-default.tsx",
@@ -878,7 +891,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-with-icons",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-with-icons.tsx",
@@ -890,7 +903,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-single",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-single.tsx",
@@ -902,7 +915,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-interactive",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-interactive.tsx",
@@ -914,7 +927,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-disabled",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-disabled.tsx",
@@ -926,7 +939,7 @@ export const examples: Registry["items"] = [
   {
     name: "quick-action-flexible-layout",
     type: "registry:example",
-    registryDependencies: ["quick-action-01"],
+    registryDependencies: ["quick-action"],
     files: [
       {
         path: "examples/quick-action/quick-action-flexible-layout.tsx",
@@ -939,12 +952,7 @@ export const examples: Registry["items"] = [
   {
     name: "sidebar-demo",
     type: "registry:example",
-    registryDependencies: [
-      "sidebar-01",
-      "history-item-01",
-      "avatar-header-01",
-      "button",
-    ],
+    registryDependencies: ["sidebar", "avatar-header", "button"],
     files: [
       {
         path: "examples/sidebar/sidebar-demo.tsx",
@@ -957,7 +965,7 @@ export const examples: Registry["items"] = [
   {
     name: "feedback-demo",
     type: "registry:example",
-    registryDependencies: ["feedback-01"],
+    registryDependencies: ["feedback"],
     files: [
       {
         path: "examples/feedback/feedback-demo.tsx",

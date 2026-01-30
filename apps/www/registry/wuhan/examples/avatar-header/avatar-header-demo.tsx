@@ -1,26 +1,18 @@
 "use client";
 
-import * as React from "react";
-import {
-  Avatar,
-  AvatarHeader,
-  AvatarName,
-  AvatarTime,
-  MessageAvatarHeader,
-} from "@/registry/wuhan/blocks/avatar-header/avatar-header-01";
+import { AvatarHeaderComposed } from "@/registry/wuhan/composed/avatar-header/avatar-header";
 
 export default function AvatarHeaderDemo() {
   return (
     <div className="flex flex-col gap-[var(--gap-md)]">
-      {/* 推荐用法：组合组件 */}
-      <MessageAvatarHeader name="User" time="12:25" />
-
-      {/* 原语用法：完全自定义结构/内容 */}
-      <AvatarHeader>
-        <Avatar />
-        <AvatarName>AI</AvatarName>
-        <AvatarTime>09:10</AvatarTime>
-      </AvatarHeader>
+      <AvatarHeaderComposed name="User" time="12:25" />
+      <AvatarHeaderComposed
+        name="AI"
+        time="09:10"
+        avatar={
+          <div className="size-6 rounded-full bg-[var(--bg-brand-light)]" />
+        }
+      />
     </div>
   );
 }

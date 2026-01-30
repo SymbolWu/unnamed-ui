@@ -3,7 +3,7 @@
 import {
   QuickActionButton,
   QuickActionGroup,
-} from "@/registry/wuhan/blocks/quick-action/quick-action-01";
+} from "@/registry/wuhan/composed/quick-action/quick-action";
 
 export default function QuickActionDefault() {
   return (

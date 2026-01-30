@@ -10,16 +10,8 @@ import {
   SenderSendButton,
   SenderModeButton,
 } from "@/registry/wuhan/blocks/sender/sender-01";
-import {
-  AttachmentCard,
-  AttachmentCardContent,
-  AttachmentCardDeleteButton,
-  AttachmentCardLeading,
-  AttachmentCardMeta,
-  AttachmentCardTitle,
-  AttachmentList,
-} from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
-import { Paperclip, Loader2, X } from "lucide-react";
+import { AttachmentListComposed } from "@/registry/wuhan/composed/attachment-list/attachment-list";
+import { Paperclip, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Attachment {
@@ -47,77 +39,22 @@ function AttachmentListWrapper({
 }: AttachmentListWrapperProps) {
   if (attachments.length === 0) return null;
 
-  return (
-    <AttachmentList>
-      {attachments.map((attachment) => {
-        const Icon = attachment.icon || Paperclip;
-        const isImage = !!attachment.thumbnail;
-        const fileType = attachment.name?.split(".").pop()?.toUpperCase() || "";
-        const meta =
-          fileType && attachment.size
-            ? `${fileType}·${attachment.size}`
-            : attachment.size || fileType;
+  const items = attachments.map((attachment) => {
+    const fileType = attachment.name?.split(".").pop()?.toUpperCase() || "";
+    return {
+      id: attachment.id,
+      name: attachment.name,
+      thumbnail: attachment.thumbnail,
+      fileType,
+      fileSize: attachment.size,
+      icon: attachment.icon ? (
+        <attachment.icon className="size-4" />
+      ) : undefined,
+      isImage: !!attachment.thumbnail,
+    };
+  });
 
-        return (
-          <AttachmentCard
-            key={attachment.id}
-            variant="outline"
-            size="sm"
-            className={cn(
-              "h-14",
-              "flex items-center",
-              isImage
-                ? "w-14 p-0"
-                : "max-w-[200px] px-[var(--padding-com-md)] gap-[var(--gap-sm)]",
-            )}
-            onClick={() => {}}
-          >
-            <AttachmentCardLeading
-              className={cn(
-                isImage
-                  ? "w-full h-full rounded-[var(--radius-xl)]"
-                  : "rounded-[var(--radius-lg)] bg-[var(--bg-container)] w-10 h-10",
-              )}
-            >
-              {attachment.thumbnail ? (
-                <img
-                  src={attachment.thumbnail}
-                  alt={attachment.name}
-                  className={
-                    isImage
-                      ? "w-full h-full object-cover"
-                      : "size-10 object-cover"
-                  }
-                />
-              ) : (
-                <Icon className="size-4" />
-              )}
-            </AttachmentCardLeading>
-
-            {!isImage && (
-              <AttachmentCardContent>
-                <AttachmentCardTitle title={attachment.name}>
-                  {attachment.name}
-                </AttachmentCardTitle>
-                {meta && <AttachmentCardMeta>{meta}</AttachmentCardMeta>}
-              </AttachmentCardContent>
-            )}
-
-            <AttachmentCardDeleteButton
-              aria-label="Delete attachment"
-              onMouseDown={(e) => e.stopPropagation()}
-              onClick={(e) => {
-                e.stopPropagation();
-                onRemove?.(attachment.id);
-              }}
-            >
-              <X className="w-3 h-3 text-[var(--text-tertiary)]" />
-            </AttachmentCardDeleteButton>
-          </AttachmentCard>
-        );
-      })}
-    </AttachmentList>
-  );
+  return <AttachmentListComposed items={items} onRemove={onRemove} />;
 }
 
 interface ModeSelectorProps {

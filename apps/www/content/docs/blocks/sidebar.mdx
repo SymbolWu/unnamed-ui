@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-description: Sidebar primitive components for chat applications (style-only, no business logic)
+description: Composed sidebar with header, search, and history list
 author: AF
 ---
 
@@ -11,7 +11,7 @@ author: AF
   align="start"
 />
 
-Sidebar 组件提供了侧边栏的基础样式原语，包含头部、新建按钮、历史对话区域和底部等部分。所有组件都是纯样式原语，不包含任何业务逻辑，用户可以根据需求自由组合使用。
+Sidebar 是组合组件，提供头部、新建按钮、历史对话区域和底部等默认结构。需要深度定制时可使用 primitives 自由组合。
 
 ## Installation
 
@@ -25,7 +25,7 @@ Sidebar 组件提供了侧边栏的基础样式原语，包含头部、新建按
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/sidebar-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/sidebar.json
 ```
 
 </TabsContent>
@@ -37,8 +37,8 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/sidebar-01.json
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  name="sidebar-demo"
-  title="registry/wuhan/examples/sidebar/sidebar-demo.tsx"
+  name="sidebar"
+  title="registry/wuhan/composed/sidebar/sidebar.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>

@@ -1,18 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import {
-  AttachmentCard,
-  AttachmentCardContent,
-  AttachmentCardDeleteButton,
-  AttachmentCardLeading,
-  AttachmentCardMeta,
-  AttachmentCardTitle,
-  AttachmentList,
-  AttachmentLoadingIndicator,
-} from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
-import { cn } from "@/lib/utils";
-import { FileText, X } from "lucide-react";
+import { AttachmentListComposed } from "@/registry/wuhan/composed/attachment-list/attachment-list";
+import { FileText } from "lucide-react";
 
 type DemoAttachment = {
   id: string;
@@ -91,70 +81,20 @@ export default function AttachmentListDemo() {
 
   return (
     <div className="w-full max-w-2xl">
-      <AttachmentList className="w-full">
-        {items.map((item) => {
-          const meta =
-            item.fileType && item.fileSize
-              ? `${item.fileType}·${item.fileSize}`
-              : item.fileSize || item.fileType;
-
-          return (
-            <AttachmentCard
-              key={item.id}
-              variant="outline"
-              size="sm"
-              className={cn(
-                "h-14",
-                "flex items-center",
-                item.isImage
-                  ? "w-14 p-0 bg-transparent bg-[var(--bg-neutral-light)]"
-                  : "max-w-[200px] px-[var(--padding-com-md)] gap-[var(--gap-sm)]",
-              )}
-              onClick={() => {}}
-            >
-              <AttachmentCardLeading
-                className={cn(
-                  item.isImage
-                    ? "w-full h-full rounded-[var(--radius-xl)] overflow-hidden "
-                    : "rounded-[var(--radius-lg)] bg-[var(--bg-container)] w-10 h-10",
-                )}
-              >
-                {item.loading ? (
-                  <AttachmentLoadingIndicator className="bg-transparent" />
-                ) : item.isImage ? (
-                  <img
-                    className="w-full h-full object-cover"
-                    src={item.thumbnail}
-                    alt={item.name}
-                  />
-                ) : (
-                  <FileText className="size-4" />
-                )}
-              </AttachmentCardLeading>
-
-              {!item.isImage && (
-                <AttachmentCardContent>
-                  {item.name && (
-                    <AttachmentCardTitle>{item.name}</AttachmentCardTitle>
-                  )}
-                  {meta && <AttachmentCardMeta>{meta}</AttachmentCardMeta>}
-                </AttachmentCardContent>
-              )}
-
-              <AttachmentCardDeleteButton
-                aria-label="Delete attachment"
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setItems((prev) => prev.filter((x) => x.id !== item.id));
-                }}
-              >
-                <X className="w-3 h-3 text-[var(--text-tertiary)]" />
-              </AttachmentCardDeleteButton>
-            </AttachmentCard>
-          );
-        })}
-      </AttachmentList>
+      <AttachmentListComposed
+        className="w-full"
+        items={items.map((item) => ({
+          id: item.id,
+          name: item.name,
+          fileType: item.fileType,
+          fileSize: item.fileSize,
+          isImage: item.isImage,
+          loading: item.loading,
+          thumbnail: item.thumbnail,
+          icon: item.isImage ? undefined : <FileText className="size-4" />,
+        }))}
+        onRemove={(id) => setItems((prev) => prev.filter((x) => x.id !== id))}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 ---
 title: Attachment List
-description: Attachment list and attachment card primitives for chat/file scenarios
+description: Composed attachment list with cards for chat/file scenarios
 author: AF
 ---
 
@@ -10,7 +10,7 @@ author: AF
   className="mb-4"
 />
 
-Attachment List 组件提供了用于展示附件卡片与横向滚动附件列表的基础样式原语，适用于聊天输入区、消息附件展示等场景。
+Attachment List 是组合组件，提供附件卡片与横向滚动列表的默认布局，适用于聊天输入区、消息附件展示等场景。需要深度定制时可使用 primitives。
 
 ## Installation
 
@@ -24,7 +24,7 @@ Attachment List 组件提供了用于展示附件卡片与横向滚动附件列�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/attachment-list-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/attachment-list.json
 ```
 
 </TabsContent>
@@ -36,8 +36,8 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/attachment-list-01.json
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  name="attachment-list-demo"
-  title="registry/wuhan/examples/attachment-list/attachment-list-demo.tsx"
+  name="attachment-list"
+  title="registry/wuhan/composed/attachment-list/attachment-list.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>

@@ -3,7 +3,7 @@
 import {
   SuggestionButton,
   SuggestionGroup,
-} from "@/registry/wuhan/blocks/suggestion/suggestion-01";
+} from "@/registry/wuhan/composed/suggestion/suggestion";
 
 export default function SuggestionDemo() {
   return (

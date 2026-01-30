@@ -20,22 +20,8 @@ import {
   SenderSendButton,
   SenderModeButton,
 } from "@/registry/wuhan/blocks/sender/sender-01";
-import {
-  AttachmentCard,
-  AttachmentCardContent,
-  AttachmentCardDeleteButton,
-  AttachmentCardLeading,
-  AttachmentCardMeta,
-  AttachmentCardTitle,
-  AttachmentList,
-} from "@/registry/wuhan/blocks/attachment-list/attachment-list-01";
-import {
-  QuoteContent,
-  QuoteContentLeading,
-  QuoteContentContent,
-  QuoteContentText,
-  QuoteContentCloseButton,
-} from "@/registry/wuhan/blocks/quote-content/quote-content-01";
+import { AttachmentListComposed } from "@/registry/wuhan/composed/attachment-list/attachment-list";
+import { QuoteContentComposed } from "@/registry/wuhan/composed/quote-content/quote-content";
 import {
   Send,
   Paperclip,
@@ -79,77 +65,23 @@ function AttachmentListWrapper({
   if (attachments.length === 0) return null;
 
   return (
-    <AttachmentList>
-      {attachments.map((attachment) => {
-        const Icon = attachment.icon || Paperclip;
-        // 判断是否为图片
-        const isImage = !!attachment.thumbnail;
-        // 提取文件类型
+    <AttachmentListComposed
+      items={attachments.map((attachment) => {
         const fileType = attachment.name?.split(".").pop()?.toUpperCase() || "";
-        const meta =
-          fileType && attachment.size
-            ? `${fileType}·${attachment.size}`
-            : attachment.size || fileType;
-
-        return (
-          <AttachmentCard
-            key={attachment.id}
-            variant="outline"
-            size="sm"
-            className={cn(
-              "h-14",
-              "flex items-center",
-              isImage
-                ? "w-14 p-0"
-                : "max-w-[200px] px-[var(--padding-com-md)] gap-[var(--gap-sm)]",
-            )}
-            onClick={() => {}}
-          >
-            <AttachmentCardLeading
-              className={cn(
-                isImage
-                  ? "w-full h-full rounded-[var(--radius-xl)]"
-                  : "rounded-[var(--radius-lg)] bg-[var(--bg-container)] w-10 h-10",
-              )}
-            >
-              {attachment.thumbnail ? (
-                <img
-                  src={attachment.thumbnail}
-                  alt={attachment.name}
-                  className={
-                    isImage
-                      ? "w-full h-full object-cover"
-                      : "size-10 object-cover"
-                  }
-                />
-              ) : (
-                <Icon className="size-4" />
-              )}
-            </AttachmentCardLeading>
-
-            {!isImage && (
-              <AttachmentCardContent>
-                <AttachmentCardTitle title={attachment.name}>
-                  {attachment.name}
-                </AttachmentCardTitle>
-                {meta && <AttachmentCardMeta>{meta}</AttachmentCardMeta>}
-              </AttachmentCardContent>
-            )}
-
-            <AttachmentCardDeleteButton
-              aria-label="Delete attachment"
-              onMouseDown={(e) => e.stopPropagation()}
-              onClick={(e) => {
-                e.stopPropagation();
-                onRemove?.(attachment.id);
-              }}
-            >
-              <X className="w-3 h-3 text-[var(--text-tertiary)]" />
-            </AttachmentCardDeleteButton>
-          </AttachmentCard>
-        );
+        return {
+          id: attachment.id,
+          name: attachment.name,
+          thumbnail: attachment.thumbnail,
+          fileType,
+          fileSize: attachment.size,
+          icon: attachment.icon ? (
+            <attachment.icon className="size-4" />
+          ) : undefined,
+          isImage: !!attachment.thumbnail,
+        };
       })}
-    </AttachmentList>
+      onRemove={onRemove}
+    />
   );
 }
 
@@ -238,19 +170,12 @@ export function ComposedSender({
       }}
     >
       {/* 引用内容 */}
-      <QuoteContent>
-        <QuoteContentLeading>
-          <CornerDownRight className="w-4 h-4" />
-        </QuoteContentLeading>
-        <QuoteContentContent>
-          <QuoteContentText>
-            引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容
-          </QuoteContentText>
-        </QuoteContentContent>
-        <QuoteContentCloseButton onClick={() => {}}>
-          <X className="w-4 h-4" />
-        </QuoteContentCloseButton>
-      </QuoteContent>
+      <QuoteContentComposed
+        content="引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容引用内容"
+        icon={<CornerDownRight className="w-4 h-4" />}
+        closeIcon={<X className="w-4 h-4" />}
+        onClose={() => {}}
+      />
       {/* 附件列表 */}
       {attachments.length > 0 && (
         <AttachmentListWrapper
