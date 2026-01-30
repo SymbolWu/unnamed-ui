@@ -1,32 +1,60 @@
+"use client";
+
 import {
-  DynamicFormLayoutPrimitive,
-  DynamicFormHeaderPrimitive,
-  DynamicFormTitlePrimitive,
-  DynamicFormBodyLayout,
-  DynamicFormFooterPrimitive,
-} from "@/registry/wuhan/blocks/dynamic-form/dynamic-form-01";
+  DynamicForm,
+  type FormSchema,
+} from "@/registry/wuhan/composed/dynamic-form";
+
+const schema: FormSchema = {
+  title: "快速开始",
+  description: "展示各种字段类型的基本用法",
+  fields: [
+    {
+      name: "name",
+      label: "姓名",
+      type: "input",
+      required: true,
+      placeholder: "请输入您的姓名",
+    },
+    {
+      name: "category",
+      label: "分类",
+      type: "select",
+      required: true,
+      options: [
+        { value: "tech", label: "技术" },
+        { value: "design", label: "设计" },
+        { value: "product", label: "产品" },
+      ],
+    },
+    {
+      name: "priority",
+      label: "优先级",
+      type: "radio",
+      options: [
+        { value: "low", label: "低" },
+        { value: "medium", label: "中" },
+        { value: "high", label: "高" },
+      ],
+      orientation: "horizontal",
+      defaultValue: "medium",
+    },
+    {
+      name: "active",
+      label: "启用",
+      type: "switch",
+      defaultValue: true,
+    },
+  ],
+};
 
 export default function DynamicFormDemo() {
   return (
-    <DynamicFormLayoutPrimitive>
-      <DynamicFormHeaderPrimitive>
-        <DynamicFormTitlePrimitive>用户干预信息</DynamicFormTitlePrimitive>
-        <button className="text-sm text-blue-600 hover:underline h-[30px]">
-          添加任务
-        </button>
-      </DynamicFormHeaderPrimitive>
-      {/* 在此处添加动态表单的内容 */}
-      <DynamicFormBodyLayout>
-        {/* 表单项可以放在这里 */}
-      </DynamicFormBodyLayout>
-      <DynamicFormFooterPrimitive>
-        <button className="px-4 py-2 border border-gray-300 rounded-md">
-          重置
-        </button>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-md">
-          提交
-        </button>
-      </DynamicFormFooterPrimitive>
-    </DynamicFormLayoutPrimitive>
+    <DynamicForm
+      schema={schema}
+      onFinish={(values) => {
+        console.log("提交:", values);
+      }}
+    />
   );
 }

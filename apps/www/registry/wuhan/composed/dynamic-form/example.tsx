@@ -3,11 +3,7 @@
 import * as React from "react";
 import { useRef } from "react";
 import * as z from "zod";
-import {
-  DynamicForm,
-  type DynamicFormRef,
-  type FormSchema,
-} from "./index";
+import { DynamicForm, type DynamicFormRef, type FormSchema } from "./index";
 import { Button } from "@/registry/wuhan/ui/button";
 
 /**
@@ -147,7 +143,10 @@ export default function DynamicFormExample() {
   const handleSetFields = () => {
     formRef.current?.setFields([
       { name: "title", value: "示例 Bug 标题" },
-      { name: "description", value: "这是一个示例描述，用于演示 setFields 方法的使用。" },
+      {
+        name: "description",
+        value: "这是一个示例描述，用于演示 setFields 方法的使用。",
+      },
       { name: "priority", value: "high" },
     ]);
   };

@@ -138,12 +138,6 @@ function EditableListItem(props: {
           onChange={(e) => props.onContentChange?.(e.target.value)}
         />
       </div>
-      <SidebarHistorySearchInput
-        value=""
-        onChange={() => {}}
-        placeholder="搜索"
-        className="w-[180px]"
-      />
       <button
         type="button"
         className="text-[var(--text-tertiary)]"

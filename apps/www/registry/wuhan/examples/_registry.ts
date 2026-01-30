@@ -1082,7 +1082,7 @@ export const examples: Registry["items"] = [
   {
     name: "dynamic-form-demo",
     type: "registry:example",
-    registryDependencies: ["dynamic-form-01"],
+    registryDependencies: ["dynamic-form"],
     files: [
       {
         path: "examples/dynamic-form/dynamic-form-demo.tsx",
@@ -1092,14 +1092,110 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "dynamic-form-default",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-default.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-default.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-validation",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-validation.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-validation.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-readonly",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-readonly.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-readonly.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-ref-methods",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-ref-methods.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-ref-methods.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-ai-scenario",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-ai-scenario.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-ai-scenario.tsx",
+      },
+    ],
+  },
+  {
     name: "task-list-demo",
     type: "registry:example",
-    registryDependencies: ["task-list-01"],
+    registryDependencies: ["task-list"],
     files: [
       {
         path: "examples/task-list/task-list-demo.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/task-list-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list-default",
+    type: "registry:example",
+    registryDependencies: ["task-list"],
+    files: [
+      {
+        path: "examples/task-list/task-list-default.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/task-list-default.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list-editable",
+    type: "registry:example",
+    registryDependencies: ["task-list"],
+    files: [
+      {
+        path: "examples/task-list/task-list-editable.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/task-list-editable.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list-feedback",
+    type: "registry:example",
+    registryDependencies: ["task-list"],
+    files: [
+      {
+        path: "examples/task-list/task-list-feedback.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/task-list-feedback.tsx",
       },
     ],
   },
@@ -1112,11 +1208,6 @@ export const examples: Registry["items"] = [
         path: "examples/task-list/task-list-composed-demo.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/task-list-composed-demo.tsx",
-      },
-      {
-        path: "examples/task-list/task-list-composed/index.tsx",
-        type: "registry:example",
-        target: "components/wuhan/examples/task-list-composed.tsx",
       },
     ],
   },

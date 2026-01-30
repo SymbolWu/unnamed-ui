@@ -13,11 +13,7 @@ import {
 } from "@/registry/wuhan/blocks/dynamic-form/dynamic-form-01";
 import { FormItem } from "./FormItem";
 import { extractDefaultValues, pickValues } from "./schema-utils";
-import type {
-  DynamicFormProps,
-  DynamicFormRef,
-  FieldErrorInfo,
-} from "./types";
+import type { DynamicFormProps, DynamicFormRef, FieldErrorInfo } from "./types";
 import { cn } from "@/lib/utils";
 
 /**
@@ -138,9 +134,10 @@ export const DynamicForm = React.forwardRef<DynamicFormRef, DynamicFormProps>(
             const error = errors[name];
             return {
               name,
-              errors: error && typeof error === 'object' && 'message' in error
-                ? [String(error.message) || "验证失败"]
-                : [],
+              errors:
+                error && typeof error === "object" && "message" in error
+                  ? [String(error.message) || "验证失败"]
+                  : [],
             };
           });
         },

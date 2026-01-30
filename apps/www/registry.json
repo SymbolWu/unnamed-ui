@@ -1911,7 +1911,7 @@
       "name": "dynamic-form-01",
       "type": "registry:block",
       "title": "Dynamic Form",
-      "description": "Dynamic form component for user input and interaction",
+      "description": "Dynamic Form component for user input and interaction",
       "registryDependencies": [
         "style"
       ],
@@ -2069,6 +2069,42 @@
           "path": "registry/wuhan/composed/thinking-process/thinking-process.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/thinking-process.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form",
+      "type": "registry:block",
+      "title": "Dynamic Form",
+      "description": "Schema-driven dynamic form with validation and multiple field types",
+      "registryDependencies": [
+        "dynamic-form-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/dynamic-form/DynamicForm.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/dynamic-form.tsx"
+        },
+        {
+          "path": "registry/wuhan/composed/dynamic-form/FormItem.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/dynamic-form-item.tsx"
+        },
+        {
+          "path": "registry/wuhan/composed/dynamic-form/types.ts",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/dynamic-form-types.ts"
+        },
+        {
+          "path": "registry/wuhan/composed/dynamic-form/schema-utils.ts",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/dynamic-form-schema-utils.ts"
+        },
+        {
+          "path": "registry/wuhan/composed/dynamic-form/index.ts",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/dynamic-form-index.ts"
         }
       ]
     },
@@ -3123,7 +3159,7 @@
       "name": "dynamic-form-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "dynamic-form-01"
+        "dynamic-form"
       ],
       "files": [
         {
@@ -3134,16 +3170,128 @@
       ]
     },
     {
+      "name": "dynamic-form-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-default.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-default.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-validation",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-validation.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-validation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-readonly",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-readonly.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-readonly.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-ref-methods",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-ref-methods.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-ref-methods.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-ai-scenario",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-ai-scenario.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-ai-scenario.tsx"
+        }
+      ]
+    },
+    {
       "name": "task-list-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "task-list-01"
+        "task-list"
       ],
       "files": [
         {
           "path": "registry/wuhan/examples/task-list/task-list-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-list-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-default.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-default.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-editable",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-editable.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-editable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-feedback",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-feedback.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-feedback.tsx"
         }
       ]
     },
@@ -3158,11 +3306,6 @@
           "path": "registry/wuhan/examples/task-list/task-list-composed-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-list-composed-demo.tsx"
-        },
-        {
-          "path": "registry/wuhan/examples/task-list/task-list-composed/index.tsx",
-          "type": "registry:example",
-          "target": "components/wuhan/examples/task-list-composed.tsx"
         }
       ]
     },

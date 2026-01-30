@@ -124,6 +124,10 @@
     "description": "Composed thinking process with steps and content blocks"
   },
   {
+    "name": "dynamic-form",
+    "description": "Schema-driven dynamic form with validation and multiple field types"
+  },
+  {
     "name": "action-dropdown",
     "description": "操作下拉菜单组件"
   },

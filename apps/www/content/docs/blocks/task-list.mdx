@@ -1,16 +1,51 @@
 ---
 title: Task List
-description: Task list component for task management
+description: Task management component with editable mode, checkboxes, and feedback options
 author: AF
 ---
 
-<ComponentPreview
-  name="task-list-demo"
-  description="Task list with default layout"
-  className="mb-4"
-/>
+<ComponentPreview name="task-list-demo" description="Task list with checkbox and feedback" className="mb-4" />
 
-Task List 组件提供了用于任务管理的列表样式原语，适用于待办事项、任务清单等场景。
+Task List 组件提供了完整的任务管理功能，支持任务的创建、编辑、完成状态切换和反馈，适用于待办事项、任务清单、工作流管理等场景。
+
+## Overview
+
+- **双模式切换**：支持只读模式和编辑模式，灵活适应不同场景
+- **任务操作**：完成/未完成切换、添加新任务、编辑任务、删除任务
+- **反馈系统**：每个任务支持点赞、点踩等反馈操作
+- **实时保存**：编辑后自动保存，无需手动确认
+- **响应式设计**：自适应不同屏幕尺寸
+- **类型安全**：完整的 TypeScript 类型定义
+
+## Quick Start
+
+```tsx
+import { TaskList } from "@/registry/wuhan/composed/task-list";
+
+const tasks = [
+  { id: "1", text: "完成项目文档", completed: false },
+  { id: "2", text: "代码审查", completed: true },
+];
+
+export function Example() {
+  return (
+    <TaskList
+      tasks={tasks}
+      onTasksChange={(newTasks) => console.log(newTasks)}
+    />
+  );
+}
+```
+
+## Features
+
+- **任务管理**：创建、编辑、删除、完成状态切换
+- **编辑模式**：一键切换到编辑模式，修改任务内容
+- **反馈功能**：支持点赞、点踩等用户反馈
+- **键盘操作**：支持 Enter 保存、Escape 取消等快捷键
+- **自动聚焦**：新建任务时自动聚焦输入框
+- **状态持久化**：任务状态实时更新
+- **空状态处理**：无任务时显示友好提示
 
 ## Installation
 
@@ -33,14 +68,11 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/task-list.json
 
 <Steps>
 
-<Step>Copy and paste the following code into your project.</Step>
+<Step>复制以下代码到你的项目</Step>
 
-<ComponentSource
-  name="task-list"
-  title="registry/wuhan/composed/task-list/task-list.tsx"
-/>
+<ComponentSource name="task-list" />
 
-<Step>Update the import paths to match your project setup.</Step>
+<Step>更新导入路径以匹配你的项目设置</Step>
 
 </Steps>
 
@@ -52,20 +84,173 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/task-list.json
 
 ### Default
 
-基础待办列表示例。
+基础只读模式，展示任务列表。
 
 <ComponentPreview
-  name="task-list-demo"
-  description="Default task list"
+  name="task-list-default"
+  description="Default readonly task list"
   className="mb-4"
 />
 
-### Composed Demo
+### Editable Mode
 
-完整的组合示例，展示了如何使用 Task List 构建实际的待办列表应用。
+可编辑模式，支持任务的增删改。
+
+<ComponentPreview
+  name="task-list-editable"
+  description="Editable task list with actions"
+  className="mb-4"
+/>
+
+### With Feedback
+
+带反馈功能的任务列表。
+
+<ComponentPreview
+  name="task-list-feedback"
+  description="Task list with feedback options"
+  className="mb-4"
+/>
+
+### Full Features
+
+完整功能展示，包含编辑、反馈、状态管理。
 
 <ComponentPreview
   name="task-list-composed-demo"
-  description="Task list composed demo with full features"
+  description="Task list with all features"
   className="mb-4"
 />
+
+## API Reference
+
+### TaskList
+
+主任务列表组件，封装了只读和编辑两种模式。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tasks` | `Task[]` | - | 任务列表（必填） |
+| `onTasksChange` | `(tasks: Task[]) => void` | - | 任务变更回调（必填） |
+| `editable` | `boolean` | `false` | 是否可编辑 |
+| `showFeedback` | `boolean` | `true` | 是否显示反馈按钮 |
+| `onFeedback` | `(taskId, type) => void` | - | 反馈回调 |
+| `className` | `string` | - | 自定义样式类名 |
+
+#### Example
+
+```tsx
+import { useState } from "react";
+import { TaskList, type Task } from "@/registry/wuhan/composed/task-list";
+
+function TaskManager() {
+  const [tasks, setTasks] = useState<Task[]>([
+    { id: "1", text: "任务1", completed: false },
+    { id: "2", text: "任务2", completed: true },
+  ]);
+
+  return (
+    <TaskList
+      tasks={tasks}
+      onTasksChange={setTasks}
+      editable
+      onFeedback={(taskId, type) => {
+        console.log(`Task ${taskId} received ${type} feedback`);
+      }}
+    />
+  );
+}
+```
+
+### Task
+
+任务数据结构。
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | `string` | 任务唯一标识（必填） |
+| `text` | `string` | 任务内容（必填） |
+| `completed` | `boolean` | 是否已完成（必填） |
+
+### ReadonlyList
+
+只读模式的任务列表子组件。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tasks` | `Task[]` | - | 任务列表 |
+| `onToggleComplete` | `(id: string) => void` | - | 完成状态切换回调 |
+| `showFeedback` | `boolean` | `true` | 是否显示反馈按钮 |
+| `onFeedback` | `(taskId, type) => void` | - | 反馈回调 |
+
+### EditableList
+
+编辑模式的任务列表子组件。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tasks` | `Task[]` | - | 任务列表 |
+| `onTasksChange` | `(tasks: Task[]) => void` | - | 任务变更回调 |
+
+## 使用场景
+
+- **待办事项**：个人或团队的任务管理
+- **工作流**：展示和管理工作流程中的步骤
+- **清单管理**：购物清单、检查清单等
+- **任务分配**：团队任务的分配和跟踪
+- **项目管理**：项目进度和任务跟踪
+- **AI 对话**：AI 生成的任务列表展示和用户反馈
+
+## 最佳实践
+
+1. **状态管理**：使用 `useState` 或状态管理库管理任务列表
+2. **持久化**：将任务列表保存到本地存储或后端
+3. **反馈处理**：合理使用反馈功能收集用户意见
+4. **键盘操作**：提供键盘快捷键提升编辑效率
+5. **验证**：对任务内容进行必要的验证（如非空检查）
+
+## 注意事项
+
+- 每个任务必须有唯一的 `id`
+- 编辑模式下任务内容不能为空
+- `onTasksChange` 回调会返回新的任务列表，需要更新状态
+- 反馈功能需要配合 `onFeedback` 回调使用
+
+## 原语组件
+
+Task List 基于以下原语组件构建：
+
+- `TaskListContainerPrimitive` - 任务列表容器
+- `TaskListHeaderPrimitive` - 列表头部
+- `TaskItemPrimitive` - 单个任务项
+- `TaskCheckboxPrimitive` - 任务复选框
+- `TaskTextPrimitive` - 任务文本
+
+这些原语可以在 `registry/wuhan/blocks/task-list/task-list-01.tsx` 中找到。
+
+## 键盘快捷键
+
+编辑模式下支持以下快捷键：
+
+| 快捷键 | 功能 |
+|--------|------|
+| `Enter` | 保存当前编辑的任务 |
+| `Escape` | 取消编辑，恢复原内容 |
+| `Tab` | 切换到下一个任务 |
+
+## 样式定制
+
+组件使用 CSS 变量，可以通过覆盖变量来定制样式：
+
+- `--bg-container`: 容器背景色
+- `--text-primary`: 主文本色
+- `--text-secondary`: 次要文本色
+- `--border-neutral`: 边框颜色
+- `--gap-md/lg`: 间距变量
+- `--radius-lg`: 圆角大小

@@ -1,16 +1,64 @@
 ---
 title: Dynamic Form
-description: Dynamic Form component for managing intervention actions
+description: Schema-driven dynamic form with validation, multiple field types, and readonly mode
 author: AF
 ---
 
-<ComponentPreview
-  name="dynamic-form-demo"
-  description="Dynamic Form with default layout"
-  className="mb-4"
-/>
+<ComponentPreview name="dynamic-form-demo" description="Dynamic form with various field types" className="mb-4" />
 
-Dynamic Form 组件提供了用于干预操作的表单样式原语，适用于需要人工干预、审核、修改等场景。
+Dynamic Form 是一个基于 Schema 配置的动态表单组件，支持多种表单控件、表单验证和只读模式，特别适用于 AI 对话场景中的用户交互表单。
+
+## Overview
+
+- **Schema 驱动**：通过 JSON 配置动态生成表单
+- **类型安全**：完整的 TypeScript 类型定义
+- **灵活验证**：基于 Zod 的强大验证能力
+- **丰富控件**：支持 8 种表单控件类型
+- **只读模式**：支持表单数据的只读展示
+- **实例方法**：类似 Ant Design 的 API 设计
+
+## Quick Start
+
+```tsx
+import { DynamicForm, type FormSchema } from "@/registry/wuhan/composed/dynamic-form";
+
+const schema: FormSchema = {
+  title: "用户信息",
+  fields: [
+    {
+      name: "username",
+      label: "用户名",
+      type: "input",
+      required: true,
+    },
+    {
+      name: "email",
+      label: "邮箱",
+      type: "input",
+    },
+  ],
+};
+
+export function Example() {
+  return (
+    <DynamicForm
+      schema={schema}
+      onFinish={(values) => console.log(values)}
+    />
+  );
+}
+```
+
+## Features
+
+- **8 种表单控件**：input、textarea、select、radio、checkbox、switch、slider、number
+- **Zod 验证集成**：强大的表单验证能力
+- **只读模式**：展示 label 而非 value，适合数据预览
+- **实例方法**：getFieldsError、getFieldsValue、validateFields、setFields、resetFields、submit
+- **表单值监听**：onValuesChange 回调实时监听表单变化
+- **自定义渲染**：支持字段级别的自定义渲染函数
+- **响应式布局**：支持 vertical、horizontal、responsive 三种布局方向
+- **AI 场景友好**：提供 generateJsonSchema 辅助 AI 理解表单结构
 
 ## Installation
 
@@ -24,7 +72,7 @@ Dynamic Form 组件提供了用于干预操作的表单样式原语，适用于�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form.json
 ```
 
 </TabsContent>
@@ -33,14 +81,17 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form-01.json
 
 <Steps>
 
-<Step>Copy and paste the following code into your project.</Step>
+<Step>安装依赖</Step>
 
-<ComponentSource
-  name="dynamic-form-demo"
-  title="registry/wuhan/examples/dynamic-form/dynamic-form-demo.tsx"
-/>
+```bash
+pnpm install react-hook-form @hookform/resolvers zod
+```
 
-<Step>Update the import paths to match your project setup.</Step>
+<Step>复制以下代码到你的项目</Step>
+
+<ComponentSource name="dynamic-form" />
+
+<Step>更新导入路径以匹配你的项目设置</Step>
 
 </Steps>
 
@@ -52,10 +103,249 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form-01.json
 
 ### Default
 
-基础干预表单示例。
+基础用法，展示多种字段类型。
 
 <ComponentPreview
-  name="dynamic-form-demo"
-  description="Default Dynamic Form"
+  name="dynamic-form-default"
+  description="Basic form with various field types"
   className="mb-4"
 />
+
+### With Validation
+
+带 Zod 验证的表单，展示错误提示。
+
+<ComponentPreview
+  name="dynamic-form-validation"
+  description="Form with Zod validation"
+  className="mb-4"
+/>
+
+### Readonly Mode
+
+只读模式展示已填写的表单数据。
+
+<ComponentPreview
+  name="dynamic-form-readonly"
+  description="Readonly mode for data preview"
+  className="mb-4"
+/>
+
+### Using Ref Methods
+
+使用实例方法控制表单。
+
+<ComponentPreview
+  name="dynamic-form-ref-methods"
+  description="Using ref methods to control form"
+  className="mb-4"
+/>
+
+### AI Scenario
+
+AI 对话场景中的动态表单生成。
+
+<ComponentPreview
+  name="dynamic-form-ai-scenario"
+  description="Dynamic form generated from AI response"
+  className="mb-4"
+/>
+
+## API Reference
+
+### DynamicForm
+
+主表单组件，封装了表单状态管理和验证逻辑。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `schema` | `FormSchema` | - | 表单配置 Schema（必填） |
+| `className` | `string` | - | 自定义样式类名 |
+| `style` | `React.CSSProperties` | - | 内联样式 |
+| `initialValues` | `Record<string, any>` | `{}` | 表单初始值 |
+| `onValuesChange` | `(values) => void` | - | 表单值变化回调 |
+| `onFinish` | `(values) => void` | - | 表单提交成功回调 |
+| `onFinishFailed` | `(errorInfo) => void` | - | 表单提交失败回调 |
+| `validateSchema` | `z.ZodType<any>` | - | Zod 验证 Schema |
+| `readonly` | `boolean` | `false` | 是否只读模式 |
+| `showActions` | `boolean` | `true` | 是否显示操作按钮 |
+| `submitText` | `string` | `"提交"` | 提交按钮文本 |
+| `resetText` | `string` | `"重置"` | 重置按钮文本 |
+| `showTitle` | `boolean` | `true` | 是否显示表单标题 |
+
+#### Ref Methods
+
+通过 `ref` 可以访问以下实例方法：
+
+| Method | Type | Description |
+|--------|------|-------------|
+| `getFieldsError` | `(nameList?: string[]) => FieldErrorInfo[]` | 获取字段错误信息 |
+| `getFieldsValue` | `(nameList?: string[]) => Record<string, any>` | 获取字段值 |
+| `validateFields` | `(nameList?: string[]) => Promise<Record<string, any>>` | 触发表单验证 |
+| `setFields` | `(fields: Array<{name, value?, errors?}>) => void` | 设置字段状态 |
+| `resetFields` | `(nameList?: string[]) => void` | 重置字段到初始值 |
+| `submit` | `() => Promise<void>` | 提交表单 |
+| `getForm` | `() => UseFormReturn<any>` | 获取 react-hook-form 实例 |
+
+#### Example
+
+```tsx
+import { useRef } from "react";
+import { DynamicForm, type DynamicFormRef } from "@/registry/wuhan/composed/dynamic-form";
+
+function FormWithMethods() {
+  const formRef = useRef<DynamicFormRef>(null);
+
+  const handleGetValues = () => {
+    const values = formRef.current?.getFieldsValue();
+    console.log(values);
+  };
+
+  const handleValidate = async () => {
+    try {
+      const values = await formRef.current?.validateFields();
+      console.log("验证通过:", values);
+    } catch (error) {
+      console.error("验证失败");
+    }
+  };
+
+  return (
+    <div>
+      <DynamicForm ref={formRef} schema={schema} showActions={false} />
+      <button onClick={handleGetValues}>获取值</button>
+      <button onClick={handleValidate}>验证</button>
+    </div>
+  );
+}
+```
+
+### FormSchema
+
+表单配置 Schema 的结构定义。
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | `string` | 表单标题 |
+| `description` | `string` | 表单描述 |
+| `fields` | `FieldSchema[]` | 字段配置列表（必填） |
+
+### FieldSchema
+
+单个字段的配置结构。
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `name` | `string` | 字段名（必填，唯一） |
+| `label` | `string` | 字段标签（必填） |
+| `type` | `FieldType` | 字段类型（必填） |
+| `description` | `string` | 字段描述 |
+| `placeholder` | `string` | 占位符 |
+| `defaultValue` | `any` | 默认值 |
+| `required` | `boolean` | 是否必填 |
+| `disabled` | `boolean` | 是否禁用 |
+| `options` | `FieldOption[]` | 选项列表（select、radio 必需） |
+| `orientation` | `'vertical' \| 'horizontal' \| 'responsive'` | 布局方向 |
+| `min` | `number` | 最小值（number 类型） |
+| `max` | `number` | 最大值（number 类型） |
+| `step` | `number` | 步进值（number 类型） |
+| `range` | `{min, max, step?}` | 范围配置（slider 类型） |
+| `render` | `(props) => ReactNode` | 自定义渲染函数 |
+
+### FieldType
+
+支持的字段类型。
+
+| Type | Description | Required Props |
+|------|-------------|----------------|
+| `input` | 单行文本输入 | - |
+| `textarea` | 多行文本输入 | - |
+| `select` | 下拉选择 | `options` |
+| `radio` | 单选按钮组 | `options` |
+| `checkbox` | 复选框 | - |
+| `switch` | 开关 | - |
+| `slider` | 滑块 | `range` |
+| `number` | 数字输入 | - |
+
+### FieldOption
+
+选择类字段的选项配置。
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `value` | `string \| number \| boolean` | 选项值 |
+| `label` | `string` | 选项显示文本 |
+| `disabled` | `boolean` | 是否禁用该选项 |
+
+## 工具函数
+
+### generateJsonSchema
+
+根据字段配置生成 AI 兼容的 JSON Schema。
+
+```tsx
+import { generateJsonSchema } from "@/registry/wuhan/composed/dynamic-form";
+
+const jsonSchema = generateJsonSchema(schema.fields);
+// 将 jsonSchema 提供给 AI，让 AI 按照这个规范输出
+```
+
+### extractDefaultValues
+
+从字段配置中提取默认值。
+
+```tsx
+import { extractDefaultValues } from "@/registry/wuhan/composed/dynamic-form";
+
+const defaultValues = extractDefaultValues(schema.fields);
+```
+
+### getDisplayLabel
+
+获取只读模式下的显示标签。
+
+```tsx
+import { getDisplayLabel } from "@/registry/wuhan/composed/dynamic-form";
+
+const displayText = getDisplayLabel(value, field);
+// 对于 select: 返回对应的 label
+// 对于 checkbox/switch: 返回 "是" 或 "否"
+```
+
+## 使用场景
+
+- **AI 对话**：根据 AI 返回的配置动态生成表单
+- **动态配置**：后台配置化的表单生成
+- **数据录入**：快速构建各类数据录入表单
+- **表单预览**：只读模式展示已填写的表单数据
+- **表单验证**：需要复杂验证规则的表单场景
+
+## 最佳实践
+
+1. **表单验证**：使用 Zod Schema 定义验证规则，确保类型安全
+2. **初始值**：合理设置 `defaultValue` 和 `initialValues`，避免非受控组件警告
+3. **只读模式**：用于数据展示时启用 `readonly`，提升用户体验
+4. **实例方法**：复杂交互场景下使用 `ref` 访问实例方法
+5. **自定义渲染**：对于特殊需求的字段，使用 `render` 函数自定义渲染逻辑
+
+## 注意事项
+
+- 确保字段的 `name` 在同一表单中唯一
+- 选择类字段（select、radio）必须提供 `options` 属性
+- 使用 `validateSchema` 时，字段名需要与 Schema 中定义的字段名一致
+- 只读模式下，表单不会进行验证，因此可以隐藏操作按钮
+- 对于 select 类型在只读模式下，确保 `options` 中包含当前值对应的选项
+
+## 原语组件
+
+Dynamic Form 基于以下原语组件构建：
+
+- `DynamicFormLayoutPrimitive` - 表单布局容器
+- `DynamicFormHeaderPrimitive` - 表单头部
+- `DynamicFormTitlePrimitive` - 表单标题
+- `DynamicFormBodyLayout` - 表单主体布局
+- `DynamicFormFooterPrimitive` - 表单底部操作栏
+
+这些原语可以在 `registry/wuhan/blocks/dynamic-form/dynamic-form-01.tsx` 中找到。
