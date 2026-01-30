@@ -1554,7 +1554,7 @@
       "name": "welcome-01",
       "type": "registry:block",
       "title": "Welcome",
-      "description": "Welcome primitives (container, icon, text)",
+      "description": "Welcome message header for empty state",
       "registryDependencies": [
         "style"
       ],
@@ -1587,7 +1587,7 @@
       "name": "quick-action-01",
       "type": "registry:block",
       "title": "Quick Action",
-      "description": "Quick action primitives for suggestion buttons (base block)",
+      "description": "Quick action button components for suggestions and next step guidance (Base Block)",
       "registryDependencies": [
         "style",
         "button"
@@ -1604,7 +1604,7 @@
       "name": "prompt-01",
       "type": "registry:block",
       "title": "Prompt",
-      "description": "Prompt primitives (horizontal layout)",
+      "description": "Prompt button (horizontal layout)",
       "registryDependencies": [
         "style",
         "quick-action-01"
@@ -1621,7 +1621,7 @@
       "name": "prompt-02",
       "type": "registry:block",
       "title": "Prompt",
-      "description": "Prompt primitives (vertical layout)",
+      "description": "Prompt button (vertical layout)",
       "registryDependencies": [
         "style",
         "quick-action-01"
@@ -1638,7 +1638,7 @@
       "name": "suggestion-01",
       "type": "registry:block",
       "title": "Suggestion",
-      "description": "Suggestion primitives (text first, icon last)",
+      "description": "Suggestion button for next step guidance (text first, icon last)",
       "registryDependencies": [
         "style",
         "quick-action-01"
@@ -1674,7 +1674,7 @@
       "name": "attachment-list-01",
       "type": "registry:block",
       "title": "Attachment List",
-      "description": "Attachment list primitives (card, list, meta)",
+      "description": "Attachment list component",
       "registryDependencies": [
         "style",
         "button",
@@ -1692,7 +1692,7 @@
       "name": "avatar-header-01",
       "type": "registry:block",
       "title": "Avatar Header",
-      "description": "Avatar header primitives (avatar, name, time)",
+      "description": "Message avatar header component (avatar + name + time)",
       "registryDependencies": [
         "style"
       ],
@@ -1708,7 +1708,7 @@
       "name": "history-item-01",
       "type": "registry:block",
       "title": "History Item",
-      "description": "History item primitives (default/hover/selected)",
+      "description": "History record list item component (default/hover/selected)",
       "registryDependencies": [
         "style"
       ],
@@ -1724,7 +1724,7 @@
       "name": "quote-content-01",
       "type": "registry:block",
       "title": "Quote Content",
-      "description": "Quote content primitives (leading, text, close)",
+      "description": "Quote content display component (shown above input field)",
       "registryDependencies": [
         "style"
       ],
@@ -1756,7 +1756,7 @@
       "name": "feedback-01",
       "type": "registry:block",
       "title": "Feedback",
-      "description": "Feedback primitives (container, header, input)",
+      "description": "Feedback component for reporting issues",
       "registryDependencies": [
         "style",
         "button",
@@ -1908,18 +1908,18 @@
       ]
     },
     {
-      "name": "intervene-form-01",
+      "name": "dynamic-form-01",
       "type": "registry:block",
-      "title": "Intervene Form",
-      "description": "Intervene form primitive container",
+      "title": "Dynamic Form",
+      "description": "Dynamic Form component for user input and interaction",
       "registryDependencies": [
         "style"
       ],
       "files": [
         {
-          "path": "registry/wuhan/blocks/intervene-form/intervene-form-01.tsx",
+          "path": "registry/wuhan/blocks/dynamic-form/dynamic-form-01.tsx",
           "type": "registry:component",
-          "target": "components/wuhan/blocks/intervene-form-01.tsx"
+          "target": "components/wuhan/blocks/dynamic-form-01.tsx"
         }
       ]
     },
@@ -1946,8 +1946,8 @@
       "description": "Composed sender with attachments and modes",
       "registryDependencies": [
         "sender-01",
-        "attachment-list",
-        "quote-content"
+        "attachment-list-01",
+        "quote-content-01"
       ],
       "files": [
         {
@@ -1964,8 +1964,8 @@
       "description": "Composed task list with editable mode",
       "registryDependencies": [
         "task-list-01",
-        "sidebar",
-        "feedback"
+        "sidebar-01",
+        "feedback-01"
       ],
       "files": [
         {
@@ -2073,181 +2073,38 @@
       ]
     },
     {
-      "name": "welcome",
+      "name": "dynamic-form",
       "type": "registry:block",
-      "title": "Welcome",
-      "description": "Composed welcome message header",
+      "title": "Dynamic Form",
+      "description": "Schema-driven dynamic form with validation and multiple field types",
       "registryDependencies": [
-        "welcome-01"
+        "dynamic-form-01"
       ],
       "files": [
         {
-          "path": "registry/wuhan/composed/welcome/welcome.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/DynamicForm.tsx",
           "type": "registry:component",
-          "target": "components/wuhan/composed/welcome.tsx"
-        }
-      ]
-    },
-    {
-      "name": "quick-action",
-      "type": "registry:block",
-      "title": "Quick Action",
-      "description": "Composed quick action panel with items",
-      "registryDependencies": [
-        "quick-action-01"
-      ],
-      "files": [
+          "target": "components/wuhan/composed/dynamic-form.tsx"
+        },
         {
-          "path": "registry/wuhan/composed/quick-action/quick-action.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/FormItem.tsx",
           "type": "registry:component",
-          "target": "components/wuhan/composed/quick-action.tsx"
-        }
-      ]
-    },
-    {
-      "name": "prompt",
-      "type": "registry:block",
-      "title": "Prompt",
-      "description": "Composed prompt list with horizontal/vertical variants",
-      "registryDependencies": [
-        "prompt-01",
-        "prompt-02"
-      ],
-      "files": [
+          "target": "components/wuhan/composed/dynamic-form-item.tsx"
+        },
         {
-          "path": "registry/wuhan/composed/prompt/prompt.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/types.ts",
           "type": "registry:component",
-          "target": "components/wuhan/composed/prompt.tsx"
-        }
-      ]
-    },
-    {
-      "name": "suggestion",
-      "type": "registry:block",
-      "title": "Suggestion",
-      "description": "Composed suggestion panel with next step actions",
-      "registryDependencies": [
-        "suggestion-01"
-      ],
-      "files": [
+          "target": "components/wuhan/composed/dynamic-form-types.ts"
+        },
         {
-          "path": "registry/wuhan/composed/suggestion/suggestion.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/schema-utils.ts",
           "type": "registry:component",
-          "target": "components/wuhan/composed/suggestion.tsx"
-        }
-      ]
-    },
-    {
-      "name": "attachment-list",
-      "type": "registry:block",
-      "title": "Attachment List",
-      "description": "Composed attachment list with cards",
-      "registryDependencies": [
-        "attachment-list-01"
-      ],
-      "files": [
+          "target": "components/wuhan/composed/dynamic-form-schema-utils.ts"
+        },
         {
-          "path": "registry/wuhan/composed/attachment-list/attachment-list.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/index.ts",
           "type": "registry:component",
-          "target": "components/wuhan/composed/attachment-list.tsx"
-        }
-      ]
-    },
-    {
-      "name": "quote-content",
-      "type": "registry:block",
-      "title": "Quote Content",
-      "description": "Composed quote content display with close action",
-      "registryDependencies": [
-        "quote-content-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/quote-content/quote-content.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/quote-content.tsx"
-        }
-      ]
-    },
-    {
-      "name": "history-item",
-      "type": "registry:block",
-      "title": "History Item",
-      "description": "Composed history list item with trailing slots",
-      "registryDependencies": [
-        "history-item-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/history-item/history-item.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/history-item.tsx"
-        }
-      ]
-    },
-    {
-      "name": "avatar-header",
-      "type": "registry:block",
-      "title": "Avatar Header",
-      "description": "Composed avatar header with name and time",
-      "registryDependencies": [
-        "avatar-header-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/avatar-header/avatar-header.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/avatar-header.tsx"
-        }
-      ]
-    },
-    {
-      "name": "sidebar",
-      "type": "registry:block",
-      "title": "Sidebar",
-      "description": "Composed sidebar with header, search, and history list",
-      "registryDependencies": [
-        "sidebar-01",
-        "history-item-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/sidebar/sidebar.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/sidebar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "feedback",
-      "type": "registry:block",
-      "title": "Feedback",
-      "description": "Composed feedback form with options and input",
-      "registryDependencies": [
-        "feedback-01",
-        "toggle-button-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/feedback/feedback.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/feedback.tsx"
-        }
-      ]
-    },
-    {
-      "name": "intervene-form",
-      "type": "registry:block",
-      "title": "Intervene Form",
-      "description": "Composed intervene form container",
-      "registryDependencies": [
-        "intervene-form-01"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/composed/intervene-form/intervene-form.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/composed/intervene-form.tsx"
+          "target": "components/wuhan/composed/dynamic-form-index.ts"
         }
       ]
     },
@@ -2684,7 +2541,7 @@
       "name": "welcome-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "welcome"
+        "welcome-01"
       ],
       "files": [
         {
@@ -2761,7 +2618,7 @@
       "type": "registry:example",
       "registryDependencies": [
         "message",
-        "attachment-list"
+        "attachment-list-01"
       ],
       "files": [
         {
@@ -2791,7 +2648,7 @@
       "type": "registry:example",
       "registryDependencies": [
         "message",
-        "avatar-header"
+        "avatar-header-01"
       ],
       "files": [
         {
@@ -2805,7 +2662,7 @@
       "name": "attachment-list-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "attachment-list"
+        "attachment-list-01"
       ],
       "files": [
         {
@@ -2819,7 +2676,7 @@
       "name": "quote-content-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "quote-content"
+        "quote-content-01"
       ],
       "files": [
         {
@@ -2833,7 +2690,7 @@
       "name": "avatar-header-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "avatar-header"
+        "avatar-header-01"
       ],
       "files": [
         {
@@ -2847,7 +2704,8 @@
       "name": "history-item-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "history-item"
+        "history-item-01",
+        "tooltip"
       ],
       "files": [
         {
@@ -2918,8 +2776,7 @@
       "type": "registry:example",
       "registryDependencies": [
         "sender-01",
-        "attachment-list",
-        "quote-content"
+        "attachment-list-01"
       ],
       "files": [
         {
@@ -2961,7 +2818,8 @@
       "name": "prompt-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "prompt"
+        "prompt-01",
+        "prompt-02"
       ],
       "files": [
         {
@@ -2975,7 +2833,7 @@
       "name": "prompt-horizontal",
       "type": "registry:example",
       "registryDependencies": [
-        "prompt"
+        "prompt-01"
       ],
       "files": [
         {
@@ -2989,7 +2847,7 @@
       "name": "prompt-vertical",
       "type": "registry:example",
       "registryDependencies": [
-        "prompt"
+        "prompt-02"
       ],
       "files": [
         {
@@ -3003,7 +2861,7 @@
       "name": "suggestion-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "suggestion"
+        "suggestion-01"
       ],
       "files": [
         {
@@ -3017,7 +2875,7 @@
       "name": "suggestion-default",
       "type": "registry:example",
       "registryDependencies": [
-        "suggestion"
+        "suggestion-01"
       ],
       "files": [
         {
@@ -3031,7 +2889,7 @@
       "name": "suggestion-custom-icon",
       "type": "registry:example",
       "registryDependencies": [
-        "suggestion"
+        "suggestion-01"
       ],
       "files": [
         {
@@ -3045,7 +2903,7 @@
       "name": "quick-action-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3059,7 +2917,7 @@
       "name": "quick-action-default",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3073,7 +2931,7 @@
       "name": "quick-action-with-icons",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3087,7 +2945,7 @@
       "name": "quick-action-single",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3101,7 +2959,7 @@
       "name": "quick-action-interactive",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3115,7 +2973,7 @@
       "name": "quick-action-disabled",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3129,7 +2987,7 @@
       "name": "quick-action-flexible-layout",
       "type": "registry:example",
       "registryDependencies": [
-        "quick-action"
+        "quick-action-01"
       ],
       "files": [
         {
@@ -3143,8 +3001,9 @@
       "name": "sidebar-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "sidebar",
-        "avatar-header",
+        "sidebar-01",
+        "history-item-01",
+        "avatar-header-01",
         "button"
       ],
       "files": [
@@ -3159,7 +3018,7 @@
       "name": "feedback-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "feedback"
+        "feedback-01"
       ],
       "files": [
         {
@@ -3297,16 +3156,86 @@
       ]
     },
     {
-      "name": "intervene-form-demo",
+      "name": "dynamic-form-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "intervene-form"
+        "dynamic-form"
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/intervene-form/intervene-form-demo.tsx",
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-demo.tsx",
           "type": "registry:example",
-          "target": "components/wuhan/examples/intervene-form-demo.tsx"
+          "target": "components/wuhan/examples/dynamic-form-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-default.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-default.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-validation",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-validation.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-validation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-readonly",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-readonly.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-readonly.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-ref-methods",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-ref-methods.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-ref-methods.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-ai-scenario",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-ai-scenario.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-ai-scenario.tsx"
         }
       ]
     },
@@ -3314,13 +3243,55 @@
       "name": "task-list-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "task-list-01"
+        "task-list"
       ],
       "files": [
         {
           "path": "registry/wuhan/examples/task-list/task-list-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-list-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-default.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-default.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-editable",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-editable.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-editable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-feedback",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-feedback.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-feedback.tsx"
         }
       ]
     },
@@ -3335,11 +3306,6 @@
           "path": "registry/wuhan/examples/task-list/task-list-composed-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-list-composed-demo.tsx"
-        },
-        {
-          "path": "registry/wuhan/examples/task-list/task-list-composed/index.tsx",
-          "type": "registry:example",
-          "target": "components/wuhan/examples/task-list-composed.tsx"
         }
       ]
     },
@@ -3648,20 +3614,6 @@
           "path": "registry/wuhan/examples/recruitment/thinking-process/thinking-process-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/recruitment/thinking-process-demo.tsx"
-        }
-      ]
-    },
-    {
-      "name": "thinking-process-debugging",
-      "type": "registry:example",
-      "registryDependencies": [
-        "thinking-process"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/examples/recruitment/thinking-process/thinking-process-debugging.tsx",
-          "type": "registry:example",
-          "target": "components/wuhan/examples/recruitment/thinking-process-debugging.tsx"
         }
       ]
     },

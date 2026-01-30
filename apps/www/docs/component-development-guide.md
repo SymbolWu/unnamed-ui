@@ -726,6 +726,316 @@ cn("base", condition && "conditional")
 
 ---
 
+## 📦 组件分层与注册规范
+
+### 组件分层说明
+
+我们的组件库采用两层架构：
+
+#### 1️⃣ Blocks 层 - 原语组件
+
+**位置**：`registry/wuhan/blocks/`  
+**特点**：
+- 只提供样式和基础结构
+- 不包含复杂业务逻辑
+- 高度可定制
+
+**示例**：
+```
+blocks/
+├── message/
+│   └── message-01.tsx          # 消息原语
+├── sender/
+│   └── sender-01.tsx           # 发送器原语
+└── dynamic-form/
+    └── dynamic-form-01.tsx     # 表单布局原语
+```
+
+#### 2️⃣ Composed 层 - 拼合组件
+
+**位置**：`registry/wuhan/composed/`  
+**特点**：
+- 基于原语组合而成
+- 包含业务逻辑和状态管理
+- 开箱即用
+
+**示例**：
+```
+composed/
+├── message/
+│   └── message.tsx             # 完整的消息组件
+├── sender/
+│   └── sender.tsx              # 完整的发送器组件
+└── dynamic-form/
+    ├── DynamicForm.tsx         # 主表单组件
+    ├── FormItem.tsx            # 表单项组件
+    ├── types.ts                # 类型定义
+    └── index.ts                # 导出入口
+```
+
+### 注册规范
+
+#### Blocks 注册示例
+
+在 `registry/wuhan/blocks/_registry.ts` 中注册原语：
+
+```typescript
+{
+  name: "dynamic-form-01",
+  type: "registry:block",
+  title: "Dynamic Form Layout",
+  description: "Form layout primitives for dynamic forms",
+  files: [
+    {
+      path: "blocks/dynamic-form/dynamic-form-01.tsx",
+      type: "registry:component",
+      target: "components/wuhan/dynamic-form-01.tsx",
+    },
+  ],
+}
+```
+
+#### Composed 注册示例
+
+在 `registry/wuhan/composed/_registry.ts` 中注册拼合组件：
+
+```typescript
+{
+  name: "dynamic-form",          // ⚠️ 重要：与原语同名（去掉 -01）
+  type: "registry:block",
+  title: "Dynamic Form",
+  description: "Schema-driven dynamic form with validation",
+  registryDependencies: ["dynamic-form-01"],  // ⚠️ 依赖原语
+  files: [
+    {
+      path: "composed/dynamic-form/DynamicForm.tsx",
+      type: "registry:component",
+      target: "components/wuhan/composed/dynamic-form.tsx",
+    },
+    {
+      path: "composed/dynamic-form/FormItem.tsx",
+      type: "registry:component",
+      target: "components/wuhan/composed/dynamic-form-item.tsx",
+    },
+    // ...其他文件
+  ],
+}
+```
+
+### 命名规范的关键点
+
+1. **原语命名**：`{component-name}-01`，例如 `dynamic-form-01`
+2. **拼合组件命名**：`{component-name}`，例如 `dynamic-form`
+3. **依赖关系**：拼合组件的 `registryDependencies` 必须包含对应的原语
+
+### 为什么这样设计？
+
+这样设计的好处是：
+
+1. **自动依赖安装**：
+   ```bash
+   # 用户安装拼合组件时
+   npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form.json
+   
+   # 会自动安装：
+   # - dynamic-form-01 (原语)
+   # - dynamic-form (拼合组件)
+   ```
+
+2. **渐进式使用**：
+   - 简单场景：直接用拼合组件
+   - 定制场景：可以单独安装原语
+
+3. **文档一致性**：
+   - 安装路径中的 JSON 名称与注册名称一致
+   - 用户体验统一
+
+---
+
+## 📝 组件文档编写规范
+
+组件文档统一放在 `content/docs/blocks/` 目录下，采用 MDX 格式。
+
+### 文档结构模板
+
+参考 `content/docs/blocks/thinking-process.mdx`，标准文档应包含以下部分：
+
+```mdx
+---
+title: Component Name
+description: Brief description
+author: Your Name
+---
+
+<ComponentPreview name="component-demo" />
+
+Brief introduction of the component.
+
+## Overview
+- Component positioning
+- Key features
+- Use cases
+
+## Quick Start
+```tsx
+import { Component } from "@/registry/wuhan/...";
+
+export function Example() {
+  return <Component />;
+}
+```
+
+## Features
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Installation
+
+<CodeTabs>
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/component-name.json
+```
+
+</TabsContent>
+<TabsContent value="manual">
+<!-- Manual installation steps -->
+</TabsContent>
+</CodeTabs>
+
+## Examples
+
+### Default
+Basic usage example.
+
+<ComponentPreview name="component-default" />
+
+### Variant 1
+Example showing variant 1.
+
+<ComponentPreview name="component-variant-1" />
+
+## API Reference
+
+### ComponentPrimitive
+
+The primitive version provides maximum flexibility.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| children | ReactNode | - | Content |
+| className | string | - | Custom styles |
+
+### Component
+
+The composed version with built-in logic.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| status | string | - | Component status |
+| onAction | function | - | Action handler |
+```
+
+### 文档编写要点
+
+#### 1. Overview 部分
+- 简要说明组件的定位
+- 不要太长，3-5 个要点即可
+
+#### 2. Quick Start 部分
+- 提供最简单的使用示例
+- 代码要能直接运行
+
+#### 3. Features 部分
+- 列出核心功能特性
+- 每个特性一句话说明
+
+#### 4. Installation 部分
+⚠️ **最重要的部分**
+
+- CLI 安装路径格式：`http://localhost:3000/r/wuhan/{name}.json`
+- `{name}` 必须与 `_registry.ts` 中的 `name` 字段一致
+- 对于拼合组件，这个名称会自动安装对应的原语
+
+**示例**：
+```bash
+# 原语组件（blocks）
+npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form-01.json
+
+# 拼合组件（composed）
+npx shadcn@latest add http://localhost:3000/r/wuhan/dynamic-form.json
+# 👆 这个会自动安装 dynamic-form-01 原语
+```
+
+#### 5. Examples 部分
+
+**原语组件**：
+- 只需 1-2 个示例即可
+- 展示基础样式和结构
+- 不包含复杂的业务逻辑
+
+**拼合组件**：
+- 需要多个示例（3-5 个）
+- 展示不同的使用场景
+- 展示配置选项和功能特性
+
+#### 6. API Reference 部分
+
+**必须包含**：
+- Props 表格
+- 类型定义
+- 默认值
+- 详细说明
+
+**格式规范**：
+```mdx
+### ComponentName
+
+Description of the component.
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| prop1 | string | - | Prop 1 description |
+| prop2 | number | 0 | Prop 2 description |
+| onEvent | function | - | Event handler |
+
+#### Example
+
+```tsx
+<Component prop1="value" prop2={42} />
+```
+```
+
+### 不要包含的部分
+
+根据新的规范，以下部分**不需要**包含：
+- ❌ Usage 部分（合并到 Quick Start）
+- ❌ Behavior Spec 部分（太技术化）
+- ❌ 过于详细的实现细节
+
+### 文档与代码的一致性
+
+确保文档与代码保持同步：
+
+1. **Props 必须准确**：文档中的 Props 必须与实际代码一致
+2. **示例可运行**：所有代码示例都应该是可运行的
+3. **及时更新**：代码变更后及时更新文档
+
+---
+
 ## 🤖 自动化工具
 
 ### 快速创建组件脚本

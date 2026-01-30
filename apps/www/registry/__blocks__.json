@@ -5,7 +5,7 @@
   },
   {
     "name": "welcome-01",
-    "description": "Welcome primitives (container, icon, text)"
+    "description": "Welcome message header for empty state"
   },
   {
     "name": "message-01",
@@ -13,19 +13,19 @@
   },
   {
     "name": "quick-action-01",
-    "description": "Quick action primitives for suggestion buttons (base block)"
+    "description": "Quick action button components for suggestions and next step guidance (Base Block)"
   },
   {
     "name": "prompt-01",
-    "description": "Prompt primitives (horizontal layout)"
+    "description": "Prompt button (horizontal layout)"
   },
   {
     "name": "prompt-02",
-    "description": "Prompt primitives (vertical layout)"
+    "description": "Prompt button (vertical layout)"
   },
   {
     "name": "suggestion-01",
-    "description": "Suggestion primitives (text first, icon last)"
+    "description": "Suggestion button for next step guidance (text first, icon last)"
   },
   {
     "name": "sender-01",
@@ -33,19 +33,19 @@
   },
   {
     "name": "attachment-list-01",
-    "description": "Attachment list primitives (card, list, meta)"
+    "description": "Attachment list component"
   },
   {
     "name": "avatar-header-01",
-    "description": "Avatar header primitives (avatar, name, time)"
+    "description": "Message avatar header component (avatar + name + time)"
   },
   {
     "name": "history-item-01",
-    "description": "History item primitives (default/hover/selected)"
+    "description": "History record list item component (default/hover/selected)"
   },
   {
     "name": "quote-content-01",
-    "description": "Quote content primitives (leading, text, close)"
+    "description": "Quote content display component (shown above input field)"
   },
   {
     "name": "sidebar-01",
@@ -53,7 +53,7 @@
   },
   {
     "name": "feedback-01",
-    "description": "Feedback primitives (container, header, input)"
+    "description": "Feedback component for reporting issues"
   },
   {
     "name": "toggle-button-01",
@@ -88,8 +88,8 @@
     "description": "Task list primitives (container, list, items)"
   },
   {
-    "name": "intervene-form-01",
-    "description": "Intervene form primitive container"
+    "name": "dynamic-form-01",
+    "description": "Dynamic Form component for user input and interaction"
   },
   {
     "name": "message",
@@ -124,48 +124,8 @@
     "description": "Composed thinking process with steps and content blocks"
   },
   {
-    "name": "welcome",
-    "description": "Composed welcome message header"
-  },
-  {
-    "name": "quick-action",
-    "description": "Composed quick action panel with items"
-  },
-  {
-    "name": "prompt",
-    "description": "Composed prompt list with horizontal/vertical variants"
-  },
-  {
-    "name": "suggestion",
-    "description": "Composed suggestion panel with next step actions"
-  },
-  {
-    "name": "attachment-list",
-    "description": "Composed attachment list with cards"
-  },
-  {
-    "name": "quote-content",
-    "description": "Composed quote content display with close action"
-  },
-  {
-    "name": "history-item",
-    "description": "Composed history list item with trailing slots"
-  },
-  {
-    "name": "avatar-header",
-    "description": "Composed avatar header with name and time"
-  },
-  {
-    "name": "sidebar",
-    "description": "Composed sidebar with header, search, and history list"
-  },
-  {
-    "name": "feedback",
-    "description": "Composed feedback form with options and input"
-  },
-  {
-    "name": "intervene-form",
-    "description": "Composed intervene form container"
+    "name": "dynamic-form",
+    "description": "Schema-driven dynamic form with validation and multiple field types"
   },
   {
     "name": "action-dropdown",

@@ -21,8 +21,8 @@ import {
   TaskListEditableContainerPrimitive,
   TaskListEditableListItemPrimitive,
 } from "@/registry/wuhan/blocks/task-list/task-list-01";
-import { SidebarSearchInput } from "@/registry/wuhan/composed/sidebar/sidebar";
-import { FeedbackInput } from "@/registry/wuhan/composed/feedback/feedback";
+import { SidebarHistorySearchInput } from "@/registry/wuhan/blocks/sidebar/sidebar-01";
+import { FeedbackInputPrimitive } from "@/registry/wuhan/blocks/feedback/feedback-01";
 
 import type { EditableTaskListItemProps } from "./types";
 
@@ -133,17 +133,11 @@ function EditableListItem(props: {
         >
           <GripVertical className="size-4" />
         </button>
-        <FeedbackInput
+        <FeedbackInputPrimitive
           value={content}
           onChange={(e) => props.onContentChange?.(e.target.value)}
         />
       </div>
-      <SidebarSearchInput
-        value=""
-        onChange={() => {}}
-        placeholder="搜索"
-        className="w-[180px]"
-      />
       <button
         type="button"
         className="text-[var(--text-tertiary)]"

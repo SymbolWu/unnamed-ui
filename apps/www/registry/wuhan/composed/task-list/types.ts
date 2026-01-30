@@ -6,6 +6,7 @@ export interface TaskListComposedProps {
   dataSource: TodoItem[];
   /** 标题 */
   title?: string;
+  /** 状态 */
   status: "pending" | "confirmed";
   /** 是否启用编辑 */
   editable?: boolean;

@@ -19,7 +19,7 @@ export const blocks: Registry["items"] = [
     name: "welcome-01",
     type: "registry:block",
     title: "Welcome",
-    description: "Welcome primitives (container, icon, text)",
+    description: "Welcome message header for empty state",
     registryDependencies: ["style"],
     files: [
       {
@@ -47,7 +47,8 @@ export const blocks: Registry["items"] = [
     name: "quick-action-01",
     type: "registry:block",
     title: "Quick Action",
-    description: "Quick action primitives for suggestion buttons (base block)",
+    description:
+      "Quick action button components for suggestions and next step guidance (Base Block)",
     registryDependencies: ["style", "button"],
     files: [
       {
@@ -61,7 +62,7 @@ export const blocks: Registry["items"] = [
     name: "prompt-01",
     type: "registry:block",
     title: "Prompt",
-    description: "Prompt primitives (horizontal layout)",
+    description: "Prompt button (horizontal layout)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -75,7 +76,7 @@ export const blocks: Registry["items"] = [
     name: "prompt-02",
     type: "registry:block",
     title: "Prompt",
-    description: "Prompt primitives (vertical layout)",
+    description: "Prompt button (vertical layout)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -89,7 +90,8 @@ export const blocks: Registry["items"] = [
     name: "suggestion-01",
     type: "registry:block",
     title: "Suggestion",
-    description: "Suggestion primitives (text first, icon last)",
+    description:
+      "Suggestion button for next step guidance (text first, icon last)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -117,7 +119,7 @@ export const blocks: Registry["items"] = [
     name: "attachment-list-01",
     type: "registry:block",
     title: "Attachment List",
-    description: "Attachment list primitives (card, list, meta)",
+    description: "Attachment list component",
     registryDependencies: ["style", "button", "tooltip-01"],
     files: [
       {
@@ -131,7 +133,7 @@ export const blocks: Registry["items"] = [
     name: "avatar-header-01",
     type: "registry:block",
     title: "Avatar Header",
-    description: "Avatar header primitives (avatar, name, time)",
+    description: "Message avatar header component (avatar + name + time)",
     registryDependencies: ["style"],
     files: [
       {
@@ -145,7 +147,7 @@ export const blocks: Registry["items"] = [
     name: "history-item-01",
     type: "registry:block",
     title: "History Item",
-    description: "History item primitives (default/hover/selected)",
+    description: "History record list item component (default/hover/selected)",
     registryDependencies: ["style"],
     files: [
       {
@@ -159,7 +161,7 @@ export const blocks: Registry["items"] = [
     name: "quote-content-01",
     type: "registry:block",
     title: "Quote Content",
-    description: "Quote content primitives (leading, text, close)",
+    description: "Quote content display component (shown above input field)",
     registryDependencies: ["style"],
     files: [
       {
@@ -187,7 +189,7 @@ export const blocks: Registry["items"] = [
     name: "feedback-01",
     type: "registry:block",
     title: "Feedback",
-    description: "Feedback primitives (container, header, input)",
+    description: "Feedback component for reporting issues",
     registryDependencies: ["style", "button", "sidebar-01", "toggle-button-01"],
     files: [
       {
@@ -312,16 +314,16 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
-    name: "intervene-form-01",
+    name: "dynamic-form-01",
     type: "registry:block",
-    title: "Intervene Form",
-    description: "Intervene form primitive container",
+    title: "Dynamic Form",
+    description: "Dynamic Form component for user input and interaction",
     registryDependencies: ["style"],
     files: [
       {
-        path: "blocks/intervene-form/intervene-form-01.tsx",
+        path: "blocks/dynamic-form/dynamic-form-01.tsx",
         type: "registry:component",
-        target: "components/wuhan/blocks/intervene-form-01.tsx",
+        target: "components/wuhan/blocks/dynamic-form-01.tsx",
       },
     ],
   },

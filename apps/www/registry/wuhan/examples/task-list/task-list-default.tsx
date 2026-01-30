@@ -5,23 +5,23 @@ import TaskList from "@/registry/wuhan/composed/task-list/task-list";
 import type { TodoItem } from "@/registry/wuhan/composed/task-list/types";
 
 const initialTasks: TodoItem[] = [
-  { id: "1", content: "学习 React 基础", order: 1 },
-  { id: "2", content: "掌握 TypeScript", order: 2 },
-  { id: "3", content: "构建第一个项目", order: 3 },
+  { id: "1", content: "完成项目文档", order: 1 },
+  { id: "2", content: "代码审查", order: 2 },
+  { id: "3", content: "修复 Bug #123", order: 3 },
+  { id: "4", content: "更新依赖包", order: 4 },
 ];
 
-export default function TaskListDemo() {
+export default function TaskListDefault() {
   const [tasks, setTasks] = useState<TodoItem[]>(initialTasks);
 
   return (
     <TaskList
       dataSource={tasks}
-      title="学习计划"
-      status="pending"
+      title="项目任务"
+      status="confirmed"
+      editable={false}
       onItemsChange={setTasks}
-      onConfirmExecute={() => {
-        console.log("确认执行", tasks);
-      }}
+      onConfirmExecute={() => {}}
     />
   );
 }

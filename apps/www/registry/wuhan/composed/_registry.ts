@@ -269,16 +269,37 @@ export const composed: Registry["items"] = [
     ],
   },
   {
-    name: "intervene-form",
+    name: "dynamic-form",
     type: "registry:block",
-    title: "Intervene Form",
-    description: "Composed intervene form container",
-    registryDependencies: ["intervene-form-01"],
+    title: "Dynamic Form",
+    description:
+      "Schema-driven dynamic form with validation and multiple field types",
+    registryDependencies: ["dynamic-form-01"],
     files: [
       {
-        path: "composed/intervene-form/intervene-form.tsx",
+        path: "composed/dynamic-form/DynamicForm.tsx",
         type: "registry:component",
-        target: "components/wuhan/composed/intervene-form.tsx",
+        target: "components/wuhan/composed/dynamic-form.tsx",
+      },
+      {
+        path: "composed/dynamic-form/FormItem.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/dynamic-form-item.tsx",
+      },
+      {
+        path: "composed/dynamic-form/types.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/dynamic-form-types.ts",
+      },
+      {
+        path: "composed/dynamic-form/schema-utils.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/dynamic-form-schema-utils.ts",
+      },
+      {
+        path: "composed/dynamic-form/index.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/dynamic-form-index.ts",
       },
     ],
   },
