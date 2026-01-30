@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import {
-  TaskListComposed,
+  TaskList,
   type TodoItem,
-} from "@/registry/wuhan/composed/task-list/task-list-composed";
+} from "@/registry/wuhan/composed/task-list/task-list";
 
 const initialTasks: TodoItem[] = [
   { id: "1", content: "学习 React 基础", order: 1 },
@@ -16,7 +16,7 @@ export default function TaskListDemo() {
   const [tasks, setTasks] = useState<TodoItem[]>(initialTasks);
 
   return (
-    <TaskListComposed
+    <TaskList
       dataSource={tasks}
       title="学习计划"
       status="pending"

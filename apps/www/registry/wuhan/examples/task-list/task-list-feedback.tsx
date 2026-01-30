@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import {
-  TaskListComposed,
+  TaskList,
   type TodoItem,
-} from "@/registry/wuhan/composed/task-list/task-list-composed";
+} from "@/registry/wuhan/composed/task-list/task-list";
 
 const initialTasks: TodoItem[] = [
   { id: "1", content: "实现用户认证", order: 1 },
@@ -18,11 +18,11 @@ export default function TaskListPending() {
   const [executed, setExecuted] = useState(false);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full">
       <p className="text-sm text-muted-foreground">
         Pending 状态：显示"修改方案"和"确认并执行"按钮
       </p>
-      <TaskListComposed
+      <TaskList
         dataSource={tasks}
         title="待执行任务"
         status="pending"

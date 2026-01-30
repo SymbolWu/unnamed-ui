@@ -30,7 +30,6 @@ import {
   TaskListEditableContainerPrimitive,
   TaskListEditableListItemPrimitive,
 } from "@/registry/wuhan/blocks/task-list/task-list-01";
-import { SidebarHistorySearchInput } from "@/registry/wuhan/blocks/sidebar/sidebar-01";
 import { FeedbackInputPrimitive } from "@/registry/wuhan/blocks/feedback/feedback-01";
 
 // ==================== 类型定义 ====================
@@ -114,80 +113,79 @@ export type EditableTaskListItemProps = Pick<
  *
  * @public
  */
-export const TaskListComposed = React.forwardRef<
-  HTMLDivElement,
-  TaskListComposedProps
->((props, ref) => {
-  const {
-    dataSource,
-    title = "待办清单",
-    cancelEditButtonText = "取消",
-    modifyButtonText = "修改方案",
-    editable = false,
-    status = "pending",
-    onItemsChange,
-    onConfirmExecute,
-  } = props;
-  const [isEditing, setIsEditing] = useState(false);
+export const TaskList = React.forwardRef<HTMLDivElement, TaskListComposedProps>(
+  (props, ref) => {
+    const {
+      dataSource,
+      title = "待办清单",
+      cancelEditButtonText = "取消",
+      modifyButtonText = "修改方案",
+      editable = false,
+      status = "pending",
+      onItemsChange,
+      onConfirmExecute,
+    } = props;
+    const [isEditing, setIsEditing] = useState(false);
 
-  const currentModifyButtonText = isEditing
-    ? cancelEditButtonText
-    : modifyButtonText;
+    const currentModifyButtonText = isEditing
+      ? cancelEditButtonText
+      : modifyButtonText;
 
-  const onTriggerEdit = () => {
-    setIsEditing(!isEditing);
-  };
+    const onTriggerEdit = () => {
+      setIsEditing(!isEditing);
+    };
 
-  const onCloseEdit = () => {
-    setIsEditing(false);
-  };
+    const onCloseEdit = () => {
+      setIsEditing(false);
+    };
 
-  const onStartExecute = () => {
-    onConfirmExecute?.();
-    onCloseEdit();
-  };
+    const onStartExecute = () => {
+      onConfirmExecute?.();
+      onCloseEdit();
+    };
 
-  const renderContent = () => {
-    if (!isEditing) {
-      return <TaskListComposedReadonlyList dataSource={dataSource} />;
-    }
+    const renderContent = () => {
+      if (!isEditing) {
+        return <TaskListComposedReadonlyList dataSource={dataSource} />;
+      }
+      return (
+        <TaskListComposedEditableList
+          dataSource={dataSource}
+          onItemsChange={onItemsChange}
+        />
+      );
+    };
+
+    const renderFooter = () => {
+      if (!(status === "pending" && editable)) return null;
+      return (
+        <TaskListFooterPrimitive>
+          <Button
+            onClick={onTriggerEdit}
+            variant="outline"
+            className="font-normal"
+          >
+            {currentModifyButtonText}
+          </Button>
+          <Button onClick={onStartExecute} className="font-normal">
+            确认并执行
+          </Button>
+        </TaskListFooterPrimitive>
+      );
+    };
+
     return (
-      <TaskListComposedEditableList
-        dataSource={dataSource}
-        onItemsChange={onItemsChange}
-      />
+      <TaskListContainerPrimitive ref={ref}>
+        <TaskListHeaderPrimitive>
+          <TaskListTitlePrimitive>{title}</TaskListTitlePrimitive>
+        </TaskListHeaderPrimitive>
+        {renderContent()}
+        {renderFooter()}
+      </TaskListContainerPrimitive>
     );
-  };
-
-  const renderFooter = () => {
-    if (!(status === "pending" && editable)) return null;
-    return (
-      <TaskListFooterPrimitive>
-        <Button
-          onClick={onTriggerEdit}
-          variant="outline"
-          className="font-normal"
-        >
-          {currentModifyButtonText}
-        </Button>
-        <Button onClick={onStartExecute} className="font-normal">
-          确认并执行
-        </Button>
-      </TaskListFooterPrimitive>
-    );
-  };
-
-  return (
-    <TaskListContainerPrimitive ref={ref}>
-      <TaskListHeaderPrimitive>
-        <TaskListTitlePrimitive>{title}</TaskListTitlePrimitive>
-      </TaskListHeaderPrimitive>
-      {renderContent()}
-      {renderFooter()}
-    </TaskListContainerPrimitive>
-  );
-});
-TaskListComposed.displayName = "TaskListComposed";
+  },
+);
+TaskList.displayName = "TaskList";
 
 // ==================== 子组件：ReadonlyList ====================
 

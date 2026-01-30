@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import {
-  TaskListComposed,
+  TaskList,
   type TodoItem,
-} from "@/registry/wuhan/composed/task-list/task-list-composed";
+} from "@/registry/wuhan/composed/task-list/task-list";
 import { Button } from "@/registry/wuhan/ui/button";
 
 const initialTasks: TodoItem[] = [
@@ -16,7 +16,7 @@ const initialTasks: TodoItem[] = [
   { id: "6", content: "测试和调试", order: 6 },
 ];
 
-export default function TaskListComposedDemo() {
+export default function TaskListDemo() {
   const [tasks, setTasks] = useState<TodoItem[]>(initialTasks);
   const [status, setStatus] = useState<"pending" | "confirmed">("pending");
 
@@ -50,7 +50,7 @@ export default function TaskListComposedDemo() {
         </div>
       </div>
 
-      <TaskListComposed
+      <TaskList
         dataSource={tasks}
         title="项目开发计划"
         status={status}

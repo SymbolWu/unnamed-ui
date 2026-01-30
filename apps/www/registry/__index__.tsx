@@ -862,17 +862,17 @@ export const Index: Record<string, Record<string, any>> = {
       name: "task-list",
       description: "Composed task list with editable mode",
       type: "registry:block",
-      registryDependencies: ["button", "task-list-01", "sidebar", "feedback"],
+      registryDependencies: ["button", "task-list-01", "feedback"],
       files: [
         {
-          path: "registry/wuhan/composed/task-list/task-list-composed.tsx",
+          path: "registry/wuhan/composed/task-list/task-list.tsx",
           type: "registry:component",
           target: "components/wuhan/composed/task-list.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/composed/task-list/task-list-composed.tsx");
+          await import("@/registry/wuhan/composed/task-list/task-list.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -1274,14 +1274,14 @@ export const Index: Record<string, Record<string, any>> = {
       ],
       files: [
         {
-          path: "registry/wuhan/composed/dynamic-form/dynamic-form-composed.tsx",
+          path: "registry/wuhan/composed/dynamic-form/dynamic-form.tsx",
           type: "registry:component",
           target: "components/wuhan/composed/dynamic-form.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/composed/dynamic-form/dynamic-form-composed.tsx");
+          await import("@/registry/wuhan/composed/dynamic-form/dynamic-form.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

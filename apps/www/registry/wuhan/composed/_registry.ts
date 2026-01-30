@@ -38,12 +38,13 @@ export const composed: Registry["items"] = [
       "@dnd-kit/core",
       "@dnd-kit/sortable",
       "@dnd-kit/utilities",
+      "@dnd-kit/modifiers",
       "lucide-react",
     ],
-    registryDependencies: ["button", "task-list-01", "sidebar", "feedback"],
+    registryDependencies: ["button", "task-list-01", "feedback"],
     files: [
       {
-        path: "composed/task-list/task-list-composed.tsx",
+        path: "composed/task-list/task-list.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/task-list.tsx",
       },
@@ -278,7 +279,7 @@ export const composed: Registry["items"] = [
     ],
     files: [
       {
-        path: "composed/dynamic-form/dynamic-form-composed.tsx",
+        path: "composed/dynamic-form/dynamic-form.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/dynamic-form.tsx",
       },

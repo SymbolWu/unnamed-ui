@@ -1966,17 +1966,17 @@
         "@dnd-kit/core",
         "@dnd-kit/sortable",
         "@dnd-kit/utilities",
+        "@dnd-kit/modifiers",
         "lucide-react"
       ],
       "registryDependencies": [
         "button",
         "task-list-01",
-        "sidebar",
         "feedback"
       ],
       "files": [
         {
-          "path": "registry/wuhan/composed/task-list/task-list-composed.tsx",
+          "path": "registry/wuhan/composed/task-list/task-list.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/task-list.tsx"
         }
@@ -2249,7 +2249,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/composed/dynamic-form/dynamic-form-composed.tsx",
+          "path": "registry/wuhan/composed/dynamic-form/dynamic-form.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/dynamic-form.tsx"
         }
