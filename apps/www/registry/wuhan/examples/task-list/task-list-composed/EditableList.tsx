@@ -19,8 +19,7 @@ import {
   TaskListEditableContainerPrimitive,
   TaskListEditableListItemPrimitive,
 } from "@/registry/wuhan/blocks/task-list/task-list-01";
-import { SidebarHistorySearchInput } from "@/registry/wuhan/blocks/sidebar/sidebar-01";
-import { FeedbackInputPrimitive } from "@/registry/wuhan/blocks/feedback/feedback-01";
+import { FeedbackInput } from "@/registry/wuhan/composed/feedback/feedback";
 
 import type { EditableTaskListItemProps } from "./types";
 
@@ -159,7 +158,7 @@ function EditableListItem(props: {
           color="#666473"
         />
       </div>
-      <FeedbackInputPrimitive value={content} onChange={onInputChange} />
+      <FeedbackInput value={content} onChange={onInputChange} />
       <div className="h-6 w-6 flex items-center justify-center">
         <Trash2
           className="cursor-pointer"

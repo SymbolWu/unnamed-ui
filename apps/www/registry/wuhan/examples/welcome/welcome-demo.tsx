@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  WelcomeContainer,
-  WelcomeIcon,
-  WelcomeText,
-} from "@/registry/wuhan/blocks/welcome/welcome-01";
+import { WelcomeMessage } from "@/registry/wuhan/composed/welcome/welcome";
 import { Wand2, Sparkles } from "lucide-react";
 
 export default function WelcomeDemo() {
@@ -20,18 +16,8 @@ export default function WelcomeDemo() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <WelcomeContainer>
-          <WelcomeIcon>
-            <Wand2 />
-          </WelcomeIcon>
-          <WelcomeText>你好，我今天能帮你什么？</WelcomeText>
-        </WelcomeContainer>
-        <WelcomeContainer>
-          <WelcomeIcon>
-            <Sparkles />
-          </WelcomeIcon>
-          <WelcomeText>欢迎回来，想从哪里开始？</WelcomeText>
-        </WelcomeContainer>
+        <WelcomeMessage icon={<Wand2 />} text="你好，我今天能帮你什么？" />
+        <WelcomeMessage icon={<Sparkles />} text="欢迎回来，想从哪里开始？" />
       </div>
     </div>
   );

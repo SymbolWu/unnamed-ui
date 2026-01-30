@@ -19,7 +19,7 @@ export const blocks: Registry["items"] = [
     name: "welcome-01",
     type: "registry:block",
     title: "Welcome",
-    description: "Welcome message header for empty state",
+    description: "Welcome primitives (container, icon, text)",
     registryDependencies: ["style"],
     files: [
       {
@@ -47,8 +47,7 @@ export const blocks: Registry["items"] = [
     name: "quick-action-01",
     type: "registry:block",
     title: "Quick Action",
-    description:
-      "Quick action button components for suggestions and next step guidance (Base Block)",
+    description: "Quick action primitives for suggestion buttons (base block)",
     registryDependencies: ["style", "button"],
     files: [
       {
@@ -62,7 +61,7 @@ export const blocks: Registry["items"] = [
     name: "prompt-01",
     type: "registry:block",
     title: "Prompt",
-    description: "Prompt button (horizontal layout)",
+    description: "Prompt primitives (horizontal layout)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -76,7 +75,7 @@ export const blocks: Registry["items"] = [
     name: "prompt-02",
     type: "registry:block",
     title: "Prompt",
-    description: "Prompt button (vertical layout)",
+    description: "Prompt primitives (vertical layout)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -90,8 +89,7 @@ export const blocks: Registry["items"] = [
     name: "suggestion-01",
     type: "registry:block",
     title: "Suggestion",
-    description:
-      "Suggestion button for next step guidance (text first, icon last)",
+    description: "Suggestion primitives (text first, icon last)",
     registryDependencies: ["style", "quick-action-01"],
     files: [
       {
@@ -119,7 +117,7 @@ export const blocks: Registry["items"] = [
     name: "attachment-list-01",
     type: "registry:block",
     title: "Attachment List",
-    description: "Attachment list component",
+    description: "Attachment list primitives (card, list, meta)",
     registryDependencies: ["style", "button", "tooltip-01"],
     files: [
       {
@@ -133,7 +131,7 @@ export const blocks: Registry["items"] = [
     name: "avatar-header-01",
     type: "registry:block",
     title: "Avatar Header",
-    description: "Message avatar header component (avatar + name + time)",
+    description: "Avatar header primitives (avatar, name, time)",
     registryDependencies: ["style"],
     files: [
       {
@@ -147,7 +145,7 @@ export const blocks: Registry["items"] = [
     name: "history-item-01",
     type: "registry:block",
     title: "History Item",
-    description: "History record list item component (default/hover/selected)",
+    description: "History item primitives (default/hover/selected)",
     registryDependencies: ["style"],
     files: [
       {
@@ -161,7 +159,7 @@ export const blocks: Registry["items"] = [
     name: "quote-content-01",
     type: "registry:block",
     title: "Quote Content",
-    description: "Quote content display component (shown above input field)",
+    description: "Quote content primitives (leading, text, close)",
     registryDependencies: ["style"],
     files: [
       {
@@ -189,7 +187,7 @@ export const blocks: Registry["items"] = [
     name: "feedback-01",
     type: "registry:block",
     title: "Feedback",
-    description: "Feedback component for reporting issues",
+    description: "Feedback primitives (container, header, input)",
     registryDependencies: ["style", "button", "sidebar-01", "toggle-button-01"],
     files: [
       {
@@ -317,7 +315,7 @@ export const blocks: Registry["items"] = [
     name: "intervene-form-01",
     type: "registry:block",
     title: "Intervene Form",
-    description: "Intervene form component for user input and interaction",
+    description: "Intervene form primitive container",
     registryDependencies: ["style"],
     files: [
       {

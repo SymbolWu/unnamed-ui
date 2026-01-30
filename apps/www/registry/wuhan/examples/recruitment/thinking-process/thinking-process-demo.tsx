@@ -74,7 +74,7 @@ export default function ThinkingProcessDemo() {
             key: "outro",
             content: "以上步骤完成后，已生成最终结论与问题清单。",
           },
-          { type:"node", key: "node", node: <h1>自定义组件</h1> },
+          { type: "node", key: "node", node: <h1>自定义组件</h1> },
         ]}
       />
 

@@ -215,7 +215,10 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
       subSteps.length > 0;
     const subStepsNode = hasSubSteps ? renderSubSteps(subSteps) : null;
     const hasContent =
-      !hasBlocksProp && content !== undefined && content !== null && content !== "";
+      !hasBlocksProp &&
+      content !== undefined &&
+      content !== null &&
+      content !== "";
 
     const renderedBlocks = hasBlocksProp
       ? contentBlocks
@@ -289,9 +292,7 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
       : [];
     const hasBlocksContent = renderedBlocks.length > 0;
     const blocksNode = hasBlocksContent ? (
-      <div className="flex flex-col gap-[var(--gap-md)]">
-        {renderedBlocks}
-      </div>
+      <div className="flex flex-col gap-[var(--gap-md)]">{renderedBlocks}</div>
     ) : null;
 
     const showHeaderMeta = headerMeta !== undefined && headerMeta !== null;
@@ -305,7 +306,6 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
       showHint && !hasBlocksContent && !hasContent && !subStepsNode;
     const hasCollapsibleContent =
       hasHintOnly || hasBlocksContent || hasContent || !!subStepsNode;
-
 
     // 状态驱动的默认开合策略：仅在非受控且未显式传 defaultOpen 时生效
     const resolvedDefaultOpen =
@@ -347,7 +347,7 @@ const ThinkingStep = React.forwardRef<HTMLDivElement, ThinkingStepProps>(
                   {duration}s
                 </ThinkingTimeLabelPrimitive>
               )}
-              
+
               {hasCollapsibleContent && (
                 <ThinkingCollapseArrowPrimitive>
                   {arrowIcon || defaultArrowIcon}

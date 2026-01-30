@@ -117,7 +117,9 @@ export default function ThinkingProcessDebugging() {
       : "pending";
 
   const resolvedHeaderMeta =
-    useHeaderMeta && headerMeta.trim().length > 0 ? headerMeta.trim() : undefined;
+    useHeaderMeta && headerMeta.trim().length > 0
+      ? headerMeta.trim()
+      : undefined;
   const resolvedHint = hint.trim().length > 0 ? hint.trim() : undefined;
   const resolvedLongRunningHint =
     longRunningHint.trim().length > 0 ? longRunningHint.trim() : undefined;
@@ -175,9 +177,7 @@ export default function ThinkingProcessDebugging() {
           blocks.push({
             type: "text",
             key: phase.key,
-            content:
-              phase.fullText.slice(0, streamState.textProgress) ||
-              "",
+            content: phase.fullText.slice(0, streamState.textProgress) || "",
           });
         }
         return;
@@ -283,7 +283,11 @@ export default function ThinkingProcessDebugging() {
 
   const handleComplete = () => {
     setIsStreaming(false);
-    setStreamState({ phaseIndex: phases.length, textProgress: 0, stepProgress: 0 });
+    setStreamState({
+      phaseIndex: phases.length,
+      textProgress: 0,
+      stepProgress: 0,
+    });
   };
 
   const handleReset = () => {
@@ -297,7 +301,10 @@ export default function ThinkingProcessDebugging() {
       <div className="flex flex-col gap-4 rounded-xl border border-border/60 bg-background/80 p-4">
         <div className="text-sm font-medium text-foreground">配置项</div>
 
-        <details className="group rounded-lg border border-border/60 bg-background p-3" open>
+        <details
+          className="group rounded-lg border border-border/60 bg-background p-3"
+          open
+        >
           <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-foreground">
             基础信息
             <ChevronRight className="size-4 transition-transform group-open:rotate-90" />
@@ -431,7 +438,10 @@ export default function ThinkingProcessDebugging() {
           </div>
         </details>
 
-        <details className="group rounded-lg border border-border/60 bg-background p-3" open>
+        <details
+          className="group rounded-lg border border-border/60 bg-background p-3"
+          open
+        >
           <summary className="flex cursor-pointer items-center justify-between text-sm font-medium text-foreground">
             流式控制
             <ChevronRight className="size-4 transition-transform group-open:rotate-90" />
@@ -442,7 +452,9 @@ export default function ThinkingProcessDebugging() {
               <select
                 className="h-9 rounded-md border border-border/60 bg-background px-3 text-sm text-foreground"
                 value={speed}
-                onChange={(event) => setSpeed(event.target.value as StreamSpeed)}
+                onChange={(event) =>
+                  setSpeed(event.target.value as StreamSpeed)
+                }
               >
                 <option value="slow">慢</option>
                 <option value="medium">中</option>
@@ -483,9 +495,7 @@ export default function ThinkingProcessDebugging() {
               状态：
               <span className="text-foreground">{resolvedStatus}</span>
               <span>·</span>
-              <span>
-                阶段：{phases[streamState.phaseIndex]?.key ?? "完成"}
-              </span>
+              <span>阶段：{phases[streamState.phaseIndex]?.key ?? "完成"}</span>
               <span>·</span>
               <span>{isStreaming ? "流式中" : "已暂停"}</span>
             </div>

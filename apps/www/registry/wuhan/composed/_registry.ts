@@ -20,11 +20,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Sender",
     description: "Composed sender with attachments and modes",
-    registryDependencies: [
-      "sender-01",
-      "attachment-list-01",
-      "quote-content-01",
-    ],
+    registryDependencies: ["sender-01", "attachment-list", "quote-content"],
     files: [
       {
         path: "composed/sender/sender.tsx",
@@ -38,7 +34,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Task List",
     description: "Composed task list with editable mode",
-    registryDependencies: ["task-list-01", "sidebar-01", "feedback-01"],
+    registryDependencies: ["task-list-01", "sidebar", "feedback"],
     files: [
       {
         path: "composed/task-list/task-list.tsx",
@@ -129,6 +125,160 @@ export const composed: Registry["items"] = [
         path: "composed/thinking-process/thinking-process.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/thinking-process.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome",
+    type: "registry:block",
+    title: "Welcome",
+    description: "Composed welcome message header",
+    registryDependencies: ["welcome-01"],
+    files: [
+      {
+        path: "composed/welcome/welcome.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/welcome.tsx",
+      },
+    ],
+  },
+  {
+    name: "quick-action",
+    type: "registry:block",
+    title: "Quick Action",
+    description: "Composed quick action panel with items",
+    registryDependencies: ["quick-action-01"],
+    files: [
+      {
+        path: "composed/quick-action/quick-action.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/quick-action.tsx",
+      },
+    ],
+  },
+  {
+    name: "prompt",
+    type: "registry:block",
+    title: "Prompt",
+    description: "Composed prompt list with horizontal/vertical variants",
+    registryDependencies: ["prompt-01", "prompt-02"],
+    files: [
+      {
+        path: "composed/prompt/prompt.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/prompt.tsx",
+      },
+    ],
+  },
+  {
+    name: "suggestion",
+    type: "registry:block",
+    title: "Suggestion",
+    description: "Composed suggestion panel with next step actions",
+    registryDependencies: ["suggestion-01"],
+    files: [
+      {
+        path: "composed/suggestion/suggestion.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/suggestion.tsx",
+      },
+    ],
+  },
+  {
+    name: "attachment-list",
+    type: "registry:block",
+    title: "Attachment List",
+    description: "Composed attachment list with cards",
+    registryDependencies: ["attachment-list-01"],
+    files: [
+      {
+        path: "composed/attachment-list/attachment-list.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/attachment-list.tsx",
+      },
+    ],
+  },
+  {
+    name: "quote-content",
+    type: "registry:block",
+    title: "Quote Content",
+    description: "Composed quote content display with close action",
+    registryDependencies: ["quote-content-01"],
+    files: [
+      {
+        path: "composed/quote-content/quote-content.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/quote-content.tsx",
+      },
+    ],
+  },
+  {
+    name: "history-item",
+    type: "registry:block",
+    title: "History Item",
+    description: "Composed history list item with trailing slots",
+    registryDependencies: ["history-item-01"],
+    files: [
+      {
+        path: "composed/history-item/history-item.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/history-item.tsx",
+      },
+    ],
+  },
+  {
+    name: "avatar-header",
+    type: "registry:block",
+    title: "Avatar Header",
+    description: "Composed avatar header with name and time",
+    registryDependencies: ["avatar-header-01"],
+    files: [
+      {
+        path: "composed/avatar-header/avatar-header.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/avatar-header.tsx",
+      },
+    ],
+  },
+  {
+    name: "sidebar",
+    type: "registry:block",
+    title: "Sidebar",
+    description: "Composed sidebar with header, search, and history list",
+    registryDependencies: ["sidebar-01", "history-item-01"],
+    files: [
+      {
+        path: "composed/sidebar/sidebar.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/sidebar.tsx",
+      },
+    ],
+  },
+  {
+    name: "feedback",
+    type: "registry:block",
+    title: "Feedback",
+    description: "Composed feedback form with options and input",
+    registryDependencies: ["feedback-01", "toggle-button-01"],
+    files: [
+      {
+        path: "composed/feedback/feedback.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/feedback.tsx",
+      },
+    ],
+  },
+  {
+    name: "intervene-form",
+    type: "registry:block",
+    title: "Intervene Form",
+    description: "Composed intervene form container",
+    registryDependencies: ["intervene-form-01"],
+    files: [
+      {
+        path: "composed/intervene-form/intervene-form.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/intervene-form.tsx",
       },
     ],
   },

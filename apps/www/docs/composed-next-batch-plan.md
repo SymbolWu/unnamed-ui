@@ -19,18 +19,22 @@
 1. 组件审计（未开始）
    - 逐个梳理 blocks，明确“原语保留”与“业务封装”边界
    - 明确是否需要新增 composed 的 API、默认文案与交互
+   - 检查第一批 composed 是否直接使用了本批 blocks（如 sender -> attachment-list-01），标记需同步替换为新的 composed 版本
 
 2. 创建 composed 组件（未开始）
    - 为每个候选新增 `apps/www/registry/wuhan/composed/<name>/<name>.tsx`
    - 复用 blocks 原语，抽出默认组合结构与 props
+   - 产出对应的入口与命名规范，便于上层组件替换引用
 
 3. 注册与分发（未开始）
    - 更新 `apps/www/registry/wuhan/composed/_registry.ts`
    - 校准 `apps/www/registry/wuhan/blocks/_registry.ts` 描述为原语层
+   - 若第一批 composed 需要替换依赖，补充 registry 描述与分类说明
 
 4. 示例与文档同步（未开始）
    - 将对应 examples 改为 composed 引用
    - 更新 `apps/www/content/docs/blocks/*.mdx` 的 Manual/CLI 指向 composed
+   - 同步更新第一批示例/文档中对本批 blocks 的引用
 
 5. 校验（未开始）
    - 跑 lint

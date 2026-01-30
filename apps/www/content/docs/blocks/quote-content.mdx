@@ -1,6 +1,6 @@
 ---
 title: Quote Content
-description: Quote content display component for showing referenced content above input field
+description: Composed quote content display above input field
 author: AF
 ---
 
@@ -10,7 +10,7 @@ author: AF
   className="mb-4"
 />
 
-Quote Content 组件提供了用于在输入框上方显示引用内容的基础样式原语，包含回车图标、内容和关闭图标。适用于聊天场景中引用消息、回复内容等场景。
+Quote Content 是组合组件，用于在输入框上方显示引用内容，包含图标、内容与关闭动作。适用于聊天场景中的引用消息、回复内容等场景。需要深度定制时可使用 primitives。
 
 ## Installation
 
@@ -24,7 +24,7 @@ Quote Content 组件提供了用于在输入框上方显示引用内容的基础
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/quote-content-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/quote-content.json
 ```
 
 </TabsContent>
@@ -36,8 +36,8 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/quote-content-01.json
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  name="quote-content-demo"
-  title="registry/wuhan/examples/quote-content/quote-content-demo.tsx"
+  name="quote-content"
+  title="registry/wuhan/composed/quote-content/quote-content.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>

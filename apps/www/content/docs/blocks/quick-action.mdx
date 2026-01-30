@@ -1,12 +1,12 @@
 ---
 title: Quick Action
-description: Quick action button components for displaying suggestions and guiding users to next steps
+description: Composed quick action panel for suggestions and next steps
 author: AF
 ---
 
 <ComponentPreview name="quick-action-demo" description="Quick action buttons for suggestions and guidance" className="mb-4" />
 
-Quick Action 组件提供了用于显示快速操作建议的按钮组件，是提示集和下一步建议的基底 block，适用于聊天界面的空状态、对话引导、快捷操作等场景。
+Quick Action 是组合组件，用于展示快速操作建议，适用于聊天界面的空状态、对话引导、快捷操作等场景。需要深度定制时可使用 primitives。
 
 ## Installation
 
@@ -20,7 +20,7 @@ Quick Action 组件提供了用于显示快速操作建议的按钮组件，是�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/quick-action-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/quick-action.json
 ```
 
 </TabsContent>
@@ -31,7 +31,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/quick-action-01.json
 
 <Step>Copy and paste the following code into your project.</Step>
 
-<ComponentSource name="quick-action-demo" title="registry/wuhan/examples/quick-action/quick-action-demo.tsx" />
+<ComponentSource name="quick-action" title="registry/wuhan/composed/quick-action/quick-action.tsx" />
 
 <Step>Update the import paths to match your project setup.</Step>
 

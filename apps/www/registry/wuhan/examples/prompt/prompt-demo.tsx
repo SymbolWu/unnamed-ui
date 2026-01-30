@@ -1,13 +1,9 @@
 "use client";
 
 import {
-  PromptButton as PromptButtonHorizontal,
-  PromptGroup as PromptGroup01,
-} from "@/registry/wuhan/blocks/prompt/prompt-01";
-import {
-  PromptButton as PromptButtonVertical,
-  PromptGroup as PromptGroup02,
-} from "@/registry/wuhan/blocks/prompt/prompt-02";
+  PromptButton,
+  PromptGroup,
+} from "@/registry/wuhan/composed/prompt/prompt";
 import { Sparkles, FileText, Lightbulb } from "lucide-react";
 
 export default function PromptDemo() {
@@ -17,52 +13,58 @@ export default function PromptDemo() {
         <h4 className="text-sm font-medium text-[var(--text-primary)] mb-4">
           Prompt 01
         </h4>
-        <PromptGroup01>
-          <PromptButtonHorizontal
+        <PromptGroup variant="horizontal">
+          <PromptButton
+            variant="horizontal"
             icon={<Sparkles />}
             onClick={() => alert("Prompt 01")}
           >
             帮我总结内容
-          </PromptButtonHorizontal>
-          <PromptButtonHorizontal
+          </PromptButton>
+          <PromptButton
+            variant="horizontal"
             icon={<FileText />}
             onClick={() => alert("Prompt 01")}
           >
             列一个学习计划
-          </PromptButtonHorizontal>
-          <PromptButtonHorizontal
+          </PromptButton>
+          <PromptButton
+            variant="horizontal"
             icon={<Lightbulb />}
             onClick={() => alert("Prompt 01")}
           >
             解释这个概念
-          </PromptButtonHorizontal>
-        </PromptGroup01>
+          </PromptButton>
+        </PromptGroup>
       </div>
 
       <div>
         <h4 className="text-sm font-medium text-[var(--text-primary)] mb-4">
           Prompt 02
         </h4>
-        <PromptGroup02>
-          <PromptButtonVertical
+        <PromptGroup variant="vertical">
+          <PromptButton
+            variant="vertical"
             icon={<Sparkles />}
             onClick={() => alert("Prompt 02")}
           >
             介绍一下人工智能对互联网行业发展的影响
-          </PromptButtonVertical>
-          <PromptButtonVertical
+          </PromptButton>
+          <PromptButton
+            variant="vertical"
             icon={<FileText />}
             onClick={() => alert("Prompt 02")}
           >
             介绍一下人工智能对互联网行业发展的影响
-          </PromptButtonVertical>
-          <PromptButtonVertical
+          </PromptButton>
+          <PromptButton
+            variant="vertical"
             icon={<Lightbulb />}
             onClick={() => alert("Prompt 02")}
           >
             帮我总结内容，并给出学习计划
-          </PromptButtonVertical>
-        </PromptGroup02>
+          </PromptButton>
+        </PromptGroup>
       </div>
     </div>
   );

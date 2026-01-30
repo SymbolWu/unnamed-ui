@@ -1,6 +1,6 @@
 ---
 title: Feedback
-description: Feedback component for reporting issues and collecting user feedback
+description: Composed feedback form for reporting issues and collecting feedback
 author: AF
 ---
 
@@ -10,7 +10,7 @@ author: AF
   className="mb-4"
 />
 
-Feedback 组件提供了用于收集用户反馈的完整界面，包含反馈选项按钮、输入框和提交按钮。适用于消息反馈、内容举报等场景。
+Feedback 是组合组件，提供完整的反馈表单界面，包含反馈选项、输入框和提交按钮。适用于消息反馈、内容举报等场景。
 
 ## Features
 
@@ -18,7 +18,7 @@ Feedback 组件提供了用于收集用户反馈的完整界面，包含反馈�
 - **输入框**：复用 sidebar 搜索框样式，提供一致的输入体验
 - **提交按钮**：品牌色提交按钮，支持表单提交
 - **关闭功能**：头部提供关闭按钮，方便用户关闭反馈界面
-- **灵活组合**：所有组件都是样式原语，可以根据需求自由组合使用
+- **灵活组合**：如需深度定制，可使用 primitives 重新组合
 
 ## Installation
 
@@ -32,7 +32,7 @@ Feedback 组件提供了用于收集用户反馈的完整界面，包含反馈�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/feedback-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/feedback.json
 ```
 
 </TabsContent>
@@ -44,8 +44,8 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/feedback-01.json
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  name="feedback-demo"
-  title="registry/wuhan/examples/feedback/feedback-demo.tsx"
+  name="feedback"
+  title="registry/wuhan/composed/feedback/feedback.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>

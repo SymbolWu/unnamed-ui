@@ -1,6 +1,6 @@
 ---
 title: Intervene Form
-description: Intervene form component for managing intervention actions
+description: Composed intervene form container for intervention actions
 author: AF
 ---
 
@@ -10,7 +10,7 @@ author: AF
   className="mb-4"
 />
 
-Intervene Form 组件提供了用于干预操作的表单样式原语，适用于需要人工干预、审核、修改等场景。
+Intervene Form 是组合组件，提供干预操作的表单容器，适用于需要人工干预、审核、修改等场景。需要深度定制时可使用 primitives。
 
 ## Installation
 
@@ -24,7 +24,7 @@ Intervene Form 组件提供了用于干预操作的表单样式原语，适用�
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/intervene-form-01.json
+npx shadcn@latest add http://localhost:3000/r/wuhan/intervene-form.json
 ```
 
 </TabsContent>
@@ -36,8 +36,8 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/intervene-form-01.json
 <Step>Copy and paste the following code into your project.</Step>
 
 <ComponentSource
-  name="intervene-form-demo"
-  title="registry/wuhan/examples/intervene-form/intervene-form-demo.tsx"
+  name="intervene-form"
+  title="registry/wuhan/composed/intervene-form/intervene-form.tsx"
 />
 
 <Step>Update the import paths to match your project setup.</Step>
