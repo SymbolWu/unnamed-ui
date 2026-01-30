@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import TaskList from "@/registry/wuhan/composed/task-list/task-list";
-import type { TodoItem } from "@/registry/wuhan/composed/task-list/types";
+import {
+  TaskListComposed,
+  type TodoItem,
+} from "@/registry/wuhan/composed/task-list/task-list-composed";
 import { Button } from "@/registry/wuhan/ui/button";
 
 const initialTasks: TodoItem[] = [
@@ -48,7 +50,7 @@ export default function TaskListComposedDemo() {
         </div>
       </div>
 
-      <TaskList
+      <TaskListComposed
         dataSource={tasks}
         title="项目开发计划"
         status={status}

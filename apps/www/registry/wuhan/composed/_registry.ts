@@ -34,27 +34,18 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Task List",
     description: "Composed task list with editable mode",
-    registryDependencies: ["task-list-01", "sidebar", "feedback"],
+    dependencies: [
+      "@dnd-kit/core",
+      "@dnd-kit/sortable",
+      "@dnd-kit/utilities",
+      "lucide-react",
+    ],
+    registryDependencies: ["button", "task-list-01", "sidebar", "feedback"],
     files: [
       {
-        path: "composed/task-list/task-list.tsx",
+        path: "composed/task-list/task-list-composed.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/task-list.tsx",
-      },
-      {
-        path: "composed/task-list/ReadonlyList.tsx",
-        type: "registry:component",
-        target: "components/wuhan/composed/task-list-readonly.tsx",
-      },
-      {
-        path: "composed/task-list/EditableList.tsx",
-        type: "registry:component",
-        target: "components/wuhan/composed/task-list-editable.tsx",
-      },
-      {
-        path: "composed/task-list/types.ts",
-        type: "registry:component",
-        target: "components/wuhan/composed/task-list-types.ts",
       },
     ],
   },
@@ -274,32 +265,22 @@ export const composed: Registry["items"] = [
     title: "Dynamic Form",
     description:
       "Schema-driven dynamic form with validation and multiple field types",
-    registryDependencies: ["dynamic-form-01"],
+    dependencies: ["react-hook-form", "zod", "@hookform/resolvers"],
+    registryDependencies: [
+      "button",
+      "input",
+      "textarea",
+      "select",
+      "switch",
+      "slider",
+      "field",
+      "dynamic-form-01",
+    ],
     files: [
       {
-        path: "composed/dynamic-form/DynamicForm.tsx",
+        path: "composed/dynamic-form/dynamic-form-composed.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/dynamic-form.tsx",
-      },
-      {
-        path: "composed/dynamic-form/FormItem.tsx",
-        type: "registry:component",
-        target: "components/wuhan/composed/dynamic-form-item.tsx",
-      },
-      {
-        path: "composed/dynamic-form/types.ts",
-        type: "registry:component",
-        target: "components/wuhan/composed/dynamic-form-types.ts",
-      },
-      {
-        path: "composed/dynamic-form/schema-utils.ts",
-        type: "registry:component",
-        target: "components/wuhan/composed/dynamic-form-schema-utils.ts",
-      },
-      {
-        path: "composed/dynamic-form/index.ts",
-        type: "registry:component",
-        target: "components/wuhan/composed/dynamic-form-index.ts",
       },
     ],
   },

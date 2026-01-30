@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import TaskList from "@/registry/wuhan/composed/task-list/task-list";
-import type { TodoItem } from "@/registry/wuhan/composed/task-list/types";
+import {
+  TaskListComposed,
+  type TodoItem,
+} from "@/registry/wuhan/composed/task-list/task-list-composed";
 
 const initialTasks: TodoItem[] = [
   { id: "1", content: "实现用户认证", order: 1 },
@@ -20,7 +22,7 @@ export default function TaskListPending() {
       <p className="text-sm text-muted-foreground">
         Pending 状态：显示"修改方案"和"确认并执行"按钮
       </p>
-      <TaskList
+      <TaskListComposed
         dataSource={tasks}
         title="待执行任务"
         status="pending"

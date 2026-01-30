@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import TaskList from "@/registry/wuhan/composed/task-list/task-list";
-import type { TodoItem } from "@/registry/wuhan/composed/task-list/types";
+import {
+  TaskListComposed,
+  type TodoItem,
+} from "@/registry/wuhan/composed/task-list/task-list-composed";
 
 const initialTasks: TodoItem[] = [
   { id: "1", content: "设计系统架构", order: 1 },
@@ -18,7 +20,7 @@ export default function TaskListEditable() {
       <p className="text-sm text-muted-foreground">
         可编辑模式：点击"修改方案"按钮可以添加、编辑、删除和排序任务
       </p>
-      <TaskList
+      <TaskListComposed
         dataSource={tasks}
         title="开发任务"
         status="pending"

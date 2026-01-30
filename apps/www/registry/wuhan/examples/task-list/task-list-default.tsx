@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import TaskList from "@/registry/wuhan/composed/task-list/task-list";
-import type { TodoItem } from "@/registry/wuhan/composed/task-list/types";
+import {
+  TaskListComposed,
+  type TodoItem,
+} from "@/registry/wuhan/composed/task-list/task-list-composed";
 
 const initialTasks: TodoItem[] = [
   { id: "1", content: "完成项目文档", order: 1 },
@@ -15,7 +17,7 @@ export default function TaskListDefault() {
   const [tasks, setTasks] = useState<TodoItem[]>(initialTasks);
 
   return (
-    <TaskList
+    <TaskListComposed
       dataSource={tasks}
       title="项目任务"
       status="confirmed"
