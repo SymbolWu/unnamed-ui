@@ -110,7 +110,6 @@ const steps = [
   title="思考完成"
   labels={{
     longRunningHint: "任务需要一段时间，可稍后查看",
-    toolsUsed: (count) => `调用了 ${count} 个工具`,
     cancelledStepTitle: "已终止",
   }}
 />;
@@ -120,27 +119,31 @@ const steps = [
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| `status` | `'pending' \| 'thinking' \| 'completed' \| 'cancelled'` | `'pending'` | 步骤状态 |
+| `status` | `'pending' \| 'thinking' \| 'completed' \| 'idle' \| 'running' \| 'success' \| 'error' \| 'cancelled'` | `'pending'` | 步骤状态 |
 | `title` | `React.ReactNode` | - | 步骤标题 |
 | `content` | `React.ReactNode` | - | 步骤内容 |
 | `contentBlocks` | `ThinkingStepContentBlock[]` | - | 文字/子步骤/自定义节点穿插 |
 | `subSteps` | `unknown[]` | - | 子步骤数据（需配合 `renderSubSteps`） |
 | `renderSubSteps` | `(subSteps) => ReactNode` | - | 子步骤渲染器 |
 | `duration` | `number` | - | 耗时（秒） |
+| `headerMeta` | `React.ReactNode` | - | 头部右侧自定义信息 |
 | `icon` | `React.ReactNode` | - | 自定义图标 |
 | `arrowIcon` | `React.ReactNode` | - | 自定义箭头 |
 | `hint` | `React.ReactNode` | - | 长耗时提示文案 |
 | `longRunning` | `boolean` | `false` | 长耗时场景默认收起 |
 | `labels` | `ThinkingStepLabels` | - | 文案与统计配置 |
+| `triggerId` | `string` | - | 触发器 id（无障碍） |
+| `contentId` | `string` | - | 内容区域 id（无障碍） |
 | `defaultOpen` | `boolean` | `false` | 默认展开 |
 | `open` | `boolean` | - | 受控展开 |
 | `onOpenChange` | `(open) => void` | - | 展开变化回调 |
 
 ## Behavior Notes
 
-- `contentBlocks` 存在时忽略 `content / subSteps / renderSubSteps`
+- `contentBlocks` 存在时忽略 `content / subSteps / renderSubSteps`，且不会回退到其他内容来源
 - `status="cancelled"` 会自动追加一个“已取消”子步骤
-- 工具统计仅对 `contentBlocks.subSteps` 自动生效
+- `duration` 仅在成功态（`success/completed`）显示，且有 `headerMeta` 时会优先显示 `headerMeta`
+- `hint/longRunning` 仅在没有正文内容时展示（避免出现“空内容容器”）
 
 ## Examples
 
@@ -171,7 +174,7 @@ const steps = [
 ### Status & Labels
 
 <ComponentPreview
-  name="thinking-process-demo"
+  name="thinking-process-debugging"
   description="Multiple states and label customization"
   className="mb-4"
 />

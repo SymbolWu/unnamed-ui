@@ -279,6 +279,18 @@ const recruitmentExamples: Registry["items"] = [
     ],
   },
   {
+    name: "thinking-process-debugging",
+    type: "registry:example",
+    registryDependencies: ["thinking-process"],
+    files: [
+      {
+        path: "examples/recruitment/thinking-process/thinking-process-debugging.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/recruitment/thinking-process-debugging.tsx",
+      },
+    ],
+  },
+  {
     name: "thinking-process-default",
     type: "registry:example",
     registryDependencies: ["thinking-process"],
