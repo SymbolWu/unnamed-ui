@@ -88,8 +88,8 @@
     "description": "Task list primitives (container, list, items)"
   },
   {
-    "name": "intervene-form-01",
-    "description": "Intervene form component for user input and interaction"
+    "name": "dynamic-form-01",
+    "description": "Dynamic Form component for user input and interaction"
   },
   {
     "name": "message",
@@ -122,6 +122,10 @@
   {
     "name": "thinking-process",
     "description": "Composed thinking process with steps and content blocks"
+  },
+  {
+    "name": "dynamic-form",
+    "description": "Schema-driven dynamic form with validation and multiple field types"
   },
   {
     "name": "action-dropdown",

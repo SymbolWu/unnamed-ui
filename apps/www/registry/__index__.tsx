@@ -784,21 +784,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "intervene-form-01": {
-      name: "intervene-form-01",
-      description: "Intervene form component for user input and interaction",
+    "dynamic-form-01": {
+      name: "dynamic-form-01",
+      description: "Dynamic Form component for user input and interaction",
       type: "registry:block",
       registryDependencies: ["style"],
       files: [
         {
-          path: "registry/wuhan/blocks/intervene-form/intervene-form-01.tsx",
+          path: "registry/wuhan/blocks/dynamic-form/dynamic-form-01.tsx",
           type: "registry:component",
-          target: "components/wuhan/blocks/intervene-form-01.tsx",
+          target: "components/wuhan/blocks/dynamic-form-01.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/blocks/intervene-form/intervene-form-01.tsx");
+          await import("@/registry/wuhan/blocks/dynamic-form/dynamic-form-01.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -1017,6 +1017,52 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/thinking-process/thinking-process.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form": {
+      name: "dynamic-form",
+      description:
+        "Schema-driven dynamic form with validation and multiple field types",
+      type: "registry:block",
+      registryDependencies: ["dynamic-form-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/dynamic-form/DynamicForm.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/dynamic-form.tsx",
+        },
+        {
+          path: "registry/wuhan/composed/dynamic-form/FormItem.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/dynamic-form-item.tsx",
+        },
+        {
+          path: "registry/wuhan/composed/dynamic-form/types.ts",
+          type: "registry:component",
+          target: "components/wuhan/composed/dynamic-form-types.ts",
+        },
+        {
+          path: "registry/wuhan/composed/dynamic-form/schema-utils.ts",
+          type: "registry:component",
+          target: "components/wuhan/composed/dynamic-form-schema-utils.ts",
+        },
+        {
+          path: "registry/wuhan/composed/dynamic-form/index.ts",
+          type: "registry:component",
+          target: "components/wuhan/composed/dynamic-form-index.ts",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/dynamic-form/DynamicForm.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -2933,21 +2979,146 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "intervene-form-demo": {
-      name: "intervene-form-demo",
+    "dynamic-form-demo": {
+      name: "dynamic-form-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["intervene-form-01"],
+      registryDependencies: ["dynamic-form"],
       files: [
         {
-          path: "registry/wuhan/examples/intervene-form/intervene-form-demo.tsx",
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-demo.tsx",
           type: "registry:example",
-          target: "components/wuhan/examples/intervene-form-demo.tsx",
+          target: "components/wuhan/examples/dynamic-form-demo.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/intervene-form/intervene-form-demo.tsx");
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-default": {
+      name: "dynamic-form-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-default.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-default.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-default.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-validation": {
+      name: "dynamic-form-validation",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-validation.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-validation.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-validation.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-readonly": {
+      name: "dynamic-form-readonly",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-readonly.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-readonly.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-readonly.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-ref-methods": {
+      name: "dynamic-form-ref-methods",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-ref-methods.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-ref-methods.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-ref-methods.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-ai-scenario": {
+      name: "dynamic-form-ai-scenario",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-ai-scenario.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-ai-scenario.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-ai-scenario.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -2962,7 +3133,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "task-list-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["task-list-01"],
+      registryDependencies: ["task-list"],
       files: [
         {
           path: "registry/wuhan/examples/task-list/task-list-demo.tsx",
@@ -2983,6 +3154,81 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "task-list-default": {
+      name: "task-list-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["task-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/task-list/task-list-default.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/task-list-default.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/task-list/task-list-default.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "task-list-editable": {
+      name: "task-list-editable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["task-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/task-list/task-list-editable.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/task-list-editable.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/task-list/task-list-editable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "task-list-feedback": {
+      name: "task-list-feedback",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["task-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/task-list/task-list-feedback.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/task-list-feedback.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/task-list/task-list-feedback.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "task-list-composed-demo": {
       name: "task-list-composed-demo",
       description: "",
@@ -2993,11 +3239,6 @@ export const Index: Record<string, Record<string, any>> = {
           path: "registry/wuhan/examples/task-list/task-list-composed-demo.tsx",
           type: "registry:example",
           target: "components/wuhan/examples/task-list-composed-demo.tsx",
-        },
-        {
-          path: "registry/wuhan/examples/task-list/task-list-composed/index.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/task-list-composed.tsx",
         },
       ],
       component: React.lazy(async () => {
