@@ -1160,6 +1160,18 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "dynamic-form-with-extra",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form", "status-tag"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-with-extra.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-with-extra.tsx",
+      },
+    ],
+  },
+  {
     name: "task-list-demo",
     type: "registry:example",
     registryDependencies: ["task-list"],

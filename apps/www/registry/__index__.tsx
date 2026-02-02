@@ -3397,6 +3397,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "dynamic-form-with-extra": {
+      name: "dynamic-form-with-extra",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form", "status-tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-with-extra.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-with-extra.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-with-extra.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "task-list-demo": {
       name: "task-list-demo",
       description: "",

@@ -182,6 +182,8 @@ export interface DynamicFormProps {
   resetText?: string;
   /** 是否显示表单标题 */
   showTitle?: boolean;
+  /** 表单头部额外信息 */
+  extra?: React.ReactNode;
 }
 
 /**
@@ -295,6 +297,7 @@ export const DynamicForm = React.forwardRef<DynamicFormRef, DynamicFormProps>(
       submitText = "提交",
       resetText = "重置",
       showTitle = true,
+      extra,
     },
     ref,
   ) => {
@@ -466,6 +469,8 @@ export const DynamicForm = React.forwardRef<DynamicFormRef, DynamicFormProps>(
             <DynamicFormTitlePrimitive>
               {schema.title}
             </DynamicFormTitlePrimitive>
+            {/* 表单头部额外信息 */}
+            {extra && <div className="ml-auto">{extra}</div>}
           </DynamicFormHeaderPrimitive>
         )}
 

@@ -3418,6 +3418,21 @@
       ]
     },
     {
+      "name": "dynamic-form-with-extra",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form",
+        "status-tag"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-with-extra.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-with-extra.tsx"
+        }
+      ]
+    },
+    {
       "name": "task-list-demo",
       "type": "registry:example",
       "registryDependencies": [
