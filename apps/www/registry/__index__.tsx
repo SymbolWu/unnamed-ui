@@ -2447,6 +2447,106 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "quote-content-default": {
+      name: "quote-content-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["quote-content"],
+      files: [
+        {
+          path: "registry/wuhan/examples/quote-content/quote-content-default.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/quote-content-default.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/quote-content/quote-content-default.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "quote-content-custom-icon": {
+      name: "quote-content-custom-icon",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["quote-content"],
+      files: [
+        {
+          path: "registry/wuhan/examples/quote-content/quote-content-custom-icon.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/quote-content-custom-icon.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/quote-content/quote-content-custom-icon.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "quote-content-adapter": {
+      name: "quote-content-adapter",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["quote-content"],
+      files: [
+        {
+          path: "registry/wuhan/examples/quote-content/quote-content-adapter.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/quote-content-adapter.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/quote-content/quote-content-adapter.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "quote-content-custom-render": {
+      name: "quote-content-custom-render",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["quote-content"],
+      files: [
+        {
+          path: "registry/wuhan/examples/quote-content/quote-content-custom-render.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/quote-content-custom-render.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/quote-content/quote-content-custom-render.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "avatar-header-demo": {
       name: "avatar-header-demo",
       description: "",

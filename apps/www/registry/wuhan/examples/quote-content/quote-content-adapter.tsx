@@ -25,9 +25,7 @@ export default function QuoteContentAdapter() {
       ) : (
         <button
           type="button"
-          onClick={() =>
-            setQuote({ id: "q-2", text: "重新添加的引用内容" })
-          }
+          onClick={() => setQuote({ id: "q-2", text: "重新添加的引用内容" })}
           className="appearance-none border-0 bg-transparent p-0 text-sm text-muted-foreground hover:text-[var(--text-primary)]"
         >
           重新添加引用
