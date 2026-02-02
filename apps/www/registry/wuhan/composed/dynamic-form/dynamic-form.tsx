@@ -634,6 +634,9 @@ function renderFieldControl(
           placeholder={placeholder}
           disabled={disabled}
           aria-invalid={!!error}
+          className={cn(
+            "bg-[var(--bg-container)]",
+          )}
           {...formField}
         />
       );
@@ -645,6 +648,9 @@ function renderFieldControl(
           placeholder={placeholder}
           disabled={disabled}
           aria-invalid={!!error}
+          className={cn(
+            "bg-[var(--bg-container)]",
+          )}
           {...formField}
         />
       );
@@ -739,7 +745,7 @@ function renderFieldControl(
 
     case "radio":
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex gap-2">
           {options?.map((option) => (
             <label
               key={String(option.value)}
