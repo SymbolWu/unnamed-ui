@@ -1,6 +1,6 @@
 ---
 title: Sidebar
-description: Composed sidebar with header, search, and history list
+description: Composed sidebar component with header, search, and history list
 author: AF
 ---
 
@@ -11,20 +11,41 @@ author: AF
   align="start"
 />
 
-Sidebar 是组合组件，开箱即用：默认包含头部、新建按钮、历史对话区域，并支持展开/收起。适合直接用于对话列表、消息历史等场景；需要深度定制时可使用 primitives 自由组合。
+Sidebar 组件是一个功能完整的侧边栏组合组件，开箱即用，包含头部、新建按钮、搜索框、历史对话列表和底部区域，支持展开/收起功能，适用于对话列表、消息历史等场景。
+
+## Overview
+
+- **开箱即用**：无需额外配置即可使用，提供合理的默认值
+- **灵活配置**：头部、新建按钮、搜索框均可自定义或隐藏
+- **展开/收起**：支持折叠状态，收起时宽度 56px，展开时 240px
+- **搜索功能**：内置搜索框，可快速筛选历史对话
+- **空状态处理**：无数据时显示友好的空状态提示
+- **完整的类型定义**：TypeScript 类型支持，开发体验友好
 
 ## Quick Start
 
-最小可用示例（无需额外配置）：
-
 ```tsx
-<SidebarComposed
-  conversations={[
-    { id: "1", title: "Conversation 1" },
-    { id: "2", title: "Conversation 2" },
-  ]}
-/>
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+
+export function Example() {
+  const conversations = [
+    { id: "1", title: "如何学习 React？" },
+    { id: "2", title: "TypeScript 最佳实践" },
+    { id: "3", title: "CSS Grid 布局指南" },
+  ];
+
+  return <SidebarComposed conversations={conversations} />;
+}
 ```
+
+## Features
+
+- **默认配置完善**：标题、图标、按钮文本等都有默认值
+- **受控/非受控**：折叠状态支持受控和非受控两种模式
+- **动态底部**：底部内容可根据折叠状态动态渲染
+- **历史列表**：支持选中状态、悬停操作等交互
+- **响应式动画**：展开收起时有流畅的过渡动画
+- **可访问性**：提供 ARIA 标签，支持键盘导航
 
 ## Installation
 
@@ -47,14 +68,11 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/sidebar.json
 
 <Steps>
 
-<Step>Copy and paste the following code into your project.</Step>
+<Step>复制以下代码到你的项目</Step>
 
-<ComponentSource
-  name="sidebar"
-  title="registry/wuhan/composed/sidebar/sidebar.tsx"
-/>
+<ComponentSource name="sidebar" />
 
-<Step>Update the import paths to match your project setup.</Step>
+<Step>更新导入路径以匹配你的项目设置</Step>
 
 </Steps>
 
@@ -62,101 +80,11 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/sidebar.json
 
 </CodeTabs>
 
-## Components
-
-Sidebar 组件由多个样式原语组成，每个原语都可以独立使用：
-
-### Main Primitives
-
-- **SidebarPrimitive** - 侧边栏主容器（flex 布局，上下结构）
-- **SidebarContentPrimitive** - 内容区域容器（可滚动，flex-1）
-- **SidebarDividerPrimitive** - 分隔线原语
-
-### Header Primitives
-
-- **SidebarHeaderPrimitive** - 头部容器（flex 布局）
-- **SidebarHeaderLeading** - 左侧区域（图标+标题）
-- **SidebarHeaderIcon** - 图标容器
-- **SidebarHeaderTitle** - 标题文本
-- **SidebarHeaderAction** - 右侧操作按钮容器
-
-### New Button Primitives
-
-- **SidebarNewButtonPrimitive** - 新建按钮样式原语（原生 button 元素）
-
-### History Primitives
-
-- **SidebarHistoryPrimitive** - 历史区域容器
-- **SidebarHistoryTitle** - 历史标题
-- **SidebarHistorySearchPrimitive** - 搜索容器
-- **SidebarHistorySearchContainer** - 搜索框容器
-- **SidebarHistorySearchIcon** - 搜索图标容器
-- **SidebarHistorySearchInput** - 搜索输入框（原生 input 元素）
-- **SidebarHistoryListPrimitive** - 列表容器（可滚动）
-- **SidebarHistoryEmpty** - 空状态容器
-
-### Footer Primitives
-
-- **SidebarFooterPrimitive** - 底部容器
-
-## API (Composed)
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `conversations` | `SidebarConversation[]` | - | 历史列表数据（必传） |
-| `selectedId` | `string \| null` | - | 当前选中项 id |
-| `historyTitle` | `React.ReactNode` | `"历史对话"` | 历史标题 |
-| `emptyText` | `React.ReactNode` | `"暂无对话历史"` | 空状态文案 |
-| `header` | `SidebarHeaderConfig \| null` | 内置默认 | 头部配置；传 `null` 隐藏 |
-| `newButton` | `SidebarNewButtonConfig \| null` | 内置默认 | 新建按钮配置；传 `null` 隐藏 |
-| `search` | `SidebarSearchConfig \| null` | 内置默认 | 搜索配置；传 `null` 隐藏 |
-| `footer` | `React.ReactNode \| (({ collapsed }) => ReactNode) \| null` | - | 底部内容；函数可拿到折叠状态 |
-| `collapsible` | `boolean` | `true` | 是否展示/启用折叠按钮 |
-| `collapsed` | `boolean` | - | 受控折叠状态 |
-| `defaultCollapsed` | `boolean` | `false` | 非受控初始折叠状态 |
-| `onCollapsedChange` | `(collapsed: boolean) => void` | - | 折叠状态变化回调 |
-| `className` | `string` | - | 外层容器样式扩展 |
-| `contentClassName` | `string` | - | 内容区域样式扩展 |
-
-## Behavior Notes
-
-- `header/newButton/search` 传 `null` 可隐藏对应区域；不传则使用默认配置。
-- 收起时顶部显示两个带 tooltip 的 icon 按钮（展开 / 新建）。
-- 收起时宽度为 `56px`，内容区域自动收紧。
-- 未传 `footer` 时不显示底部。
-
-## API (Config Types)
-
-### SidebarHeaderConfig
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `title` | `React.ReactNode` | `"对话"` | 标题内容 |
-| `icon` | `React.ReactNode` | `Sparkles` | 标题左侧图标 |
-| `action` | `React.ReactNode \| null` | 内置折叠按钮 | 右侧操作；传 `null` 隐藏 |
-
-### SidebarNewButtonConfig
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `label` | `React.ReactNode` | `"新对话"` | 按钮文本 |
-| `icon` | `React.ReactNode` | `Plus` | 按钮图标 |
-| `onClick` | `() => void` | - | 点击回调 |
-
-### SidebarSearchConfig
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `value` | `string` | `""` | 输入值 |
-| `onChange` | `(value: string) => void` | - | 输入变化回调 |
-| `placeholder` | `string` | `"搜索"` | 占位文案 |
-| `icon` | `React.ReactNode` | `Search` | 搜索图标 |
-
 ## Examples
 
 ### Complete Sidebar
 
-完整的侧边栏示例，包含所有部分：
+完整的侧边栏示例，包含所有功能。
 
 <ComponentPreview
   name="sidebar-demo"
@@ -165,102 +93,580 @@ Sidebar 组件由多个样式原语组成，每个原语都可以独立使用：
   align="start"
 />
 
-### Custom Header
+## API Reference
 
-自定义头部内容：
+### SidebarComposed
+
+主侧边栏组件，封装了所有功能。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `conversations` | `SidebarConversation[]` | - | 历史对话列表数据（必填） |
+| `selectedId` | `string \| null` | - | 当前选中的对话 ID |
+| `historyTitle` | `React.ReactNode` | `"历史对话"` | 历史区域标题 |
+| `emptyText` | `React.ReactNode` | `"暂无对话历史"` | 空状态提示文本 |
+| `header` | `SidebarHeaderConfig \| null` | 默认配置 | 头部配置，传 `null` 隐藏头部 |
+| `newButton` | `SidebarNewButtonConfig \| null` | 默认配置 | 新建按钮配置，传 `null` 隐藏按钮 |
+| `search` | `SidebarSearchConfig \| null` | 默认配置 | 搜索框配置，传 `null` 隐藏搜索框 |
+| `footer` | `ReactNode \| ((state) => ReactNode) \| null` | - | 底部内容，可以是函数动态渲染 |
+| `collapsible` | `boolean` | `true` | 是否启用折叠功能 |
+| `collapsed` | `boolean` | - | 受控的折叠状态 |
+| `defaultCollapsed` | `boolean` | `false` | 非受控模式的初始折叠状态 |
+| `onCollapsedChange` | `(collapsed: boolean) => void` | - | 折叠状态变化回调 |
+| `className` | `string` | - | 外层容器自定义类名 |
+| `contentClassName` | `string` | - | 内容区域自定义类名 |
+
+#### Example
 
 ```tsx
-<SidebarHeaderPrimitive>
-  <SidebarHeaderLeading>
-    <SidebarHeaderIcon>
-      <CustomIcon className="size-4" />
-    </SidebarHeaderIcon>
-    <SidebarHeaderTitle>自定义标题</SidebarHeaderTitle>
-  </SidebarHeaderLeading>
-  <SidebarHeaderAction>
-    <CustomButton />
-  </SidebarHeaderAction>
-</SidebarHeaderPrimitive>
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { useState } from "react";
+
+function Example() {
+  const [selected, setSelected] = useState<string>("1");
+  const [searchValue, setSearchValue] = useState("");
+
+  const conversations = [
+    { 
+      id: "1", 
+      title: "如何学习 React？",
+      onClick: () => setSelected("1"),
+    },
+    { 
+      id: "2", 
+      title: "TypeScript 最佳实践",
+      onClick: () => setSelected("2"),
+    },
+  ];
+
+  return (
+    <SidebarComposed
+      // 头部配置
+      header={{
+        title: "我的对话",
+        icon: <MessageSquare className="size-4" />,
+      }}
+      // 新建按钮配置
+      newButton={{
+        label: "新建对话",
+        onClick: () => console.log("新建对话"),
+      }}
+      // 搜索配置
+      search={{
+        value: searchValue,
+        onChange: setSearchValue,
+        placeholder: "搜索对话",
+      }}
+      // 对话列表
+      conversations={conversations}
+      selectedId={selected}
+      // 底部内容
+      footer={<UserProfile />}
+    />
+  );
+}
 ```
 
-### Custom New Button
+### SidebarHeaderConfig
 
-自定义新建按钮：
+头部配置对象。
 
 ```tsx
-<SidebarNewButtonPrimitive onClick={handleCreate}>
-  <Plus className="size-4" />
-  新建对话
-</SidebarNewButtonPrimitive>
+interface SidebarHeaderConfig {
+  title: React.ReactNode;      // 标题内容
+  icon?: React.ReactNode;       // 标题左侧图标
+  action?: React.ReactNode;     // 右侧操作区域，传 null 隐藏
+}
 ```
 
-### History with Search
-
-带搜索功能的历史对话区域：
+**示例**：
 
 ```tsx
-<SidebarHistoryPrimitive>
-  <SidebarHistoryTitle>历史对话</SidebarHistoryTitle>
-  <SidebarHistorySearchPrimitive>
-    <SidebarHistorySearchContainer>
-      <SidebarHistorySearchIcon>
-        <Search className="size-4" />
-      </SidebarHistorySearchIcon>
-      <SidebarHistorySearchInput
-        placeholder="搜索"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-    </SidebarHistorySearchContainer>
-  </SidebarHistorySearchPrimitive>
-  <SidebarHistoryListPrimitive>
-    {/* 列表内容 */}
-  </SidebarHistoryListPrimitive>
-</SidebarHistoryPrimitive>
-```
-
-### Empty State
-
-空状态显示：
-
-```tsx
-<SidebarHistoryListPrimitive>
-  <SidebarHistoryEmpty>暂无对话历史</SidebarHistoryEmpty>
-</SidebarHistoryListPrimitive>
-```
-
-### Controlled Collapse
-
-受控折叠示例（外部状态驱动）：
-
-```tsx
-const [collapsed, setCollapsed] = React.useState(false);
-
 <SidebarComposed
-  collapsed={collapsed}
-  onCollapsedChange={setCollapsed}
+  header={{
+    title: "我的工作区",
+    icon: <Briefcase className="size-4" />,
+    action: <SettingsButton />,
+  }}
+  conversations={data}
+/>
+
+// 隐藏头部
+<SidebarComposed
+  header={null}
   conversations={data}
 />
 ```
 
-### Footer Based on Collapse
+### SidebarNewButtonConfig
 
-根据折叠状态渲染不同 footer：
+新建按钮配置对象。
+
+```tsx
+interface SidebarNewButtonConfig {
+  label: React.ReactNode;       // 按钮文本
+  icon?: React.ReactNode;        // 按钮图标
+  onClick?: () => void;          // 点击回调
+}
+```
+
+**示例**：
 
 ```tsx
 <SidebarComposed
+  newButton={{
+    label: "创建项目",
+    icon: <FolderPlus className="size-4" />,
+    onClick: handleCreateProject,
+  }}
   conversations={data}
-  footer={({ collapsed }) =>
-    collapsed ? (
-      <AvatarHeader avatar={<Avatar />} />
-    ) : (
-      <AvatarHeader
-        avatar={<Avatar />}
-        name="User"
-        time="Online"
+/>
+
+// 隐藏新建按钮
+<SidebarComposed
+  newButton={null}
+  conversations={data}
+/>
+```
+
+### SidebarSearchConfig
+
+搜索框配置对象。
+
+```tsx
+interface SidebarSearchConfig {
+  value: string;                       // 搜索值
+  onChange: (value: string) => void;   // 变化回调
+  placeholder?: string;                 // 占位文本
+  icon?: React.ReactNode;               // 搜索图标
+}
+```
+
+**示例**：
+
+```tsx
+const [query, setQuery] = useState("");
+
+<SidebarComposed
+  search={{
+    value: query,
+    onChange: setQuery,
+    placeholder: "搜索历史记录",
+    icon: <Search className="size-4" />,
+  }}
+  conversations={filteredData}
+/>
+
+// 隐藏搜索框
+<SidebarComposed
+  search={null}
+  conversations={data}
+/>
+```
+
+### SidebarConversation
+
+对话列表项数据结构。
+
+```tsx
+interface SidebarConversation {
+  id: string;                      // 唯一标识
+  title: React.ReactNode;          // 标题
+  hoverTrailing?: React.ReactNode; // 悬停时显示的右侧操作
+  onClick?: () => void;            // 点击回调
+}
+```
+
+**示例**：
+
+```tsx
+const conversations: SidebarConversation[] = [
+  {
+    id: "1",
+    title: "对话标题",
+    hoverTrailing: (
+      <button onClick={() => handleDelete("1")}>
+        <Trash2 className="size-4" />
+      </button>
+    ),
+    onClick: () => handleSelect("1"),
+  },
+];
+```
+
+## 使用场景
+
+- **聊天应用**：显示对话历史，支持快速切换和搜索
+- **文档管理**：展示文档列表，支持新建和搜索
+- **项目管理**：显示项目列表，支持快速切换
+- **邮件客户端**：显示邮件文件夹和对话列表
+- **笔记应用**：展示笔记列表，支持分类和搜索
+- **工作区导航**：显示工作区和频道列表
+
+## 最佳实践
+
+1. **合理使用默认值**：大多数场景下默认配置已足够，避免过度配置
+2. **控制列表长度**：历史列表过长时考虑分页或虚拟滚动
+3. **搜索优化**：搜索时应该过滤 conversations 数据而非依赖内部实现
+4. **折叠状态持久化**：将折叠状态保存到 localStorage 提升用户体验
+5. **响应式设计**：移动端考虑使用抽屉或全屏模式
+6. **快捷键支持**：为新建、搜索等操作添加键盘快捷键
+
+## 注意事项
+
+- `header`、`newButton`、`search` 传 `null` 可完全隐藏对应区域
+- 收起状态下，头部会显示两个图标按钮（展开按钮和新建按钮）
+- 收起时宽度固定为 56px，展开时为 240px
+- `footer` 可以是函数，接收 `{ collapsed }` 参数动态渲染
+- 搜索功能需要外部实现过滤逻辑，组件本身不处理搜索
+- 选中状态通过 `selectedId` 和 `conversation.id` 匹配
+
+## 原语组件
+
+Sidebar 基于以下原语组件构建：
+
+### 主要原语
+- `SidebarPrimitive` - 主容器
+- `SidebarContentPrimitive` - 内容区域
+- `SidebarDividerPrimitive` - 分隔线
+
+### 头部原语
+- `SidebarHeaderPrimitive` - 头部容器
+- `SidebarHeaderLeading` - 左侧区域
+- `SidebarHeaderIcon` - 图标容器
+- `SidebarHeaderTitle` - 标题
+- `SidebarHeaderAction` - 右侧操作
+
+### 历史原语
+- `SidebarHistoryPrimitive` - 历史区域容器
+- `SidebarHistoryTitle` - 历史标题
+- `SidebarHistorySearchPrimitive` - 搜索容器
+- `SidebarHistoryListPrimitive` - 列表容器
+- `SidebarHistoryEmpty` - 空状态
+
+### 其他原语
+- `SidebarNewButtonPrimitive` - 新建按钮
+- `SidebarFooterPrimitive` - 底部容器
+
+原语组件提供了更底层的控制，可以在 [registry/wuhan/blocks/sidebar/sidebar-01.tsx](../../registry/wuhan/blocks/sidebar/sidebar-01.tsx) 中找到。
+
+## 样式定制
+
+组件使用 Tailwind CSS 和 CSS 变量，可以通过以下方式定制：
+
+```tsx
+// 自定义容器样式
+<SidebarComposed
+  className="border-2 border-primary"
+  contentClassName="bg-muted/50"
+  conversations={data}
+/>
+```
+
+### 设计系统变量
+
+- **宽度**：展开 240px，收起 56px
+- **最小高度**：360px
+- **内边距**：`--padding-com-lg`
+- **边框**：`--border-neutral`
+- **背景色**：`--bg-page-secondary`
+- **过渡时长**：200ms
+
+## 扩展示例
+
+### 受控折叠状态
+
+使用受控模式管理折叠状态。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { useState } from "react";
+
+function ControlledCollapse() {
+  const [collapsed, setCollapsed] = useState(false);
+
+  return (
+    <div className="flex gap-4">
+      <SidebarComposed
+        collapsed={collapsed}
+        onCollapsedChange={setCollapsed}
+        conversations={data}
       />
-    )
+      <div className="flex-1">
+        <button onClick={() => setCollapsed(!collapsed)}>
+          切换侧边栏
+        </button>
+        <p>当前状态：{collapsed ? "收起" : "展开"}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### 动态底部内容
+
+根据折叠状态渲染不同的底部内容。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { Avatar } from "@/components/ui/avatar";
+
+function DynamicFooter() {
+  return (
+    <SidebarComposed
+      conversations={data}
+      footer={({ collapsed }) =>
+        collapsed ? (
+          <Avatar>
+            <AvatarImage src="/avatar.jpg" />
+            <AvatarFallback>U</AvatarFallback>
+          </Avatar>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage src="/avatar.jpg" />
+              <AvatarFallback>U</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm font-medium">用户名</p>
+              <p className="text-xs text-muted-foreground">在线</p>
+            </div>
+          </div>
+        )
+      }
+    />
+  );
+}
+```
+
+### 带操作的历史项
+
+为历史项添加悬停操作按钮。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { Trash2, Edit } from "lucide-react";
+
+function ConversationActions() {
+  const conversations = [
+    {
+      id: "1",
+      title: "如何学习 React？",
+      hoverTrailing: (
+        <div className="flex gap-1">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEdit("1");
+            }}
+            className="p-1 hover:bg-muted rounded"
+          >
+            <Edit className="size-3" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete("1");
+            }}
+            className="p-1 hover:bg-destructive/10 rounded"
+          >
+            <Trash2 className="size-3" />
+          </button>
+        </div>
+      ),
+      onClick: () => handleSelect("1"),
+    },
+  ];
+
+  return <SidebarComposed conversations={conversations} />;
+}
+```
+
+### 搜索过滤
+
+实现搜索过滤功能。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { useState, useMemo } from "react";
+
+function SearchFilter() {
+  const [searchValue, setSearchValue] = useState("");
+  
+  const allConversations = [
+    { id: "1", title: "如何学习 React？" },
+    { id: "2", title: "TypeScript 最佳实践" },
+    { id: "3", title: "CSS Grid 布局指南" },
+  ];
+
+  const filteredConversations = useMemo(() => {
+    if (!searchValue) return allConversations;
+    return allConversations.filter((conv) =>
+      conv.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }, [searchValue, allConversations]);
+
+  return (
+    <SidebarComposed
+      search={{
+        value: searchValue,
+        onChange: setSearchValue,
+      }}
+      conversations={filteredConversations}
+      emptyText={
+        searchValue ? `未找到 "${searchValue}" 相关对话` : "暂无对话历史"
+      }
+    />
+  );
+}
+```
+
+### 自定义头部
+
+完全自定义头部内容。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { Settings, MessageSquare } from "lucide-react";
+
+function CustomHeader() {
+  return (
+    <SidebarComposed
+      header={{
+        title: "工作区",
+        icon: <MessageSquare className="size-4" />,
+        action: (
+          <button className="p-1 hover:bg-muted rounded">
+            <Settings className="size-4" />
+          </button>
+        ),
+      }}
+      conversations={data}
+    />
+  );
+}
+
+// 隐藏折叠按钮但保留头部
+function NoCollapse() {
+  return (
+    <SidebarComposed
+      collapsible={false}
+      header={{
+        title: "对话列表",
+        action: null, // 隐藏右侧操作
+      }}
+      conversations={data}
+    />
+  );
+}
+```
+
+### 持久化折叠状态
+
+将折叠状态保存到 localStorage。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+import { useState, useEffect } from "react";
+
+function PersistentCollapse() {
+  const [collapsed, setCollapsed] = useState(() => {
+    const saved = localStorage.getItem("sidebar-collapsed");
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sidebar-collapsed", JSON.stringify(collapsed));
+  }, [collapsed]);
+
+  return (
+    <SidebarComposed
+      collapsed={collapsed}
+      onCollapsedChange={setCollapsed}
+      conversations={data}
+    />
+  );
+}
+```
+
+### 分组显示
+
+将对话按时间分组显示。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+
+function GroupedConversations() {
+  const todayConversations = [
+    { id: "1", title: "今天的对话 1" },
+    { id: "2", title: "今天的对话 2" },
+  ];
+
+  const yesterdayConversations = [
+    { id: "3", title: "昨天的对话 1" },
+    { id: "4", title: "昨天的对话 2" },
+  ];
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-sm font-medium mb-2">今天</h3>
+        <SidebarComposed
+          header={null}
+          newButton={null}
+          search={null}
+          conversations={todayConversations}
+        />
+      </div>
+      <div>
+        <h3 className="text-sm font-medium mb-2">昨天</h3>
+        <SidebarComposed
+          header={null}
+          newButton={null}
+          search={null}
+          conversations={yesterdayConversations}
+        />
+      </div>
+    </div>
+  );
+}
+```
+
+### 加载状态
+
+显示加载中的骨架屏。
+
+```tsx
+import { SidebarComposed } from "@/registry/wuhan/composed/sidebar";
+
+function LoadingState() {
+  const [loading, setLoading] = useState(true);
+  const [conversations, setConversations] = useState([]);
+
+  useEffect(() => {
+    fetchConversations().then((data) => {
+      setConversations(data);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-[240px] space-y-2 p-4">
+        <div className="h-8 bg-muted animate-pulse rounded" />
+        <div className="h-10 bg-muted animate-pulse rounded" />
+        <div className="space-y-2 mt-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className="h-12 bg-muted animate-pulse rounded" />
+          ))}
+        </div>
+      </div>
+    );
   }
-/>
+
+  return <SidebarComposed conversations={conversations} />;
+}
 ```
 
