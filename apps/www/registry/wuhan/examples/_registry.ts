@@ -1084,6 +1084,42 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "deep-thinking-controlled",
+    type: "registry:example",
+    registryDependencies: ["deep-thinking"],
+    files: [
+      {
+        path: "examples/deep-thinking/deep-thinking-controlled.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/deep-thinking-controlled.tsx",
+      },
+    ],
+  },
+  {
+    name: "deep-thinking-labels",
+    type: "registry:example",
+    registryDependencies: ["deep-thinking"],
+    files: [
+      {
+        path: "examples/deep-thinking/deep-thinking-labels.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/deep-thinking-labels.tsx",
+      },
+    ],
+  },
+  {
+    name: "deep-thinking-steps",
+    type: "registry:example",
+    registryDependencies: ["deep-thinking"],
+    files: [
+      {
+        path: "examples/deep-thinking/deep-thinking-steps.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/deep-thinking-steps.tsx",
+      },
+    ],
+  },
   // component-panel examples
   {
     name: "component-panel-default",
