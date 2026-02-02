@@ -141,8 +141,8 @@ export const AvatarHeader = React.forwardRef<HTMLDivElement, AvatarHeaderProps>(
     // 处理图片加载错误
     const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
       // 立即隐藏破损的图片，避免显示裂图
-      e.currentTarget.style.display = 'none';
-      
+      e.currentTarget.style.display = "none";
+
       if (onError) {
         const shouldUseFallback = onError();
         if (shouldUseFallback === false) return;
