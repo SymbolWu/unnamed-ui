@@ -32,7 +32,7 @@ export default async function HomePage() {
   const navLinks = [
     { href: "/docs", label: "Components" },
     { href: "/themes", label: "Themes" },
-    { href: "/variants", label: "Variants" },
+    { href: "/compositions", label: "Variants" },
   ];
 
   return (
