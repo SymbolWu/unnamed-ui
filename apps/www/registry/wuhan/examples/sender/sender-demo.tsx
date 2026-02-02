@@ -93,9 +93,10 @@ export default function SenderDemo() {
         modeSelection="exclusive"
         allowEmptySelection={false}
         onModeChange={(next) => setSelectedModes(next)}
-        getCanSend={({ value: currentValue, attachments: currentAttachments }) =>
-          currentValue.trim().length > 0 || currentAttachments.length > 0
-        }
+        getCanSend={({
+          value: currentValue,
+          attachments: currentAttachments,
+        }) => currentValue.trim().length > 0 || currentAttachments.length > 0}
         sendDisabled={!canSend}
         submitOnEnter
         onSubmit={({ canSend, reason }) => {

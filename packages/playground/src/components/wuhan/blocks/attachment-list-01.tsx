@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, unstyledButtonClassName } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   BlockTooltip,
@@ -217,6 +217,7 @@ const AttachmentCardDeleteButton = React.forwardRef<
       ref={ref}
       type="button"
       className={cn(
+        unstyledButtonClassName,
         "absolute",
         "-top-1 -right-1",
         "z-10",
@@ -226,6 +227,7 @@ const AttachmentCardDeleteButton = React.forwardRef<
         "border border-[var(--border-neutral)]",
         "shadow-sm",
         "flex items-center justify-center",
+        "cursor-pointer",
         "opacity-0 pointer-events-none",
         "group-hover/card:opacity-100 group-hover/card:pointer-events-auto",
         "transition-opacity duration-150",
@@ -475,6 +477,7 @@ function AttachmentListPrimitive({
             type="button"
             onClick={() => scroll("left")}
             className={cn(
+              unstyledButtonClassName,
               "absolute left-2 top-1/2 -translate-y-1/2 z-10",
               "w-6 h-6",
               "rounded-[var(--radius-md)]",
@@ -512,6 +515,7 @@ function AttachmentListPrimitive({
             type="button"
             onClick={() => scroll("right")}
             className={cn(
+              unstyledButtonClassName,
               "absolute right-2 top-1/2 -translate-y-1/2 z-10",
               "w-6 h-6",
               "rounded-[var(--radius-md)]",

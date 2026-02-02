@@ -212,8 +212,10 @@ export type SenderSubmitReason =
   | "invalid"
   | "unknown";
 
-export interface SenderSubmitContext<TAttachment, TMode>
-  extends SenderCanSendContext<TAttachment, TMode> {
+export interface SenderSubmitContext<
+  TAttachment,
+  TMode,
+> extends SenderCanSendContext<TAttachment, TMode> {
   canSend: boolean;
   reason?: SenderSubmitReason;
   event?: React.SyntheticEvent;
@@ -227,16 +229,20 @@ export interface SenderAttachContext<TAttachment> {
   sizeLimit?: number;
 }
 
-export interface SenderInputRenderContext<TAttachment, TMode>
-  extends SenderCanSendContext<TAttachment, TMode> {
+export interface SenderInputRenderContext<
+  TAttachment,
+  TMode,
+> extends SenderCanSendContext<TAttachment, TMode> {
   placeholder?: string;
   disabled?: boolean;
   onChange: (value: string) => void;
   onKeyDown: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
-export interface SenderActionRenderContext<TAttachment, TMode>
-  extends SenderCanSendContext<TAttachment, TMode> {
+export interface SenderActionRenderContext<
+  TAttachment,
+  TMode,
+> extends SenderCanSendContext<TAttachment, TMode> {
   canSend: boolean;
   sendDisabledReason?: SenderSubmitReason;
   attachmentsCount: number;
@@ -274,7 +280,10 @@ export interface ComposedSenderProps<TAttachment = Attachment, TMode = Mode> {
   modeSelection?: ModeSelectionStrategy;
   allowEmptySelection?: boolean;
   onModeToggle?: (modeId: string) => void;
-  onModeChange?: (nextSelectedModes: string[], context: ModeChangeContext<TMode>) => void;
+  onModeChange?: (
+    nextSelectedModes: string[],
+    context: ModeChangeContext<TMode>,
+  ) => void;
   renderMode?: (context: ModeRenderContext<TMode>) => React.ReactNode;
 
   onAttach?: () => void;
@@ -394,17 +403,15 @@ function ComposedSenderInner<TAttachment = Attachment, TMode = Mode>(
     baseContext,
     usesCustomCanSend,
   );
-  const sendDisabledReason =
-    !canSend
-      ? getSendDisabledReason?.(baseContext) ?? defaultReason
-      : undefined;
+  const sendDisabledReason = !canSend
+    ? (getSendDisabledReason?.(baseContext) ?? defaultReason)
+    : undefined;
   const attachmentsCount = attachmentItems?.length ?? attachments.length;
   const canAttach =
     typeof maxAttachments === "number"
       ? attachmentsCount < maxAttachments
       : true;
-  const allowEmpty =
-    allowEmptySelection ?? (modeSelection === "multiple");
+  const allowEmpty = allowEmptySelection ?? modeSelection === "multiple";
 
   const attachContext: SenderAttachContext<TAttachment> = {
     attachments,
@@ -474,7 +481,8 @@ function ComposedSenderInner<TAttachment = Attachment, TMode = Mode>(
     if (event.defaultPrevented) return;
     if (!submitOnEnter) return;
     if (event.key !== "Enter") return;
-    if (event.shiftKey || event.altKey || event.metaKey || event.ctrlKey) return;
+    if (event.shiftKey || event.altKey || event.metaKey || event.ctrlKey)
+      return;
     if ((event.nativeEvent as { isComposing?: boolean })?.isComposing) return;
     event.preventDefault();
     handleSubmit(event);

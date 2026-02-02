@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CornerDownLeft, X } from "lucide-react";
+import { CornerDownRight, X } from "lucide-react";
 import {
   QuoteContent,
   QuoteContentLeading,
@@ -28,7 +28,7 @@ export const QuoteContentComposed = React.forwardRef<
   HTMLDivElement,
   QuoteContentProps
 >(({ content, icon, onClose, closeIcon, className }, ref) => {
-  const resolvedIcon = icon ?? <CornerDownLeft className="w-4 h-4" />;
+  const resolvedIcon = icon ?? <CornerDownRight className="w-4 h-4" />;
   const resolvedCloseIcon = closeIcon ?? <X className="w-4 h-4" />;
   const isText = typeof content === "string" || typeof content === "number";
 

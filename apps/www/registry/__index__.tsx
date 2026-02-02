@@ -2347,6 +2347,81 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "attachment-list-preview": {
+      name: "attachment-list-preview",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["attachment-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/attachment-list/attachment-list-preview.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/attachment-list-preview.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/attachment-list/attachment-list-preview.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "attachment-list-custom-render": {
+      name: "attachment-list-custom-render",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["attachment-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/attachment-list/attachment-list-custom-render.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/attachment-list-custom-render.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/attachment-list/attachment-list-custom-render.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "attachment-list-empty": {
+      name: "attachment-list-empty",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["attachment-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/attachment-list/attachment-list-empty.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/attachment-list-empty.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/attachment-list/attachment-list-empty.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "quote-content-demo": {
       name: "quote-content-demo",
       description: "",

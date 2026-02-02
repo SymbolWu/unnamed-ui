@@ -181,9 +181,10 @@ export function NewPage() {
               onAttachmentRemove={(id) =>
                 setAttachments((prev) => prev.filter((item) => item.key !== id))
               }
-              onAttachmentClick={(item) =>
-                setSubmitHint(`已点击附件：${item.name ?? item.id}`)
-              }
+              onAttachmentClick={(item) => {
+                // setSubmitHint(`已点击附件：${item.name ?? item.id}`)
+                console.log(item);
+              }}
               maxAttachments={3}
               accept=".pdf,.docx,.png"
               sizeLimit={5 * 1024 * 1024}

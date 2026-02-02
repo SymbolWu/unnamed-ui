@@ -663,6 +663,42 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "attachment-list-preview",
+    type: "registry:example",
+    registryDependencies: ["attachment-list"],
+    files: [
+      {
+        path: "examples/attachment-list/attachment-list-preview.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/attachment-list-preview.tsx",
+      },
+    ],
+  },
+  {
+    name: "attachment-list-custom-render",
+    type: "registry:example",
+    registryDependencies: ["attachment-list"],
+    files: [
+      {
+        path: "examples/attachment-list/attachment-list-custom-render.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/attachment-list-custom-render.tsx",
+      },
+    ],
+  },
+  {
+    name: "attachment-list-empty",
+    type: "registry:example",
+    registryDependencies: ["attachment-list"],
+    files: [
+      {
+        path: "examples/attachment-list/attachment-list-empty.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/attachment-list-empty.tsx",
+      },
+    ],
+  },
   // quote-content examples
   {
     name: "quote-content-demo",
