@@ -157,6 +157,7 @@ MessageAvatarHeader.displayName = "MessageAvatarHeader";
 export {
   AvatarHeaderPrimitive,
   DefaultAvatarIcon,
+  DefaultAvatarIcon as Avatar,
   AvatarNamePrimitive,
   AvatarTimePrimitive,
   MessageAvatarHeader,
