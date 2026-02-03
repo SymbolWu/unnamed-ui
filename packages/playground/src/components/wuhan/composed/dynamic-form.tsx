@@ -474,6 +474,7 @@ export const DynamicForm = React.forwardRef<DynamicFormRef, DynamicFormProps>(
             <DynamicFormTitlePrimitive>
               {safeSchema.title}
             </DynamicFormTitlePrimitive>
+            {extra && <div>{extra}</div>}
           </DynamicFormHeaderPrimitive>
         )}
 

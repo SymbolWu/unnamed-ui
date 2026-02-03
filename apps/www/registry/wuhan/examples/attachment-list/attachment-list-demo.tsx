@@ -1,7 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AttachmentListComposed } from "@/registry/wuhan/composed/attachment-list/attachment-list";
+import {
+  AttachmentListComposed,
+  type AttachmentItem,
+} from "@/registry/wuhan/composed/attachment-list/attachment-list";
 import { FileText } from "lucide-react";
 
 type DemoAttachment = {
@@ -12,6 +15,7 @@ type DemoAttachment = {
   kind?: "image" | "file";
   loading?: boolean;
   previewUrl?: string;
+  url?: string;
 };
 
 export default function AttachmentListDemo() {
@@ -88,6 +92,24 @@ export default function AttachmentListDemo() {
 
   const [items, setItems] = useState<DemoAttachment[]>(initial);
 
+  const attachmentItems = useMemo<AttachmentItem[]>(
+    () =>
+      items.map((item) => ({
+        id: item.key,
+        name: item.filename,
+        fileType: item.ext,
+        fileSize: item.sizeLabel,
+        isImage: item.kind === "image",
+        loading: item.loading,
+        thumbnail: item.previewUrl,
+        previewUrl: item.previewUrl,
+        url: item.url,
+        icon:
+          item.kind === "image" ? undefined : <FileText className="size-4" />,
+      })),
+    [items],
+  );
+
   return (
     <div className="w-full max-w-2xl space-y-2">
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -108,20 +130,7 @@ export default function AttachmentListDemo() {
       </div>
       <AttachmentListComposed
         className="w-full"
-        attachments={items}
-        attachmentAdapter={(item) => ({
-          id: item.key,
-          name: item.filename,
-          fileType: item.ext,
-          fileSize: item.sizeLabel,
-          isImage: item.kind === "image",
-          loading: item.loading,
-          thumbnail: item.previewUrl,
-          previewUrl: item.previewUrl,
-          url: item.url,
-          icon:
-            item.kind === "image" ? undefined : <FileText className="size-4" />,
-        })}
+        items={attachmentItems}
         previewEnabled
         onRemove={(id) =>
           setItems((prev) => prev.filter((item) => item.key !== id))

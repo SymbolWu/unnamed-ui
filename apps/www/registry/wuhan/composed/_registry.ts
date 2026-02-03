@@ -299,4 +299,161 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "markdown",
+    type: "registry:block",
+    title: "Markdown",
+    description: "Streaming-friendly Markdown renderer with custom blocks",
+    dependencies: [
+      "@ant-design/x",
+      "@ant-design/x-markdown",
+      "@ant-design/icons",
+      "@antv/gpt-vis",
+      "antd",
+      "styled-components",
+    ],
+    files: [
+      {
+        path: "composed/markdown/index.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/index.tsx",
+      },
+      {
+        path: "composed/markdown/config.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/config.ts",
+      },
+      {
+        path: "composed/markdown/declaration.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/declaration.ts",
+      },
+      {
+        path: "composed/markdown/style.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/style.ts",
+      },
+      {
+        path: "composed/markdown/utils.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/utils.ts",
+      },
+      {
+        path: "composed/markdown/icons.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/icons.tsx",
+      },
+      {
+        path: "composed/markdown/Code/index.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/Code/index.tsx",
+      },
+      {
+        path: "composed/markdown/Code/style.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/Code/style.ts",
+      },
+      {
+        path: "composed/markdown/Table/index.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/Table/index.tsx",
+      },
+      {
+        path: "composed/markdown/Table/style.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/Table/style.ts",
+      },
+      {
+        path: "composed/markdown/components/index.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/components/index.ts",
+      },
+      {
+        path: "composed/markdown/components/DynamicForm/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/DynamicForm/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/DynamicTable/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/DynamicTable/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/GptVis/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/GptVis/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/GptVis/style.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/components/GptVis/style.ts",
+      },
+      {
+        path: "composed/markdown/components/HtmlSkeleton/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/HtmlSkeleton/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/ImageSkeleton/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/ImageSkeleton/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/IncompleteEmphasis/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/IncompleteEmphasis/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/IncompleteLink/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/IncompleteLink/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/TableSkeleton/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/TableSkeleton/index.tsx",
+      },
+      {
+        path: "composed/markdown/components/ThinkComponent/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/components/ThinkComponent/index.tsx",
+      },
+      {
+        path: "composed/markdown/CustomSources/index.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/CustomSources/index.tsx",
+      },
+      {
+        path: "composed/markdown/CustomSources/style.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/CustomSources/style.ts",
+      },
+      {
+        path: "composed/markdown/CustomSources/SourcesSidebar/index.tsx",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/CustomSources/SourcesSidebar/index.tsx",
+      },
+      {
+        path: "composed/markdown/CustomSources/SourcesSidebar/style.ts",
+        type: "registry:component",
+        target:
+          "components/wuhan/composed/markdown/CustomSources/SourcesSidebar/style.ts",
+      },
+      {
+        path: "composed/markdown/utils/tools.ts",
+        type: "registry:component",
+        target: "components/wuhan/composed/markdown/utils/tools.ts",
+      },
+    ],
+  },
 ];

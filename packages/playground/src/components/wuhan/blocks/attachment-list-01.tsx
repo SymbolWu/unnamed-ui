@@ -50,6 +50,9 @@ const AttachmentCardPrimitive = React.forwardRef<
 >(({ variant, size, className, children, ...props }, ref) => {
   const isInteractive = !!props.onClick;
 
+  // Map icon-sm and icon-lg to icon for buttonVariants compatibility
+  const buttonSize = size === "icon-sm" || size === "icon-lg" ? "icon" : size;
+
   return (
     <div
       ref={ref}
@@ -68,7 +71,7 @@ const AttachmentCardPrimitive = React.forwardRef<
         }
       }}
       className={cn(
-        buttonVariants({ variant, size }),
+        buttonVariants({ variant, size: buttonSize }),
         "relative",
         "flex items-center",
         "bg-[var(--bg-neutral-light)]",
