@@ -8,14 +8,14 @@ author: AF
 
 Thinking Step Item 组件用于在思考过程内容中展示**子步骤**：状态、（可选）折叠详情、工具调用信息与文件附件。
 
-## Overview
+## 概述
 
 - **适用场景**：思考过程拆分、任务流水线、工具调用轨迹、文件处理进度。
 - **两层用法**：
   - **业务组件 `ThinkingStepItem`**：开箱即用（推荐）。
   - **Primitives**：在不改内部实现的前提下自定义布局/内容（高级用法）。
 
-## Quick Start
+## 快速开始
 
 ```tsx
 import { ThinkingStepItem } from "@/registry/wuhan/composed/thinking-step-item/thinking-step-item";
@@ -31,7 +31,7 @@ export function Example() {
 }
 ```
 
-## Features
+## 特性
 
 - **四种状态**：loading（加载中）、success（成功）、error（错误）、cancel（取消）
 - **状态图标**：每种状态有专属的图标和颜色
@@ -41,7 +41,7 @@ export function Example() {
 - **Hover 高亮**：鼠标悬停时标题和箭头变为品牌色
 - **样式隔离**：组件样式不受外部框架影响
 
-## Installation
+## 安装
 
 <CodeTabs>
 
@@ -74,7 +74,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-step-item.json
 
 </CodeTabs>
 
-## Examples
+## 代码演示
 
 ### Default
 
