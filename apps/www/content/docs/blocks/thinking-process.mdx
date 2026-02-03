@@ -12,7 +12,7 @@ author: AF
 
 Thinking Process 是一个**单个思考步骤块**的组合组件，适合展示 AI 思考/任务执行的状态与内容，并支持“文字 + 子步骤”混合渲染。
 
-## Installation
+## 安装
 
 <CodeTabs>
 
@@ -48,7 +48,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/thinking-process.json
 
 </CodeTabs>
 
-## Overview
+## 概述
 
 - **定位**：展示单个思考步骤（状态、标题、可折叠内容）
 - **组合方式**：通过 `contentBlocks` 可穿插文字与子步骤
@@ -145,7 +145,7 @@ const steps = [
 - `duration` 仅在成功态（`success/completed`）显示，且有 `headerMeta` 时会优先显示 `headerMeta`
 - `hint/longRunning` 仅在没有正文内容时展示（避免出现“空内容容器”）
 
-## Examples
+## 代码演示
 
 ### Default
 
