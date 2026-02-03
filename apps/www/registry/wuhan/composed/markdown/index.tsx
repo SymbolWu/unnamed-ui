@@ -9,6 +9,10 @@ import { markdownConfig } from "./config";
 // import CustomSource from '@/components/Chat/CustomSource';
 import CustomSources from "@/registry/wuhan/composed/custom-sources/custom-sources";
 import { lazy, Suspense, useDeferredValue } from "react";
+const GptVis = lazy(() =>
+  import("./components/GptVis").then((mod) => ({ default: mod.GptVis })),
+);
+
 import {
   ImageSkeleton,
   IncompleteLink,
@@ -21,10 +25,6 @@ import {
 import { StyledMarkdownWrapper } from "./style";
 import "@ant-design/x-markdown/themes/light.css";
 import { useCallback } from "react";
-const GptVis = lazy(() =>
-  import("./components/GptVis").then((mod) => ({ default: mod.GptVis })),
-);
-
 const ThinkComponent = lazy(() =>
   import("./components/ThinkComponent").then((mod) => ({
     default: mod.ThinkComponent,

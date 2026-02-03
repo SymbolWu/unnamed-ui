@@ -48,9 +48,10 @@ export const Index: Record<string, Record<string, any>> = {`
         continue
       }
 
-      const componentPath = item.files?.[0]?.path
-        ? `@/registry/${style.name}/${item.files[0].path}`
-        : ""
+      const componentPath =
+        item.type !== "registry:style" && item.files?.[0]?.path
+          ? `@/registry/${style.name}/${item.files[0].path}`
+          : ""
 
       index += `
     "${item.name}": {
@@ -127,21 +128,20 @@ async function buildRegistryJsonFile(styleName: string) {
         }
       })
 
-      // Convert block component dependencies to full URLs
+      // Convert registry dependencies to full URLs for remote installs.
       const fixedDependencies = item.registryDependencies?.map((dep) => {
-        // If already a full URL, keep it as is
+        // If already a full URL, keep it as is.
         if (typeof dep === "string" && dep.startsWith("http")) {
           return dep
         }
-        
-        // Check if this dependency is a block component in the same registry
+
+        // Convert any known registry item (style/ui/block/etc.) to full URL.
         const depItem = registry.items.find((i) => i.name === dep)
-        if (depItem && depItem.type === "registry:block") {
-          // Convert block component dependency to full URL
+        if (depItem) {
           return `${registryBaseUrl}${registryPath}/${dep}.json`
         }
-        
-        // Keep UI components and other dependencies as-is
+
+        // Keep unknown dependencies as-is.
         return dep
       })
 

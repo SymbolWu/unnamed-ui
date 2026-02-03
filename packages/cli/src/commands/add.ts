@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import chalk from "chalk";
+import spawn from "cross-spawn";
 import { existsSync } from "fs";
 import path from "path";
 
@@ -18,10 +19,19 @@ import {
   readJson,
 } from "../utils/project-setup";
 
-export const initCommand = new Command("init")
-  .description("Initialize tailwind + shadcn config in current directory")
-  .option("-f, --force", "Force initialization even if config exists")
-  .action((options: { force?: boolean }) => {
+function runShadcnAdd(cwd: string, target: string) {
+  const result = spawn.sync("npx", ["shadcn@latest", "add", target], {
+    stdio: "inherit",
+    cwd,
+  });
+  process.exit(result.status ?? 0);
+}
+
+export const addCommand = new Command()
+  .name("add")
+  .description("Install components with auto-init (tailwind + alias)")
+  .argument("<registry-url>", "registry json url")
+  .action((registryUrl: string) => {
     const cwd = process.cwd();
     const pkgPath = path.join(cwd, "package.json");
     if (!existsSync(pkgPath)) {
@@ -40,20 +50,17 @@ export const initCommand = new Command("init")
           : "styles/globals.css";
     const cssPath = rawCssPath.replace(/\\/g, "/");
 
-    console.log(chalk.cyan("🔧 Initializing project prerequisites..."));
-    if (options.force) {
-      console.log(chalk.yellow("⚠️  Force mode enabled"));
-    }
-
-    ensureTailwindConfig(cwd, framework, useSrc, options.force);
-    ensurePostcssConfig(cwd, options.force);
-    ensureCssImports(cwd, cssPath, options.force);
-    ensureAliasConfig(cwd, useSrc, options.force);
-    ensureComponentsJson(cwd, cssPath, framework === "next", options.force);
-    ensureLegacyPeerDepsNpmrc(cwd, options.force);
+    console.log(chalk.cyan("🔧 Checking project prerequisites..."));
+    ensureTailwindConfig(cwd, framework, useSrc);
+    ensurePostcssConfig(cwd);
+    ensureCssImports(cwd, cssPath);
+    ensureAliasConfig(cwd, useSrc);
+    ensureComponentsJson(cwd, cssPath, framework === "next");
+    ensureLegacyPeerDepsNpmrc(cwd);
 
     const packageManager = detectPackageManager(cwd);
     ensureDevDeps(cwd, pkg, packageManager);
 
-    console.log(chalk.green("✅ Initialization completed!"));
+    console.log(chalk.cyan("📦 Installing component from registry..."));
+    runShadcnAdd(cwd, registryUrl);
   });

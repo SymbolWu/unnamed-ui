@@ -7,6 +7,48 @@ import * as React from "react";
 
 export const Index: Record<string, Record<string, any>> = {
   wuhan: {
+    index: {
+      name: "index",
+      description: "",
+      type: "registry:style",
+      registryDependencies: [],
+      files: [
+        {
+          path: "registry/wuhan/style/globals.css",
+          type: "registry:style",
+          target: "app/globals.css",
+        },
+        {
+          path: "registry/wuhan/style/postcss.config.mjs",
+          type: "registry:style",
+          target: "postcss.config.mjs",
+        },
+      ],
+      component: null,
+      categories: undefined,
+      meta: undefined,
+    },
+    style: {
+      name: "style",
+      description: "",
+      type: "registry:style",
+      registryDependencies: [],
+      files: [
+        {
+          path: "registry/wuhan/style/globals.css",
+          type: "registry:style",
+          target: "app/globals.css",
+        },
+        {
+          path: "registry/wuhan/style/postcss.config.mjs",
+          type: "registry:style",
+          target: "postcss.config.mjs",
+        },
+      ],
+      component: null,
+      categories: undefined,
+      meta: undefined,
+    },
     button: {
       name: "button",
       description: "",

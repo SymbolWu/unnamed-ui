@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { createCommand } from "./commands/create";
 import { initCommand } from "./commands/init";
+import { addCommand } from "./commands/add";
 
 const program = new Command();
 
@@ -12,6 +13,7 @@ program
   .version("0.0.1");
 
 // Register commands
+program.addCommand(addCommand);
 program.addCommand(createCommand);
 program.addCommand(initCommand);
 

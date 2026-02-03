@@ -10,12 +10,24 @@
         "lucide-react"
       ],
       "devDependencies": [
-        "tw-animate-css"
+        "tw-animate-css",
+        "tailwindcss",
+        "@tailwindcss/postcss",
+        "postcss"
       ],
-      "registryDependencies": [
-        "utils"
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/wuhan/style/globals.css",
+          "type": "registry:style",
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/wuhan/style/postcss.config.mjs",
+          "type": "registry:style",
+          "target": "postcss.config.mjs"
+        }
       ],
-      "files": [],
       "cssVars": {
         "light": {
           "font-family-en": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
@@ -771,12 +783,24 @@
         "lucide-react"
       ],
       "devDependencies": [
-        "tw-animate-css"
+        "tw-animate-css",
+        "tailwindcss",
+        "@tailwindcss/postcss",
+        "postcss"
       ],
-      "registryDependencies": [
-        "utils"
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/wuhan/style/globals.css",
+          "type": "registry:style",
+          "target": "app/globals.css"
+        },
+        {
+          "path": "registry/wuhan/style/postcss.config.mjs",
+          "type": "registry:style",
+          "target": "postcss.config.mjs"
+        }
       ],
-      "files": [],
       "cssVars": {
         "light": {
           "font-family-en": "\"Helvetica Neue\", Helvetica, Arial, sans-serif",
@@ -1717,6 +1741,9 @@
       "type": "registry:block",
       "title": "Prompt",
       "description": "Prompt button (horizontal layout)",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "quick-action-01"
@@ -1751,6 +1778,9 @@
       "type": "registry:block",
       "title": "Suggestion",
       "description": "Suggestion button for next step guidance (text first, icon last)",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "quick-action-01"
@@ -1768,6 +1798,9 @@
       "type": "registry:block",
       "title": "Sender",
       "description": "Sender primitives (input, actions, buttons)",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "textarea",
@@ -1787,6 +1820,9 @@
       "type": "registry:block",
       "title": "Attachment List",
       "description": "Attachment list component",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "button",
@@ -1821,6 +1857,9 @@
       "type": "registry:block",
       "title": "History Item",
       "description": "History record list item component (default/hover/selected)",
+      "dependencies": [
+        "@radix-ui/react-slot"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -1869,6 +1908,9 @@
       "type": "registry:block",
       "title": "Feedback",
       "description": "Feedback component for reporting issues",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "button",
@@ -1922,6 +1964,9 @@
       "type": "registry:block",
       "title": "Block Tooltip",
       "description": "Block tooltip component with custom styling",
+      "dependencies": [
+        "@radix-ui/react-tooltip"
+      ],
       "registryDependencies": [
         "style",
         "tooltip"
@@ -1939,6 +1984,9 @@
       "type": "registry:block",
       "title": "Execution Result",
       "description": "Execution result primitives (container, items, sections)",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "collapsible"
@@ -1991,6 +2039,9 @@
       "type": "registry:block",
       "title": "Thinking Step Item",
       "description": "Thinking step item primitives (timeline, tool call, file list, status)",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style",
         "collapsible"
@@ -2056,6 +2107,9 @@
       "type": "registry:block",
       "title": "Custom Sources",
       "description": "Source marker and popover card primitives",
+      "dependencies": [
+        "styled-components"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -2072,6 +2126,9 @@
       "type": "registry:block",
       "title": "Sources Sidebar",
       "description": "Sources sidebar primitives with tabs and list",
+      "dependencies": [
+        "styled-components"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -2438,12 +2495,12 @@
       "title": "Markdown",
       "description": "Streaming-friendly Markdown renderer with custom blocks",
       "dependencies": [
-        "@ant-design/x",
-        "@ant-design/x-markdown",
-        "@ant-design/icons",
-        "@antv/gpt-vis",
-        "antd",
-        "styled-components"
+        "@ant-design/x@^2.2.0",
+        "@ant-design/x-markdown@^2.2.0",
+        "@ant-design/icons@^6.1.0",
+        "@antv/gpt-vis@0.6.0",
+        "antd@^6.2.1",
+        "styled-components@^6.3.8"
       ],
       "registryDependencies": [
         "dynamic-form",
@@ -2552,6 +2609,11 @@
       "type": "registry:block",
       "title": "Custom Sources",
       "description": "Source markers with popover preview",
+      "dependencies": [
+        "@ant-design/icons",
+        "@ant-design/x-markdown",
+        "antd"
+      ],
       "registryDependencies": [
         "custom-sources-01"
       ],
@@ -2573,6 +2635,9 @@
       "type": "registry:block",
       "title": "Sources Sidebar",
       "description": "Sources sidebar with tabs and list",
+      "dependencies": [
+        "@ant-design/icons"
+      ],
       "registryDependencies": [
         "sources-sidebar-01"
       ],
