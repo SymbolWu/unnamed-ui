@@ -1278,7 +1278,7 @@ export const examples: Registry["items"] = [
   {
     name: "toggle-button-demo",
     type: "registry:example",
-    registryDependencies: ["toggle-button-01"],
+    registryDependencies: ["toggle-button"],
     files: [
       {
         path: "examples/toggle-button/toggle-button-demo.tsx",
@@ -1387,7 +1387,7 @@ export const examples: Registry["items"] = [
   {
     name: "deep-thinking-default",
     type: "registry:example",
-    registryDependencies: ["deep-thinking-01"],
+    registryDependencies: ["deep-thinking"],
     files: [
       {
         path: "examples/deep-thinking/deep-thinking-default.tsx",
@@ -1533,7 +1533,7 @@ export const examples: Registry["items"] = [
   {
     name: "tooltip-demo",
     type: "registry:example",
-    registryDependencies: ["tooltip-01", "button"],
+    registryDependencies: ["tooltip", "button"],
     files: [
       {
         path: "examples/tooltip/tooltip-demo.tsx",

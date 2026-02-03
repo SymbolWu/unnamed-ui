@@ -3864,7 +3864,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "toggle-button-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["toggle-button-01"],
+      registryDependencies: ["toggle-button"],
       files: [
         {
           path: "registry/wuhan/examples/toggle-button/toggle-button-demo.tsx",
@@ -4089,7 +4089,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "deep-thinking-default",
       description: "",
       type: "registry:example",
-      registryDependencies: ["deep-thinking-01"],
+      registryDependencies: ["deep-thinking"],
       files: [
         {
           path: "registry/wuhan/examples/deep-thinking/deep-thinking-default.tsx",
@@ -4390,7 +4390,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "tooltip-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["tooltip-01", "button"],
+      registryDependencies: ["tooltip", "button"],
       files: [
         {
           path: "registry/wuhan/examples/tooltip/tooltip-demo.tsx",
