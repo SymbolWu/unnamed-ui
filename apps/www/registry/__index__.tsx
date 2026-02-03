@@ -7,6 +7,48 @@ import * as React from "react";
 
 export const Index: Record<string, Record<string, any>> = {
   wuhan: {
+    index: {
+      name: "index",
+      description: "",
+      type: "registry:style",
+      registryDependencies: [],
+      files: [
+        {
+          path: "registry/wuhan/style/globals.css",
+          type: "registry:style",
+          target: "app/globals.css",
+        },
+        {
+          path: "registry/wuhan/style/postcss.config.mjs",
+          type: "registry:style",
+          target: "postcss.config.mjs",
+        },
+      ],
+      component: null,
+      categories: undefined,
+      meta: undefined,
+    },
+    style: {
+      name: "style",
+      description: "",
+      type: "registry:style",
+      registryDependencies: [],
+      files: [
+        {
+          path: "registry/wuhan/style/globals.css",
+          type: "registry:style",
+          target: "app/globals.css",
+        },
+        {
+          path: "registry/wuhan/style/postcss.config.mjs",
+          type: "registry:style",
+          target: "postcss.config.mjs",
+        },
+      ],
+      component: null,
+      categories: undefined,
+      meta: undefined,
+    },
     button: {
       name: "button",
       description: "",
@@ -834,6 +876,56 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "custom-sources-01": {
+      name: "custom-sources-01",
+      description: "Source marker and popover card primitives",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/custom-sources/custom-sources-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/custom-sources-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/custom-sources/custom-sources-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "sources-sidebar-01": {
+      name: "sources-sidebar-01",
+      description: "Sources sidebar primitives with tabs and list",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/sources-sidebar/sources-sidebar-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/sources-sidebar-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/sources-sidebar/sources-sidebar-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -1350,7 +1442,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "markdown",
       description: "Streaming-friendly Markdown renderer with custom blocks",
       type: "registry:block",
-      registryDependencies: undefined,
+      registryDependencies: ["dynamic-form", "custom-sources"],
       files: [
         {
           path: "registry/wuhan/composed/markdown/index.tsx",
@@ -1383,41 +1475,32 @@ export const Index: Record<string, Record<string, any>> = {
           target: "components/wuhan/composed/markdown/icons.tsx",
         },
         {
-          path: "registry/wuhan/composed/markdown/Code/index.tsx",
+          path: "registry/wuhan/composed/markdown/components/Code/index.tsx",
           type: "registry:component",
-          target: "components/wuhan/composed/markdown/Code/index.tsx",
+          target:
+            "components/wuhan/composed/markdown/components/Code/index.tsx",
         },
         {
-          path: "registry/wuhan/composed/markdown/Code/style.ts",
+          path: "registry/wuhan/composed/markdown/components/Code/style.ts",
           type: "registry:component",
-          target: "components/wuhan/composed/markdown/Code/style.ts",
+          target: "components/wuhan/composed/markdown/components/Code/style.ts",
         },
         {
-          path: "registry/wuhan/composed/markdown/Table/index.tsx",
+          path: "registry/wuhan/composed/markdown/components/Table/index.tsx",
           type: "registry:component",
-          target: "components/wuhan/composed/markdown/Table/index.tsx",
+          target:
+            "components/wuhan/composed/markdown/components/Table/index.tsx",
         },
         {
-          path: "registry/wuhan/composed/markdown/Table/style.ts",
+          path: "registry/wuhan/composed/markdown/components/Table/style.ts",
           type: "registry:component",
-          target: "components/wuhan/composed/markdown/Table/style.ts",
+          target:
+            "components/wuhan/composed/markdown/components/Table/style.ts",
         },
         {
           path: "registry/wuhan/composed/markdown/components/index.ts",
           type: "registry:component",
           target: "components/wuhan/composed/markdown/components/index.ts",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/components/DynamicForm/index.tsx",
-          type: "registry:component",
-          target:
-            "components/wuhan/composed/markdown/components/DynamicForm/index.tsx",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/components/DynamicTable/index.tsx",
-          type: "registry:component",
-          target:
-            "components/wuhan/composed/markdown/components/DynamicTable/index.tsx",
         },
         {
           path: "registry/wuhan/composed/markdown/components/GptVis/index.tsx",
@@ -1467,37 +1550,65 @@ export const Index: Record<string, Record<string, any>> = {
           target:
             "components/wuhan/composed/markdown/components/ThinkComponent/index.tsx",
         },
-        {
-          path: "registry/wuhan/composed/markdown/CustomSources/index.tsx",
-          type: "registry:component",
-          target: "components/wuhan/composed/markdown/CustomSources/index.tsx",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/CustomSources/style.ts",
-          type: "registry:component",
-          target: "components/wuhan/composed/markdown/CustomSources/style.ts",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/CustomSources/SourcesSidebar/index.tsx",
-          type: "registry:component",
-          target:
-            "components/wuhan/composed/markdown/CustomSources/SourcesSidebar/index.tsx",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/CustomSources/SourcesSidebar/style.ts",
-          type: "registry:component",
-          target:
-            "components/wuhan/composed/markdown/CustomSources/SourcesSidebar/style.ts",
-        },
-        {
-          path: "registry/wuhan/composed/markdown/utils/tools.ts",
-          type: "registry:component",
-          target: "components/wuhan/composed/markdown/utils/tools.ts",
-        },
       ],
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/markdown/index.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "custom-sources": {
+      name: "custom-sources",
+      description: "Source markers with popover preview",
+      type: "registry:block",
+      registryDependencies: ["custom-sources-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/custom-sources/custom-sources.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/custom-sources/custom-sources.tsx",
+        },
+        {
+          path: "registry/wuhan/composed/custom-sources/utils.ts",
+          type: "registry:component",
+          target: "components/wuhan/composed/custom-sources/utils.ts",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/custom-sources/custom-sources.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "sources-sidebar": {
+      name: "sources-sidebar",
+      description: "Sources sidebar with tabs and list",
+      type: "registry:block",
+      registryDependencies: ["sources-sidebar-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/sources-sidebar.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -2335,31 +2446,6 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    markdown: {
-      name: "markdown",
-      description: "支持流式渲染的 Markdown 组件",
-      type: "registry:block",
-      registryDependencies: undefined,
-      files: [
-        {
-          path: "registry/wuhan/recruitment/Markdown/index.tsx",
-          type: "registry:component",
-          target: "components/wuhan/recruitment/markdown.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/recruitment/Markdown/index.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
     "sender-input": {
       name: "sender-input",
       description: "发送者输入组件",
@@ -2960,131 +3046,6 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "history-item-basic": {
-      name: "history-item-basic",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["history-item"],
-      files: [
-        {
-          path: "registry/wuhan/examples/history-item/history-item-basic.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/history-item-basic.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/history-item/history-item-basic.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "history-item-with-actions": {
-      name: "history-item-with-actions",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["history-item"],
-      files: [
-        {
-          path: "registry/wuhan/examples/history-item/history-item-with-actions.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/history-item-with-actions.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/history-item/history-item-with-actions.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "history-item-with-icons": {
-      name: "history-item-with-icons",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["history-item"],
-      files: [
-        {
-          path: "registry/wuhan/examples/history-item/history-item-with-icons.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/history-item-with-icons.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/history-item/history-item-with-icons.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "history-item-states": {
-      name: "history-item-states",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["history-item"],
-      files: [
-        {
-          path: "registry/wuhan/examples/history-item/history-item-states.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/history-item-states.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/history-item/history-item-states.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "history-item-list": {
-      name: "history-item-list",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["history-item"],
-      files: [
-        {
-          path: "registry/wuhan/examples/history-item/history-item-list.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/history-item-list.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/history-item/history-item-list.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
     "sender-demo": {
       name: "sender-demo",
       description: "",
@@ -3610,21 +3571,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "sidebar-custom-header": {
-      name: "sidebar-custom-header",
+    "markdown-demo": {
+      name: "markdown-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["sidebar"],
+      registryDependencies: ["markdown"],
       files: [
         {
-          path: "registry/wuhan/examples/sidebar/sidebar-custom-header.tsx",
+          path: "registry/wuhan/examples/markdown/markdown-demo.tsx",
           type: "registry:example",
-          target: "components/wuhan/examples/sidebar-custom-header.tsx",
+          target: "components/wuhan/examples/markdown-demo.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-custom-header.tsx");
+          await import("@/registry/wuhan/examples/markdown/markdown-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -3635,21 +3596,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "sidebar-custom-new-button": {
-      name: "sidebar-custom-new-button",
+    "markdown-advanced-demo": {
+      name: "markdown-advanced-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["sidebar"],
+      registryDependencies: ["markdown", "custom-sources", "sources-sidebar"],
       files: [
         {
-          path: "registry/wuhan/examples/sidebar/sidebar-custom-new-button.tsx",
+          path: "registry/wuhan/examples/markdown/markdown-advanced-demo.tsx",
           type: "registry:example",
-          target: "components/wuhan/examples/sidebar-custom-new-button.tsx",
+          target: "components/wuhan/examples/markdown-advanced-demo.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-custom-new-button.tsx");
+          await import("@/registry/wuhan/examples/markdown/markdown-advanced-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -3660,21 +3621,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "sidebar-with-search": {
-      name: "sidebar-with-search",
+    "custom-sources-demo": {
+      name: "custom-sources-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["sidebar"],
+      registryDependencies: ["custom-sources", "sources-sidebar"],
       files: [
         {
-          path: "registry/wuhan/examples/sidebar/sidebar-with-search.tsx",
+          path: "registry/wuhan/examples/custom-sources/custom-sources-demo.tsx",
           type: "registry:example",
-          target: "components/wuhan/examples/sidebar-with-search.tsx",
+          target: "components/wuhan/examples/custom-sources-demo.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-with-search.tsx");
+          await import("@/registry/wuhan/examples/custom-sources/custom-sources-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -3685,71 +3646,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "sidebar-empty-state": {
-      name: "sidebar-empty-state",
+    "sources-sidebar-demo": {
+      name: "sources-sidebar-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["sidebar"],
+      registryDependencies: ["sources-sidebar"],
       files: [
         {
-          path: "registry/wuhan/examples/sidebar/sidebar-empty-state.tsx",
+          path: "registry/wuhan/examples/sources-sidebar/sources-sidebar-demo.tsx",
           type: "registry:example",
-          target: "components/wuhan/examples/sidebar-empty-state.tsx",
+          target: "components/wuhan/examples/sources-sidebar-demo.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-empty-state.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "sidebar-controlled-collapse": {
-      name: "sidebar-controlled-collapse",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["sidebar", "button"],
-      files: [
-        {
-          path: "registry/wuhan/examples/sidebar/sidebar-controlled-collapse.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/sidebar-controlled-collapse.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-controlled-collapse.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "sidebar-footer-collapse": {
-      name: "sidebar-footer-collapse",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["sidebar", "avatar-header"],
-      files: [
-        {
-          path: "registry/wuhan/examples/sidebar/sidebar-footer-collapse.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/sidebar-footer-collapse.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/sidebar/sidebar-footer-collapse.tsx");
+          await import("@/registry/wuhan/examples/sources-sidebar/sources-sidebar-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -3864,7 +3775,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "toggle-button-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["toggle-button"],
+      registryDependencies: ["toggle-button-01"],
       files: [
         {
           path: "registry/wuhan/examples/toggle-button/toggle-button-demo.tsx",
@@ -4089,7 +4000,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "deep-thinking-default",
       description: "",
       type: "registry:example",
-      registryDependencies: ["deep-thinking"],
+      registryDependencies: ["deep-thinking-01"],
       files: [
         {
           path: "registry/wuhan/examples/deep-thinking/deep-thinking-default.tsx",
@@ -4260,137 +4171,11 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "component-panel-controlled": {
-      name: "component-panel-controlled",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["component-panel", "button"],
-      files: [
-        {
-          path: "registry/wuhan/examples/component-panel/component-panel-controlled.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/component-panel-controlled.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/component-panel/component-panel-controlled.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "component-panel-single-select": {
-      name: "component-panel-single-select",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["component-panel"],
-      files: [
-        {
-          path: "registry/wuhan/examples/component-panel/component-panel-single-select.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/component-panel-single-select.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/component-panel/component-panel-single-select.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "component-panel-with-icons": {
-      name: "component-panel-with-icons",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["component-panel"],
-      files: [
-        {
-          path: "registry/wuhan/examples/component-panel/component-panel-with-icons.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/component-panel-with-icons.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/component-panel/component-panel-with-icons.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "component-panel-disabled": {
-      name: "component-panel-disabled",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["component-panel"],
-      files: [
-        {
-          path: "registry/wuhan/examples/component-panel/component-panel-disabled.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/component-panel-disabled.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/component-panel/component-panel-disabled.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "component-panel-tab-controlled": {
-      name: "component-panel-tab-controlled",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["component-panel"],
-      files: [
-        {
-          path: "registry/wuhan/examples/component-panel/component-panel-tab-controlled.tsx",
-          type: "registry:example",
-          target:
-            "components/wuhan/examples/component-panel-tab-controlled.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/component-panel/component-panel-tab-controlled.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
     "tooltip-demo": {
       name: "tooltip-demo",
       description: "",
       type: "registry:example",
-      registryDependencies: ["tooltip", "button"],
+      registryDependencies: ["tooltip-01", "button"],
       files: [
         {
           path: "registry/wuhan/examples/tooltip/tooltip-demo.tsx",
@@ -6185,31 +5970,6 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/recruitment/resume-evaluation-report/resume-evaluation-report-demo.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
-    "markdown-demo": {
-      name: "markdown-demo",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["markdown"],
-      files: [
-        {
-          path: "registry/wuhan/examples/recruitment/markdown/markdown-demo.tsx",
-          type: "registry:example",
-          target: "components/wuhan/examples/recruitment/markdown-demo.tsx",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/recruitment/markdown/markdown-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

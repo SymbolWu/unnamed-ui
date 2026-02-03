@@ -27,11 +27,27 @@ const DEPRECATED_ITEMS = [
 const NEW_YORK_V4_STYLE = {
   type: "registry:style",
   dependencies: ["class-variance-authority", "lucide-react"],
-  devDependencies: ["tw-animate-css"],
-  registryDependencies: ["utils"],
+  devDependencies: [
+    "tw-animate-css",
+    "tailwindcss",
+    "@tailwindcss/postcss",
+    "postcss",
+  ],
+  registryDependencies: [],
   cssVars: getWuhanStyleCssVars(),
   css: getWuhanStyleCss(),
-  files: [],
+  files: [
+    {
+      path: "style/globals.css",
+      type: "registry:style",
+      target: "app/globals.css",
+    },
+    {
+      path: "style/postcss.config.mjs",
+      type: "registry:style",
+      target: "postcss.config.mjs",
+    },
+  ],
 };
 
 export const registry = {
