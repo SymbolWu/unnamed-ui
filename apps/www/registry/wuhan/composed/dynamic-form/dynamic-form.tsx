@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   useForm,
   type FieldError,
+  type FieldErrors,
   type Control,
   type UseFormReturn,
   type ControllerRenderProps,
@@ -169,7 +170,7 @@ export interface DynamicFormProps {
   /** 表单提交失败时的回调 */
   onFinishFailed?: (errorInfo: {
     values: Record<string, unknown>;
-    errors: Record<string, FieldError>;
+    errors: FieldErrors<Record<string, unknown>>;
   }) => void;
   /** Zod 验证 Schema */
   validateSchema?: z.ZodType<Record<string, unknown>>;
@@ -364,7 +365,7 @@ export const DynamicForm = React.forwardRef<DynamicFormRef, DynamicFormProps>(
 
     // 表单提交失败处理
     const onError = React.useCallback(
-      (formErrors: Record<string, FieldError>) => {
+      (formErrors: FieldErrors<Record<string, unknown>>) => {
         onFinishFailed?.({
           values: getValues(),
           errors: formErrors,
@@ -643,6 +644,7 @@ function renderFieldControl(
           aria-invalid={!!error}
           className={cn("bg-[var(--bg-container)]")}
           {...formField}
+          value={formField.value as string}
         />
       );
 
@@ -655,13 +657,14 @@ function renderFieldControl(
           aria-invalid={!!error}
           className={cn("bg-[var(--bg-container)]")}
           {...formField}
+          value={formField.value as string}
         />
       );
 
     case "select":
       return (
         <Select
-          value={formField.value}
+          value={String(formField.value ?? "")}
           onValueChange={formField.onChange}
           disabled={disabled}
         >
@@ -687,7 +690,7 @@ function renderFieldControl(
         <div className="flex items-center gap-2">
           <Switch
             id={field.name}
-            checked={formField.value}
+            checked={formField.value as boolean}
             onCheckedChange={formField.onChange}
             disabled={disabled}
           />
@@ -700,7 +703,7 @@ function renderFieldControl(
           <input
             type="checkbox"
             id={field.name}
-            checked={formField.value}
+            checked={formField.value as boolean}
             onChange={(e) => formField.onChange(e.target.checked)}
             disabled={disabled}
             className="h-4 w-4 rounded border-input"
@@ -739,6 +742,7 @@ function renderFieldControl(
           step={step}
           aria-invalid={!!error}
           {...formField}
+          value={formField.value as string | number}
           onChange={(e) => {
             const value = e.target.value === "" ? "" : Number(e.target.value);
             formField.onChange(value);
@@ -777,6 +781,7 @@ function renderFieldControl(
           disabled={disabled}
           aria-invalid={!!error}
           {...formField}
+          value={formField.value as string}
         />
       );
   }
