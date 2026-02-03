@@ -3852,7 +3852,7 @@
       "name": "toggle-button-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "toggle-button-01"
+        "toggle-button"
       ],
       "files": [
         {
@@ -3978,7 +3978,7 @@
       "name": "deep-thinking-default",
       "type": "registry:example",
       "registryDependencies": [
-        "deep-thinking-01"
+        "deep-thinking"
       ],
       "files": [
         {
@@ -4147,7 +4147,7 @@
       "name": "tooltip-demo",
       "type": "registry:example",
       "registryDependencies": [
-        "tooltip-01",
+        "tooltip",
         "button"
       ],
       "files": [
