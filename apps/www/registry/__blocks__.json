@@ -108,6 +108,14 @@
     "description": "Sources sidebar primitives with tabs and list"
   },
   {
+    "name": "confirm-panel-01",
+    "description": "Confirmation panel primitives for user actions"
+  },
+  {
+    "name": "report-card-01",
+    "description": "Report card primitives for displaying data and metrics"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -186,6 +194,10 @@
   {
     "name": "status-tag",
     "description": "Composed status tag with business API and preset statuses"
+  },
+  {
+    "name": "confirm-panel",
+    "description": "Composed confirm panel with status support and custom actions"
   },
   {
     "name": "markdown",

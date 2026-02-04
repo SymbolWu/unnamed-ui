@@ -300,6 +300,21 @@ export const composed: Registry["items"] = [
     ],
   },
   {
+    name: "confirm-panel",
+    type: "registry:block",
+    title: "Confirm Panel",
+    description:
+      "Composed confirm panel with status support and custom actions",
+    registryDependencies: ["confirm-panel-01", "status-tag", "button"],
+    files: [
+      {
+        path: "composed/confirm-panel/confirm-panel.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/confirm-panel.tsx",
+      },
+    ],
+  },
+  {
     name: "markdown",
     type: "registry:block",
     title: "Markdown",

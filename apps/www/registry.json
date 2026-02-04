@@ -2141,6 +2141,38 @@
       ]
     },
     {
+      "name": "confirm-panel-01",
+      "type": "registry:block",
+      "title": "Confirm Panel",
+      "description": "Confirmation panel primitives for user actions",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/confirm-panel/confirm-panel-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/confirm-panel-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "report-card-01",
+      "type": "registry:block",
+      "title": "Report Card",
+      "description": "Report card primitives for displaying data and metrics",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/report-card/report-card-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/report-card-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2486,6 +2518,24 @@
           "path": "registry/wuhan/composed/status-tag/status-tag.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/status-tag.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel",
+      "type": "registry:block",
+      "title": "Confirm Panel",
+      "description": "Composed confirm panel with status support and custom actions",
+      "registryDependencies": [
+        "confirm-panel-01",
+        "status-tag",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/confirm-panel/confirm-panel.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/confirm-panel.tsx"
         }
       ]
     },
@@ -4740,6 +4790,91 @@
           "path": "registry/wuhan/examples/status-tag/status-tag-mixed.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/status-tag-mixed.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-pending",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-pending.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-pending.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-confirmed",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-confirmed.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-confirmed.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-with-actions",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-with-actions.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-with-actions.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-custom-content",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-custom-content.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-custom-content.tsx"
+        }
+      ]
+    },
+    {
+      "name": "report-card-example",
+      "type": "registry:example",
+      "registryDependencies": [
+        "report-card-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/report-card/report-card-example.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/report-card-example.tsx"
         }
       ]
     },
