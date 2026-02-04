@@ -380,4 +380,32 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "confirm-panel-01",
+    type: "registry:block",
+    title: "Confirm Panel",
+    description: "Confirmation panel primitives for user actions",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/confirm-panel/confirm-panel-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/confirm-panel-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "report-card-01",
+    type: "registry:block",
+    title: "Report Card",
+    description: "Report card primitives for displaying data and metrics",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/report-card/report-card-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/report-card-01.tsx",
+      },
+    ],
+  },
 ];

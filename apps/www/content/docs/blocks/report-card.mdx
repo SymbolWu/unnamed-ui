@@ -1,0 +1,95 @@
+---
+title: Report Card
+description: Report card component for displaying data and metrics
+author: AF
+---
+
+<ComponentPreview name="report-card-example" description="报告卡片示例" className="mb-4" />
+
+## 概述
+
+Report Card 组件用于展示数据报告、指标卡片等信息，提供清晰的数据可视化界面。
+
+## 快速开始
+
+```tsx
+import { ReportCardPrimitive } from "@/registry/wuhan/blocks/report-card/report-card-01";
+
+export function Example() {
+  return (
+    <ReportCardPrimitive>
+      <div>报告卡片内容</div>
+    </ReportCardPrimitive>
+  );
+}
+```
+
+## 安装
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://unnamed-ui.com/r/wuhan/report-card-01"
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### 安装依赖
+
+```bash
+npm install lucide-react
+```
+
+### 复制代码
+
+将 `report-card-01.tsx` 的代码复制到你的项目中。
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## 代码演示
+
+<ComponentPreview name="report-card-example" description="基础用法" />
+
+## API
+
+### ReportCardPrimitive
+
+基础报告卡片容器组件。
+
+| 属性 | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| className | string | - | 自定义类名 |
+| children | ReactNode | - | 子元素 |
+
+## 使用场景
+
+- 数据报告展示
+- 指标卡片
+- 统计数据可视化
+- 仪表盘组件
+
+## 最佳实践
+
+- 清晰地组织数据结构
+- 使用合适的图表和视觉元素
+- 突出关键指标
+- 提供必要的数据说明
+
+## 原语组件
+
+- `ReportCardPrimitive`: 基础容器组件

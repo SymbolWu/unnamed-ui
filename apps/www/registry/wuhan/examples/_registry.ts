@@ -1951,6 +1951,80 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // confirm-panel examples
+  {
+    name: "confirm-panel-demo",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-pending",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-pending.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-pending.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-confirmed",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-confirmed.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-confirmed.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-with-actions",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel", "button"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-with-actions.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-with-actions.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-custom-content",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-custom-content.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-custom-content.tsx",
+      },
+    ],
+  },
+  // report-card examples
+  {
+    name: "report-card-example",
+    type: "registry:example",
+    registryDependencies: ["report-card-01"],
+    files: [
+      {
+        path: "examples/report-card/report-card-example.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/report-card-example.tsx",
+      },
+    ],
+  },
   // Merge recruitment examples
   ...recruitmentExamples,
 ];

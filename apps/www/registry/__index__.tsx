@@ -926,6 +926,56 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "confirm-panel-01": {
+      name: "confirm-panel-01",
+      description: "Confirmation panel primitives for user actions",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/confirm-panel/confirm-panel-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/confirm-panel-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/confirm-panel/confirm-panel-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "report-card-01": {
+      name: "report-card-01",
+      description: "Report card primitives for displaying data and metrics",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/report-card/report-card-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/report-card-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/report-card/report-card-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -1428,6 +1478,32 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/status-tag/status-tag.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel": {
+      name: "confirm-panel",
+      description:
+        "Composed confirm panel with status support and custom actions",
+      type: "registry:block",
+      registryDependencies: ["confirm-panel-01", "status-tag", "button"],
+      files: [
+        {
+          path: "registry/wuhan/composed/confirm-panel/confirm-panel.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/confirm-panel.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/confirm-panel/confirm-panel.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -5362,6 +5438,156 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/status-tag/status-tag-mixed.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel-demo": {
+      name: "confirm-panel-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["confirm-panel"],
+      files: [
+        {
+          path: "registry/wuhan/examples/confirm-panel/confirm-panel-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/confirm-panel-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/confirm-panel/confirm-panel-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel-pending": {
+      name: "confirm-panel-pending",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["confirm-panel"],
+      files: [
+        {
+          path: "registry/wuhan/examples/confirm-panel/confirm-panel-pending.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/confirm-panel-pending.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/confirm-panel/confirm-panel-pending.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel-confirmed": {
+      name: "confirm-panel-confirmed",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["confirm-panel"],
+      files: [
+        {
+          path: "registry/wuhan/examples/confirm-panel/confirm-panel-confirmed.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/confirm-panel-confirmed.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/confirm-panel/confirm-panel-confirmed.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel-with-actions": {
+      name: "confirm-panel-with-actions",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["confirm-panel", "button"],
+      files: [
+        {
+          path: "registry/wuhan/examples/confirm-panel/confirm-panel-with-actions.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/confirm-panel-with-actions.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/confirm-panel/confirm-panel-with-actions.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "confirm-panel-custom-content": {
+      name: "confirm-panel-custom-content",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["confirm-panel"],
+      files: [
+        {
+          path: "registry/wuhan/examples/confirm-panel/confirm-panel-custom-content.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/confirm-panel-custom-content.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/confirm-panel/confirm-panel-custom-content.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "report-card-example": {
+      name: "report-card-example",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["report-card-01"],
+      files: [
+        {
+          path: "registry/wuhan/examples/report-card/report-card-example.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/report-card-example.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/report-card/report-card-example.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
