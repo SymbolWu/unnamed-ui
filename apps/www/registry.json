@@ -2593,12 +2593,12 @@
       "title": "Markdown",
       "description": "Streaming-friendly Markdown renderer with custom blocks",
       "dependencies": [
-        "@ant-design/x@^2.2.0",
-        "@ant-design/x-markdown@^2.2.0",
-        "@ant-design/icons@^6.1.0",
-        "@antv/gpt-vis@0.6.0",
-        "antd@^6.2.1",
-        "styled-components@^6.3.8"
+        "@ant-design/x",
+        "@ant-design/x-markdown",
+        "@ant-design/icons",
+        "@antv/gpt-vis",
+        "antd",
+        "styled-components"
       ],
       "registryDependencies": [
         "dynamic-form",
