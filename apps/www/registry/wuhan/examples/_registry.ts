@@ -2115,4 +2115,81 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "radio-demo",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-controlled",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-controlled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-group-options",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-group-options.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-vertical",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-vertical.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-disabled",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-disabled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-group-controlled",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-group-controlled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "radio-custom-style",
+    type: "registry:example",
+    registryDependencies: ["radio"],
+    files: [
+      {
+        path: "examples/radio/radio-custom-style.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

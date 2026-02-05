@@ -525,4 +525,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "radio",
+    type: "registry:block",
+    title: "Radio",
+    description: "单选框",
+    registryDependencies: ["radio-01"],
+    files: [
+      {
+        path: "composed/radio/radio.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/radio.tsx",
+      },
+    ],
+  },
 ];

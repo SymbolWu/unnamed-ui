@@ -436,4 +436,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "radio-01",
+    type: "registry:block",
+    title: "Radio",
+    description: "单选框",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/radio/radio-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/radio-01.tsx",
+      },
+    ],
+  },
 ];

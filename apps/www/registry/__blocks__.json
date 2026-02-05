@@ -124,6 +124,10 @@
     "description": "多选框"
   },
   {
+    "name": "radio-01",
+    "description": "单选框"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -230,6 +234,10 @@
   {
     "name": "checkbox",
     "description": "多选框"
+  },
+  {
+    "name": "radio",
+    "description": "单选框"
   },
   {
     "name": "action-dropdown",

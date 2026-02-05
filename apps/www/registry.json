@@ -2205,6 +2205,22 @@
       ]
     },
     {
+      "name": "radio-01",
+      "type": "registry:block",
+      "title": "Radio",
+      "description": "单选框",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/radio/radio-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/radio-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2792,6 +2808,22 @@
           "path": "registry/wuhan/composed/checkbox/checkbox.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio",
+      "type": "registry:block",
+      "title": "Radio",
+      "description": "单选框",
+      "registryDependencies": [
+        "radio-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/radio/radio.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/radio.tsx"
         }
       ]
     },
@@ -5616,6 +5648,97 @@
       "files": [
         {
           "path": "registry/wuhan/examples/checkbox/checkbox-custom-style.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-controlled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-controlled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-group-options",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-group-options.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-vertical",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-vertical.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-disabled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-disabled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-group-controlled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-group-controlled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "radio-custom-style",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/radio/radio-custom-style.tsx",
           "type": "registry:example"
         }
       ]
