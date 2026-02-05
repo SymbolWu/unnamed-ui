@@ -2182,12 +2182,78 @@ export const examples: Registry["items"] = [
     ],
   },
   {
-    name: "block-select-default",
+    name: "block-select-demo",
     type: "registry:example",
     registryDependencies: ["block-select"],
     files: [
       {
-        path: "examples/block-select/block-select-default.tsx",
+        path: "examples/block-select/block-select-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-controlled",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-controlled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-multiple",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-multiple.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-icon",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-icon.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-full-rounded",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-full-rounded.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-disabled",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-disabled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-select-advanced",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-advanced.tsx",
         type: "registry:example",
       },
     ],

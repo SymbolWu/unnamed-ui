@@ -7155,21 +7155,171 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "block-select-default": {
-      name: "block-select-default",
+    "block-select-demo": {
+      name: "block-select-demo",
       description: "",
       type: "registry:example",
       registryDependencies: ["block-select"],
       files: [
         {
-          path: "registry/wuhan/examples/block-select/block-select-default.tsx",
+          path: "registry/wuhan/examples/block-select/block-select-demo.tsx",
           type: "registry:example",
           target: "",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/examples/block-select/block-select-default.tsx");
+          await import("@/registry/wuhan/examples/block-select/block-select-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-controlled": {
+      name: "block-select-controlled",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-controlled.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-controlled.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-multiple": {
+      name: "block-select-multiple",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-multiple.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-multiple.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-icon": {
+      name: "block-select-icon",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-icon.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-icon.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-full-rounded": {
+      name: "block-select-full-rounded",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-full-rounded.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-full-rounded.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-disabled": {
+      name: "block-select-disabled",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-disabled.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-disabled.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-select-advanced": {
+      name: "block-select-advanced",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-select/block-select-advanced.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-select/block-select-advanced.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
