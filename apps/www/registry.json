@@ -345,7 +345,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-200)",
+          "border-neutral": "var(--neutral-300)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -689,7 +689,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-200)",
+          "border-neutral": "var(--neutral-300)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -1118,7 +1118,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-200)",
+          "border-neutral": "var(--neutral-300)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -1462,7 +1462,7 @@
           "border-brand-active": "var(--brand-700)",
           "border-brand-light": "var(--brand-300)",
           "border-brand-light-hover": "var(--brand-400)",
-          "border-neutral": "var(--neutral-200)",
+          "border-neutral": "var(--neutral-300)",
           "border-success": "var(--success-600)",
           "border-success-hover": "var(--success-500)",
           "border-success-active": "var(--success-700)",
@@ -2125,10 +2125,7 @@
       "name": "sources-sidebar-01",
       "type": "registry:block",
       "title": "Sources Sidebar",
-      "description": "Sources sidebar primitives with tabs and list",
-      "dependencies": [
-        "styled-components"
-      ],
+      "description": "Sources sidebar component",
       "registryDependencies": [
         "style"
       ],
@@ -2137,6 +2134,25 @@
           "path": "registry/wuhan/blocks/sources-sidebar/sources-sidebar-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/sources-sidebar-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-01",
+      "type": "registry:block",
+      "title": "Button Primitive",
+      "description": "Button primitive with solid/text/outline/link variants, multiple colors, and sizes",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/button/button-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/button-01.tsx"
         }
       ]
     },
@@ -2153,6 +2169,22 @@
           "path": "registry/wuhan/blocks/confirm-panel/confirm-panel-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/confirm-panel-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-card-01",
+      "type": "registry:block",
+      "title": "Select Card",
+      "description": "Card selection item primitive with selected state",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/select-card/select-card-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/select-card-01.tsx"
         }
       ]
     },
@@ -2511,7 +2543,8 @@
         "switch",
         "slider",
         "field",
-        "dynamic-form-01"
+        "dynamic-form-01",
+        "status-tag"
       ],
       "files": [
         {
@@ -2561,12 +2594,12 @@
       "title": "Markdown",
       "description": "Streaming-friendly Markdown renderer with custom blocks",
       "dependencies": [
-        "@ant-design/x@^2.2.0",
-        "@ant-design/x-markdown@^2.2.0",
-        "@ant-design/icons@^6.1.0",
-        "@antv/gpt-vis@0.6.0",
-        "antd@^6.2.1",
-        "styled-components@^6.3.8"
+        "@ant-design/x",
+        "@ant-design/x-markdown",
+        "@ant-design/icons",
+        "@antv/gpt-vis",
+        "antd",
+        "styled-components"
       ],
       "registryDependencies": [
         "dynamic-form",
@@ -2748,7 +2781,43 @@
       ]
     },
     {
-      "name": "select",
+      "name": "block-button",
+      "type": "registry:block",
+      "title": "Button",
+      "description": "Composed button with icon support, block mode, and convenient props",
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-slot"
+      ],
+      "registryDependencies": [
+        "button-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/button/button.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-card",
+      "type": "registry:block",
+      "title": "Select Card",
+      "description": "Composed card selection with single/multiple modes and grid layout",
+      "registryDependencies": [
+        "select-card-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/select-card/select-card.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/select-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "block-select",
       "type": "registry:block",
       "title": "Select",
       "description": "选择器",
@@ -4826,6 +4895,20 @@
       ]
     },
     {
+      "name": "select-card-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/select-card/select-card-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/select-card-demo.tsx"
+        }
+      ]
+    },
+    {
       "name": "confirm-panel-demo",
       "type": "registry:example",
       "registryDependencies": [
@@ -4836,6 +4919,20 @@
           "path": "registry/wuhan/examples/confirm-panel/confirm-panel-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/confirm-panel-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-card-single",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/select-card/select-card-single.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/select-card-single.tsx"
         }
       ]
     },
@@ -4854,6 +4951,21 @@
       ]
     },
     {
+      "name": "select-card-controlled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select-card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/select-card/select-card-controlled.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/select-card-controlled.tsx"
+        }
+      ]
+    },
+    {
       "name": "confirm-panel-confirmed",
       "type": "registry:example",
       "registryDependencies": [
@@ -4864,6 +4976,20 @@
           "path": "registry/wuhan/examples/confirm-panel/confirm-panel-confirmed.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/confirm-panel-confirmed.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/button/button-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/button-demo.tsx"
         }
       ]
     },

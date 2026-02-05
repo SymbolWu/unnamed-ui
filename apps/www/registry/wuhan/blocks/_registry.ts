@@ -369,14 +369,29 @@ export const blocks: Registry["items"] = [
     name: "sources-sidebar-01",
     type: "registry:block",
     title: "Sources Sidebar",
-    description: "Sources sidebar primitives with tabs and list",
-    dependencies: ["styled-components"],
+    description: "Sources sidebar component",
     registryDependencies: ["style"],
     files: [
       {
         path: "blocks/sources-sidebar/sources-sidebar-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/sources-sidebar-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "button-01",
+    type: "registry:block",
+    title: "Button Primitive",
+    description:
+      "Button primitive with solid/text/outline/link variants, multiple colors, and sizes",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/button/button-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/button-01.tsx",
       },
     ],
   },
@@ -391,6 +406,20 @@ export const blocks: Registry["items"] = [
         path: "blocks/confirm-panel/confirm-panel-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/confirm-panel-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "select-card-01",
+    type: "registry:block",
+    title: "Select Card",
+    description: "Card selection item primitive with selected state",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/select-card/select-card-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/select-card-01.tsx",
       },
     ],
   },

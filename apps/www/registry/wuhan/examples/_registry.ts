@@ -1951,6 +1951,19 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // select-card examples
+  {
+    name: "select-card-demo",
+    type: "registry:example",
+    registryDependencies: ["select-card"],
+    files: [
+      {
+        path: "examples/select-card/select-card-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/select-card-demo.tsx",
+      },
+    ],
+  },
   // confirm-panel examples
   {
     name: "confirm-panel-demo",
@@ -1961,6 +1974,18 @@ export const examples: Registry["items"] = [
         path: "examples/confirm-panel/confirm-panel-demo.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/confirm-panel-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "select-card-single",
+    type: "registry:example",
+    registryDependencies: ["select-card"],
+    files: [
+      {
+        path: "examples/select-card/select-card-single.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/select-card-single.tsx",
       },
     ],
   },
@@ -1977,6 +2002,18 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "select-card-controlled",
+    type: "registry:example",
+    registryDependencies: ["select-card", "button"],
+    files: [
+      {
+        path: "examples/select-card/select-card-controlled.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/select-card-controlled.tsx",
+      },
+    ],
+  },
+  {
     name: "confirm-panel-confirmed",
     type: "registry:example",
     registryDependencies: ["confirm-panel"],
@@ -1985,6 +2022,18 @@ export const examples: Registry["items"] = [
         path: "examples/confirm-panel/confirm-panel-confirmed.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/confirm-panel-confirmed.tsx",
+      },
+    ],
+  },
+  {
+    name: "button-demo",
+    type: "registry:example",
+    registryDependencies: ["button"],
+    files: [
+      {
+        path: "examples/button/button-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/button-demo.tsx",
       },
     ],
   },

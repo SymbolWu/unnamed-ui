@@ -276,6 +276,7 @@ export const composed: Registry["items"] = [
       "slider",
       "field",
       "dynamic-form-01",
+      "status-tag",
     ],
     files: [
       {
@@ -320,12 +321,12 @@ export const composed: Registry["items"] = [
     title: "Markdown",
     description: "Streaming-friendly Markdown renderer with custom blocks",
     dependencies: [
-      "@ant-design/x@^2.2.0",
-      "@ant-design/x-markdown@^2.2.0",
-      "@ant-design/icons@^6.1.0",
-      "@antv/gpt-vis@0.6.0",
-      "antd@^6.2.1",
-      "styled-components@^6.3.8",
+      "@ant-design/x",
+      "@ant-design/x-markdown",
+      "@ant-design/icons",
+      "@antv/gpt-vis",
+      "antd",
+      "styled-components",
     ],
     registryDependencies: ["dynamic-form", "custom-sources"],
     files: [
@@ -498,7 +499,38 @@ export const composed: Registry["items"] = [
     ],
   },
   {
-    name: "select",
+    name: "block-button",
+    type: "registry:block",
+    title: "Button",
+    description:
+      "Composed button with icon support, block mode, and convenient props",
+    dependencies: ["lucide-react", "@radix-ui/react-slot"],
+    registryDependencies: ["button-01"],
+    files: [
+      {
+        path: "composed/block-button/block-button.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/block-button.tsx",
+      },
+    ],
+  },
+  {
+    name: "select-card",
+    type: "registry:block",
+    title: "Select Card",
+    description:
+      "Composed card selection with single/multiple modes and grid layout",
+    registryDependencies: ["select-card-01"],
+    files: [
+      {
+        path: "composed/select-card/select-card.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/select-card.tsx",
+      },
+    ],
+  },
+  {
+    name: "block-select",
     type: "registry:block",
     title: "Select",
     description: "选择器",

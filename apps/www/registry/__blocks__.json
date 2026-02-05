@@ -105,11 +105,19 @@
   },
   {
     "name": "sources-sidebar-01",
-    "description": "Sources sidebar primitives with tabs and list"
+    "description": "Sources sidebar component"
+  },
+  {
+    "name": "button-01",
+    "description": "Button primitive with solid/text/outline/link variants, multiple colors, and sizes"
   },
   {
     "name": "confirm-panel-01",
     "description": "Confirmation panel primitives for user actions"
+  },
+  {
+    "name": "select-card-01",
+    "description": "Card selection item primitive with selected state"
   },
   {
     "name": "report-card-01",
@@ -220,7 +228,15 @@
     "description": "Composed toggle button with single and multiple selection modes"
   },
   {
-    "name": "select",
+    "name": "block-button",
+    "description": "Composed button with icon support, block mode, and convenient props"
+  },
+  {
+    "name": "select-card",
+    "description": "Composed card selection with single/multiple modes and grid layout"
+  },
+  {
+    "name": "block-select",
     "description": "选择器"
   },
   {
