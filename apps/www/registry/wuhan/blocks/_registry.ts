@@ -436,4 +436,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-select-01",
+    type: "registry:block",
+    title: "BlockSelect",
+    description: "选择器",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/block-select/block-select-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/block-select-01.tsx",
+      },
+    ],
+  },
 ];

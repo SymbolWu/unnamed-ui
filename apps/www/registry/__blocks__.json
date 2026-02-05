@@ -124,6 +124,10 @@
     "description": "单选框"
   },
   {
+    "name": "block-select-01",
+    "description": "选择器"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -230,6 +234,10 @@
   {
     "name": "radio",
     "description": "单选框"
+  },
+  {
+    "name": "block-select",
+    "description": "选择器"
   },
   {
     "name": "action-dropdown",

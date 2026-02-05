@@ -2205,6 +2205,22 @@
       ]
     },
     {
+      "name": "block-select-01",
+      "type": "registry:block",
+      "title": "BlockSelect",
+      "description": "选择器",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/block-select/block-select-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/block-select-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2792,6 +2808,22 @@
           "path": "registry/wuhan/composed/radio/radio.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/radio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "block-select",
+      "type": "registry:block",
+      "title": "BlockSelect",
+      "description": "选择器",
+      "registryDependencies": [
+        "block-select-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/block-select/block-select.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/block-select.tsx"
         }
       ]
     },
@@ -5694,6 +5726,19 @@
       "files": [
         {
           "path": "registry/wuhan/examples/radio/radio-custom-style.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "block-select-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "block-select"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/block-select/block-select-default.tsx",
           "type": "registry:example"
         }
       ]

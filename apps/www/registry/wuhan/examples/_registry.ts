@@ -2181,4 +2181,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-select-default",
+    type: "registry:example",
+    registryDependencies: ["block-select"],
+    files: [
+      {
+        path: "examples/block-select/block-select-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

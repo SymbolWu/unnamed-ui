@@ -525,4 +525,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-select",
+    type: "registry:block",
+    title: "BlockSelect",
+    description: "选择器",
+    registryDependencies: ["block-select-01"],
+    files: [
+      {
+        path: "composed/block-select/block-select.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/block-select.tsx",
+      },
+    ],
+  },
 ];
