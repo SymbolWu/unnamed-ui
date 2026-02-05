@@ -61,42 +61,41 @@ export interface SelectCardProps {
  *
  * @public
  */
-export const SelectCard = React.forwardRef<
-  HTMLButtonElement,
-  SelectCardProps
->(({ option, selected, onClick }, ref) => {
-  return (
-    <SelectCardItemPrimitive
-      ref={ref}
-      key={option.value}
-      selected={selected}
-      aria-selected={selected}
-      disabled={option.disabled}
-      onClick={() => !option.disabled && onClick?.()}
-    >
-      {/* 图标或默认图标 */}
-      {option.icon ? (
-        <span className="w-4 h-4 shrink-0 flex items-center justify-center">
-          {option.icon}
-        </span>
-      ) : (
-        <SelectCardItemIconPrimitive />
-      )}
+export const SelectCard = React.forwardRef<HTMLButtonElement, SelectCardProps>(
+  ({ option, selected, onClick }, ref) => {
+    return (
+      <SelectCardItemPrimitive
+        ref={ref}
+        key={option.value}
+        selected={selected}
+        aria-selected={selected}
+        disabled={option.disabled}
+        onClick={() => !option.disabled && onClick?.()}
+      >
+        {/* 图标或默认图标 */}
+        {option.icon ? (
+          <span className="w-4 h-4 shrink-0 flex items-center justify-center">
+            {option.icon}
+          </span>
+        ) : (
+          <SelectCardItemIconPrimitive />
+        )}
 
-      {/* 标签，支持 tooltip */}
-      {option.tooltip ? (
-        <BlockTooltip>
-          <BlockTooltipTrigger asChild>
-            <span className="truncate">{option.label}</span>
-          </BlockTooltipTrigger>
-          <BlockTooltipContent>{option.tooltip}</BlockTooltipContent>
-        </BlockTooltip>
-      ) : (
-        <span className="truncate">{option.label}</span>
-      )}
-    </SelectCardItemPrimitive>
-  );
-});
+        {/* 标签，支持 tooltip */}
+        {option.tooltip ? (
+          <BlockTooltip>
+            <BlockTooltipTrigger asChild>
+              <span className="truncate">{option.label}</span>
+            </BlockTooltipTrigger>
+            <BlockTooltipContent>{option.tooltip}</BlockTooltipContent>
+          </BlockTooltip>
+        ) : (
+          <span className="truncate">{option.label}</span>
+        )}
+      </SelectCardItemPrimitive>
+    );
+  },
+);
 SelectCard.displayName = "SelectCard";
 
 /**

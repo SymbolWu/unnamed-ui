@@ -218,18 +218,6 @@ const recruitmentExamples: Registry["items"] = [
     ],
   },
   {
-    name: "status-tag-demo",
-    type: "registry:example",
-    registryDependencies: ["status-tag"],
-    files: [
-      {
-        path: "examples/recruitment/status-tag/status-tag-demo.tsx",
-        type: "registry:example",
-        target: "components/wuhan/examples/recruitment/status-tag-demo.tsx",
-      },
-    ],
-  },
-  {
     name: "step-detail-demo",
     type: "registry:example",
     registryDependencies: ["step-detail"],
@@ -1808,6 +1796,30 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "dynamic-form-pending",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-pending.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-pending.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-confirmed",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-confirmed.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-confirmed.tsx",
+      },
+    ],
+  },
+  {
     name: "task-list-demo",
     type: "registry:example",
     registryDependencies: ["task-list"],
@@ -1852,6 +1864,30 @@ export const examples: Registry["items"] = [
         path: "examples/task-list/task-list-feedback.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/task-list-feedback.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list-pending",
+    type: "registry:example",
+    registryDependencies: ["task-list"],
+    files: [
+      {
+        path: "examples/task-list/task-list-pending.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/task-list-pending.tsx",
+      },
+    ],
+  },
+  {
+    name: "task-list-confirmed",
+    type: "registry:example",
+    registryDependencies: ["task-list"],
+    files: [
+      {
+        path: "examples/task-list/task-list-confirmed.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/task-list-confirmed.tsx",
       },
     ],
   },
@@ -1928,6 +1964,19 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // confirm-panel examples
+  {
+    name: "confirm-panel-demo",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-demo.tsx",
+      },
+    ],
+  },
   {
     name: "select-card-single",
     type: "registry:example",
@@ -1937,6 +1986,18 @@ export const examples: Registry["items"] = [
         path: "examples/select-card/select-card-single.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/select-card-single.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-pending",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-pending.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-pending.tsx",
       },
     ],
   },
@@ -1953,6 +2014,18 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "confirm-panel-confirmed",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-confirmed.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-confirmed.tsx",
+      },
+    ],
+  },
+  {
     name: "button-demo",
     type: "registry:example",
     registryDependencies: ["button"],
@@ -1964,6 +2037,54 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "confirm-panel-with-actions",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel", "button"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-with-actions.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-with-actions.tsx",
+      },
+    ],
+  },
+  {
+    name: "confirm-panel-custom-content",
+    type: "registry:example",
+    registryDependencies: ["confirm-panel"],
+    files: [
+      {
+        path: "examples/confirm-panel/confirm-panel-custom-content.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/confirm-panel-custom-content.tsx",
+      },
+    ],
+  },
+  // report-card examples
+  {
+    name: "report-card-example",
+    type: "registry:example",
+    registryDependencies: ["report-card-01"],
+    files: [
+      {
+        path: "examples/report-card/report-card-example.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/report-card-example.tsx",
+      },
+    ],
+  },
   // Merge recruitment examples
   ...recruitmentExamples,
+  {
+    name: "select-default",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [
+      {
+        path: "examples/select/select-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

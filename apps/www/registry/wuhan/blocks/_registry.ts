@@ -396,6 +396,20 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
+    name: "confirm-panel-01",
+    type: "registry:block",
+    title: "Confirm Panel",
+    description: "Confirmation panel primitives for user actions",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/confirm-panel/confirm-panel-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/confirm-panel-01.tsx",
+      },
+    ],
+  },
+  {
     name: "select-card-01",
     type: "registry:block",
     title: "Select Card",
@@ -406,6 +420,34 @@ export const blocks: Registry["items"] = [
         path: "blocks/select-card/select-card-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/select-card-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "report-card-01",
+    type: "registry:block",
+    title: "Report Card",
+    description: "Report card primitives for displaying data and metrics",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/report-card/report-card-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/report-card-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "select-01",
+    type: "registry:block",
+    title: "Select",
+    description: "选择器",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/select/select-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/select-01.tsx",
       },
     ],
   },

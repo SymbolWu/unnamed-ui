@@ -2157,6 +2157,22 @@
       ]
     },
     {
+      "name": "confirm-panel-01",
+      "type": "registry:block",
+      "title": "Confirm Panel",
+      "description": "Confirmation panel primitives for user actions",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/confirm-panel/confirm-panel-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/confirm-panel-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "select-card-01",
       "type": "registry:block",
       "title": "Select Card",
@@ -2169,6 +2185,38 @@
           "path": "registry/wuhan/blocks/select-card/select-card-01.tsx",
           "type": "registry:component",
           "target": "components/wuhan/blocks/select-card-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "report-card-01",
+      "type": "registry:block",
+      "title": "Report Card",
+      "description": "Report card primitives for displaying data and metrics",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/report-card/report-card-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/report-card-01.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-01",
+      "type": "registry:block",
+      "title": "Select",
+      "description": "选择器",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/select/select-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/select-01.tsx"
         }
       ]
     },
@@ -2522,6 +2570,24 @@
       ]
     },
     {
+      "name": "confirm-panel",
+      "type": "registry:block",
+      "title": "Confirm Panel",
+      "description": "Composed confirm panel with status support and custom actions",
+      "registryDependencies": [
+        "confirm-panel-01",
+        "status-tag",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/confirm-panel/confirm-panel.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/confirm-panel.tsx"
+        }
+      ]
+    },
+    {
       "name": "markdown",
       "type": "registry:block",
       "title": "Markdown",
@@ -2750,6 +2816,22 @@
       ]
     },
     {
+      "name": "select",
+      "type": "registry:block",
+      "title": "Select",
+      "description": "选择器",
+      "registryDependencies": [
+        "select-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/select/select.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/select.tsx"
+        }
+      ]
+    },
+    {
       "name": "action-dropdown",
       "type": "registry:block",
       "title": "Action Dropdown",
@@ -2876,19 +2958,6 @@
           "path": "registry/wuhan/recruitment/SimilarJob/index.tsx",
           "type": "registry:component",
           "target": "components/wuhan/recruitment/similar-job.tsx"
-        }
-      ]
-    },
-    {
-      "name": "status-tag",
-      "type": "registry:block",
-      "title": "Status Tag",
-      "description": "状态标签",
-      "files": [
-        {
-          "path": "registry/wuhan/recruitment/StatusTag/index.tsx",
-          "type": "registry:component",
-          "target": "components/wuhan/recruitment/status-tag.tsx"
         }
       ]
     },
@@ -4643,6 +4712,34 @@
       ]
     },
     {
+      "name": "dynamic-form-pending",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-pending.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-pending.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-form-confirmed",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dynamic-form"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/dynamic-form/dynamic-form-confirmed.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dynamic-form-confirmed.tsx"
+        }
+      ]
+    },
+    {
       "name": "task-list-demo",
       "type": "registry:example",
       "registryDependencies": [
@@ -4695,6 +4792,34 @@
           "path": "registry/wuhan/examples/task-list/task-list-feedback.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-list-feedback.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-pending",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-pending.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-pending.tsx"
+        }
+      ]
+    },
+    {
+      "name": "task-list-confirmed",
+      "type": "registry:example",
+      "registryDependencies": [
+        "task-list"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/task-list/task-list-confirmed.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/task-list-confirmed.tsx"
         }
       ]
     },
@@ -4783,6 +4908,20 @@
       ]
     },
     {
+      "name": "confirm-panel-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-demo.tsx"
+        }
+      ]
+    },
+    {
       "name": "select-card-single",
       "type": "registry:example",
       "registryDependencies": [
@@ -4793,6 +4932,20 @@
           "path": "registry/wuhan/examples/select-card/select-card-single.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/select-card-single.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-pending",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-pending.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-pending.tsx"
         }
       ]
     },
@@ -4812,6 +4965,20 @@
       ]
     },
     {
+      "name": "confirm-panel-confirmed",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-confirmed.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-confirmed.tsx"
+        }
+      ]
+    },
+    {
       "name": "button-demo",
       "type": "registry:example",
       "registryDependencies": [
@@ -4822,6 +4989,49 @@
           "path": "registry/wuhan/examples/button/button-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/button-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-with-actions",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-with-actions.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-with-actions.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-panel-custom-content",
+      "type": "registry:example",
+      "registryDependencies": [
+        "confirm-panel"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/confirm-panel/confirm-panel-custom-content.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/confirm-panel-custom-content.tsx"
+        }
+      ]
+    },
+    {
+      "name": "report-card-example",
+      "type": "registry:example",
+      "registryDependencies": [
+        "report-card-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/report-card/report-card-example.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/report-card-example.tsx"
         }
       ]
     },
@@ -5060,20 +5270,6 @@
           "path": "registry/wuhan/examples/recruitment/similar-job/similar-job-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/recruitment/similar-job-demo.tsx"
-        }
-      ]
-    },
-    {
-      "name": "status-tag-demo",
-      "type": "registry:example",
-      "registryDependencies": [
-        "status-tag"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/examples/recruitment/status-tag/status-tag-demo.tsx",
-          "type": "registry:example",
-          "target": "components/wuhan/examples/recruitment/status-tag-demo.tsx"
         }
       ]
     },
@@ -5410,6 +5606,19 @@
           "path": "registry/wuhan/examples/recruitment/resume-evaluation-report/resume-evaluation-report-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/recruitment/resume-evaluation-report-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/select/select-default.tsx",
+          "type": "registry:example"
         }
       ]
     }

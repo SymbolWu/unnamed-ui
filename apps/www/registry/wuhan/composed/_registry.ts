@@ -300,6 +300,21 @@ export const composed: Registry["items"] = [
     ],
   },
   {
+    name: "confirm-panel",
+    type: "registry:block",
+    title: "Confirm Panel",
+    description:
+      "Composed confirm panel with status support and custom actions",
+    registryDependencies: ["confirm-panel-01", "status-tag", "button"],
+    files: [
+      {
+        path: "composed/confirm-panel/confirm-panel.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/confirm-panel.tsx",
+      },
+    ],
+  },
+  {
     name: "markdown",
     type: "registry:block",
     title: "Markdown",
@@ -510,6 +525,20 @@ export const composed: Registry["items"] = [
         path: "composed/select-card/select-card.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/select-card.tsx",
+      },
+    ],
+  },
+  {
+    name: "select",
+    type: "registry:block",
+    title: "Select",
+    description: "选择器",
+    registryDependencies: ["select-01"],
+    files: [
+      {
+        path: "composed/select/select.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/select.tsx",
       },
     ],
   },
