@@ -120,6 +120,10 @@
     "description": "选择器"
   },
   {
+    "name": "checkbox-01",
+    "description": "多选框"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -222,6 +226,10 @@
   {
     "name": "select",
     "description": "选择器"
+  },
+  {
+    "name": "checkbox",
+    "description": "多选框"
   },
   {
     "name": "action-dropdown",

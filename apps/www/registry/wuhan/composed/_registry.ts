@@ -511,4 +511,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "checkbox",
+    type: "registry:block",
+    title: "Checkbox",
+    description: "多选框",
+    registryDependencies: ["checkbox-01"],
+    files: [
+      {
+        path: "composed/checkbox/checkbox.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/checkbox.tsx",
+      },
+    ],
+  },
 ];

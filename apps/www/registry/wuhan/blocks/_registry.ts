@@ -422,4 +422,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "checkbox-01",
+    type: "registry:block",
+    title: "Checkbox",
+    description: "多选框",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/checkbox/checkbox-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/checkbox-01.tsx",
+      },
+    ],
+  },
 ];

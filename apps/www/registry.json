@@ -2189,6 +2189,22 @@
       ]
     },
     {
+      "name": "checkbox-01",
+      "type": "registry:block",
+      "title": "Checkbox",
+      "description": "多选框",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/checkbox/checkbox-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/checkbox-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2760,6 +2776,22 @@
           "path": "registry/wuhan/composed/select/select.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:block",
+      "title": "Checkbox",
+      "description": "多选框",
+      "registryDependencies": [
+        "checkbox-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/checkbox/checkbox.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/checkbox.tsx"
         }
       ]
     },
@@ -5493,6 +5525,97 @@
       "files": [
         {
           "path": "registry/wuhan/examples/select/select-default.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-controlled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-controlled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-indeterminate",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-indeterminate.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-group-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-group-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-group-controlled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-group-controlled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-group-disabled",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-group-disabled.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-custom-style",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/checkbox/checkbox-custom-style.tsx",
           "type": "registry:example"
         }
       ]
