@@ -976,6 +976,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "select-01": {
+      name: "select-01",
+      description: "选择器",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/select/select-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/select-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/select/select-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -1736,6 +1761,30 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/tooltip/tooltip.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    select: {
+      name: "select",
+      description: "选择器",
+      type: "registry:block",
+      registryDependencies: ["select-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/select/select.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/select.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod = await import("@/registry/wuhan/composed/select/select.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -6647,6 +6696,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/recruitment/resume-evaluation-report/resume-evaluation-report-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "select-default": {
+      name: "select-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["select"],
+      files: [
+        {
+          path: "registry/wuhan/examples/select/select-default.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/select/select-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

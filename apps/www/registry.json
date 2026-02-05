@@ -2173,6 +2173,22 @@
       ]
     },
     {
+      "name": "select-01",
+      "type": "registry:block",
+      "title": "Select",
+      "description": "选择器",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/select/select-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/select-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2728,6 +2744,22 @@
           "path": "registry/wuhan/composed/tooltip/tooltip.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:block",
+      "title": "Select",
+      "description": "选择器",
+      "registryDependencies": [
+        "select-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/select/select.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/select.tsx"
         }
       ]
     },
@@ -5449,6 +5481,19 @@
           "path": "registry/wuhan/examples/recruitment/resume-evaluation-report/resume-evaluation-report-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/recruitment/resume-evaluation-report-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/select/select-default.tsx",
+          "type": "registry:example"
         }
       ]
     }

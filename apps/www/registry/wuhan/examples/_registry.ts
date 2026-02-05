@@ -2027,4 +2027,15 @@ export const examples: Registry["items"] = [
   },
   // Merge recruitment examples
   ...recruitmentExamples,
+  {
+    name: "select-default",
+    type: "registry:example",
+    registryDependencies: ["select"],
+    files: [
+      {
+        path: "examples/select/select-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

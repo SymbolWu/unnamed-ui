@@ -116,6 +116,10 @@
     "description": "Report card primitives for displaying data and metrics"
   },
   {
+    "name": "select-01",
+    "description": "选择器"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -214,6 +218,10 @@
   {
     "name": "toggle-button",
     "description": "Composed toggle button with single and multiple selection modes"
+  },
+  {
+    "name": "select",
+    "description": "选择器"
   },
   {
     "name": "action-dropdown",
