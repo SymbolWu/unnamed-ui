@@ -340,51 +340,51 @@ export function RadioGroup({
             )}
             style={style}
           >
-          {options.map((option, index) => {
-            // 判断选项是对象还是简单值
-            const isOptionObject = typeof option === "object";
-            // 提取选项值
-            const optionValue = isOptionObject
-              ? (option as RadioOptionType).value
-              : option;
-            // 提取选项标签
-            const optionLabel = isOptionObject
-              ? (option as RadioOptionType).label
-              : String(option);
-            // 提取选项禁用状态
-            const optionDisabled = isOptionObject
-              ? (option as RadioOptionType).disabled
-              : false;
-            // 提取选项提示文本
-            const optionTitle = isOptionObject
-              ? (option as RadioOptionType).title
-              : undefined;
-            // 提取选项类名
-            const optionClassName = isOptionObject
-              ? (option as RadioOptionType).className
-              : undefined;
-            // 提取选项样式
-            const optionStyle = isOptionObject
-              ? (option as RadioOptionType).style
-              : undefined;
-            // 提取选项 ID
-            const optionId = isOptionObject
-              ? (option as RadioOptionType).id
-              : undefined;
+            {options.map((option, index) => {
+              // 判断选项是对象还是简单值
+              const isOptionObject = typeof option === "object";
+              // 提取选项值
+              const optionValue = isOptionObject
+                ? (option as RadioOptionType).value
+                : option;
+              // 提取选项标签
+              const optionLabel = isOptionObject
+                ? (option as RadioOptionType).label
+                : String(option);
+              // 提取选项禁用状态
+              const optionDisabled = isOptionObject
+                ? (option as RadioOptionType).disabled
+                : false;
+              // 提取选项提示文本
+              const optionTitle = isOptionObject
+                ? (option as RadioOptionType).title
+                : undefined;
+              // 提取选项类名
+              const optionClassName = isOptionObject
+                ? (option as RadioOptionType).className
+                : undefined;
+              // 提取选项样式
+              const optionStyle = isOptionObject
+                ? (option as RadioOptionType).style
+                : undefined;
+              // 提取选项 ID
+              const optionId = isOptionObject
+                ? (option as RadioOptionType).id
+                : undefined;
 
-            return (
-              <Radio
-                key={optionId || String(optionValue) || index}
-                value={optionValue}
-                disabled={disabled || optionDisabled}
-                id={optionId}
-                classNames={{ wrapper: optionClassName }}
-                styles={{ wrapper: optionStyle }}
-              >
-                <span title={optionTitle}>{optionLabel}</span>
-              </Radio>
-            );
-          })}
+              return (
+                <Radio
+                  key={optionId || String(optionValue) || index}
+                  value={optionValue}
+                  disabled={disabled || optionDisabled}
+                  id={optionId}
+                  classNames={{ wrapper: optionClassName }}
+                  styles={{ wrapper: optionStyle }}
+                >
+                  <span title={optionTitle}>{optionLabel}</span>
+                </Radio>
+              );
+            })}
           </RadioGroupRootPrimitive>
         </RadioGroupContext.Provider>
       </div>

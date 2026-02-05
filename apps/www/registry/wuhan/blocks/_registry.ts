@@ -409,20 +409,6 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
-    name: "select-01",
-    type: "registry:block",
-    title: "Select",
-    description: "选择器",
-    registryDependencies: ["style"],
-    files: [
-      {
-        path: "blocks/select/select-01.tsx",
-        type: "registry:component",
-        target: "components/wuhan/blocks/select-01.tsx",
-      },
-    ],
-  },
-  {
     name: "checkbox-01",
     type: "registry:block",
     title: "Checkbox",
