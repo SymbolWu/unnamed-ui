@@ -479,4 +479,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "split-pane-01",
+    type: "registry:block",
+    title: "SplitPane",
+    description: "分隔面板",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/split-pane/split-pane-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/split-pane-01.tsx",
+      },
+    ],
+  },
 ];

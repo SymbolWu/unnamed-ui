@@ -1101,6 +1101,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "split-pane-01": {
+      name: "split-pane-01",
+      description: "分隔面板",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/split-pane/split-pane-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/split-pane-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/split-pane/split-pane-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -1988,6 +2013,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/block-select/block-select.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "triple-split-pane": {
+      name: "triple-split-pane",
+      description: "三分隔面板",
+      type: "registry:block",
+      registryDependencies: ["split-pane-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/split-pane/triple-split-pane.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/triple-split-pane.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/split-pane/triple-split-pane.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -7524,6 +7574,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/block-select/block-select-advanced.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "split-pane-three": {
+      name: "split-pane-three",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["triple-split-pane"],
+      files: [
+        {
+          path: "registry/wuhan/examples/split-pane/split-pane-three.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/split-pane/split-pane-three.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

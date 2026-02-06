@@ -2253,6 +2253,22 @@
       ]
     },
     {
+      "name": "split-pane-01",
+      "type": "registry:block",
+      "title": "SplitPane",
+      "description": "分隔面板",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/split-pane/split-pane-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/split-pane-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -2893,6 +2909,22 @@
           "path": "registry/wuhan/composed/block-select/block-select.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/block-select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "triple-split-pane",
+      "type": "registry:block",
+      "title": "TripleSplitPane",
+      "description": "三分隔面板",
+      "registryDependencies": [
+        "split-pane-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/split-pane/triple-split-pane.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/triple-split-pane.tsx"
         }
       ]
     },
@@ -5943,6 +5975,19 @@
       "files": [
         {
           "path": "registry/wuhan/examples/block-select/block-select-advanced.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "split-pane-three",
+      "type": "registry:example",
+      "registryDependencies": [
+        "triple-split-pane"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/split-pane/split-pane-three.tsx",
           "type": "registry:example"
         }
       ]
