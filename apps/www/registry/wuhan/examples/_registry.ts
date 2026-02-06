@@ -2307,4 +2307,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "split-pane-default",
+    type: "registry:example",
+    registryDependencies: ["split-pane"],
+    files: [
+      {
+        path: "examples/split-pane/split-pane-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

@@ -571,4 +571,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "split-pane",
+    type: "registry:block",
+    title: "SplitPane",
+    description: "分隔面板",
+    registryDependencies: ["split-pane-01"],
+    files: [
+      {
+        path: "composed/split-pane/split-pane.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/split-pane.tsx",
+      },
+    ],
+  },
 ];

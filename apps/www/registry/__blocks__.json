@@ -136,6 +136,10 @@
     "description": "选择器"
   },
   {
+    "name": "split-pane-01",
+    "description": "分隔面板"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -254,6 +258,10 @@
   {
     "name": "block-select",
     "description": "选择器"
+  },
+  {
+    "name": "split-pane",
+    "description": "分隔面板"
   },
   {
     "name": "action-dropdown",
