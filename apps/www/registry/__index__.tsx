@@ -2023,21 +2023,21 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "split-pane": {
-      name: "split-pane",
-      description: "分隔面板",
+    "triple-split-pane": {
+      name: "triple-split-pane",
+      description: "三分隔面板",
       type: "registry:block",
       registryDependencies: ["split-pane-01"],
       files: [
         {
-          path: "registry/wuhan/composed/split-pane/split-pane.tsx",
+          path: "registry/wuhan/composed/split-pane/triple-split-pane.tsx",
           type: "registry:component",
-          target: "components/wuhan/composed/split-pane.tsx",
+          target: "components/wuhan/composed/triple-split-pane.tsx",
         },
       ],
       component: React.lazy(async () => {
         const mod =
-          await import("@/registry/wuhan/composed/split-pane/split-pane.tsx");
+          await import("@/registry/wuhan/composed/split-pane/triple-split-pane.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -7584,36 +7584,11 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
-    "split-pane-default": {
-      name: "split-pane-default",
-      description: "",
-      type: "registry:example",
-      registryDependencies: ["split-pane"],
-      files: [
-        {
-          path: "registry/wuhan/examples/split-pane/split-pane-default.tsx",
-          type: "registry:example",
-          target: "",
-        },
-      ],
-      component: React.lazy(async () => {
-        const mod =
-          await import("@/registry/wuhan/examples/split-pane/split-pane-default.tsx");
-        const exportName =
-          Object.keys(mod).find(
-            (key) =>
-              typeof mod[key] === "function" || typeof mod[key] === "object",
-          ) || item.name;
-        return { default: mod.default || mod[exportName] };
-      }),
-      categories: undefined,
-      meta: undefined,
-    },
     "split-pane-three": {
       name: "split-pane-three",
       description: "",
       type: "registry:example",
-      registryDependencies: ["split-pane-01"],
+      registryDependencies: ["triple-split-pane"],
       files: [
         {
           path: "registry/wuhan/examples/split-pane/split-pane-three.tsx",

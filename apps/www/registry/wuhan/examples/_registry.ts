@@ -2308,20 +2308,9 @@ export const examples: Registry["items"] = [
     ],
   },
   {
-    name: "split-pane-default",
-    type: "registry:example",
-    registryDependencies: ["split-pane"],
-    files: [
-      {
-        path: "examples/split-pane/split-pane-default.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
     name: "split-pane-three",
     type: "registry:example",
-    registryDependencies: ["split-pane-01"],
+    registryDependencies: ["triple-split-pane"],
     files: [
       {
         path: "examples/split-pane/split-pane-three.tsx",

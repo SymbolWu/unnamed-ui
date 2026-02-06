@@ -2913,18 +2913,18 @@
       ]
     },
     {
-      "name": "split-pane",
+      "name": "triple-split-pane",
       "type": "registry:block",
-      "title": "SplitPane",
-      "description": "分隔面板",
+      "title": "TripleSplitPane",
+      "description": "三分隔面板",
       "registryDependencies": [
         "split-pane-01"
       ],
       "files": [
         {
-          "path": "registry/wuhan/composed/split-pane/split-pane.tsx",
+          "path": "registry/wuhan/composed/split-pane/triple-split-pane.tsx",
           "type": "registry:component",
-          "target": "components/wuhan/composed/split-pane.tsx"
+          "target": "components/wuhan/composed/triple-split-pane.tsx"
         }
       ]
     },
@@ -5980,23 +5980,10 @@
       ]
     },
     {
-      "name": "split-pane-default",
-      "type": "registry:example",
-      "registryDependencies": [
-        "split-pane"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/examples/split-pane/split-pane-default.tsx",
-          "type": "registry:example"
-        }
-      ]
-    },
-    {
       "name": "split-pane-three",
       "type": "registry:example",
       "registryDependencies": [
-        "split-pane-01"
+        "triple-split-pane"
       ],
       "files": [
         {

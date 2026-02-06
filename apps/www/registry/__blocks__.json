@@ -260,8 +260,8 @@
     "description": "选择器"
   },
   {
-    "name": "split-pane",
-    "description": "分隔面板"
+    "name": "triple-split-pane",
+    "description": "三分隔面板"
   },
   {
     "name": "action-dropdown",
