@@ -601,4 +601,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-input",
+    type: "registry:block",
+    title: "Input",
+    description: "输入框",
+    registryDependencies: ["block-input-01"],
+    files: [
+      {
+        path: "composed/block-input/block-input.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/block-input.tsx",
+      },
+    ],
+  },
 ];

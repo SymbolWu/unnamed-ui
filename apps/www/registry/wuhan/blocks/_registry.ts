@@ -510,4 +510,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-input-01",
+    type: "registry:block",
+    title: "Input",
+    description: "输入框",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/block-input/block-input-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/block-input-01.tsx",
+      },
+    ],
+  },
 ];

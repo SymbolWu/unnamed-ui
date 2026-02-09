@@ -144,6 +144,10 @@
     "description": "Task card component with progress tracking and status indicators"
   },
   {
+    "name": "block-input-01",
+    "description": "输入框"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -270,6 +274,10 @@
   {
     "name": "task-card",
     "description": "Composed task card with progress tracking and status indicators"
+  },
+  {
+    "name": "block-input",
+    "description": "输入框"
   },
   {
     "name": "action-dropdown",

@@ -1,0 +1,83 @@
+---
+title: Input
+description: 输入框
+author: AF
+---
+
+<ComponentPreview name="block-input-default" description="输入框" className="mb-4" />
+
+输入框
+
+## 快速开始
+
+```tsx
+import { BlockInput } from "@/registry/wuhan/composed/block-input";
+
+export function Example() {
+  return <BlockInput />;
+}
+```
+
+## 安装
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://unnamed-ui.com/r/wuhan/block-input"
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>复制以下代码到你的项目</Step>
+
+<ComponentSource name="block-input" />
+
+<Step>更新导入路径以匹配你的项目设置</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## 代码演示
+
+### 基础用法
+
+<ComponentPreview
+  name="block-input-default"
+  description="基础用法"
+  className="mb-4"
+/>
+
+## API
+
+### BlockInput
+
+输入框
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `"BlockInput"` | 组件内容 |
+| `className` | `string` | - | 容器自定义类名 |
+
+## 原语组件
+
+BlockInput 组件基于以下原语组件构建：
+
+- `BlockInputContainerPrimitive`: 容器组件
+
+如需更灵活的定制，可以直接使用这些原语组件。

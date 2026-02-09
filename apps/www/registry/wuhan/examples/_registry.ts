@@ -2330,4 +2330,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-input-default",
+    type: "registry:example",
+    registryDependencies: ["block-input"],
+    files: [
+      {
+        path: "examples/block-input/block-input-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

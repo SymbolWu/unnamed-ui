@@ -810,7 +810,7 @@
           "font-weight": "600"
         },
         "@keyframes thinking-loading-pulse": {
-          "0%,\r\n    100%": {
+          "0%,\n    100%": {
             "opacity": "0.3",
             "transform": "scale(0.8)"
           },
@@ -1629,7 +1629,7 @@
           "font-weight": "600"
         },
         "@keyframes thinking-loading-pulse": {
-          "0%,\r\n    100%": {
+          "0%,\n    100%": {
             "opacity": "0.3",
             "transform": "scale(0.8)"
           },
@@ -2396,6 +2396,22 @@
       ]
     },
     {
+      "name": "block-input-01",
+      "type": "registry:block",
+      "title": "Input",
+      "description": "输入框",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/block-input/block-input-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/block-input-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3071,6 +3087,22 @@
           "path": "registry/wuhan/composed/task-card/task-card.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/task-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "block-input",
+      "type": "registry:block",
+      "title": "Input",
+      "description": "输入框",
+      "registryDependencies": [
+        "block-input-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/block-input/block-input.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/block-input.tsx"
         }
       ]
     },
@@ -6149,6 +6181,19 @@
           "path": "registry/wuhan/examples/task-card/task-card-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/task-card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "block-input-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "block-input"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/block-input/block-input-default.tsx",
+          "type": "registry:example"
         }
       ]
     }

@@ -1176,6 +1176,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "block-input-01": {
+      name: "block-input-01",
+      description: "输入框",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/block-input/block-input-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/block-input-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/block-input/block-input-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2114,6 +2139,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/task-card/task-card.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-input": {
+      name: "block-input",
+      description: "输入框",
+      type: "registry:block",
+      registryDependencies: ["block-input-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/block-input/block-input.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/block-input.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/block-input/block-input.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -7700,6 +7750,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/task-card/task-card-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-input-default": {
+      name: "block-input-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-input/block-input-default.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-input/block-input-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
