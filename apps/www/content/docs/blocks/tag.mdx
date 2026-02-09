@@ -121,6 +121,16 @@ npx shadcn@latest add "https://unnamed-ui.com/r/wuhan/tag"
   className="mb-4"
 />
 
+### 可选中标签
+
+支持单选和多选的可选中标签。
+
+<ComponentPreview
+  name="tag-checkable"
+  description="可选中标签"
+  className="mb-4"
+/>
+
 ## API
 
 ### Tag
@@ -179,6 +189,154 @@ function TagExamples() {
         addable 
         addText="添加技能"
         onAdd={() => console.log("点击添加")}
+      />
+    </div>
+  );
+}
+```
+
+### CheckableTag
+
+可选中的标签组件，支持单个标签的选中状态切换。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | 标签文本内容 |
+| `checked` | `boolean` | `false` | 是否选中 |
+| `icon` | `ReactNode` | - | 图标 |
+| `onChange` | `(checked: boolean) => void` | - | 选中状态变化回调 |
+| `disabled` | `boolean` | `false` | 是否禁用 |
+| `className` | `string` | - | 自定义类名 |
+
+#### Example
+
+```tsx
+import { CheckableTag } from "@/registry/wuhan/composed/tag";
+import { Star } from "lucide-react";
+
+function CheckableTagExample() {
+  const [checked, setChecked] = useState(false);
+  
+  return (
+    <div className="flex gap-2">
+      {/* 基础用法 */}
+      <CheckableTag checked={checked} onChange={setChecked}>
+        可选中标签
+      </CheckableTag>
+      
+      {/* 带图标 */}
+      <CheckableTag 
+        checked={checked} 
+        onChange={setChecked}
+        icon={<Star className="h-3.5 w-3.5" />}
+      >
+        带图标
+      </CheckableTag>
+      
+      {/* 禁用状态 */}
+      <CheckableTag checked={true} disabled>
+        已禁用
+      </CheckableTag>
+    </div>
+  );
+}
+```
+
+#### 样式说明
+
+CheckableTag 有两种状态样式：
+
+**未选中状态**（neutral + filled 变体）：
+- 默认：浅灰色背景，次要文本颜色
+- Hover：`bg-neutral-light-hover` 背景，`text-brand-hover` 文本
+- Disabled：`bg-container-disable` 背景，`text-disabled` 文本
+
+**选中状态**（brand + solid 变体）：
+- 默认：品牌色背景，白色文本
+- Hover：`bg-brand-hover` 背景，`text-inverse` 文本
+- Disabled：品牌色背景，`text-inverse` 文本，透明度 `bg-solid-disable`
+
+### CheckableTagGroup
+
+可选中标签组，支持单选和多选模式。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `Array<{ label: ReactNode; value: string \| number }>` | `[]` | 选项列表 |
+| `multiple` | `boolean` | `false` | 是否多选模式 |
+| `value` | `string \| number \| Array<string \| number> \| null` | - | 选中值（受控） |
+| `defaultValue` | `string \| number \| Array<string \| number> \| null` | - | 初始选中值（非受控） |
+| `disabled` | `boolean` | `false` | 是否禁用选中 |
+| `onChange` | `(value: string \| number \| Array<string \| number> \| null) => void` | - | 选中值变化回调 |
+| `classNames` | `Record<SemanticDOM, string> \| (info: { props }) => Record<SemanticDOM, string>` | - | 自定义各部分类名 |
+| `styles` | `Record<SemanticDOM, CSSProperties> \| (info: { props }) => Record<SemanticDOM, CSSProperties>` | - | 自定义各部分样式 |
+
+#### SemanticDOM
+
+| Key | Description |
+|-----|-------------|
+| `root` | 根容器 |
+| `tag` | 单个标签 |
+
+#### Example
+
+```tsx
+import { CheckableTagGroup } from "@/registry/wuhan/composed/tag";
+
+function CheckableTagGroupExample() {
+  const [singleValue, setSingleValue] = useState<string | null>("react");
+  const [multipleValue, setMultipleValue] = useState<Array<string>>(["react", "vue"]);
+  
+  return (
+    <div className="flex flex-col gap-4">
+      {/* 单选模式 */}
+      <CheckableTagGroup
+        options={[
+          { label: "React", value: "react" },
+          { label: "Vue", value: "vue" },
+          { label: "Angular", value: "angular" },
+        ]}
+        value={singleValue}
+        onChange={(value) => setSingleValue(value as string | null)}
+        classNames={{
+          root: "flex flex-wrap gap-2",
+          tag: "",
+        }}
+      />
+      
+      {/* 多选模式 */}
+      <CheckableTagGroup
+        multiple
+        options={[
+          { label: "React", value: "react" },
+          { label: "Vue", value: "vue" },
+          { label: "Angular", value: "angular" },
+        ]}
+        value={multipleValue}
+        onChange={(value) => setMultipleValue(value as Array<string>)}
+        classNames={{
+          root: "flex flex-wrap gap-2",
+          tag: "",
+        }}
+      />
+      
+      {/* 非受控模式 */}
+      <CheckableTagGroup
+        options={[
+          { label: "选项 A", value: "optionA" },
+          { label: "选项 B", value: "optionB" },
+          { label: "选项 C", value: "optionC" },
+        ]}
+        defaultValue="optionA"
+        onChange={(value) => console.log("选中值:", value)}
+        classNames={{
+          root: "flex flex-wrap gap-2",
+          tag: "",
+        }}
       />
     </div>
   );
@@ -257,6 +415,24 @@ const [tags, setTags] = useState(["React", "Vue"]);
 </div>
 ```
 
+### 标签筛选
+使用 CheckableTagGroup 实现多选筛选：
+
+```tsx
+const [selectedTags, setSelectedTags] = useState<Array<string>>([]);
+
+<CheckableTagGroup
+  multiple
+  options={["前端", "后端", "设计", "产品"]}
+  value={selectedTags}
+  onChange={(value) => {
+    setSelectedTags(value as Array<string>);
+    // 执行筛选逻辑
+  }}
+  classNames={{ root: "flex gap-2", tag: "" }}
+/>
+```
+
 ## 设计指南
 
 ### 最佳实践
@@ -278,11 +454,18 @@ const [tags, setTags] = useState(["React", "Vue"]);
    - 添加模式标签应放在标签列表末尾
    - 使用清晰的提示文本
 
+5. **可选中标签**：
+   - 单选模式用于互斥选择（如筛选条件）
+   - 多选模式用于多个标签组合（如技能标签）
+   - 提供清晰的视觉反馈区分选中和未选中状态
+
 ### 可访问性
 
 - 关闭按钮支持键盘导航
+- CheckableTag 作为 button 元素，支持完整的键盘交互
 - 使用语义化的主题颜色
 - 支持自定义关闭图标，可以使用更明确的提示
+- 禁用状态有明确的视觉反馈
 
 ## 常见问题
 
@@ -323,13 +506,49 @@ A: 可以，两者不冲突：
 </Tag>
 ```
 
+**Q: CheckableTagGroup 如何实现受控和非受控？**
+
+A: 使用 `value` prop 为受控模式，使用 `defaultValue` 为非受控模式：
+
+```tsx
+// 受控模式
+const [value, setValue] = useState<string | null>(null);
+<CheckableTagGroup value={value} onChange={setValue} ... />
+
+// 非受控模式
+<CheckableTagGroup defaultValue="option1" onChange={...} ... />
+```
+
+**Q: 如何在 CheckableTagGroup 中自定义样式？**
+
+A: 使用 `classNames` 或 `styles` prop：
+
+```tsx
+<CheckableTagGroup
+  classNames={{
+    root: "flex flex-wrap gap-3",
+    tag: "custom-tag-class",
+  }}
+  styles={{
+    root: { padding: "16px" },
+    tag: { fontSize: "14px" },
+  }}
+/>
+```
+
 ## 原语组件
 
 Tag 组件基于以下原语组件构建：
 
+**Tag 相关**：
 - `TagContainerPrimitive`: 容器组件，处理变体和主题样式
 - `TagPrefixIconPrimitive`: 前缀图标容器
 - `TagTextPrimitive`: 文本组件
 - `TagCloseButtonPrimitive`: 关闭按钮组件
+
+**CheckableTag 相关**：
+- `CheckableTagContainerPrimitive`: 可选中标签容器，处理选中状态样式
+- `CheckableTagIconPrimitive`: 图标容器
+- `CheckableTagTextPrimitive`: 文本组件
 
 如需更灵活的定制，可以直接使用这些原语组件。

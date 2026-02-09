@@ -6352,6 +6352,22 @@
           "type": "registry:example"
         }
       ]
+    },
+    {
+      "name": "tag-checkable",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tag"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/tag/tag-checkable.tsx",
+          "type": "registry:example"
+        }
+      ]
     }
   ]
 }

@@ -8057,5 +8057,30 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "tag-checkable": {
+      name: "tag-checkable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/tag/tag-checkable.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/tag/tag-checkable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
   },
 };

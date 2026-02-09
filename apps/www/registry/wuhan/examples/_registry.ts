@@ -2442,4 +2442,16 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "tag-checkable",
+    type: "registry:example",
+    registryDependencies: ["tag"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "examples/tag/tag-checkable.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

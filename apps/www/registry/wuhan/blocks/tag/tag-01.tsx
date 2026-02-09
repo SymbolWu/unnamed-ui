@@ -248,11 +248,144 @@ const TagCloseButtonPrimitive = React.forwardRef<
 });
 TagCloseButtonPrimitive.displayName = "TagCloseButtonPrimitive";
 
+/**
+ * CheckableTag 容器原语的属性
+ */
+interface CheckableTagContainerPrimitiveProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** 是否选中 */
+  checked?: boolean;
+}
+
+/**
+ * CheckableTag 容器原语
+ * 提供可选中标签的样式和交互
+ */
+const CheckableTagContainerPrimitive = React.forwardRef<
+  HTMLButtonElement,
+  CheckableTagContainerPrimitiveProps
+>(({ className, checked = false, disabled = false, ...props }, ref) => {
+  return (
+    <button
+      ref={ref}
+      type="button"
+      disabled={disabled}
+      className={cn(
+        // 基础样式
+        "inline-flex items-center gap-1",
+        "h-[var(--size-com-sm)]",
+        "rounded-[var(--radius-sm)]",
+        "px-[6px]",
+        "transition-all duration-200",
+        "box-border",
+        "border",
+        "cursor-pointer",
+        "focus:outline-none",
+
+        // 未选中状态（neutral + filled）
+        !checked &&
+          !disabled && [
+            "bg-[var(--bg-neutral-light)]",
+            "border-[var(--bg-neutral-light)]",
+            "text-[var(--text-secondary)]",
+            // hover
+            "hover:bg-[var(--bg-neutral-light-hover)]",
+            "hover:text-[var(--text-brand-hover)]",
+          ],
+
+        // 未选中 + 禁用
+        !checked &&
+          disabled && [
+            "bg-[var(--bg-container-disable)]",
+            "border-[var(--bg-container-disable)]",
+            "text-[var(--text-disable)]",
+            "cursor-not-allowed",
+          ],
+
+        // 选中状态（brand + solid）
+        checked &&
+          !disabled && [
+            "bg-[var(--bg-brand)]",
+            "border-[var(--bg-brand)]",
+            "text-white",
+            // hover
+            "hover:bg-[var(--bg-brand-hover)]",
+            "hover:text-[var(--text-inverse)]",
+          ],
+
+        // 选中 + 禁用
+        checked &&
+          disabled && [
+            "bg-[var(--bg-brand)]",
+            "border-[var(--bg-brand)]",
+            "text-[var(--text-inverse)]",
+            "opacity-[var(--bg-solid-disable)]",
+            "cursor-not-allowed",
+          ],
+
+        className,
+      )}
+      {...props}
+    />
+  );
+});
+CheckableTagContainerPrimitive.displayName = "CheckableTagContainerPrimitive";
+
+/**
+ * CheckableTag 图标原语
+ */
+const CheckableTagIconPrimitive = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <span
+      ref={ref}
+      className={cn(
+        "inline-flex items-center justify-center",
+        "shrink-0",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
+CheckableTagIconPrimitive.displayName = "CheckableTagIconPrimitive";
+
+/**
+ * CheckableTag 文本原语
+ */
+const CheckableTagTextPrimitive = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <span
+      ref={ref}
+      className={cn(
+        "truncate",
+        "font-[var(--font-family-cn)]",
+        "font-size-1",
+        "leading-[var(--line-height-1)]",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
+CheckableTagTextPrimitive.displayName = "CheckableTagTextPrimitive";
+
 export {
   TagContainerPrimitive,
   TagPrefixIconPrimitive,
   TagTextPrimitive,
   TagCloseButtonPrimitive,
+  CheckableTagContainerPrimitive,
+  CheckableTagIconPrimitive,
+  CheckableTagTextPrimitive,
 };
 
-export type { TagContainerPrimitiveProps, TagCloseButtonPrimitiveProps };
+export type {
+  TagContainerPrimitiveProps,
+  TagCloseButtonPrimitiveProps,
+  CheckableTagContainerPrimitiveProps,
+};
