@@ -2334,9 +2334,54 @@ export const examples: Registry["items"] = [
     name: "block-input-default",
     type: "registry:example",
     registryDependencies: ["block-input"],
+    dependencies: ["lucide-react"],
     files: [
       {
         path: "examples/block-input/block-input-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-input-demo",
+    type: "registry:example",
+    registryDependencies: ["block-input"],
+    files: [
+      {
+        path: "examples/block-input/block-input-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-input-states",
+    type: "registry:example",
+    registryDependencies: ["block-input"],
+    files: [
+      {
+        path: "examples/block-input/block-input-states.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-input-multiline",
+    type: "registry:example",
+    registryDependencies: ["block-input"],
+    files: [
+      {
+        path: "examples/block-input/block-input-multiline.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "block-input-rounded",
+    type: "registry:example",
+    registryDependencies: ["block-input"],
+    files: [
+      {
+        path: "examples/block-input/block-input-rounded.tsx",
         type: "registry:example",
       },
     ],

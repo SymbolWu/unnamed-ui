@@ -7785,5 +7785,105 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "block-input-demo": {
+      name: "block-input-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-input/block-input-demo.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-input/block-input-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-input-states": {
+      name: "block-input-states",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-input/block-input-states.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-input/block-input-states.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-input-multiline": {
+      name: "block-input-multiline",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-input/block-input-multiline.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-input/block-input-multiline.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-input-rounded": {
+      name: "block-input-rounded",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/block-input/block-input-rounded.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/block-input/block-input-rounded.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
   },
 };
