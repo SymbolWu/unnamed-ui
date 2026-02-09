@@ -2465,4 +2465,59 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "divider-demo",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "divider-variants",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-variants.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "divider-with-text",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-with-text.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "divider-vertical",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-vertical.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "divider-custom",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-custom.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

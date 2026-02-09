@@ -8157,5 +8157,130 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "divider-demo": {
+      name: "divider-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-demo.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "divider-variants": {
+      name: "divider-variants",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-variants.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-variants.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "divider-with-text": {
+      name: "divider-with-text",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-with-text.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-with-text.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "divider-vertical": {
+      name: "divider-vertical",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-vertical.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-vertical.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "divider-custom": {
+      name: "divider-custom",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-custom.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-custom.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
   },
 };
