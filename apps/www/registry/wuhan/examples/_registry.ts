@@ -2454,4 +2454,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "divider-default",
+    type: "registry:example",
+    registryDependencies: ["divider"],
+    files: [
+      {
+        path: "examples/divider/divider-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

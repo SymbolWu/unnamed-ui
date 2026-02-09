@@ -538,4 +538,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "divider-01",
+    type: "registry:block",
+    title: "Divider",
+    description: "分割线",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/divider/divider-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/divider-01.tsx",
+      },
+    ],
+  },
 ];

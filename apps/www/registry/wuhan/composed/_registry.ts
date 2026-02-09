@@ -629,4 +629,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "divider",
+    type: "registry:block",
+    title: "Divider",
+    description: "分割线",
+    registryDependencies: ["divider-01"],
+    files: [
+      {
+        path: "composed/divider/divider.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/divider.tsx",
+      },
+    ],
+  },
 ];

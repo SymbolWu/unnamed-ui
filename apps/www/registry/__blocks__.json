@@ -152,6 +152,10 @@
     "description": "标签"
   },
   {
+    "name": "divider-01",
+    "description": "分割线"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -286,6 +290,10 @@
   {
     "name": "tag",
     "description": "标签"
+  },
+  {
+    "name": "divider",
+    "description": "分割线"
   },
   {
     "name": "action-dropdown",

@@ -2428,6 +2428,22 @@
       ]
     },
     {
+      "name": "divider-01",
+      "type": "registry:block",
+      "title": "Divider",
+      "description": "分割线",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/divider/divider-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/divider-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3135,6 +3151,22 @@
           "path": "registry/wuhan/composed/tag/tag.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/tag.tsx"
+        }
+      ]
+    },
+    {
+      "name": "divider",
+      "type": "registry:block",
+      "title": "Divider",
+      "description": "分割线",
+      "registryDependencies": [
+        "divider-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/divider/divider.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/divider.tsx"
         }
       ]
     },
@@ -6365,6 +6397,19 @@
       "files": [
         {
           "path": "registry/wuhan/examples/tag/tag-checkable.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "divider-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "divider"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/divider/divider-default.tsx",
           "type": "registry:example"
         }
       ]

@@ -1225,6 +1225,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "divider-01": {
+      name: "divider-01",
+      description: "分割线",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/divider/divider-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/divider-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/divider/divider-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2212,6 +2237,31 @@ export const Index: Record<string, Record<string, any>> = {
       ],
       component: React.lazy(async () => {
         const mod = await import("@/registry/wuhan/composed/tag/tag.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    divider: {
+      name: "divider",
+      description: "分割线",
+      type: "registry:block",
+      registryDependencies: ["divider-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/divider/divider.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/divider.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/divider/divider.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -8072,6 +8122,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/tag/tag-checkable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "divider-default": {
+      name: "divider-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["divider"],
+      files: [
+        {
+          path: "registry/wuhan/examples/divider/divider-default.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/divider/divider-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
