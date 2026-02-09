@@ -124,8 +124,20 @@
     "description": "Report card primitives for displaying data and metrics"
   },
   {
-    "name": "select-01",
+    "name": "checkbox-01",
+    "description": "多选框"
+  },
+  {
+    "name": "radio-01",
+    "description": "单选框"
+  },
+  {
+    "name": "block-select-01",
     "description": "选择器"
+  },
+  {
+    "name": "split-pane-01",
+    "description": "分隔面板"
   },
   {
     "name": "task-card-01",
@@ -240,8 +252,20 @@
     "description": "Composed card selection with single/multiple modes and grid layout"
   },
   {
+    "name": "checkbox",
+    "description": "多选框"
+  },
+  {
+    "name": "radio",
+    "description": "单选框"
+  },
+  {
     "name": "block-select",
     "description": "选择器"
+  },
+  {
+    "name": "triple-split-pane",
+    "description": "三分隔面板"
   },
   {
     "name": "task-card",
