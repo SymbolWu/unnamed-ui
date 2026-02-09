@@ -8,6 +8,7 @@ import {
   BlockInputPrimitive,
   BlockTextareaPrimitive,
 } from "@/registry/wuhan/blocks/block-input/block-input-01";
+import { cn } from "@/lib/utils";
 
 /**
  * 输入框组件的属性
@@ -106,7 +107,10 @@ export const BlockInput = React.forwardRef<
         disabled={disabled}
         fullRounded={fullRounded}
         isFocused={isFocused}
-        className={className}
+        className={cn(
+          !multiline ? "h-[var(--size-com-md)]" : "",
+          className,
+        )}
       >
         {prefix && (
           <BlockInputPrefixPrimitive>{prefix}</BlockInputPrefixPrimitive>

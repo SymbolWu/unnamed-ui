@@ -26,33 +26,54 @@ const BlockInputContainerPrimitive = React.forwardRef<
     <div
       ref={ref}
       className={cn(
+        // 基础布局和尺寸
         "relative flex items-center gap-2",
-        "px-3 py-2",
+        "px-2 py-[5px]",
         "border",
-        "transition-colors duration-200",
+        "font-[var(--font-family-cn)]",
         // 圆角
         fullRounded ? "rounded-full" : "rounded-[var(--radius-lg)]",
         // 背景色
         "bg-[var(--background-primary)]",
-        // 边框颜色 - 默认状态
-        !danger &&
-          !disabled &&
-          !isFocused &&
-          "border-[var(--border-secondary)]",
-        // 边框颜色 - hover 状态
-        !danger &&
-          !disabled &&
-          !isFocused &&
+        // 过渡动画
+        "transition-all duration-300",
+        
+        // 默认主题样式
+        !danger && !disabled && [
+          // 默认状态
+          "border-[var(--border-neutral)]",
+          // Hover 状态
           "hover:border-[var(--border-brand)]",
-        // 边框颜色 - focus 状态
-        !danger && !disabled && isFocused && "border-[var(--border-brand)]",
-        // 边框颜色 - danger 状态
-        danger && !disabled && "border-[var(--border-error)]",
-        danger && !disabled && "hover:border-[var(--border-error)]",
-        danger && !disabled && "focus-within:border-[var(--border-error)]",
-        // 边框颜色 - disabled 状态
-        disabled && "border-[var(--border-secondary)]",
-        disabled && "opacity-50 cursor-not-allowed",
+          // Focus 状态
+          isFocused && [
+            "border-[var(--border-brand)]",
+            "ring-2",
+            "ring-[var(--ring)]",
+          ],
+        ],
+        
+        // Danger 主题样式
+        danger && !disabled && [
+          // 默认状态
+          "border-[var(--border-error)]",
+          // Hover 状态
+          "hover:border-[var(--border-error)]",
+          // Focus 状态
+          isFocused && [
+            "border-[var(--border-error)]",
+            "ring-2",
+            "ring-[var(--border-error)]/20",
+          ],
+        ],
+        
+        // Disabled 状态
+        disabled && [
+          "border-[var(--border-neutral)]",
+          "bg-[var(--bg-container-disable)]",
+          "opacity-50",
+          "cursor-not-allowed",
+        ],
+        
         className,
       )}
       {...props}
@@ -121,6 +142,7 @@ const BlockInputPrimitive = React.forwardRef<
         "flex-1 w-full",
         "bg-transparent",
         "outline-none",
+        "font-size-2",
         "text-[var(--text-primary)]",
         "placeholder:text-[var(--text-placeholder)]",
         "disabled:cursor-not-allowed",
