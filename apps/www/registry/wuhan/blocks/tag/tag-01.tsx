@@ -20,6 +20,97 @@ export type TagVariant =
 export type TagTheme = "brand" | "success" | "warning" | "error" | "neutral";
 
 /**
+ * 主题配置 - 集中管理所有主题的 CSS 变量
+ * 修改主题颜色只需要在这里修改对应的变量名
+ */
+const THEME_STYLES = {
+  brand: {
+    text: "text-[var(--text-brand)]",
+    bg: "bg-[var(--bg-brand)]",
+    bgLight: "bg-[var(--bg-brand-light)]",
+    border: "border-[var(--border-brand)]",
+    borderLight: "border-[var(--border-brand-light)]",
+  },
+  success: {
+    text: "text-[var(--text-success)]",
+    bg: "bg-[var(--bg-success)]",
+    bgLight: "bg-[var(--bg-success-light)]",
+    border: "border-[var(--border-success)]",
+    borderLight: "border-[var(--border-success-light)]",
+  },
+  warning: {
+    text: "text-[var(--text-warning)]",
+    bg: "bg-[var(--bg-warning)]",
+    bgLight: "bg-[var(--bg-warning-light)]",
+    border: "border-[var(--border-warning)]",
+    borderLight: "border-[var(--border-warning-light)]",
+  },
+  error: {
+    text: "text-[var(--text-error)]",
+    bg: "bg-[var(--bg-error)]",
+    bgLight: "bg-[var(--bg-error-light)]",
+    border: "border-[var(--border-error)]",
+    borderLight: "border-[var(--border-error-light)]",
+  },
+  neutral: {
+    text: "text-[var(--text-secondary)]",
+    bg: "bg-[var(--bg-neutral)]",
+    bgLight: "bg-[var(--bg-neutral-light)]",
+    border: "border-[var(--border-neutral)]",
+    borderLight: "border-[var(--border-neutral-light)]",
+  },
+} as const;
+
+/**
+ * 变体配置 - 集中管理所有变体的样式规则
+ * 每个变体定义了它使用主题的哪些属性
+ */
+const VARIANT_STYLES = {
+  // 默认变体：只有文本颜色
+  default: (theme: TagTheme) => [THEME_STYLES[theme].text],
+
+  // 纯色变体：背景色 + 白色文字
+  solid: (theme: TagTheme) => ["text-white", THEME_STYLES[theme].bg],
+
+  // 描边变体：边框 + 文本颜色
+  outline: (theme: TagTheme) => [
+    "border",
+    "bg-container",
+    THEME_STYLES[theme].border,
+    THEME_STYLES[theme].text,
+  ],
+
+  // 填充变体：浅色背景 + 同色边框 + 文本颜色
+  filled: (theme: TagTheme) => [
+    "border",
+    THEME_STYLES[theme].bgLight,
+    THEME_STYLES[theme].bgLight.replace("bg-", "border-"),
+    THEME_STYLES[theme].text,
+  ],
+
+  // 填充描边变体：浅色背景 + 浅色边框 + 文本颜色
+  "filled-outline": (theme: TagTheme) => [
+    "border",
+    THEME_STYLES[theme].bgLight,
+    THEME_STYLES[theme].borderLight,
+    THEME_STYLES[theme].text,
+  ],
+} as const;
+
+/**
+ * 添加模式样式配置
+ */
+const ADDABLE_STYLES = [
+  "border border-dashed",
+  "border-[var(--border-neutral)]",
+  "text-[var(--text-secondary)]",
+  "bg-transparent",
+  "cursor-pointer",
+  "hover:border-[var(--text-brand)]",
+  "hover:text-[var(--text-brand)]",
+] as const;
+
+/**
  * Tag 容器原语的属性
  */
 interface TagContainerPrimitiveProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -55,134 +146,15 @@ const TagContainerPrimitive = React.forwardRef<
         className={cn(
           // 基础样式
           "inline-flex items-center gap-1",
-          "h-[28px]",
-          "rounded-[var(--radius-md)]",
-          "px-2 py-1",
-          "text-[13px]",
-          "leading-[20px]",
-          "font-normal",
+          "h-[var(--size-com-sm)]",
+          "rounded-[var(--radius-sm)]",
+          "px-[6px]",
           "transition-all duration-200",
           "box-border",
-
           // 添加模式样式
-          addable && [
-            "border border-dashed",
-            "border-[var(--border-neutral)]",
-            "text-[var(--text-secondary)]",
-            "bg-transparent",
-            "cursor-pointer",
-            "hover:border-[var(--text-brand)]",
-            "hover:text-[var(--text-brand)]",
-          ],
-
-          // 默认变体 + 主题（非添加模式）
-          !addable &&
-            variant === "default" && [
-              theme === "brand" && "text-[var(--text-brand)]",
-              theme === "success" && "text-[var(--text-success)]",
-              theme === "warning" && "text-[var(--text-warning)]",
-              theme === "error" && "text-[var(--text-error)]",
-              theme === "neutral" && "text-[var(--text-secondary)]",
-            ],
-
-          // Solid 变体 + 主题
-          !addable &&
-            variant === "solid" && [
-              "text-white",
-              theme === "brand" && "bg-[var(--bg-brand)]",
-              theme === "success" && "bg-[var(--bg-success)]",
-              theme === "warning" && "bg-[var(--bg-warning)]",
-              theme === "error" && "bg-[var(--bg-error)]",
-              theme === "neutral" && "bg-[var(--bg-neutral)]",
-            ],
-
-          // Outline 变体 + 主题
-          !addable &&
-            variant === "outline" && [
-              "border",
-              theme === "brand" && [
-                "border-[var(--border-brand)]",
-                "text-[var(--text-brand)]",
-              ],
-              theme === "success" && [
-                "border-[var(--border-success)]",
-                "text-[var(--text-success)]",
-              ],
-              theme === "warning" && [
-                "border-[var(--border-warning)]",
-                "text-[var(--text-warning)]",
-              ],
-              theme === "error" && [
-                "border-[var(--border-error)]",
-                "text-[var(--text-error)]",
-              ],
-              theme === "neutral" && [
-                "border-[var(--border-neutral)]",
-                "text-[var(--text-secondary)]",
-              ],
-            ],
-
-          // Filled 变体 + 主题
-          !addable &&
-            variant === "filled" && [
-              "border",
-              theme === "brand" && [
-                "bg-[var(--bg-brand-light)]",
-                "border-[var(--bg-brand-light)]",
-                "text-[var(--text-brand)]",
-              ],
-              theme === "success" && [
-                "bg-[var(--bg-success-light)]",
-                "border-[var(--bg-success-light)]",
-                "text-[var(--text-success)]",
-              ],
-              theme === "warning" && [
-                "bg-[var(--bg-warning-light)]",
-                "border-[var(--bg-warning-light)]",
-                "text-[var(--text-warning)]",
-              ],
-              theme === "error" && [
-                "bg-[var(--bg-error-light)]",
-                "border-[var(--bg-error-light)]",
-                "text-[var(--text-error)]",
-              ],
-              theme === "neutral" && [
-                "bg-[var(--bg-neutral-light)]",
-                "border-[var(--bg-neutral-light)]",
-                "text-[var(--text-secondary)]",
-              ],
-            ],
-
-          // Filled-outline 变体 + 主题
-          !addable &&
-            variant === "filled-outline" && [
-              "border",
-              theme === "brand" && [
-                "bg-[var(--bg-brand-light)]",
-                "border-[var(--border-brand-light)]",
-                "text-[var(--text-brand)]",
-              ],
-              theme === "success" && [
-                "bg-[var(--bg-success-light)]",
-                "border-[var(--border-success-light)]",
-                "text-[var(--text-success)]",
-              ],
-              theme === "warning" && [
-                "bg-[var(--bg-warning-light)]",
-                "border-[var(--border-warning-light)]",
-                "text-[var(--text-warning)]",
-              ],
-              theme === "error" && [
-                "bg-[var(--bg-error-light)]",
-                "border-[var(--border-error-light)]",
-                "text-[var(--text-error)]",
-              ],
-              theme === "neutral" && [
-                "bg-[var(--bg-neutral-light)]",
-                "border-[var(--border-neutral-light)]",
-                "text-[var(--text-secondary)]",
-              ],
-            ],
+          addable && ADDABLE_STYLES,
+          // 变体 + 主题样式（非添加模式）
+          !addable && VARIANT_STYLES[variant](theme),
 
           className,
         )}
@@ -221,7 +193,19 @@ const TagTextPrimitive = React.forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement>
 >(({ className, ...props }, ref) => {
-  return <span ref={ref} className={cn("truncate", className)} {...props} />;
+  return (
+    <span
+      ref={ref}
+      className={cn(
+        "truncate",
+        "font-[var(--font-family-cn)]",
+        "font-size-1",
+        "leading-[var(--line-height-1)]",
+        className,
+      )}
+      {...props}
+    />
+  );
 });
 TagTextPrimitive.displayName = "TagTextPrimitive";
 
@@ -253,6 +237,7 @@ const TagCloseButtonPrimitive = React.forwardRef<
         "hover:opacity-100",
         "transition-opacity",
         "focus:outline-none",
+        "cursor-pointer",
         className,
       )}
       {...props}
