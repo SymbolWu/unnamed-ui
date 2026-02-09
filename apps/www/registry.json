@@ -2444,6 +2444,22 @@
       ]
     },
     {
+      "name": "upload-01",
+      "type": "registry:block",
+      "title": "Upload",
+      "description": "上传",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/upload/upload-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/upload-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3167,6 +3183,22 @@
           "path": "registry/wuhan/composed/divider/divider.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/divider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "upload",
+      "type": "registry:block",
+      "title": "Upload",
+      "description": "上传",
+      "registryDependencies": [
+        "upload-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/upload/upload.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/upload.tsx"
         }
       ]
     },
@@ -6475,6 +6507,19 @@
       "files": [
         {
           "path": "registry/wuhan/examples/divider/divider-custom.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "upload-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "upload"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/upload/upload-default.tsx",
           "type": "registry:example"
         }
       ]

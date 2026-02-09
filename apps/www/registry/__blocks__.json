@@ -156,6 +156,10 @@
     "description": "分割线"
   },
   {
+    "name": "upload-01",
+    "description": "上传"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -294,6 +298,10 @@
   {
     "name": "divider",
     "description": "分割线"
+  },
+  {
+    "name": "upload",
+    "description": "上传"
   },
   {
     "name": "action-dropdown",

@@ -643,4 +643,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "upload",
+    type: "registry:block",
+    title: "Upload",
+    description: "上传",
+    registryDependencies: ["upload-01"],
+    files: [
+      {
+        path: "composed/upload/upload.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/upload.tsx",
+      },
+    ],
+  },
 ];

@@ -1250,6 +1250,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "upload-01": {
+      name: "upload-01",
+      description: "上传",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/upload/upload-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/upload-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/upload/upload-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2262,6 +2287,30 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/divider/divider.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    upload: {
+      name: "upload",
+      description: "上传",
+      type: "registry:block",
+      registryDependencies: ["upload-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/upload/upload.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/upload.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod = await import("@/registry/wuhan/composed/upload/upload.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -8272,6 +8321,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/divider/divider-custom.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "upload-default": {
+      name: "upload-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["upload"],
+      files: [
+        {
+          path: "registry/wuhan/examples/upload/upload-default.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/upload/upload-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

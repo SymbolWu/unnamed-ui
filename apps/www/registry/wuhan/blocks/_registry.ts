@@ -552,4 +552,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "upload-01",
+    type: "registry:block",
+    title: "Upload",
+    description: "上传",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/upload/upload-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/upload-01.tsx",
+      },
+    ],
+  },
 ];

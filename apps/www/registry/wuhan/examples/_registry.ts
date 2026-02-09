@@ -2520,4 +2520,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "upload-default",
+    type: "registry:example",
+    registryDependencies: ["upload"],
+    files: [
+      {
+        path: "examples/upload/upload-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];
