@@ -7958,5 +7958,104 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "tag-demo": {
+      name: "tag-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/tag/tag-demo.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod = await import("@/registry/wuhan/examples/tag/tag-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "tag-with-icon": {
+      name: "tag-with-icon",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/tag/tag-with-icon.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/tag/tag-with-icon.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "tag-closeable": {
+      name: "tag-closeable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/tag/tag-closeable.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/tag/tag-closeable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "tag-addable": {
+      name: "tag-addable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["tag", "block-input"],
+      files: [
+        {
+          path: "registry/wuhan/examples/tag/tag-addable.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/tag/tag-addable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
   },
 };

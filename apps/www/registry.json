@@ -6296,6 +6296,62 @@
           "type": "registry:example"
         }
       ]
+    },
+    {
+      "name": "tag-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tag"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/tag/tag-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "tag-with-icon",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tag"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/tag/tag-with-icon.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "tag-closeable",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tag"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/tag/tag-closeable.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "tag-addable",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tag",
+        "block-input"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/tag/tag-addable.tsx",
+          "type": "registry:example"
+        }
+      ]
     }
   ]
 }

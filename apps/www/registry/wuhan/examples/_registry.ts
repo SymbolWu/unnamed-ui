@@ -2397,4 +2397,49 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "tag-demo",
+    type: "registry:example",
+    registryDependencies: ["tag"],
+    files: [
+      {
+        path: "examples/tag/tag-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "tag-with-icon",
+    type: "registry:example",
+    registryDependencies: ["tag"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "examples/tag/tag-with-icon.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "tag-closeable",
+    type: "registry:example",
+    registryDependencies: ["tag"],
+    files: [
+      {
+        path: "examples/tag/tag-closeable.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "tag-addable",
+    type: "registry:example",
+    registryDependencies: ["tag", "block-input"],
+    files: [
+      {
+        path: "examples/tag/tag-addable.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];
