@@ -1,0 +1,83 @@
+---
+title: Tag
+description: 标签
+author: AF
+---
+
+<ComponentPreview name="tag-default" description="标签" className="mb-4" />
+
+标签
+
+## 快速开始
+
+```tsx
+import { Tag } from "@/registry/wuhan/composed/tag";
+
+export function Example() {
+  return <Tag />;
+}
+```
+
+## 安装
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add "https://unnamed-ui.com/r/wuhan/tag"
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>复制以下代码到你的项目</Step>
+
+<ComponentSource name="tag" />
+
+<Step>更新导入路径以匹配你的项目设置</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## 代码演示
+
+### 基础用法
+
+<ComponentPreview
+  name="tag-default"
+  description="基础用法"
+  className="mb-4"
+/>
+
+## API
+
+### Tag
+
+标签
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `"Tag"` | 组件内容 |
+| `className` | `string` | - | 容器自定义类名 |
+
+## 原语组件
+
+Tag 组件基于以下原语组件构建：
+
+- `TagContainerPrimitive`: 容器组件
+
+如需更灵活的定制，可以直接使用这些原语组件。

@@ -148,6 +148,10 @@
     "description": "输入框"
   },
   {
+    "name": "tag-01",
+    "description": "标签"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -278,6 +282,10 @@
   {
     "name": "block-input",
     "description": "输入框"
+  },
+  {
+    "name": "tag",
+    "description": "标签"
   },
   {
     "name": "action-dropdown",

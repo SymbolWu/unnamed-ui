@@ -107,10 +107,7 @@ export const BlockInput = React.forwardRef<
         disabled={disabled}
         fullRounded={fullRounded}
         isFocused={isFocused}
-        className={cn(
-          !multiline ? "h-[var(--size-com-md)]" : "",
-          className,
-        )}
+        className={cn(!multiline ? "h-[var(--size-com-md)]" : "", className)}
       >
         {prefix && (
           <BlockInputPrefixPrimitive>{prefix}</BlockInputPrefixPrimitive>

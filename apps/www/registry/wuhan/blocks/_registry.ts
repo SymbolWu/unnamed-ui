@@ -524,4 +524,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "tag-01",
+    type: "registry:block",
+    title: "Tag",
+    description: "标签",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/tag/tag-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/tag-01.tsx",
+      },
+    ],
+  },
 ];

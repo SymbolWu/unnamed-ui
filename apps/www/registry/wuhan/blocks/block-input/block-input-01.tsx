@@ -37,35 +37,37 @@ const BlockInputContainerPrimitive = React.forwardRef<
         "bg-[var(--background-primary)]",
         // 过渡动画
         "transition-all duration-300",
-        
+
         // 默认主题样式
-        !danger && !disabled && [
-          // 默认状态
-          "border-[var(--border-neutral)]",
-          // Hover 状态
-          "hover:border-[var(--border-brand)]",
-          // Focus 状态
-          isFocused && [
-            "border-[var(--border-brand)]",
-            "ring-2",
-            "ring-[var(--ring)]",
+        !danger &&
+          !disabled && [
+            // 默认状态
+            "border-[var(--border-neutral)]",
+            // Hover 状态
+            "hover:border-[var(--border-brand)]",
+            // Focus 状态
+            isFocused && [
+              "border-[var(--border-brand)]",
+              "ring-2",
+              "ring-[var(--ring)]",
+            ],
           ],
-        ],
-        
+
         // Danger 主题样式
-        danger && !disabled && [
-          // 默认状态
-          "border-[var(--border-error)]",
-          // Hover 状态
-          "hover:border-[var(--border-error)]",
-          // Focus 状态
-          isFocused && [
+        danger &&
+          !disabled && [
+            // 默认状态
             "border-[var(--border-error)]",
-            "ring-2",
-            "ring-[var(--border-error)]/20",
+            // Hover 状态
+            "hover:border-[var(--border-error)]",
+            // Focus 状态
+            isFocused && [
+              "border-[var(--border-error)]",
+              "ring-2",
+              "ring-[var(--border-error)]/20",
+            ],
           ],
-        ],
-        
+
         // Disabled 状态
         disabled && [
           "border-[var(--border-neutral)]",
@@ -73,7 +75,7 @@ const BlockInputContainerPrimitive = React.forwardRef<
           "opacity-50",
           "cursor-not-allowed",
         ],
-        
+
         className,
       )}
       {...props}

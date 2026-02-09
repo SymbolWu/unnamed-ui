@@ -2386,4 +2386,15 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "tag-default",
+    type: "registry:example",
+    registryDependencies: ["tag"],
+    files: [
+      {
+        path: "examples/tag/tag-default.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];

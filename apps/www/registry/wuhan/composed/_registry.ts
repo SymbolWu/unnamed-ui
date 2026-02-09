@@ -615,4 +615,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "tag",
+    type: "registry:block",
+    title: "Tag",
+    description: "标签",
+    registryDependencies: ["tag-01"],
+    files: [
+      {
+        path: "composed/tag/tag.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/tag.tsx",
+      },
+    ],
+  },
 ];
