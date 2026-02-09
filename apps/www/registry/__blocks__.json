@@ -140,6 +140,10 @@
     "description": "分隔面板"
   },
   {
+    "name": "task-card-01",
+    "description": "Task card component with progress tracking and status indicators"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -262,6 +266,10 @@
   {
     "name": "triple-split-pane",
     "description": "三分隔面板"
+  },
+  {
+    "name": "task-card",
+    "description": "Composed task card with progress tracking and status indicators"
   },
   {
     "name": "action-dropdown",
