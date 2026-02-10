@@ -1352,6 +1352,31 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "progress-01": {
+      name: "progress-01",
+      description: "进度条",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/progress/progress-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/progress-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/progress/progress-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2490,6 +2515,31 @@ export const Index: Record<string, Record<string, any>> = {
       ],
       component: React.lazy(async () => {
         const mod = await import("@/registry/wuhan/composed/avatar/avatar.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    progress: {
+      name: "progress",
+      description: "进度条",
+      type: "registry:block",
+      registryDependencies: ["progress-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/progress/progress.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/progress.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/progress/progress.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -8875,6 +8925,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/avatar/avatar-header-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "progress-default": {
+      name: "progress-default",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["progress"],
+      files: [
+        {
+          path: "registry/wuhan/examples/progress/progress-default.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/progress/progress-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

@@ -720,4 +720,18 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "progress",
+    type: "registry:block",
+    title: "Progress",
+    description: "进度条",
+    registryDependencies: ["progress-01"],
+    files: [
+      {
+        path: "composed/progress/progress.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/progress.tsx",
+      },
+    ],
+  },
 ];

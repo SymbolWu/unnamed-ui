@@ -612,4 +612,18 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "progress-01",
+    type: "registry:block",
+    title: "Progress",
+    description: "进度条",
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/progress/progress-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/progress-01.tsx",
+      },
+    ],
+  },
 ];

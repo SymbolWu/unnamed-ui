@@ -2422,6 +2422,22 @@
       ]
     },
     {
+      "name": "progress-01",
+      "type": "registry:block",
+      "title": "Progress",
+      "description": "进度条",
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/progress/progress-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/progress-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3238,6 +3254,22 @@
           "path": "registry/wuhan/composed/avatar/avatar.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:block",
+      "title": "Progress",
+      "description": "进度条",
+      "registryDependencies": [
+        "progress-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/progress/progress.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/progress.tsx"
         }
       ]
     },
@@ -6743,6 +6775,19 @@
       "files": [
         {
           "path": "registry/wuhan/examples/avatar/avatar-header-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "progress-default",
+      "type": "registry:example",
+      "registryDependencies": [
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/progress/progress-default.tsx",
           "type": "registry:example"
         }
       ]

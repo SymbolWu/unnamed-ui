@@ -172,6 +172,10 @@
     "description": "头像"
   },
   {
+    "name": "progress-01",
+    "description": "进度条"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -330,6 +334,10 @@
   {
     "name": "avatar",
     "description": "头像"
+  },
+  {
+    "name": "progress",
+    "description": "进度条"
   },
   {
     "name": "action-dropdown",
