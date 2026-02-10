@@ -13,7 +13,6 @@ import {
   SelectSeparatorPrimitive,
   SelectValuePrimitive,
   SelectGroupPrimitive,
-  TagPrimitive,
   MultiSelectRootPrimitive,
   MultiSelectTriggerPrimitive,
   MultiSelectTriggerContainerPrimitive,
@@ -24,6 +23,7 @@ import {
   MultiSelectItemPrimitive,
 } from "@/registry/wuhan/blocks/block-select/block-select-01";
 import { Checkbox } from "@/registry/wuhan/composed/checkbox/checkbox";
+import { Tag } from "@/registry/wuhan/composed/tag/tag";
 
 //#region BlockSelect Types
 /**
@@ -221,11 +221,15 @@ export const BlockSelect = React.forwardRef<HTMLDivElement, BlockSelectProps>(
             <MultiSelectValueContainerPrimitive>
               {selectedValues.length > 0 ? (
                 getSelectedLabels().map((label, index) => (
-                  <TagPrimitive
+                  <Tag
                     key={selectedValues[index]}
-                    label={label!}
-                    onRemove={() => handleRemoveTag(selectedValues[index])}
-                  />
+                    variant="filled"
+                    theme="neutral"
+                    closeable
+                    onClose={() => handleRemoveTag(selectedValues[index])}
+                  >
+                    {label}
+                  </Tag>
                 ))
               ) : (
                 <MultiSelectPlaceholderPrimitive>
