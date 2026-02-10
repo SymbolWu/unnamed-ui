@@ -6,9 +6,9 @@
   "pages": [
     "---Introduction---",
     "index",
+    "unnamed-ui",
     "shadcn",
     "agent-app",
-    "unnamed-ui",
     "plan"
   ]
 }
