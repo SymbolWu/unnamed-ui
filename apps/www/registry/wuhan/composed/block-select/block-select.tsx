@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Select } from "radix-ui";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import {
   SelectTriggerPrimitive,
   SelectIconPrimitive,
@@ -13,50 +13,12 @@ import {
   SelectSeparatorPrimitive,
   SelectValuePrimitive,
   SelectGroupPrimitive,
+  TagPrimitive,
+  MultiSelectTriggerPrimitive,
+  MultiSelectContentPrimitive,
+  MultiSelectItemPrimitive,
 } from "@/registry/wuhan/blocks/block-select/block-select-01";
 import { Checkbox } from "@/registry/wuhan/composed/checkbox/checkbox";
-
-//#region Tag Component
-/**
- * 简单的 Tag 组件
- * 用于在多选模式下展示选中项
- */
-interface TagProps {
-  label: string;
-  onRemove?: () => void;
-  className?: string;
-}
-
-const Tag: React.FC<TagProps> = ({ label, onRemove, className }) => {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1",
-        "px-2 py-0.5",
-        "rounded-[var(--radius-sm)]",
-        "bg-[var(--bg-brand-subtle)]",
-        "text-[var(--text-brand)]",
-        "text-xs font-medium",
-        className,
-      )}
-    >
-      <span>{label}</span>
-      {onRemove && (
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onRemove();
-          }}
-          className="hover:bg-[var(--bg-brand-subtle-hover)] rounded-sm p-0.5"
-        >
-          <X className="h-3 w-3" />
-        </button>
-      )}
-    </span>
-  );
-};
-//#endregion
 
 //#region BlockSelect Types
 /**
@@ -237,22 +199,13 @@ export const BlockSelect = React.forwardRef<HTMLDivElement, BlockSelectProps>(
 
     // 多选模式
     return (
-      <div className="relative">
-        <div
-          className={cn(
-            "h-[var(--size-com-md)] min-w-[200px]",
-            fullRounded ? "rounded-full" : "rounded-[var(--radius-md)]",
-            "border border-[var(--border-neutral)] bg-[var(--bg-container)]",
-            "flex items-center gap-2",
-            "px-[var(--padding-com-md)] py-[5px]",
-            "cursor-pointer",
-            "hover:border-[var(--border-brand)]",
-            "transition-all duration-300",
-            disabled &&
-              "cursor-not-allowed opacity-50 bg-[var(--bg-container-disable)]",
-            triggerClassName,
-          )}
-          onClick={() => !disabled && onOpenChange?.(!open)}
+      <div className="relative" ref={ref}>
+        <MultiSelectTriggerPrimitive
+          fullRounded={fullRounded}
+          disabled={disabled}
+          open={open}
+          onOpenChange={onOpenChange}
+          className={triggerClassName}
         >
           {iconPosition === "prefix" && (
             <span className="flex-shrink-0">{renderIcon()}</span>
@@ -261,7 +214,7 @@ export const BlockSelect = React.forwardRef<HTMLDivElement, BlockSelectProps>(
           <div className="flex-1 flex flex-wrap gap-1 items-center overflow-hidden">
             {selectedValues.length > 0 ? (
               getSelectedLabels().map((label, index) => (
-                <Tag
+                <TagPrimitive
                   key={selectedValues[index]}
                   label={label!}
                   onRemove={() => handleRemoveTag(selectedValues[index])}
@@ -277,46 +230,33 @@ export const BlockSelect = React.forwardRef<HTMLDivElement, BlockSelectProps>(
           {iconPosition === "suffix" && (
             <span className="flex-shrink-0">{renderIcon()}</span>
           )}
-        </div>
+        </MultiSelectTriggerPrimitive>
 
-        {/* 多选下拉菜单 */}
-        {open && (
-          <div
-            className={cn(
-              "absolute z-50 mt-1 w-full",
-              "rounded-[var(--radius-md)]",
-              "border border-[var(--border-neutral)]",
-              "bg-[var(--bg-container)]",
-              "shadow-md p-1",
-              contentClassName,
-            )}
-          >
-            {options.map((option) => (
-              <div
-                key={option.value}
-                className={cn(
-                  "flex items-center gap-2 px-2 py-1.5",
-                  "rounded-[var(--radius-sm)]",
-                  "cursor-pointer",
-                  "hover:bg-[var(--bg-item-hover)]",
-                  option.disabled && "opacity-50 cursor-not-allowed",
-                )}
-                onClick={() =>
+        <MultiSelectContentPrimitive
+          open={open}
+          onOpenChange={onOpenChange}
+          className={contentClassName}
+        >
+          {options.map((option) => (
+            <MultiSelectItemPrimitive
+              key={option.value}
+              disabled={option.disabled}
+              checked={selectedValues.includes(option.value)}
+              onCheckedChange={() =>
+                !option.disabled && handleMultipleValueChange(option.value)
+              }
+            >
+              <Checkbox
+                checked={selectedValues.includes(option.value)}
+                disabled={option.disabled}
+                onChange={() =>
                   !option.disabled && handleMultipleValueChange(option.value)
                 }
-              >
-                <Checkbox
-                  checked={selectedValues.includes(option.value)}
-                  disabled={option.disabled}
-                  onChange={() =>
-                    !option.disabled && handleMultipleValueChange(option.value)
-                  }
-                />
-                <span className="text-sm">{option.label}</span>
-              </div>
-            ))}
-          </div>
-        )}
+              />
+              <span className="text-sm">{option.label}</span>
+            </MultiSelectItemPrimitive>
+          ))}
+        </MultiSelectContentPrimitive>
       </div>
     );
   },
@@ -334,3 +274,4 @@ export {
   SelectTriggerPrimitive as SelectTrigger,
   SelectValuePrimitive as SelectValue,
 };
+
