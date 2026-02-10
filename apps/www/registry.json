@@ -2468,6 +2468,25 @@
       ]
     },
     {
+      "name": "accordion-01",
+      "type": "registry:block",
+      "title": "Accordion",
+      "description": "Accordion primitives with Root, Item, Trigger, and Content components",
+      "dependencies": [
+        "@radix-ui/react-accordion"
+      ],
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/accordion/accordion-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/accordion-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3323,6 +3342,25 @@
           "path": "registry/wuhan/composed/icon-button/icon-button.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/icon-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "block-accordion",
+      "type": "registry:block",
+      "title": "Accordion",
+      "description": "Composed accordion with simplified API, supporting single and multiple selection modes",
+      "dependencies": [
+        "@radix-ui/react-accordion"
+      ],
+      "registryDependencies": [
+        "accordion-01"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/block-accordion/block-accordion.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/block-accordion.tsx"
         }
       ]
     },
@@ -6718,6 +6756,20 @@
           "path": "registry/wuhan/examples/file-card/file-card-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/file-card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/accordion/accordion-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/accordion-demo.tsx"
         }
       ]
     }

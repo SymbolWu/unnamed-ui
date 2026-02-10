@@ -753,4 +753,20 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "block-accordion",
+    type: "registry:block",
+    title: "Accordion",
+    description:
+      "Composed accordion with simplified API, supporting single and multiple selection modes",
+    dependencies: ["@radix-ui/react-accordion"],
+    registryDependencies: ["accordion-01"],
+    files: [
+      {
+        path: "composed/block-accordion/block-accordion.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/block-accordion.tsx",
+      },
+    ],
+  },
 ];

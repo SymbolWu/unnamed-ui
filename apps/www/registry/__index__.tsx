@@ -1405,6 +1405,32 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "accordion-01": {
+      name: "accordion-01",
+      description:
+        "Accordion primitives with Root, Item, Trigger, and Content components",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/accordion/accordion-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/accordion-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/accordion/accordion-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2597,6 +2623,32 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/icon-button/icon-button.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "block-accordion": {
+      name: "block-accordion",
+      description:
+        "Composed accordion with simplified API, supporting single and multiple selection modes",
+      type: "registry:block",
+      registryDependencies: ["accordion-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/block-accordion/block-accordion.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/block-accordion.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/block-accordion/block-accordion.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -8757,6 +8809,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/file-card/file-card-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "accordion-demo": {
+      name: "accordion-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["accordion"],
+      files: [
+        {
+          path: "registry/wuhan/examples/accordion/accordion-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/accordion-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/accordion/accordion-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

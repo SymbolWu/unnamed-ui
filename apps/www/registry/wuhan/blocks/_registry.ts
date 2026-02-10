@@ -646,4 +646,20 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "accordion-01",
+    type: "registry:block",
+    title: "Accordion",
+    description:
+      "Accordion primitives with Root, Item, Trigger, and Content components",
+    dependencies: ["@radix-ui/react-accordion"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/accordion/accordion-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/accordion-01.tsx",
+      },
+    ],
+  },
 ];

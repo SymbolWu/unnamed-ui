@@ -180,6 +180,10 @@
     "description": "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes"
   },
   {
+    "name": "accordion-01",
+    "description": "Accordion primitives with Root, Item, Trigger, and Content components"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -346,6 +350,10 @@
   {
     "name": "icon-button",
     "description": "Composed icon button with tooltip support, multiple variants, colors, and sizes"
+  },
+  {
+    "name": "block-accordion",
+    "description": "Composed accordion with simplified API, supporting single and multiple selection modes"
   },
   {
     "name": "action-dropdown",

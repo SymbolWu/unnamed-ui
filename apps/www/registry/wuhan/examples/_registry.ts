@@ -2600,4 +2600,17 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // accordion examples
+  {
+    name: "accordion-demo",
+    type: "registry:example",
+    registryDependencies: ["accordion"],
+    files: [
+      {
+        path: "examples/accordion/accordion-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/accordion-demo.tsx",
+      },
+    ],
+  },
 ];
