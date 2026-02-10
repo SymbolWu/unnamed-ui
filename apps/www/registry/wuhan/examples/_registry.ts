@@ -2627,4 +2627,70 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "avatar-demo",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "avatar-text",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-text.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "avatar-icon",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-icon.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "avatar-sizes",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-sizes.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "avatar-group-demo",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-group-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "avatar-header-demo",
+    type: "registry:example",
+    registryDependencies: ["avatar"],
+    files: [
+      {
+        path: "examples/avatar/avatar-header-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ];
