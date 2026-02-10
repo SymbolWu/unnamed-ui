@@ -176,6 +176,10 @@
     "description": "File card component for displaying file information with checkbox, icon, title, date, and action button"
   },
   {
+    "name": "icon-button-01",
+    "description": "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
@@ -338,6 +342,10 @@
   {
     "name": "file-card",
     "description": "File card component with checkbox, icon, title, date, and action button"
+  },
+  {
+    "name": "icon-button",
+    "description": "Composed icon button with tooltip support, multiple variants, colors, and sizes"
   },
   {
     "name": "action-dropdown",

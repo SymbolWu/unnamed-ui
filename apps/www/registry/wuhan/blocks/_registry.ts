@@ -630,4 +630,20 @@ export const blocks: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "icon-button-01",
+    type: "registry:block",
+    title: "Icon Button",
+    description:
+      "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/icon-button/icon-button-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/icon-button-01.tsx",
+      },
+    ],
+  },
 ];

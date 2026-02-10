@@ -1379,6 +1379,32 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "icon-button-01": {
+      name: "icon-button-01",
+      description:
+        "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes",
+      type: "registry:block",
+      registryDependencies: ["style"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/icon-button/icon-button-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/icon-button-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/icon-button/icon-button-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -2545,6 +2571,32 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/file-card/file-card.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "icon-button": {
+      name: "icon-button",
+      description:
+        "Composed icon button with tooltip support, multiple variants, colors, and sizes",
+      type: "registry:block",
+      registryDependencies: ["icon-button-01", "tooltip"],
+      files: [
+        {
+          path: "registry/wuhan/composed/icon-button/icon-button.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/icon-button.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/icon-button/icon-button.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -6422,6 +6474,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/button/button-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "icon-button-demo": {
+      name: "icon-button-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["icon-button"],
+      files: [
+        {
+          path: "registry/wuhan/examples/icon-button/icon-button-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/icon-button-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/icon-button/icon-button-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

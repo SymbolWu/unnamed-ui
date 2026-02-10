@@ -2037,6 +2037,20 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  // icon-button examples
+  {
+    name: "icon-button-demo",
+    type: "registry:example",
+    registryDependencies: ["icon-button"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "examples/icon-button/icon-button-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/icon-button-demo.tsx",
+      },
+    ],
+  },
   {
     name: "confirm-panel-with-actions",
     type: "registry:example",

@@ -737,4 +737,20 @@ export const composed: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "icon-button",
+    type: "registry:block",
+    title: "Icon Button",
+    description:
+      "Composed icon button with tooltip support, multiple variants, colors, and sizes",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["icon-button-01", "tooltip"],
+    files: [
+      {
+        path: "composed/icon-button/icon-button.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/icon-button.tsx",
+      },
+    ],
+  },
 ];

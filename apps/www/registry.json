@@ -766,7 +766,7 @@
           "font-weight": "600"
         },
         "@keyframes thinking-loading-pulse": {
-          "0%,\n    100%": {
+          "0%,\r\n    100%": {
             "opacity": "0.3",
             "transform": "scale(0.8)"
           },
@@ -1541,7 +1541,7 @@
           "font-weight": "600"
         },
         "@keyframes thinking-loading-pulse": {
-          "0%,\n    100%": {
+          "0%,\r\n    100%": {
             "opacity": "0.3",
             "transform": "scale(0.8)"
           },
@@ -2449,6 +2449,25 @@
       ]
     },
     {
+      "name": "icon-button-01",
+      "type": "registry:block",
+      "title": "Icon Button",
+      "description": "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "style"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/blocks/icon-button/icon-button-01.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/blocks/icon-button-01.tsx"
+        }
+      ]
+    },
+    {
       "name": "message",
       "type": "registry:block",
       "title": "Message",
@@ -3284,6 +3303,26 @@
           "path": "registry/wuhan/composed/file-card/file-card.tsx",
           "type": "registry:component",
           "target": "components/wuhan/composed/file-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "icon-button",
+      "type": "registry:block",
+      "title": "Icon Button",
+      "description": "Composed icon button with tooltip support, multiple variants, colors, and sizes",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "icon-button-01",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/composed/icon-button/icon-button.tsx",
+          "type": "registry:component",
+          "target": "components/wuhan/composed/icon-button.tsx"
         }
       ]
     },
@@ -5445,6 +5484,23 @@
           "path": "registry/wuhan/examples/button/button-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/button-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "icon-button-demo",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "icon-button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/icon-button/icon-button-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/icon-button-demo.tsx"
         }
       ]
     },
