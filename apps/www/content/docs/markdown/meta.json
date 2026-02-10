@@ -1,6 +1,6 @@
 {
   "title": "Markdown",
-  "description": "Markdown",
+  "description": "AI 原生应用的内容创作工具",
   "icon": "Pencil",
   "root": true,
   "pages": ["---Introduction---", "index"]

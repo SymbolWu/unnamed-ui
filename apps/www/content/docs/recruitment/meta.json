@@ -1,6 +1,6 @@
 {
   "title": "招聘组件",
-  "description": "招聘组件",
+  "description": "招聘组件库，助你轻松构建 AI 原生应用的招聘模块",
   "icon": "Cuboid",
   "root": true,
   "pages": ["---Introduction---", "index", "..."]
