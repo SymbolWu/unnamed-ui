@@ -30,6 +30,26 @@ export const composed: Registry["items"] = [
     ],
   },
   {
+    name: "responsive-sender",
+    type: "registry:block",
+    title: "Responsive Sender",
+    description:
+      "Composed responsive sender with automatic single/multi-line layout switching",
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "sender-responsive-01",
+      "attachment-list",
+      "quote-content",
+    ],
+    files: [
+      {
+        path: "composed/sender/responsive-sender.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/responsive-sender.tsx",
+      },
+    ],
+  },
+  {
     name: "task-list",
     type: "registry:block",
     title: "Task List",
@@ -766,6 +786,22 @@ export const composed: Registry["items"] = [
         path: "composed/block-accordion/block-accordion.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/block-accordion.tsx",
+      },
+    ],
+  },
+  {
+    name: "page-header",
+    type: "registry:block",
+    title: "Page Header",
+    description:
+      "Composed page header with logo, title, button group and user avatar",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["page-header-01"],
+    files: [
+      {
+        path: "composed/page-header/page-header.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/page-header.tsx",
       },
     ],
   },

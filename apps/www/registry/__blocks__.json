@@ -36,6 +36,10 @@
     "description": "Sender primitives (input, actions, buttons)"
   },
   {
+    "name": "sender-responsive-01",
+    "description": "Responsive sender primitives with automatic layout switching (single/multi-line)"
+  },
+  {
     "name": "attachment-list-01",
     "description": "Attachment list component"
   },
@@ -184,12 +188,20 @@
     "description": "Accordion primitives with Root, Item, Trigger, and Content components"
   },
   {
+    "name": "page-header-01",
+    "description": "Page header component with logo, title, button group and user avatar"
+  },
+  {
     "name": "message",
     "description": "Composed AI and user message components"
   },
   {
     "name": "sender",
     "description": "Composed sender with attachments and modes"
+  },
+  {
+    "name": "responsive-sender",
+    "description": "Composed responsive sender with automatic single/multi-line layout switching"
   },
   {
     "name": "task-list",
@@ -354,6 +366,10 @@
   {
     "name": "block-accordion",
     "description": "Composed accordion with simplified API, supporting single and multiple selection modes"
+  },
+  {
+    "name": "page-header",
+    "description": "Composed page header with logo, title, button group and user avatar"
   },
   {
     "name": "action-dropdown",

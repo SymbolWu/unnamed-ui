@@ -491,6 +491,32 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "sender-responsive-01": {
+      name: "sender-responsive-01",
+      description:
+        "Responsive sender primitives with automatic layout switching (single/multi-line)",
+      type: "registry:block",
+      registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/sender/sender-responsive-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/sender-responsive-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/sender/sender-responsive-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "attachment-list-01": {
       name: "attachment-list-01",
       description: "Attachment list component",
@@ -1431,6 +1457,32 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "page-header-01": {
+      name: "page-header-01",
+      description:
+        "Page header component with logo, title, button group and user avatar",
+      type: "registry:block",
+      registryDependencies: ["style", "button-01", "avatar-header-01"],
+      files: [
+        {
+          path: "registry/wuhan/blocks/page-header/page-header-01.tsx",
+          type: "registry:component",
+          target: "components/wuhan/blocks/page-header-01.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/blocks/page-header/page-header-01.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     message: {
       name: "message",
       description: "Composed AI and user message components",
@@ -1470,6 +1522,36 @@ export const Index: Record<string, Record<string, any>> = {
       ],
       component: React.lazy(async () => {
         const mod = await import("@/registry/wuhan/composed/sender/sender.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "responsive-sender": {
+      name: "responsive-sender",
+      description:
+        "Composed responsive sender with automatic single/multi-line layout switching",
+      type: "registry:block",
+      registryDependencies: [
+        "sender-responsive-01",
+        "attachment-list",
+        "quote-content",
+      ],
+      files: [
+        {
+          path: "registry/wuhan/composed/sender/responsive-sender.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/responsive-sender.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/sender/responsive-sender.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -2649,6 +2731,32 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/composed/block-accordion/block-accordion.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "page-header": {
+      name: "page-header",
+      description:
+        "Composed page header with logo, title, button group and user avatar",
+      type: "registry:block",
+      registryDependencies: ["page-header-01"],
+      files: [
+        {
+          path: "registry/wuhan/composed/page-header/page-header.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/page-header.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/page-header/page-header.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -4250,6 +4358,57 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/sender/sender-composed-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "sender-responsive": {
+      name: "sender-responsive",
+      description:
+        "Responsive sender with automatic single/multi-line layout switching",
+      type: "registry:example",
+      registryDependencies: ["responsive-sender"],
+      files: [
+        {
+          path: "registry/wuhan/examples/sender/sender-responsive.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/sender-responsive.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/sender/sender-responsive.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "sender-responsive-default": {
+      name: "sender-responsive-default",
+      description: "Basic usage of responsive sender primitives",
+      type: "registry:example",
+      registryDependencies: ["sender-responsive-01"],
+      files: [
+        {
+          path: "registry/wuhan/examples/sender/sender-responsive-default.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/sender-responsive-default.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/sender/sender-responsive-default.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -8834,6 +8993,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/accordion/accordion-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "page-header-demo": {
+      name: "page-header-demo",
+      description: "Page header component demo with various configurations",
+      type: "registry:example",
+      registryDependencies: ["page-header"],
+      files: [
+        {
+          path: "registry/wuhan/examples/page-header/page-header-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/page-header-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/page-header/page-header-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

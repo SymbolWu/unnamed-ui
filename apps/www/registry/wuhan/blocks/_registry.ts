@@ -119,6 +119,22 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
+    name: "sender-responsive-01",
+    type: "registry:block",
+    title: "Sender Responsive",
+    description:
+      "Responsive sender primitives with automatic layout switching (single/multi-line)",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
+    files: [
+      {
+        path: "blocks/sender/sender-responsive-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/sender-responsive-01.tsx",
+      },
+    ],
+  },
+  {
     name: "attachment-list-01",
     type: "registry:block",
     title: "Attachment List",
@@ -659,6 +675,22 @@ export const blocks: Registry["items"] = [
         path: "blocks/accordion/accordion-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/accordion-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "page-header-01",
+    type: "registry:block",
+    title: "Page Header",
+    description:
+      "Page header component with logo, title, button group and user avatar",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style", "button-01", "avatar-header-01"],
+    files: [
+      {
+        path: "blocks/page-header/page-header-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/page-header-01.tsx",
       },
     ],
   },

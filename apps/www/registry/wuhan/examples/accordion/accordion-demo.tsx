@@ -16,9 +16,7 @@ export default function AccordionDemo() {
     <div className="w-full max-w-[650px] mx-auto p-4 space-y-8">
       {/* 单选模式（默认） */}
       <div className="">
-        <h3 className="text-xl mb-3">
-          单选模式（一次只能展开一个）
-        </h3>
+        <h3 className="text-xl mb-3">单选模式（一次只能展开一个）</h3>
         <Accordion type="single" collapsible>
           <AccordionItem
             value="item-1"
@@ -64,9 +62,7 @@ export default function AccordionDemo() {
 
       {/* 多选模式 */}
       <div>
-        <h3 className="text-xl mb-3">
-          多选模式（可以同时展开多个）
-        </h3>
+        <h3 className="text-xl mb-3">多选模式（可以同时展开多个）</h3>
         <Accordion type="multiple">
           <AccordionItem
             value="feature-1"
@@ -122,21 +118,33 @@ export default function AccordionDemo() {
         >
           <AccordionItem
             value="controlled-1"
-            trigger={<div className="text-sm font-medium text-[var(--text-secondary)]">受控项目一</div>}
+            trigger={
+              <div className="text-sm font-medium text-[var(--text-secondary)]">
+                受控项目一
+              </div>
+            }
             content={
               <div className="p-4">这是受控模式下的第一个项目内容。</div>
             }
           />
           <AccordionItem
             value="controlled-2"
-            trigger={<div className="text-sm font-medium text-[var(--text-secondary)]">受控项目二</div>}
+            trigger={
+              <div className="text-sm font-medium text-[var(--text-secondary)]">
+                受控项目二
+              </div>
+            }
             content={
               <div className="p-4">这是受控模式下的第二个项目内容。</div>
             }
           />
           <AccordionItem
             value="controlled-3"
-            trigger={<div className="text-sm font-medium text-[var(--text-secondary)]">受控项目三</div>}
+            trigger={
+              <div className="text-sm font-medium text-[var(--text-secondary)]">
+                受控项目三
+              </div>
+            }
             content={
               <div className="p-4">这是受控模式下的第三个项目内容。</div>
             }
