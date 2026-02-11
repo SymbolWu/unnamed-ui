@@ -193,7 +193,10 @@ export const TripleSplitPane = React.forwardRef<
     isRightCollapsed && parseWidth(rightCollapsedWidth, 0) > 0;
 
   return (
-    <SplitPaneContainerPrimitive ref={containerRef} className={`gap-3 ${className}`}>
+    <SplitPaneContainerPrimitive
+      ref={containerRef}
+      className={`gap-3 ${className}`}
+    >
       {/* 左侧面板 */}
       <SplitPaneItemPrimitive
         width={constrainedLeftWidth}

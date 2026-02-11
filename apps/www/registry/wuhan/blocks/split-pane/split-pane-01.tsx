@@ -66,7 +66,7 @@ export const SplitPaneItemPrimitive = React.forwardRef<
     },
     ref,
   ) => {
-    if(!parseFloat(width as string)) return null;
+    if (!parseFloat(width as string)) return null;
     return (
       <div
         ref={ref}

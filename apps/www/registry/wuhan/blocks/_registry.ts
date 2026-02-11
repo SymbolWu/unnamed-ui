@@ -119,6 +119,22 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
+    name: "sender-responsive-01",
+    type: "registry:block",
+    title: "Sender Responsive",
+    description:
+      "Responsive sender primitives with automatic layout switching (single/multi-line)",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style", "textarea", "button", "toggle-button-01"],
+    files: [
+      {
+        path: "blocks/sender/sender-responsive-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/sender-responsive-01.tsx",
+      },
+    ],
+  },
+  {
     name: "attachment-list-01",
     type: "registry:block",
     title: "Attachment List",
@@ -583,6 +599,22 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
+    name: "agent-card-01",
+    type: "registry:block",
+    title: "Agent Card",
+    description:
+      "Agent card component with AI icon, title, description, and status indicator",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/agent-card/agent-card-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/agent-card-01.tsx",
+      },
+    ],
+  },
+  {
     name: "document-card-01",
     type: "registry:block",
     title: "Document Card",
@@ -599,6 +631,38 @@ export const blocks: Registry["items"] = [
     ],
   },
   {
+    name: "file-card-01",
+    type: "registry:block",
+    title: "File Card",
+    description:
+      "File card component for displaying file information with checkbox, icon, title, date, and action button",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style", "checkbox-01"],
+    files: [
+      {
+        path: "blocks/file-card/file-card-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/file-card-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "icon-button-01",
+    type: "registry:block",
+    title: "Icon Button",
+    description:
+      "Icon button primitive with solid/outline/ghost variants, multiple colors, and sizes",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/icon-button/icon-button-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/icon-button-01.tsx",
+      },
+    ],
+  },
+  {
     name: "avatar-01",
     type: "registry:block",
     title: "Avatar",
@@ -609,6 +673,38 @@ export const blocks: Registry["items"] = [
         path: "blocks/avatar/avatar-01.tsx",
         type: "registry:component",
         target: "components/wuhan/blocks/avatar-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "accordion-01",
+    type: "registry:block",
+    title: "Accordion",
+    description:
+      "Accordion primitives with Root, Item, Trigger, and Content components",
+    dependencies: ["@radix-ui/react-accordion"],
+    registryDependencies: ["style"],
+    files: [
+      {
+        path: "blocks/accordion/accordion-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/accordion-01.tsx",
+      },
+    ],
+  },
+  {
+    name: "page-header-01",
+    type: "registry:block",
+    title: "Page Header",
+    description:
+      "Page header component with logo, title, button group and user avatar",
+    dependencies: ["lucide-react"],
+    registryDependencies: ["style", "button-01", "avatar-header-01"],
+    files: [
+      {
+        path: "blocks/page-header/page-header-01.tsx",
+        type: "registry:component",
+        target: "components/wuhan/blocks/page-header-01.tsx",
       },
     ],
   },
