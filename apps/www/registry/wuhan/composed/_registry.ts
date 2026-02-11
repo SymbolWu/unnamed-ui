@@ -16,6 +16,21 @@ export const composed: Registry["items"] = [
     ],
   },
   {
+    name: "message-list",
+    type: "registry:block",
+    title: "Message List",
+    description:
+      "Chat message list component with auto-scroll, multiple message types, and status support",
+    registryDependencies: ["message", "avatar-header"],
+    files: [
+      {
+        path: "composed/message/message-list.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/message-list.tsx",
+      },
+    ],
+  },
+  {
     name: "sender",
     type: "registry:block",
     title: "Sender",

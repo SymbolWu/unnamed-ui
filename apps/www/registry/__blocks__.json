@@ -204,6 +204,10 @@
     "description": "Composed AI and user message components"
   },
   {
+    "name": "message-list",
+    "description": "Chat message list component with auto-scroll, multiple message types, and status support"
+  },
+  {
     "name": "sender",
     "description": "Composed sender with attachments and modes"
   },
