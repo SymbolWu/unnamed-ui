@@ -5,7 +5,7 @@ import { PanelLeft, PanelRight } from "lucide-react";
 import {
   SplitPaneContainerPrimitive,
   SplitPaneItemPrimitive,
-  SplitPaneSeparatorPrimitive,
+  // SplitPaneSeparatorPrimitive,
 } from "@/registry/wuhan/blocks/split-pane/split-pane-01";
 import {
   Popover,
