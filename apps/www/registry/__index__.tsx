@@ -265,6 +265,30 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    popover: {
+      name: "popover",
+      description: "",
+      type: "registry:ui",
+      registryDependencies: undefined,
+      files: [
+        {
+          path: "registry/wuhan/ui/popover.tsx",
+          type: "registry:ui",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod = await import("@/registry/wuhan/ui/popover.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     resizable: {
       name: "resizable",
       description: "",
@@ -2464,7 +2488,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "triple-split-pane",
       description: "三分隔面板",
       type: "registry:block",
-      registryDependencies: ["split-pane-01"],
+      registryDependencies: ["split-pane-01", "popover"],
       files: [
         {
           path: "registry/wuhan/composed/split-pane/triple-split-pane.tsx",
