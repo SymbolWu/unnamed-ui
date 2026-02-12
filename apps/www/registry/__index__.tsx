@@ -9451,6 +9451,131 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "agent-card-basic": {
+      name: "agent-card-basic",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["agent-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/agent-card/agent-card-basic.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/agent-card/agent-card-basic.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "agent-card-sizes": {
+      name: "agent-card-sizes",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["agent-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/agent-card/agent-card-sizes.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/agent-card/agent-card-sizes.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "agent-card-custom-style": {
+      name: "agent-card-custom-style",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["agent-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/agent-card/agent-card-custom-style.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/agent-card/agent-card-custom-style.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "agent-card-custom-icon": {
+      name: "agent-card-custom-icon",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["agent-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/agent-card/agent-card-custom-icon.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/agent-card/agent-card-custom-icon.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "agent-card-list": {
+      name: "agent-card-list",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["agent-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/agent-card/agent-card-list.tsx",
+          type: "registry:example",
+          target: "",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/agent-card/agent-card-list.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "document-card-demo": {
       name: "document-card-demo",
       description: "",

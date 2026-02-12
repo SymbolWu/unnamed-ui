@@ -2782,6 +2782,62 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "agent-card-basic",
+    type: "registry:example",
+    registryDependencies: ["agent-card"],
+    files: [
+      {
+        path: "examples/agent-card/agent-card-basic.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "agent-card-sizes",
+    type: "registry:example",
+    registryDependencies: ["agent-card"],
+    files: [
+      {
+        path: "examples/agent-card/agent-card-sizes.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "agent-card-custom-style",
+    type: "registry:example",
+    registryDependencies: ["agent-card"],
+    files: [
+      {
+        path: "examples/agent-card/agent-card-custom-style.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "agent-card-custom-icon",
+    type: "registry:example",
+    registryDependencies: ["agent-card"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "examples/agent-card/agent-card-custom-icon.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "agent-card-list",
+    type: "registry:example",
+    registryDependencies: ["agent-card"],
+    files: [
+      {
+        path: "examples/agent-card/agent-card-list.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
   // document-card examples
   {
     name: "document-card-demo",

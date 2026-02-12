@@ -7154,6 +7154,74 @@
       ]
     },
     {
+      "name": "agent-card-basic",
+      "type": "registry:example",
+      "registryDependencies": [
+        "agent-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/agent-card/agent-card-basic.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "agent-card-sizes",
+      "type": "registry:example",
+      "registryDependencies": [
+        "agent-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/agent-card/agent-card-sizes.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "agent-card-custom-style",
+      "type": "registry:example",
+      "registryDependencies": [
+        "agent-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/agent-card/agent-card-custom-style.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "agent-card-custom-icon",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "agent-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/agent-card/agent-card-custom-icon.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "agent-card-list",
+      "type": "registry:example",
+      "registryDependencies": [
+        "agent-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/agent-card/agent-card-list.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "document-card-demo",
       "type": "registry:example",
       "registryDependencies": [
