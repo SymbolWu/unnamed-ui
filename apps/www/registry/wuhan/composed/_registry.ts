@@ -16,6 +16,21 @@ export const composed: Registry["items"] = [
     ],
   },
   {
+    name: "message-list",
+    type: "registry:block",
+    title: "Message List",
+    description:
+      "Chat message list component with auto-scroll, multiple message types, and status support",
+    registryDependencies: ["message", "avatar-header"],
+    files: [
+      {
+        path: "composed/message/message-list.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/message-list.tsx",
+      },
+    ],
+  },
+  {
     name: "sender",
     type: "registry:block",
     title: "Sender",
@@ -61,7 +76,7 @@ export const composed: Registry["items"] = [
       "@dnd-kit/modifiers",
       "lucide-react",
     ],
-    registryDependencies: ["button", "task-list-01", "feedback"],
+    registryDependencies: ["button", "task-list-01", "feedback", "status-tag"],
     files: [
       {
         path: "composed/task-list/task-list.tsx",
@@ -717,7 +732,7 @@ export const composed: Registry["items"] = [
     description:
       "Composed report card with icon, title, description, and hover actions",
     dependencies: ["lucide-react"],
-    registryDependencies: ["report-card-01"],
+    registryDependencies: ["report-card-01", "checkbox-01"],
     files: [
       {
         path: "composed/report-card/report-card.tsx",

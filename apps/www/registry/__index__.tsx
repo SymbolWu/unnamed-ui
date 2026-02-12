@@ -1582,6 +1582,32 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "message-list": {
+      name: "message-list",
+      description:
+        "Chat message list component with auto-scroll, multiple message types, and status support",
+      type: "registry:block",
+      registryDependencies: ["message", "avatar-header"],
+      files: [
+        {
+          path: "registry/wuhan/composed/message/message-list.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/message-list.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/composed/message/message-list.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     sender: {
       name: "sender",
       description: "Composed sender with attachments and modes",
@@ -1640,7 +1666,12 @@ export const Index: Record<string, Record<string, any>> = {
       name: "task-list",
       description: "Composed task list with editable mode",
       type: "registry:block",
-      registryDependencies: ["button", "task-list-01", "feedback"],
+      registryDependencies: [
+        "button",
+        "task-list-01",
+        "feedback",
+        "status-tag",
+      ],
       files: [
         {
           path: "registry/wuhan/composed/task-list/task-list.tsx",
@@ -2690,7 +2721,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Composed report card with icon, title, description, and hover actions",
       type: "registry:block",
-      registryDependencies: ["report-card-01"],
+      registryDependencies: ["report-card-01", "checkbox-01"],
       files: [
         {
           path: "registry/wuhan/composed/report-card/report-card.tsx",
@@ -3856,6 +3887,32 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/message/message-with-avatar-header.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-list-demo": {
+      name: "message-list-demo",
+      description:
+        "Chat message list component demo with auto-scroll, input, and message status",
+      type: "registry:example",
+      registryDependencies: ["message-list", "button", "icon-button"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-list-demo.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-list-demo.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-list-demo.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

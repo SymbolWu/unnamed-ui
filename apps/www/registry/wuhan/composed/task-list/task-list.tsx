@@ -3,10 +3,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { GripVertical, Trash2 } from "lucide-react";
-import {
-  StatusTag,
-  type StatusType,
-} from "@/registry/wuhan/composed/status-tag/status-tag";
+import { StatusTag } from "@/registry/wuhan/composed/status-tag/status-tag";
 import {
   DndContext,
   PointerSensor,

@@ -626,6 +626,21 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "message-list-demo",
+    type: "registry:example",
+    title: "Message List Demo",
+    description:
+      "Chat message list component demo with auto-scroll, input, and message status",
+    registryDependencies: ["message-list", "button", "icon-button"],
+    files: [
+      {
+        path: "examples/message/message-list-demo.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-list-demo.tsx",
+      },
+    ],
+  },
   // attachment-list examples
   {
     name: "attachment-list-demo",

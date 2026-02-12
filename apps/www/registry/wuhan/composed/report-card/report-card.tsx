@@ -93,6 +93,8 @@ export interface ReportCardListProps {
   showCardAction?: boolean;
   /** 自定义类名 */
   className?: string;
+  /** 列表容器自定义类名 */
+  listClassName?: string;
   /** 卡片宽度 */
   cardWidth?: string | number;
 }
@@ -136,7 +138,7 @@ const CardActionsMenu = ({
             <span
               className={cn(
                 "text-[var(--text-primary)]",
-                "text-[var(--font-size-1)]",
+                "font-size-1",
                 "leading-[var(--line-height-1)]",
               )}
             >
@@ -160,7 +162,7 @@ const CardActionsMenu = ({
             <span
               className={cn(
                 "text-[var(--text-primary)]",
-                "text-[var(--font-size-1)]",
+                "font-size-1",
                 "leading-[var(--line-height-1)]",
               )}
             >
@@ -184,7 +186,7 @@ const CardActionsMenu = ({
             <span
               className={cn(
                 "text-[var(--text-error)]",
-                "text-[var(--font-size-1)]",
+                "font-size-1",
                 "leading-[var(--line-height-1)]",
               )}
             >
@@ -375,7 +377,6 @@ export const ReportCardList = React.forwardRef<
   ReportCardListProps
 >((props, ref) => {
   const {
-    title,
     cards = [],
     showCheckbox = false,
     onSelectChange,
@@ -385,6 +386,7 @@ export const ReportCardList = React.forwardRef<
     cardAction,
     showCardAction,
     className,
+    listClassName,
     cardWidth,
   } = props;
 
@@ -398,7 +400,7 @@ export const ReportCardList = React.forwardRef<
 
   return (
     <div ref={ref} className={className}>
-      {title && (
+      {/* {title && (
         <div
           className={cn(
             "font-[var(--font-family-cn)]",
@@ -411,8 +413,8 @@ export const ReportCardList = React.forwardRef<
         >
           {title}
         </div>
-      )}
-      <div className="flex flex-col gap-[var(--gap-md)]">
+      )} */}
+      <div className={cn("flex flex-col gap-[var(--gap-md)]", listClassName)}>
         {cards.map((card) => (
           <ReportCard
             key={card.id}
