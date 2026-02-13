@@ -2578,6 +2578,18 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "split-pane-center-header",
+    type: "registry:example",
+    registryDependencies: ["triple-split-pane"],
+    dependencies: ["lucide-react"],
+    files: [
+      {
+        path: "examples/split-pane/split-pane-center-header.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "task-card-demo",
     type: "registry:example",
     registryDependencies: ["task-card"],

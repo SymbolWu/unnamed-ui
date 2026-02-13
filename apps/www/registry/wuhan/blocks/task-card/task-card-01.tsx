@@ -423,6 +423,10 @@ interface TaskCardPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
    * 自定义类名
    */
   className?: string;
+  /**
+   * 容器类名
+   */
+  containerClassName?: string;
 }
 
 export const TaskCardPrimitive = React.forwardRef<
@@ -441,6 +445,7 @@ export const TaskCardPrimitive = React.forwardRef<
       onOpenChange,
       steps = [],
       className,
+      containerClassName,
       ...props
     },
     ref,
@@ -456,7 +461,11 @@ export const TaskCardPrimitive = React.forwardRef<
     };
 
     return (
-      <Collapsible open={isOpen} onOpenChange={handleOpenChange}>
+      <Collapsible
+        open={isOpen}
+        onOpenChange={handleOpenChange}
+        className={containerClassName}
+      >
         <div
           ref={ref}
           className={cn(

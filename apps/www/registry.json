@@ -6920,6 +6920,22 @@
       ]
     },
     {
+      "name": "split-pane-center-header",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "triple-split-pane"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/split-pane/split-pane-center-header.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "task-card-demo",
       "type": "registry:example",
       "registryDependencies": [
