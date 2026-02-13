@@ -48,6 +48,8 @@ export interface TaskCardComposedProps {
   onOpenChange?: (open: boolean) => void;
   /** 自定义类名 */
   className?: string;
+  /** 容器类名 */
+  containerClassName?: string;
 }
 
 // ==================== 主组件：TaskCard ====================
@@ -84,6 +86,7 @@ export const TaskCard = React.forwardRef<HTMLDivElement, TaskCardComposedProps>(
       open,
       onOpenChange,
       className,
+      containerClassName,
     } = props;
 
     // 计算当前步骤序号（找到第一个 running 或 pending 的步骤索引+1）
@@ -114,6 +117,7 @@ export const TaskCard = React.forwardRef<HTMLDivElement, TaskCardComposedProps>(
         onOpenChange={onOpenChange}
         steps={steps}
         className={className}
+        containerClassName={containerClassName}
       />
     );
   },
