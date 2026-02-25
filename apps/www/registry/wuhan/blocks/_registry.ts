@@ -488,7 +488,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "BlockSelect",
     description: "选择器",
-    dependencies: ["@radix-ui/react-popover", "lucide-react"],
+    dependencies: ["radix-ui", "@radix-ui/react-popover", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
