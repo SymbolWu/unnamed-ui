@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "registry:build && next build",
+    "build": "pnpm run registry:build && next build",
     "dev": "next dev",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
