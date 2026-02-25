@@ -16,7 +16,7 @@ export const Index: Record<string, Record<string, any>> = {
         {
           path: "registry/wuhan/style/globals.css",
           type: "registry:style",
-          target: "app/globals.css",
+          target: "",
         },
         {
           path: "registry/wuhan/style/postcss.config.mjs",
@@ -37,7 +37,7 @@ export const Index: Record<string, Record<string, any>> = {
         {
           path: "registry/wuhan/style/globals.css",
           type: "registry:style",
-          target: "app/globals.css",
+          target: "",
         },
         {
           path: "registry/wuhan/style/postcss.config.mjs",

@@ -11,8 +11,6 @@ import { examples } from "./examples/_registry";
 // import { lib } from "./lib/_registry"
 import { ui } from "./ui/_registry";
 import { recruitmentBlocks } from "./recruitment/_registry";
-import { getWuhanStyleCssVars } from "./style/css-vars";
-import { getWuhanStyleCss } from "./style/css";
 
 const DEPRECATED_ITEMS = [
   "toast",
@@ -34,13 +32,12 @@ const NEW_YORK_V4_STYLE = {
     "postcss",
   ],
   registryDependencies: [],
-  cssVars: getWuhanStyleCssVars(),
-  css: getWuhanStyleCss(),
+  // 仅使用 files，避免与 cssVars/css 重复导致两套 CSS 文件
   files: [
     {
       path: "style/globals.css",
       type: "registry:style",
-      target: "app/globals.css",
+      // 不指定 target，shadcn CLI 会从 components.json 的 tailwind.css 读取路径，从而根据项目类型自动判断
     },
     {
       path: "style/postcss.config.mjs",

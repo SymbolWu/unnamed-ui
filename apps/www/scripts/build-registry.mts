@@ -1,11 +1,50 @@
 import { exec } from "child_process"
-import { existsSync, promises as fs } from "fs"
+import { existsSync, promises as fs, readFileSync, writeFileSync } from "fs"
 import path from "path"
 import { rimraf } from "rimraf"
 import { registrySchema } from "shadcn/schema"
 
 import { getAllBlocks } from "../lib/blocks"
 import { STYLES, type Style } from "../registry/styles"
+
+/**
+ * 将 themes.css 内联到 globals.css，解决用户安装后 @import "./themes.css" 路径失效的问题。
+ * 构建时临时替换 globals.css，构建完成后恢复。
+ */
+async function bakeStyleGlobals(styleName: string): Promise<() => void> {
+  const styleDir = path.join(process.cwd(), "registry", styleName, "style")
+  const globalsPath = path.join(styleDir, "globals.css")
+  const themesPath = path.join(styleDir, "themes.css")
+
+  if (!existsSync(globalsPath) || !existsSync(themesPath)) {
+    return () => {}
+  }
+
+  const globalsRaw = readFileSync(globalsPath, "utf-8")
+  const themesContent = readFileSync(themesPath, "utf-8")
+
+  const importRegex = /@import\s+["']\.\/themes\.css["']\s*;?\s*\n?/
+  if (!importRegex.test(globalsRaw)) {
+    return () => {}
+  }
+
+  const bakedContent = globalsRaw.replace(importRegex, () => {
+    return `/* themes.css - inlined for registry distribution */\n${themesContent}\n\n`
+  })
+
+  const backupPath = path.join(styleDir, "globals.css.bak")
+  writeFileSync(backupPath, globalsRaw, "utf-8")
+  writeFileSync(globalsPath, bakedContent, "utf-8")
+
+  console.log(`   📦 Baked themes.css into globals.css for ${styleName}`)
+
+  return () => {
+    writeFileSync(globalsPath, globalsRaw, "utf-8")
+    if (existsSync(backupPath)) {
+      fs.unlink(backupPath).catch(() => {})
+    }
+  }
+}
 
 async function buildRegistryIndex(styles: Style[]) {
   let index = `/* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -229,14 +268,27 @@ try {
   console.log("\n🗂️ Building unified multi-style registry/__index__.tsx...")
   await buildRegistryIndex(styles)
 
-  for (const style of styles) {
-    console.log(`\n📦 Processing style: ${style.name}`)
+  const restoreFns: Array<() => void> = []
+  try {
+    for (const style of styles) {
+      console.log(`\n📦 Processing style: ${style.name}`)
 
-    console.log(`💅 Building registry-${style.name}.json...`)
-    await buildRegistryJsonFile(style.name)
+      const restore = await bakeStyleGlobals(style.name)
+      if (restore) restoreFns.push(restore)
 
-    console.log(`🏗️ Building registry for ${style.name}...`)
-    await buildRegistry(style.name)
+      console.log(`💅 Building registry-${style.name}.json...`)
+      await buildRegistryJsonFile(style.name)
+
+      console.log(`🏗️ Building registry for ${style.name}...`)
+      await buildRegistry(style.name)
+    }
+  } finally {
+    for (const restore of restoreFns) {
+      restore()
+    }
+    if (restoreFns.length > 0) {
+      console.log("   ↩️ Restored globals.css from bake")
+    }
   }
 
   console.log("\n🗂️ Building registry/__blocks__.json...")
