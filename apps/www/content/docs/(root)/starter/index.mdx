@@ -92,6 +92,15 @@ npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/style.json
 
 首次执行会提示创建 `components.json`，选择 `yes`。
 
+> 样式安装后，需要将样式导入到你的全局样式文件中。  
+以 Next.js 为例，请在 `app/globals.css` 文件顶部引入（Vite 项目一般为 `src/index.css`）：
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@/components/globals.css";
+```
+
 **第六步：安装 Welcome 组件（用于验证）**
 
 ```bash
