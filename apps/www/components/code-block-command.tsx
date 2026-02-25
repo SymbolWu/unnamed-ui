@@ -38,14 +38,24 @@ export function CodeBlockCommand({
     }
   }, [hasCopied])
 
+  // 将 localhost:3000 替换为当前访问域名，便于部署到不同环境时命令中的 URL 自动适配
+  const replaceRegistryUrl = React.useCallback((cmd: string | undefined) => {
+    if (!cmd) return cmd
+    const baseUrl =
+      typeof window !== "undefined"
+        ? window.location.origin
+        : (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000")
+    return cmd.replace(/https?:\/\/localhost:3000/g, baseUrl)
+  }, [])
+
   const tabs = React.useMemo(() => {
     return {
-      pnpm: __pnpm__,
-      npm: __npm__,
-      yarn: __yarn__,
-      bun: __bun__,
+      pnpm: replaceRegistryUrl(__pnpm__),
+      npm: replaceRegistryUrl(__npm__),
+      yarn: replaceRegistryUrl(__yarn__),
+      bun: replaceRegistryUrl(__bun__),
     }
-  }, [__npm__, __pnpm__, __yarn__, __bun__])
+  }, [__npm__, __pnpm__, __yarn__, __bun__, replaceRegistryUrl])
 
   const copyCommand = React.useCallback(() => {
     const command = tabs[packageManager]
