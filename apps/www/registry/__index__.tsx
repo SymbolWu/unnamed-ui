@@ -1746,7 +1746,11 @@ export const Index: Record<string, Record<string, any>> = {
       name: "component-panel",
       description: "Composed panel with tabs and selectable items",
       type: "registry:block",
-      registryDependencies: ["component-panel-01", "tooltip-01"],
+      registryDependencies: [
+        "component-panel-01",
+        "tooltip-01",
+        "select-card-01",
+      ],
       files: [
         {
           path: "registry/wuhan/composed/component-panel/component-panel.tsx",
@@ -1796,7 +1800,11 @@ export const Index: Record<string, Record<string, any>> = {
       name: "thinking-process",
       description: "Composed thinking process with steps and content blocks",
       type: "registry:block",
-      registryDependencies: ["thinking-process-01", "thinking-step-item"],
+      registryDependencies: [
+        "thinking-process-01",
+        "thinking-step-item",
+        "collapsible",
+      ],
       files: [
         {
           path: "registry/wuhan/composed/thinking-process/thinking-process.tsx",
@@ -2024,6 +2032,7 @@ export const Index: Record<string, Record<string, any>> = {
         "sidebar-01",
         "history-item-01",
         "avatar-header-01",
+        "button",
       ],
       files: [
         {
@@ -2317,7 +2326,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "sources-sidebar",
       description: "Sources sidebar with tabs and list",
       type: "registry:block",
-      registryDependencies: ["sources-sidebar-01"],
+      registryDependencies: ["sources-sidebar-01", "custom-sources"],
       files: [
         {
           path: "registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
@@ -2494,7 +2503,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "block-select",
       description: "选择器",
       type: "registry:block",
-      registryDependencies: ["block-select-01"],
+      registryDependencies: ["block-select-01", "checkbox", "tag"],
       files: [
         {
           path: "registry/wuhan/composed/block-select/block-select.tsx",

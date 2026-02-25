@@ -766,7 +766,8 @@
       "title": "Checkbox",
       "description": "多选框",
       "dependencies": [
-        "radix-ui"
+        "radix-ui",
+        "lucide-react"
       ],
       "registryDependencies": [
         "style"
@@ -784,6 +785,10 @@
       "type": "registry:block",
       "title": "Radio",
       "description": "单选框",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -800,6 +805,10 @@
       "type": "registry:block",
       "title": "BlockSelect",
       "description": "选择器",
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -871,6 +880,9 @@
       "type": "registry:block",
       "title": "Tag",
       "description": "标签",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -977,7 +989,8 @@
       "title": "File Card",
       "description": "File card component for displaying file information with checkbox, icon, title, date, and action button",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "@radix-ui/react-popover"
       ],
       "registryDependencies": [
         "style",
@@ -1032,7 +1045,8 @@
       "title": "Accordion",
       "description": "Accordion primitives with Root, Item, Trigger, and Content components",
       "dependencies": [
-        "@radix-ui/react-accordion"
+        "@radix-ui/react-accordion",
+        "lucide-react"
       ],
       "registryDependencies": [
         "style"
@@ -1071,6 +1085,9 @@
       "type": "registry:block",
       "title": "Progress",
       "description": "进度条",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -1185,6 +1202,9 @@
       "type": "registry:block",
       "title": "Deep Thinking",
       "description": "Composed deep thinking collapsible block",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "deep-thinking-01"
       ],
@@ -1201,6 +1221,9 @@
       "type": "registry:block",
       "title": "Execution Result",
       "description": "Composed execution result list with sections",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "execution-result-01"
       ],
@@ -1219,7 +1242,8 @@
       "description": "Composed panel with tabs and selectable items",
       "registryDependencies": [
         "component-panel-01",
-        "tooltip-01"
+        "tooltip-01",
+        "select-card-01"
       ],
       "files": [
         {
@@ -1234,6 +1258,9 @@
       "type": "registry:block",
       "title": "Thinking Step Item",
       "description": "Composed step item with status, timeline, tools, and files",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "thinking-step-item-01"
       ],
@@ -1250,9 +1277,13 @@
       "type": "registry:block",
       "title": "Thinking Process",
       "description": "Composed thinking process with steps and content blocks",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "thinking-process-01",
-        "thinking-step-item"
+        "thinking-step-item",
+        "collapsible"
       ],
       "files": [
         {
@@ -1299,6 +1330,9 @@
       "type": "registry:block",
       "title": "Prompt",
       "description": "Composed prompt list with horizontal/vertical variants",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "prompt-01",
         "prompt-02"
@@ -1332,6 +1366,9 @@
       "type": "registry:block",
       "title": "Attachment List",
       "description": "Composed attachment list with cards",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "attachment-list-01"
       ],
@@ -1348,6 +1385,9 @@
       "type": "registry:block",
       "title": "Quote Content",
       "description": "Composed quote content display with close action",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "quote-content-01"
       ],
@@ -1380,6 +1420,9 @@
       "type": "registry:block",
       "title": "Avatar Header",
       "description": "Composed avatar header with name and time",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "avatar-header-01"
       ],
@@ -1396,10 +1439,14 @@
       "type": "registry:block",
       "title": "Sidebar",
       "description": "Composed sidebar with header, search, and history list",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "sidebar-01",
         "history-item-01",
-        "avatar-header-01"
+        "avatar-header-01",
+        "button"
       ],
       "files": [
         {
@@ -1639,7 +1686,8 @@
         "@ant-design/icons"
       ],
       "registryDependencies": [
-        "sources-sidebar-01"
+        "sources-sidebar-01",
+        "custom-sources"
       ],
       "files": [
         {
@@ -1755,8 +1803,13 @@
       "type": "registry:block",
       "title": "BlockSelect",
       "description": "选择器",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "block-select-01"
+        "block-select-01",
+        "checkbox",
+        "tag"
       ],
       "files": [
         {
@@ -1771,6 +1824,9 @@
       "type": "registry:block",
       "title": "TripleSplitPane",
       "description": "三分隔面板",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "split-pane-01",
         "popover"
@@ -1823,6 +1879,9 @@
       "type": "registry:block",
       "title": "Tag",
       "description": "标签",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "tag-01"
       ],
