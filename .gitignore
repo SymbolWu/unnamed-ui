@@ -15,6 +15,9 @@ build
 .next
 out
 
+# cursor
+.cursor
+
 # Misc
 .DS_Store
 *.pem
