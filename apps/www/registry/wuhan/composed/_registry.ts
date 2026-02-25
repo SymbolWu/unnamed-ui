@@ -555,7 +555,7 @@ export const composed: Registry["items"] = [
     title: "Select Card",
     description:
       "Composed card selection with single/multiple modes and grid layout",
-    registryDependencies: ["select-card-01"],
+    registryDependencies: ["select-card-01", "tooltip-01"],
     files: [
       {
         path: "composed/select-card/select-card.tsx",
@@ -731,7 +731,7 @@ export const composed: Registry["items"] = [
     title: "Report Card",
     description:
       "Composed report card with icon, title, description, and hover actions",
-    dependencies: ["lucide-react"],
+    dependencies: ["lucide-react", "@radix-ui/react-popover"],
     registryDependencies: ["report-card-01", "checkbox-01"],
     files: [
       {

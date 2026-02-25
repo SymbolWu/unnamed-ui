@@ -430,7 +430,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Select Card",
     description: "Card selection item primitive with selected state",
-    registryDependencies: ["style"],
+    registryDependencies: ["style", "toggle-button-01"],
     files: [
       {
         path: "blocks/select-card/select-card-01.tsx",
@@ -518,7 +518,7 @@ export const blocks: Registry["items"] = [
     description:
       "Task card component with progress tracking and status indicators",
     dependencies: ["lucide-react"],
-    registryDependencies: ["style"],
+    registryDependencies: ["style", "collapsible"],
     files: [
       {
         path: "blocks/task-card/task-card-01.tsx",

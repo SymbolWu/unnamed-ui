@@ -1055,7 +1055,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "select-card-01",
       description: "Card selection item primitive with selected state",
       type: "registry:block",
-      registryDependencies: ["style"],
+      registryDependencies: ["style", "toggle-button-01"],
       files: [
         {
           path: "registry/wuhan/blocks/select-card/select-card-01.tsx",
@@ -1205,7 +1205,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Task card component with progress tracking and status indicators",
       type: "registry:block",
-      registryDependencies: ["style"],
+      registryDependencies: ["style", "collapsible"],
       files: [
         {
           path: "registry/wuhan/blocks/task-card/task-card-01.tsx",
@@ -2420,7 +2420,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Composed card selection with single/multiple modes and grid layout",
       type: "registry:block",
-      registryDependencies: ["select-card-01"],
+      registryDependencies: ["select-card-01", "tooltip-01"],
       files: [
         {
           path: "registry/wuhan/composed/select-card/select-card.tsx",

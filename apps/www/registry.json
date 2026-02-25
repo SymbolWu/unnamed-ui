@@ -732,7 +732,8 @@
       "title": "Select Card",
       "description": "Card selection item primitive with selected state",
       "registryDependencies": [
-        "style"
+        "style",
+        "toggle-button-01"
       ],
       "files": [
         {
@@ -838,7 +839,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "style"
+        "style",
+        "collapsible"
       ],
       "files": [
         {
@@ -1705,7 +1707,8 @@
       "title": "Select Card",
       "description": "Composed card selection with single/multiple modes and grid layout",
       "registryDependencies": [
-        "select-card-01"
+        "select-card-01",
+        "tooltip-01"
       ],
       "files": [
         {
@@ -1911,7 +1914,8 @@
       "title": "Report Card",
       "description": "Composed report card with icon, title, description, and hover actions",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "@radix-ui/react-popover"
       ],
       "registryDependencies": [
         "report-card-01",
@@ -5446,6 +5450,22 @@
       "files": [
         {
           "path": "registry/wuhan/examples/split-pane/split-pane-classnames.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "split-pane-center-header",
+      "type": "registry:example",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "triple-split-pane"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/split-pane/split-pane-center-header.tsx",
           "type": "registry:example"
         }
       ]
