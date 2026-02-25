@@ -90,6 +90,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Deep Thinking",
     description: "Composed deep thinking collapsible block",
+    dependencies: ["lucide-react"],
     registryDependencies: ["deep-thinking-01"],
     files: [
       {
@@ -104,6 +105,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Execution Result",
     description: "Composed execution result list with sections",
+    dependencies: ["lucide-react"],
     registryDependencies: ["execution-result-01"],
     files: [
       {
@@ -118,7 +120,11 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Component Panel",
     description: "Composed panel with tabs and selectable items",
-    registryDependencies: ["component-panel-01", "tooltip-01"],
+    registryDependencies: [
+      "component-panel-01",
+      "tooltip-01",
+      "select-card-01",
+    ],
     files: [
       {
         path: "composed/component-panel/component-panel.tsx",
@@ -132,6 +138,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Thinking Step Item",
     description: "Composed step item with status, timeline, tools, and files",
+    dependencies: ["lucide-react"],
     registryDependencies: ["thinking-step-item-01"],
     files: [
       {
@@ -146,7 +153,12 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Thinking Process",
     description: "Composed thinking process with steps and content blocks",
-    registryDependencies: ["thinking-process-01", "thinking-step-item"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "thinking-process-01",
+      "thinking-step-item",
+      "collapsible",
+    ],
     files: [
       {
         path: "composed/thinking-process/thinking-process.tsx",
@@ -188,6 +200,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Prompt",
     description: "Composed prompt list with horizontal/vertical variants",
+    dependencies: ["lucide-react"],
     registryDependencies: ["prompt-01", "prompt-02"],
     files: [
       {
@@ -216,6 +229,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Attachment List",
     description: "Composed attachment list with cards",
+    dependencies: ["lucide-react"],
     registryDependencies: ["attachment-list-01"],
     files: [
       {
@@ -230,6 +244,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Quote Content",
     description: "Composed quote content display with close action",
+    dependencies: ["lucide-react"],
     registryDependencies: ["quote-content-01"],
     files: [
       {
@@ -258,6 +273,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Avatar Header",
     description: "Composed avatar header with name and time",
+    dependencies: ["lucide-react"],
     registryDependencies: ["avatar-header-01"],
     files: [
       {
@@ -272,7 +288,13 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Sidebar",
     description: "Composed sidebar with header, search, and history list",
-    registryDependencies: ["sidebar-01", "history-item-01", "avatar-header-01"],
+    dependencies: ["lucide-react"],
+    registryDependencies: [
+      "sidebar-01",
+      "history-item-01",
+      "avatar-header-01",
+      "button",
+    ],
     files: [
       {
         path: "composed/sidebar/sidebar.tsx",
@@ -495,7 +517,7 @@ export const composed: Registry["items"] = [
     title: "Sources Sidebar",
     description: "Sources sidebar with tabs and list",
     dependencies: ["@ant-design/icons"],
-    registryDependencies: ["sources-sidebar-01"],
+    registryDependencies: ["sources-sidebar-01", "custom-sources"],
     files: [
       {
         path: "composed/sources-sidebar/sources-sidebar.tsx",
@@ -555,7 +577,7 @@ export const composed: Registry["items"] = [
     title: "Select Card",
     description:
       "Composed card selection with single/multiple modes and grid layout",
-    registryDependencies: ["select-card-01"],
+    registryDependencies: ["select-card-01", "tooltip-01"],
     files: [
       {
         path: "composed/select-card/select-card.tsx",
@@ -597,7 +619,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "BlockSelect",
     description: "选择器",
-    dependencies: ["radix-ui", "lucide-react"],
+    dependencies: ["lucide-react"],
     registryDependencies: ["block-select-01", "checkbox", "tag"],
     files: [
       {
@@ -657,6 +679,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Tag",
     description: "标签",
+    dependencies: ["lucide-react"],
     registryDependencies: ["tag-01"],
     files: [
       {
@@ -733,7 +756,7 @@ export const composed: Registry["items"] = [
     title: "Report Card",
     description:
       "Composed report card with icon, title, description, and hover actions",
-    dependencies: ["lucide-react"],
+    dependencies: ["lucide-react", "@radix-ui/react-popover"],
     registryDependencies: ["report-card-01", "checkbox-01"],
     files: [
       {

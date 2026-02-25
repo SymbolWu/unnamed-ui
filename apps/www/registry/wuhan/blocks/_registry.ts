@@ -430,7 +430,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Select Card",
     description: "Card selection item primitive with selected state",
-    registryDependencies: ["style"],
+    registryDependencies: ["style", "toggle-button-01"],
     files: [
       {
         path: "blocks/select-card/select-card-01.tsx",
@@ -686,7 +686,7 @@ export const blocks: Registry["items"] = [
     title: "Accordion",
     description:
       "Accordion primitives with Root, Item, Trigger, and Content components",
-    dependencies: ["@radix-ui/react-accordion"],
+    dependencies: ["@radix-ui/react-accordion", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
