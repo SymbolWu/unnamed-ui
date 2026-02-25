@@ -597,7 +597,8 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "BlockSelect",
     description: "选择器",
-    registryDependencies: ["block-select-01"],
+    dependencies: ["radix-ui", "lucide-react"],
+    registryDependencies: ["block-select-01", "checkbox", "tag"],
     files: [
       {
         path: "composed/block-select/block-select.tsx",
@@ -611,6 +612,7 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "TripleSplitPane",
     description: "三分隔面板",
+    dependencies: ["lucide-react"],
     registryDependencies: ["split-pane-01", "popover"],
     files: [
       {

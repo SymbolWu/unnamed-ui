@@ -1205,7 +1205,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Task card component with progress tracking and status indicators",
       type: "registry:block",
-      registryDependencies: ["style"],
+      registryDependencies: ["style", "collapsible"],
       files: [
         {
           path: "registry/wuhan/blocks/task-card/task-card-01.tsx",
@@ -2494,7 +2494,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "block-select",
       description: "选择器",
       type: "registry:block",
-      registryDependencies: ["block-select-01"],
+      registryDependencies: ["block-select-01", "checkbox", "tag"],
       files: [
         {
           path: "registry/wuhan/composed/block-select/block-select.tsx",

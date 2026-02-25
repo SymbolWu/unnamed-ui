@@ -765,7 +765,8 @@
       "title": "Checkbox",
       "description": "多选框",
       "dependencies": [
-        "radix-ui"
+        "radix-ui",
+        "lucide-react"
       ],
       "registryDependencies": [
         "style"
@@ -783,6 +784,10 @@
       "type": "registry:block",
       "title": "Radio",
       "description": "单选框",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -799,6 +804,11 @@
       "type": "registry:block",
       "title": "BlockSelect",
       "description": "选择器",
+      "dependencies": [
+        "radix-ui",
+        "@radix-ui/react-popover",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -838,7 +848,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "style"
+        "style",
+        "collapsible"
       ],
       "files": [
         {
@@ -869,6 +880,9 @@
       "type": "registry:block",
       "title": "Tag",
       "description": "标签",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -975,7 +989,8 @@
       "title": "File Card",
       "description": "File card component for displaying file information with checkbox, icon, title, date, and action button",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "@radix-ui/react-popover"
       ],
       "registryDependencies": [
         "style",
@@ -1069,6 +1084,9 @@
       "type": "registry:block",
       "title": "Progress",
       "description": "进度条",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "style"
       ],
@@ -1752,8 +1770,14 @@
       "type": "registry:block",
       "title": "BlockSelect",
       "description": "选择器",
+      "dependencies": [
+        "radix-ui",
+        "lucide-react"
+      ],
       "registryDependencies": [
-        "block-select-01"
+        "block-select-01",
+        "checkbox",
+        "tag"
       ],
       "files": [
         {
@@ -1768,6 +1792,9 @@
       "type": "registry:block",
       "title": "TripleSplitPane",
       "description": "三分隔面板",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "split-pane-01",
         "popover"
