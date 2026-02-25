@@ -33,12 +33,62 @@ npm install
 
 ### 1.2 安装 Unnamed UI
 
-假设我们的包名为 `unnamed-ui`（请根据实际发包名称调整）：
+安装前需先完成样式环境配置，按以下顺序操作。
+
+**第一步：安装依赖**
 
 ```bash
-npm install unnamed-ui --save
-# 如果依赖 tailwind 或 icons，请一并安装
+npm install -D tailwindcss @tailwindcss/postcss postcss tw-animate-css
 ```
+
+在项目根目录创建 `postcss.config.mjs`：
+
+```js
+const config = { plugins: ["@tailwindcss/postcss"] };
+export default config;
+```
+
+**第二步：配置 `tailwind.config.js`**
+
+在项目根目录新建 `tailwind.config.js`：
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
+};
+```
+
+**第三步：添加 Tailwind 导入**
+
+在 `src/index.css`（Vite）或 `app/globals.css`（Next.js）**最顶部**添加：
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+**第四步：配置 `@/*` 路径别名**
+
+在根目录 `tsconfig.json` 的 `compilerOptions` 中添加（必须写在 `compilerOptions` 内部）：
+
+```json
+"baseUrl": ".",
+"paths": {
+  "@/*": ["./src/*"]
+}
+```
+
+若使用 project references（有 `tsconfig.app.json`），需在根 `tsconfig.json` 中同样添加；并在 `vite.config.ts` 中配置 `resolve.alias`，详见 [样式与主题](/docs/unnamed-ui/howto/styles)。
+
+**第五步：安装样式**
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/style.json
+```
+
+首次执行会提示创建 `components.json`，选择 `yes`。
+
 
 ### 1.3 验证安装
 
