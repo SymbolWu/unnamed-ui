@@ -430,7 +430,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Select Card",
     description: "Card selection item primitive with selected state",
-    registryDependencies: ["style"],
+    registryDependencies: ["style", "toggle-button-01"],
     files: [
       {
         path: "blocks/select-card/select-card-01.tsx",
@@ -458,7 +458,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Checkbox",
     description: "多选框",
-    dependencies: ["radix-ui"],
+    dependencies: ["radix-ui", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
@@ -473,6 +473,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Radio",
     description: "单选框",
+    dependencies: ["radix-ui", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
@@ -487,6 +488,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "BlockSelect",
     description: "选择器",
+    dependencies: ["@radix-ui/react-popover", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
@@ -518,7 +520,7 @@ export const blocks: Registry["items"] = [
     description:
       "Task card component with progress tracking and status indicators",
     dependencies: ["lucide-react"],
-    registryDependencies: ["style"],
+    registryDependencies: ["style", "collapsible"],
     files: [
       {
         path: "blocks/task-card/task-card-01.tsx",
@@ -546,6 +548,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Tag",
     description: "标签",
+    dependencies: ["lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
@@ -637,7 +640,7 @@ export const blocks: Registry["items"] = [
     title: "File Card",
     description:
       "File card component for displaying file information with checkbox, icon, title, date, and action button",
-    dependencies: ["lucide-react"],
+    dependencies: ["lucide-react", "@radix-ui/react-popover"],
     registryDependencies: ["style", "checkbox-01"],
     files: [
       {
@@ -683,7 +686,7 @@ export const blocks: Registry["items"] = [
     title: "Accordion",
     description:
       "Accordion primitives with Root, Item, Trigger, and Content components",
-    dependencies: ["@radix-ui/react-accordion"],
+    dependencies: ["@radix-ui/react-accordion", "lucide-react"],
     registryDependencies: ["style"],
     files: [
       {
@@ -714,6 +717,7 @@ export const blocks: Registry["items"] = [
     type: "registry:block",
     title: "Progress",
     description: "进度条",
+    dependencies: ["lucide-react"],
     registryDependencies: ["style"],
     files: [
       {

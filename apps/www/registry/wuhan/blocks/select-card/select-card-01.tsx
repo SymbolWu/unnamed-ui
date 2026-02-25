@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import {
   ToggleButtonPrimitive,
-  ToggleButtonPrimitiveProps,
+  type ToggleButtonPrimitiveProps,
 } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
 
 // ==================== 类型定义 ====================
