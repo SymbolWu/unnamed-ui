@@ -96,6 +96,16 @@ npx shadcn@latest add "http://localhost:3000/r/wuhan/triple-split-pane.json"
   className="mb-4"
 />
 
+### 中间面板头部居中内容
+
+通过 `centerHeaderContent` 属性可以在中间面板头部添加居中显示的内容，如搜索框、导航标签等。内容会通过绝对定位的方式完美居中，不受左侧展开按钮或标题的影响。
+
+<ComponentPreview
+  name="split-pane-center-header"
+  description="中间面板头部居中内容"
+  className="mb-4"
+/>
+
 ## API
 
 ### TripleSplitPane
@@ -120,6 +130,7 @@ npx shadcn@latest add "http://localhost:3000/r/wuhan/triple-split-pane.json"
 |------|------|---------|-------------|
 | `children` | `ReactNode` | - | 面板内容 |
 | `title` | `ReactNode` | - | 面板标题 |
+| `centerHeaderContent` | `ReactNode` | - | 头部居中内容（仅中间面板支持），会通过绝对定位居中显示，不受标题和按钮影响 |
 | `width` | `string` | `"300px"`(左/右)/`undefined`(中) | 展开时的宽度（像素或百分比字符串） |
 | `minWidth` | `string` | `"200px"`(左/右)/`"400px"`(中) | 最小宽度（像素或百分比字符串） |
 | `collapsedWidth` | `string` | `"0px"` | 折叠后的宽度（像素或百分比字符串），设为 "0px" 表示完全折叠 |
