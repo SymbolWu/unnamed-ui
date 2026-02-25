@@ -1055,7 +1055,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "select-card-01",
       description: "Card selection item primitive with selected state",
       type: "registry:block",
-      registryDependencies: ["style"],
+      registryDependencies: ["style", "toggle-button-01"],
       files: [
         {
           path: "registry/wuhan/blocks/select-card/select-card-01.tsx",
@@ -1746,7 +1746,11 @@ export const Index: Record<string, Record<string, any>> = {
       name: "component-panel",
       description: "Composed panel with tabs and selectable items",
       type: "registry:block",
-      registryDependencies: ["component-panel-01", "tooltip-01"],
+      registryDependencies: [
+        "component-panel-01",
+        "tooltip-01",
+        "select-card-01",
+      ],
       files: [
         {
           path: "registry/wuhan/composed/component-panel/component-panel.tsx",
@@ -1796,7 +1800,11 @@ export const Index: Record<string, Record<string, any>> = {
       name: "thinking-process",
       description: "Composed thinking process with steps and content blocks",
       type: "registry:block",
-      registryDependencies: ["thinking-process-01", "thinking-step-item"],
+      registryDependencies: [
+        "thinking-process-01",
+        "thinking-step-item",
+        "collapsible",
+      ],
       files: [
         {
           path: "registry/wuhan/composed/thinking-process/thinking-process.tsx",
@@ -2024,6 +2032,7 @@ export const Index: Record<string, Record<string, any>> = {
         "sidebar-01",
         "history-item-01",
         "avatar-header-01",
+        "button",
       ],
       files: [
         {
@@ -2317,7 +2326,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "sources-sidebar",
       description: "Sources sidebar with tabs and list",
       type: "registry:block",
-      registryDependencies: ["sources-sidebar-01"],
+      registryDependencies: ["sources-sidebar-01", "custom-sources"],
       files: [
         {
           path: "registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
@@ -2420,7 +2429,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Composed card selection with single/multiple modes and grid layout",
       type: "registry:block",
-      registryDependencies: ["select-card-01"],
+      registryDependencies: ["select-card-01", "tooltip-01"],
       files: [
         {
           path: "registry/wuhan/composed/select-card/select-card.tsx",
