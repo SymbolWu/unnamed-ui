@@ -1585,12 +1585,17 @@ export const Index: Record<string, Record<string, any>> = {
       name: "message",
       description: "Composed AI and user message components",
       type: "registry:block",
-      registryDependencies: ["message-01"],
+      registryDependencies: ["message-01", "icon-button", "feedback"],
       files: [
         {
           path: "registry/wuhan/composed/message/message.tsx",
           type: "registry:component",
           target: "components/wuhan/composed/message.tsx",
+        },
+        {
+          path: "registry/wuhan/composed/message/message-feedback.tsx",
+          type: "registry:component",
+          target: "components/wuhan/composed/message-feedback.tsx",
         },
       ],
       component: React.lazy(async () => {

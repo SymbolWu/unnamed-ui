@@ -15,7 +15,7 @@ export const SourcesSidebarWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   min-height: 100%;
-  width: 400px;
+  width: 100%;
   background: var(--bg-container);
 `;
 

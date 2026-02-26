@@ -224,7 +224,6 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
       showAction = true,
       className,
     } = props;
-    const [isHovered, setIsHovered] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const closeTimer = React.useRef<number | null>(null);
 
@@ -267,16 +266,8 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
         ref={ref}
         selected={selected}
         disabled={disabled}
-        className={className}
+        className={cn("group/report-card", className)}
         style={{ width }}
-        onMouseEnter={() => {
-          setIsHovered(true);
-          clearCloseTimer();
-        }}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          scheduleClose();
-        }}
       >
         {/* 左侧：复选框 + 图标 + 标题 + 描述 */}
         <ReportCardHeaderPrimitive
@@ -294,48 +285,54 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
           // 用户自定义操作区域
           <div onClick={(e) => e.stopPropagation()}>{action}</div>
         ) : showDefaultAction ? (
-          // 默认操作按钮 (hover 时显示)
-          isHovered && (
-            <Popover.Root open={open} onOpenChange={setOpen}>
-              <Popover.Trigger asChild>
-                <span
-                  className={cn(
-                    "flex items-center justify-center",
-                    "w-6 h-6",
-                    "rounded-[var(--radius-md)]",
-                    "p-[var(--gap-xs)]",
-                    "cursor-pointer",
-                    "bg-[var(--bg-neutral-light-hover)]",
-                    // "hover:bg-[var(--bg-neutral-light-hover)]",
-                  )}
-                  aria-label="更多操作"
-                  onMouseEnter={() => {
-                    clearCloseTimer();
-                    setOpen(true);
-                  }}
-                  onMouseLeave={scheduleClose}
-                >
-                  <Ellipsis className="size-4 text-[var(--text-secondary)]" />
-                </span>
-              </Popover.Trigger>
-              <Popover.Portal>
-                <Popover.Content
-                  side="bottom"
-                  align="end"
-                  sideOffset={8}
-                  onMouseEnter={clearCloseTimer}
-                  onMouseLeave={scheduleClose}
-                  className={cn("z-50")}
-                >
-                  <CardActionsMenu
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                    onDuplicate={onDuplicate}
-                  />
-                </Popover.Content>
-              </Popover.Portal>
-            </Popover.Root>
-          )
+          // 默认操作按钮（与 file-card 一致：默认隐藏，hover 卡片时显示）
+          <Popover.Root open={open} onOpenChange={setOpen}>
+            <Popover.Trigger asChild>
+              <span
+                className={cn(
+                  "flex items-center justify-center",
+                  "w-6 h-6",
+                  "rounded-[var(--radius-md)]",
+                  "p-[var(--gap-xs)]",
+                  "transition-all duration-200",
+                  "flex-shrink-0",
+                  // 默认隐藏，hover 卡片时显示（此时无底色）
+                  "opacity-0",
+                  "group-hover/report-card:opacity-100",
+                  // popover 展开时 icon 保持显示且保持底色
+                  open && "opacity-100",
+                  open && "bg-[var(--bg-neutral-light-hover)]",
+                  // 仅 hover icon 时底色变化
+                  "hover:bg-[var(--bg-neutral-light-hover)]",
+                  "cursor-pointer",
+                )}
+                aria-label="更多操作"
+                onMouseEnter={() => {
+                  clearCloseTimer();
+                  setOpen(true);
+                }}
+                onMouseLeave={scheduleClose}
+              >
+                <Ellipsis className="size-4 text-[var(--text-secondary)]" />
+              </span>
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Popover.Content
+                side="bottom"
+                align="end"
+                sideOffset={8}
+                onMouseEnter={clearCloseTimer}
+                onMouseLeave={scheduleClose}
+                className={cn("z-50")}
+              >
+                <CardActionsMenu
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onDuplicate={onDuplicate}
+                />
+              </Popover.Content>
+            </Popover.Portal>
+          </Popover.Root>
         ) : null}
       </ReportCardContainerPrimitive>
     );

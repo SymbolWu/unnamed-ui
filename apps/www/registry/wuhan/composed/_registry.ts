@@ -6,12 +6,17 @@ export const composed: Registry["items"] = [
     type: "registry:block",
     title: "Message",
     description: "Composed AI and user message components",
-    registryDependencies: ["message-01"],
+    registryDependencies: ["message-01", "icon-button", "feedback"],
     files: [
       {
         path: "composed/message/message.tsx",
         type: "registry:component",
         target: "components/wuhan/composed/message.tsx",
+      },
+      {
+        path: "composed/message/message-feedback.tsx",
+        type: "registry:component",
+        target: "components/wuhan/composed/message-feedback.tsx",
       },
     ],
   },
