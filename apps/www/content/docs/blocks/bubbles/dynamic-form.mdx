@@ -52,11 +52,12 @@ export function Example() {
 ## 特性
 
 - **8 种表单控件**：input、textarea、select、radio、checkbox、switch、slider、number
+- **自定义组件**：支持使用任何具备 value 和 onChange 属性的自定义组件
 - **Zod 验证集成**：强大的表单验证能力
 - **只读模式**：展示 label 而非 value，适合数据预览
 - **实例方法**：getFieldsError、getFieldsValue、validateFields、setFields、resetFields、submit
 - **表单值监听**：onValuesChange 回调实时监听表单变化
-- **自定义渲染**：支持字段级别的自定义渲染函数
+- **自定义渲染**：支持字段级别的自定义渲染函数（高级用法）
 - **响应式布局**：支持 vertical、horizontal、responsive 三种布局方向
 - **AI 场景友好**：提供 generateJsonSchema 辅助 AI 理解表单结构
 
@@ -181,6 +182,102 @@ AI 对话场景中的动态表单生成。
   className="mb-4"
 />
 
+### 自定义组件
+
+通过 `component` 属性使用自定义表单组件。**自定义组件必须具备 `value` 和 `onChange` 属性**，这是受控组件的基本要求。
+
+<ComponentPreview
+  name="dynamic-form-custom-component"
+  description="Form with custom components (address selector, price range, color picker)"
+  className="mb-4"
+/>
+
+#### 自定义组件示例
+
+以上示例展示了三个不同复杂度的自定义组件：
+
+1. **地址选择器（AddressSelector）**：包含省份和城市两个下拉框，展示如何在一个组件中管理多个输入字段
+2. **价格范围输入（PriceRangeInput）**：包含最小值和最大值两个数字输入框，展示如何处理复杂的数据结构
+3. **颜色选择器（ColorPicker）**：简单的颜色选择组件，展示基础的自定义组件实现
+
+#### 自定义组件要求
+
+当使用 `component` 属性时，您的自定义组件需要遵循以下规范：
+
+**必需属性：**
+- `value`: 字段的当前值，组件应根据此值显示状态
+- `onChange`: 值变更处理函数，当用户交互改变值时调用此函数
+
+**可选属性：**
+- `onBlur`: 字段失焦处理函数，用于触发验证
+- `error`: 字段错误信息（`FieldError` 类型），可用于显示错误状态
+- `disabled`: 是否禁用组件
+- `field`: 完整的字段配置对象，可访问其他配置信息（如 `placeholder`、`description` 等）
+
+#### 复杂组件示例：地址选择器
+
+下面是一个完整的自定义组件示例，展示如何创建包含多个输入框的组件：
+
+```tsx
+import type { CustomFieldComponentProps } from "@/registry/wuhan/composed/dynamic-form";
+
+interface AddressValue {
+  province?: string;
+  city?: string;
+}
+
+function AddressSelector({ value, onChange, disabled, error }: CustomFieldComponentProps) {
+  const addressValue = (value as AddressValue) || {};
+  const [selectedProvince, setSelectedProvince] = useState(addressValue.province || "");
+  const [selectedCity, setSelectedCity] = useState(addressValue.city || "");
+
+  // 当省份或城市改变时，更新表单值
+  useEffect(() => {
+    onChange({
+      province: selectedProvince,
+      city: selectedCity,
+    });
+  }, [selectedProvince, selectedCity, onChange]);
+
+  return (
+    <div className="grid grid-cols-2 gap-3">
+      <select
+        value={selectedProvince}
+        onChange={(e) => setSelectedProvince(e.target.value)}
+        disabled={disabled}
+      >
+        <option value="">请选择省份</option>
+        {/* ... 省份选项 */}
+      </select>
+      
+      <select
+        value={selectedCity}
+        onChange={(e) => setSelectedCity(e.target.value)}
+        disabled={disabled || !selectedProvince}
+      >
+        <option value="">请选择城市</option>
+        {/* ... 城市选项 */}
+      </select>
+    </div>
+  );
+}
+
+// 在 schema 中使用
+const schema = {
+  fields: [
+    {
+      name: "address",
+      label: "地址",
+      type: "input",
+      component: AddressSelector,
+      defaultValue: {},
+    },
+  ],
+};
+```
+
+这种设计遵循 React 受控组件的标准模式，确保表单状态的一致性和可预测性。您可以创建任何符合此接口的自定义组件，如颜色选择器、标签输入、富文本编辑器等。
+
 ## API
 
 ### DynamicForm
@@ -284,7 +381,8 @@ function FormWithMethods() {
 | `max` | `number` | 最大值（number 类型） |
 | `step` | `number` | 步进值（number 类型） |
 | `range` | `{min, max, step?}` | 范围配置（slider 类型） |
-| `render` | `(props) => ReactNode` | 自定义渲染函数 |
+| `component` | `React.ComponentType<CustomFieldComponentProps>` | 自定义组件（需要具备 value 和 onChange 属性） |
+| `render` | `(props) => ReactNode` | 自定义渲染函数（优先级高于 component） |
 
 ### FieldType
 
@@ -310,6 +408,94 @@ function FormWithMethods() {
 | `value` | `string \| number \| boolean` | 选项值 |
 | `label` | `string` | 选项显示文本 |
 | `disabled` | `boolean` | 是否禁用该选项 |
+
+### CustomFieldComponentProps
+
+自定义组件必须实现的属性接口。
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `value` | `unknown` | ✅ | 字段的当前值 |
+| `onChange` | `(value: unknown) => void` | ✅ | 值变更处理函数 |
+| `onBlur` | `() => void` | ❌ | 字段失焦处理函数 |
+| `error` | `FieldError` | ❌ | 字段错误信息 |
+| `disabled` | `boolean` | ❌ | 是否禁用 |
+| `field` | `FieldSchema` | ❌ | 完整的字段配置对象 |
+
+**简单示例（单个输入）：**
+
+```tsx
+import type { CustomFieldComponentProps } from "@/registry/wuhan/composed/dynamic-form";
+
+function CustomRating({ value, onChange, disabled }: CustomFieldComponentProps) {
+  const rating = (value as number) || 0;
+  
+  return (
+    <div className="flex gap-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          type="button"
+          disabled={disabled}
+          onClick={() => onChange(star)}
+          className={star <= rating ? "text-yellow-500" : "text-gray-300"}
+        >
+          ★
+        </button>
+      ))}
+    </div>
+  );
+}
+```
+
+**复杂示例（多个输入）：**
+
+```tsx
+import { useState, useEffect } from "react";
+import type { CustomFieldComponentProps } from "@/registry/wuhan/composed/dynamic-form";
+
+interface DateRangeValue {
+  start?: string;
+  end?: string;
+}
+
+function DateRangePicker({ value, onChange, disabled }: CustomFieldComponentProps) {
+  const rangeValue = (value as DateRangeValue) || {};
+  const [start, setStart] = useState(rangeValue.start || "");
+  const [end, setEnd] = useState(rangeValue.end || "");
+
+  // 当任一日期改变时，更新表单值
+  useEffect(() => {
+    onChange({ start, end });
+  }, [start, end, onChange]);
+
+  return (
+    <div className="flex gap-2">
+      <input
+        type="date"
+        value={start}
+        onChange={(e) => setStart(e.target.value)}
+        disabled={disabled}
+      />
+      <span>至</span>
+      <input
+        type="date"
+        value={end}
+        onChange={(e) => setEnd(e.target.value)}
+        disabled={disabled}
+      />
+    </div>
+  );
+}
+          className={star <= rating ? "text-yellow-500" : "text-gray-300"}
+        >
+          ★
+        </button>
+      ))}
+    </div>
+  );
+}
+```
 
 ## 工具函数
 
@@ -360,7 +546,12 @@ const displayText = getDisplayLabel(value, field);
 2. **初始值**：合理设置 `defaultValue` 和 `initialValues`，避免非受控组件警告
 3. **只读模式**：用于数据展示时启用 `readonly`，提升用户体验
 4. **实例方法**：复杂交互场景下使用 `ref` 访问实例方法
-5. **自定义渲染**：对于特殊需求的字段，使用 `render` 函数自定义渲染逻辑
+5. **自定义组件**：
+   - 确保自定义组件实现 `value` 和 `onChange` 属性（受控组件模式）
+   - 使用 TypeScript 时，导入 `CustomFieldComponentProps` 类型确保类型安全
+   - 优先使用 `component` 而非 `render`，除非需要完全自定义布局
+   - 在自定义组件中适当处理 `error` 和 `disabled` 状态
+6. **自定义渲染**：对于需要完全控制布局的字段，使用 `render` 函数（优先级高于 `component`）
 
 ## 注意事项
 
@@ -369,6 +560,7 @@ const displayText = getDisplayLabel(value, field);
 - 使用 `validateSchema` 时，字段名需要与 Schema 中定义的字段名一致
 - 只读模式下，表单不会进行验证，因此可以隐藏操作按钮
 - 对于 select 类型在只读模式下，确保 `options` 中包含当前值对应的选项
+- 自定义组件必须遵循受控组件模式（controlled component pattern），即通过 `value` 接收值，通过 `onChange` 通知变更
 
 ## 原语组件
 

@@ -1841,6 +1841,18 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "dynamic-form-custom-component",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-custom-component.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-custom-component.tsx",
+      },
+    ],
+  },
+  {
     name: "dynamic-form-pending",
     type: "registry:example",
     registryDependencies: ["dynamic-form"],

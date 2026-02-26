@@ -77,6 +77,26 @@ export interface FieldOption {
 }
 
 /**
+ * 自定义组件属性
+ * 自定义表单组件必须具备的属性接口
+ * @public
+ */
+export interface CustomFieldComponentProps {
+  /** 字段的当前值 */
+  value: unknown;
+  /** 值变更处理函数 */
+  onChange: (value: unknown) => void;
+  /** 字段失焦处理函数（可选） */
+  onBlur?: () => void;
+  /** 字段错误信息（可选） */
+  error?: FieldError;
+  /** 是否禁用（可选） */
+  disabled?: boolean;
+  /** 字段配置（可选，可用于访问其他配置信息） */
+  field?: FieldSchema;
+}
+
+/**
  * 表单字段配置
  * 定义单个表单项的完整配置信息
  * @public
@@ -114,7 +134,9 @@ export interface FieldSchema {
     max: number;
     step?: number;
   };
-  /** 自定义渲染函数（高级用法） */
+  /** 自定义组件（需要具备 value 和 onChange 属性） */
+  component?: React.ComponentType<CustomFieldComponentProps>;
+  /** 自定义渲染函数（高级用法，优先级高于 component） */
   render?: (props: FieldRenderProps) => React.ReactNode;
 }
 
@@ -582,7 +604,7 @@ const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(
       );
     }
 
-    // 如果有自定义渲染函数，使用自定义渲染
+    // 如果有自定义渲染函数，使用自定义渲染（优先级最高）
     if (field.render) {
       return (
         <Field ref={ref} orientation={field.orientation}>
@@ -603,6 +625,42 @@ const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(
               </>
             )}
           />
+        </Field>
+      );
+    }
+
+    // 如果有自定义组件，使用自定义组件
+    if (field.component) {
+      const CustomComponent = field.component;
+      return (
+        <Field
+          ref={ref}
+          orientation={field.orientation}
+          data-invalid={!!error}
+          className={cn(field.disabled && "opacity-50")}
+        >
+          <FieldLabel htmlFor={field.name}>
+            {field.label}
+            {field.required && <span className="text-destructive ml-1">*</span>}
+          </FieldLabel>
+          <Controller
+            name={field.name}
+            control={control}
+            render={({ field: formField }) => (
+              <CustomComponent
+                value={formField.value}
+                onChange={formField.onChange}
+                onBlur={formField.onBlur}
+                error={error}
+                disabled={field.disabled}
+                field={field}
+              />
+            )}
+          />
+          {field.description && (
+            <FieldDescription>{field.description}</FieldDescription>
+          )}
+          {error && <FieldErrorComponent>{error.message}</FieldErrorComponent>}
         </Field>
       );
     }
