@@ -3,6 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { PanelLeft } from "lucide-react";
+import { IconButtonPrimitive } from "@/registry/wuhan/blocks/icon-button/icon-button-01";
 
 /**
  * SplitPane 容器原语组件
@@ -124,13 +125,14 @@ export const SplitPaneItemPrimitive = React.forwardRef<
                   {/* 折叠图标 */}
                   {showCollapsibleIcon &&
                     (!isCompact || showIconWhenCompact) && (
-                      <button
-                        type="button"
+                      <IconButtonPrimitive
+                        variant="ghost"
+                        color="secondary"
+                        size="sm"
                         onClick={onCollapsibleClick}
-                        className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
                       >
-                        {collapsibleIcon || <PanelLeft className="h-4 w-4" />}
-                      </button>
+                        {collapsibleIcon || <PanelLeft />}
+                      </IconButtonPrimitive>
                     )}
                 </div>
               </>
@@ -157,13 +159,14 @@ export const SplitPaneItemPrimitive = React.forwardRef<
 
                 {/* 折叠图标 */}
                 {showCollapsibleIcon && (!isCompact || showIconWhenCompact) && (
-                  <button
-                    type="button"
+                  <IconButtonPrimitive
+                    variant="ghost"
+                    color="secondary"
+                    size="md"
                     onClick={onCollapsibleClick}
-                    className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
                   >
-                    {collapsibleIcon || <PanelLeft className="h-4 w-4" />}
-                  </button>
+                    {collapsibleIcon || <PanelLeft />}
+                  </IconButtonPrimitive>
                 )}
               </>
             )}

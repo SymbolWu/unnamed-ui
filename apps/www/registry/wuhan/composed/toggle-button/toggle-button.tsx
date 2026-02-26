@@ -120,7 +120,7 @@ export interface ToggleButtonProps {
       optionId: string;
       disabled?: boolean;
       index: number;
-    }
+    },
   ) => React.ReactNode;
 }
 
@@ -198,11 +198,11 @@ export const ToggleButton = React.forwardRef<HTMLDivElement, ToggleButtonProps>(
     ref,
   ) => {
     // 非受控模式
-    const [internalValue, setInternalValue] = React.useState<string | undefined>(
-      valueProp === undefined ? defaultValue : undefined,
-    );
+    const [internalValue, setInternalValue] = React.useState<
+      string | undefined
+    >(valueProp === undefined ? defaultValue : undefined);
     const [internalValues, setInternalValues] = React.useState<string[]>(
-      valuesProp === undefined ? defaultValues ?? [] : [],
+      valuesProp === undefined ? (defaultValues ?? []) : [],
     );
 
     const isControlled = valueProp !== undefined || valuesProp !== undefined;
@@ -278,7 +278,7 @@ export const ToggleButton = React.forwardRef<HTMLDivElement, ToggleButtonProps>(
             disabled: option.disabled,
             index,
           })
-        : option.icon ?? option.label;
+        : (option.icon ?? option.label);
 
       const button = (
         <ToggleButtonPrimitive

@@ -113,8 +113,6 @@ export const ReportCardContainerPrimitive = React.forwardRef<
         disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
         // hover 状态（非禁用）
         !disabled && "hover:bg-[var(--bg-neutral-light)]",
-        // selected 状态
-        selected && "bg-[var(--bg-brand-light)]",
         // 焦点状态（非禁用）
         !disabled &&
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2",

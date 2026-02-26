@@ -125,20 +125,20 @@ export const AccordionTriggerPrimitive = React.forwardRef<
           "font-[var(--font-family-cn)]",
           "font-[var(--font-weight-400)]",
           "leading-[var(--line-height-2)]",
-          "text-[var(--text-secondary)]",
+          "text-[var(--text-primary)]",
           "font-size-2",
           "group flex flex-1 items-center justify-between gap-2",
           "text-left transition-all outline-none",
           "hover:bg-[var(--bg-hover)]",
           "focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
-          "[&[data-state='open']>svg.chevron-down]:hidden",
-          "[&[data-state='closed']>svg.chevron-up]:hidden",
         )}
         {...props}
       >
         {children}
-        <ChevronDown className="chevron-down h-4 w-4 shrink-0 text-[var(--text-tertiary)] transition-transform duration-200" />
-        <ChevronUp className="chevron-up h-4 w-4 shrink-0 text-[var(--text-tertiary)] transition-transform duration-200" />
+        <div className={cn("flex items-center justify-center", "size-6 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200")}>
+          <ChevronDown className="size-4 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200 group-data-[state=open]:hidden" />
+          <ChevronUp className="size-4 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200 group-data-[state=closed]:hidden" />
+        </div>
       </RadixAccordion.Trigger>
     </RadixAccordion.Header>
   );

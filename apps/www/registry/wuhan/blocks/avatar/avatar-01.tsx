@@ -84,10 +84,10 @@ export const AvatarTextPrimitive = React.forwardRef<
     <span
       ref={ref}
       className={cn(
-        "font-normal",
         "font-[var(--font-family-cn)]",
         "leading-[var(--line-height-2)]",
         className,
+        "font-size-2",
       )}
       {...props}
     />
@@ -189,7 +189,8 @@ export const AvatarNamePrimitive = React.forwardRef<
       ref={ref}
       className={cn(
         "font-[var(--font-family-cn)] font-[var(--font-weight-400)]",
-        "font-size-2 leading-[var(--line-height-2)]",
+        "leading-[var(--line-height-2)]",
+        "font-size-2",
         "tracking-[0px] text-[var(--text-primary)]",
         className,
       )}
