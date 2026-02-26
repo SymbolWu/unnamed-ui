@@ -57,8 +57,10 @@ export default config;
 ```js
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
-};
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+}
 ```
 
 **第三步：添加 Tailwind 导入**
@@ -161,7 +163,7 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/sources-sidebar.json
 ```tsx
 import { PageHeader } from "@/components/wuhan/composed/page-header";
 import { TripleSplitPane } from "@/components/wuhan/composed/triple-split-pane";
-import { SourcesSidebar } from "@/components/wuhan/composed/sources-sidebar";
+import SourcesSidebar  from "@/components/wuhan/composed/sources-sidebar/sources-sidebar";
 
 export default function ProposalPage() {
   return (
