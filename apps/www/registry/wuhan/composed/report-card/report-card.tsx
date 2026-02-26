@@ -114,11 +114,11 @@ const CardActionsMenu = ({
     <div
       className={cn(
         "min-w-[120px]",
-        "rounded-[var(--radius-lg)]",
+        "rounded-[var(--radius-xl)]",
         "border border-[var(--border-neutral)]",
         "bg-[var(--bg-container)]",
         "shadow-[var(--shadow-basic)]",
-        "p-[var(--padding-com-sm)]",
+        "p-[var(--padding-com-xs)]",
       )}
     >
       <div className="flex flex-col">
@@ -127,21 +127,17 @@ const CardActionsMenu = ({
             type="button"
             onClick={onEdit}
             className={cn(
-              "flex items-center gap-2",
-              "px-2 py-1 rounded-md",
+              "flex items-center gap-[var(--gap-md)]",
+              "py-[var(--gap-xs)] px-[var(--padding-com-md)]",
+              "rounded-[var(--radius-lg)]",
               "cursor-pointer",
               "outline-none",
+              "text-[var(--text-primary)]",
               "hover:bg-[var(--bg-neutral-light)]",
             )}
           >
             <Pencil className="size-4 text-[var(--text-secondary)]" />
-            <span
-              className={cn(
-                "text-[var(--text-primary)]",
-                "font-size-1",
-                "leading-[var(--line-height-1)]",
-              )}
-            >
+            <span className="font-size-2 leading-[var(--line-height-2)]">
               编辑
             </span>
           </button>
@@ -151,21 +147,17 @@ const CardActionsMenu = ({
             type="button"
             onClick={onDuplicate}
             className={cn(
-              "flex items-center gap-2",
-              "px-2 py-1 rounded-md",
+              "flex items-center gap-[var(--gap-md)]",
+              "py-[var(--gap-xs)] px-[var(--padding-com-md)]",
+              "rounded-[var(--radius-lg)]",
               "cursor-pointer",
               "outline-none",
+              "text-[var(--text-primary)]",
               "hover:bg-[var(--bg-neutral-light)]",
             )}
           >
             <Copy className="size-4 text-[var(--text-secondary)]" />
-            <span
-              className={cn(
-                "text-[var(--text-primary)]",
-                "font-size-1",
-                "leading-[var(--line-height-1)]",
-              )}
-            >
+            <span className="font-size-2 leading-[var(--line-height-2)]">
               复制
             </span>
           </button>
@@ -175,21 +167,17 @@ const CardActionsMenu = ({
             type="button"
             onClick={onDelete}
             className={cn(
-              "flex items-center gap-2",
-              "px-2 py-1 rounded-md",
+              "flex items-center gap-[var(--gap-md)]",
+              "py-[var(--gap-xs)] px-[var(--padding-com-md)]",
+              "rounded-[var(--radius-lg)]",
               "cursor-pointer",
               "outline-none",
+              "text-[var(--text-error)]",
               "hover:bg-[var(--bg-error-light)]",
             )}
           >
             <Trash2 className="size-4 text-[var(--text-error)]" />
-            <span
-              className={cn(
-                "text-[var(--text-error)]",
-                "font-size-1",
-                "leading-[var(--line-height-1)]",
-              )}
-            >
+            <span className="font-size-2 leading-[var(--line-height-2)]">
               删除
             </span>
           </button>
@@ -318,6 +306,7 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
                     "p-[var(--gap-xs)]",
                     "cursor-pointer",
                     "bg-[var(--bg-neutral-light-hover)]",
+                    // "hover:bg-[var(--bg-neutral-light-hover)]",
                   )}
                   aria-label="更多操作"
                   onMouseEnter={() => {

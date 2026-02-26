@@ -1179,7 +1179,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "split-pane-01",
       description: "分隔面板",
       type: "registry:block",
-      registryDependencies: ["resizable"],
+      registryDependencies: ["resizable", "icon-button-01"],
       files: [
         {
           path: "registry/wuhan/blocks/split-pane/split-pane-01.tsx",
@@ -2354,7 +2354,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Composed toggle button with single and multiple selection modes",
       type: "registry:block",
-      registryDependencies: ["toggle-button-01", "tooltip"],
+      registryDependencies: ["toggle-button-01"],
       files: [
         {
           path: "registry/wuhan/composed/toggle-button/toggle-button.tsx",
@@ -6039,7 +6039,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "toggle-button-icon",
       description: "",
       type: "registry:example",
-      registryDependencies: ["toggle-button"],
+      registryDependencies: ["toggle-button", "tooltip"],
       files: [
         {
           path: "registry/wuhan/examples/toggle-button/toggle-button-icon.tsx",
