@@ -2032,6 +2032,7 @@ export const Index: Record<string, Record<string, any>> = {
         "sidebar-01",
         "history-item-01",
         "avatar-header-01",
+        "tooltip-01",
         "button",
       ],
       files: [
@@ -2331,7 +2332,8 @@ export const Index: Record<string, Record<string, any>> = {
         {
           path: "registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
           type: "registry:component",
-          target: "components/wuhan/composed/sources-sidebar.tsx",
+          target:
+            "components/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
         },
       ],
       component: React.lazy(async () => {

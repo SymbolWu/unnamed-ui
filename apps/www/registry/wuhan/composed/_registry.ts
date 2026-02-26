@@ -293,6 +293,7 @@ export const composed: Registry["items"] = [
       "sidebar-01",
       "history-item-01",
       "avatar-header-01",
+      "tooltip-01",
       "button",
     ],
     files: [
@@ -522,7 +523,7 @@ export const composed: Registry["items"] = [
       {
         path: "composed/sources-sidebar/sources-sidebar.tsx",
         type: "registry:component",
-        target: "components/wuhan/composed/sources-sidebar.tsx",
+        target: "components/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
       },
     ],
   },
