@@ -3223,6 +3223,54 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "file-card-list-controlled",
+    type: "registry:example",
+    registryDependencies: ["file-card"],
+    files: [
+      {
+        path: "examples/file-card/file-card-list-controlled.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/file-card-list-controlled.tsx",
+      },
+    ],
+  },
+  {
+    name: "file-card-list-horizontal",
+    type: "registry:example",
+    registryDependencies: ["file-card"],
+    files: [
+      {
+        path: "examples/file-card/file-card-list-horizontal.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/file-card-list-horizontal.tsx",
+      },
+    ],
+  },
+  {
+    name: "file-card-list-vertical",
+    type: "registry:example",
+    registryDependencies: ["file-card"],
+    files: [
+      {
+        path: "examples/file-card/file-card-list-vertical.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/file-card-list-vertical.tsx",
+      },
+    ],
+  },
+  {
+    name: "file-card-list-custom-spacing",
+    type: "registry:example",
+    registryDependencies: ["file-card"],
+    files: [
+      {
+        path: "examples/file-card/file-card-list-custom-spacing.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/file-card-list-custom-spacing.tsx",
+      },
+    ],
+  },
   // accordion examples
   {
     name: "accordion-demo",

@@ -89,16 +89,24 @@ export interface FileCardListProps {
   title?: string;
   /** 文件列表数据 */
   files?: FileItem[];
-  /** 选中状态 */
+  /** 选中状态（表单组件属性，推荐使用） */
+  value?: Set<string> | string[];
+  /** 选中状态（已废弃，请使用 value） */
   selectedIds?: Set<string> | string[];
   /** 是否禁用 */
   disabled?: boolean;
-  /** 选中状态变化回调 */
+  /** 选中状态变化回调（表单组件属性，推荐使用） */
+  onChange?: (selectedIds: Set<string>) => void;
+  /** 选中状态变化回调（已废弃，请使用 onChange） */
   onSelectionChange?: (selectedIds: Set<string>) => void;
   /** 全选/取消全选回调 */
   onSelectAll?: (select: boolean) => void;
   /** 操作按钮点击回调 */
   onActionClick?: (id: string) => void;
+  /** 布局方向 */
+  layout?: "vertical" | "horizontal";
+  /** 卡片间距，支持数字（px）或 CSS 变量字符串 */
+  spacing?: number | string;
   /** 自定义类名 */
   className?: string;
 }
@@ -392,20 +400,30 @@ export const FileCardList = React.memo(
     const {
       title = "文件列表",
       files = [],
-      selectedIds = [],
+      value,
+      selectedIds,
       disabled = false,
+      onChange,
       onSelectionChange,
       onSelectAll,
       onActionClick,
       multiSelect = true,
+      layout = "vertical",
+      spacing,
       className,
     } = props;
 
+    // 优先使用 value，向后兼容 selectedIds
+    const currentValue = value ?? selectedIds ?? [];
+
+    // 优先使用 onChange，向后兼容 onSelectionChange
+    const handleChange = onChange ?? onSelectionChange;
+
     // 转换为 Set 以便操作
     const selectedSet = React.useMemo(() => {
-      if (selectedIds instanceof Set) return selectedIds;
-      return new Set(selectedIds);
-    }, [selectedIds]);
+      if (currentValue instanceof Set) return currentValue;
+      return new Set(currentValue);
+    }, [currentValue]);
 
     // 处理选中状态变化
     const handleSelectChange = React.useCallback(
@@ -416,9 +434,9 @@ export const FileCardList = React.memo(
         } else {
           newSelected.delete(id);
         }
-        onSelectionChange?.(newSelected);
+        handleChange?.(newSelected);
       },
-      [selectedSet, onSelectionChange],
+      [selectedSet, handleChange],
     );
 
     // 处理全选/取消全选
@@ -426,13 +444,13 @@ export const FileCardList = React.memo(
       (checked: boolean) => {
         if (checked) {
           const allIds = new Set(files.map((f) => f.id));
-          onSelectionChange?.(allIds);
+          handleChange?.(allIds);
         } else {
-          onSelectionChange?.(new Set());
+          handleChange?.(new Set());
         }
         onSelectAll?.(checked);
       },
-      [files, onSelectionChange, onSelectAll],
+      [files, handleChange, onSelectAll],
     );
 
     // 检查是否全选
@@ -440,6 +458,23 @@ export const FileCardList = React.memo(
 
     // 计算选中的数量
     const selectedCount = selectedSet.size;
+
+    // 计算间距样式
+    const gapStyle = React.useMemo(() => {
+      if (spacing === undefined) {
+        return "var(--gap-sm)"; // 默认 16px
+      }
+      if (typeof spacing === "number") {
+        return `${spacing}px`;
+      }
+      return spacing;
+    }, [spacing]);
+
+    // 布局类名
+    const listClassName = cn(
+      "flex",
+      layout === "vertical" ? "flex-col" : "flex-row flex-wrap",
+    );
 
     return (
       <div ref={ref} className={className}>
@@ -506,7 +541,8 @@ export const FileCardList = React.memo(
         {/* 文件列表 */}
         {files.length > 0 && (
           <div
-            className={cn("flex flex-col gap-[var(--gap-sm)]")}
+            className={listClassName}
+            style={{ gap: gapStyle }}
             role="list"
             aria-label={typeof title === "string" ? title : "文件列表"}
           >

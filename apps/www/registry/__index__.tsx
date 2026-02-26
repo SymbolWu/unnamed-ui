@@ -10419,6 +10419,106 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "file-card-list-controlled": {
+      name: "file-card-list-controlled",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["file-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/file-card/file-card-list-controlled.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/file-card-list-controlled.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/file-card/file-card-list-controlled.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "file-card-list-horizontal": {
+      name: "file-card-list-horizontal",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["file-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/file-card/file-card-list-horizontal.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/file-card-list-horizontal.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/file-card/file-card-list-horizontal.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "file-card-list-vertical": {
+      name: "file-card-list-vertical",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["file-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/file-card/file-card-list-vertical.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/file-card-list-vertical.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/file-card/file-card-list-vertical.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "file-card-list-custom-spacing": {
+      name: "file-card-list-custom-spacing",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["file-card"],
+      files: [
+        {
+          path: "registry/wuhan/examples/file-card/file-card-list-custom-spacing.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/file-card-list-custom-spacing.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/file-card/file-card-list-custom-spacing.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "accordion-demo": {
       name: "accordion-demo",
       description: "",
