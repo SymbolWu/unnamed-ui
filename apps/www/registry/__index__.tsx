@@ -11,7 +11,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "index",
       description: "",
       type: "registry:style",
-      registryDependencies: [],
+      registryDependencies: ["utils"],
       files: [
         {
           path: "registry/wuhan/style/globals.css",
@@ -32,7 +32,7 @@ export const Index: Record<string, Record<string, any>> = {
       name: "style",
       description: "",
       type: "registry:style",
-      registryDependencies: [],
+      registryDependencies: ["utils"],
       files: [
         {
           path: "registry/wuhan/style/globals.css",
@@ -46,6 +46,30 @@ export const Index: Record<string, Record<string, any>> = {
         },
       ],
       component: null,
+      categories: undefined,
+      meta: undefined,
+    },
+    utils: {
+      name: "utils",
+      description: "",
+      type: "registry:lib",
+      registryDependencies: [],
+      files: [
+        {
+          path: "registry/wuhan/lib/utils.ts",
+          type: "registry:lib",
+          target: "src/lib/utils.ts",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod = await import("@/registry/wuhan/lib/utils.ts");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
       categories: undefined,
       meta: undefined,
     },

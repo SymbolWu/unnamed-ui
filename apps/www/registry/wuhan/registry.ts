@@ -8,7 +8,7 @@ import { composed } from "./composed/_registry";
 import { examples } from "./examples/_registry";
 // import { hooks } from "./hooks/_registry"
 // import { internal } from "./internal/_registry"
-// import { lib } from "./lib/_registry"
+import { lib } from "./lib/_registry";
 import { ui } from "./ui/_registry";
 import { recruitmentBlocks } from "./recruitment/_registry";
 
@@ -31,7 +31,7 @@ const NEW_YORK_V4_STYLE = {
     "@tailwindcss/postcss",
     "postcss",
   ],
-  registryDependencies: [],
+  registryDependencies: ["utils"],
   // 仅使用 files，避免与 cssVars/css 重复导致两套 CSS 文件
   files: [
     {
@@ -60,6 +60,7 @@ export const registry = {
         name: "style",
         ...NEW_YORK_V4_STYLE,
       },
+      ...lib,
       ...ui,
       ...blocks,
       ...composed,

@@ -135,7 +135,12 @@ export const AccordionTriggerPrimitive = React.forwardRef<
         {...props}
       >
         {children}
-        <div className={cn("flex items-center justify-center", "size-6 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200")}>
+        <div
+          className={cn(
+            "flex items-center justify-center",
+            "size-6 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200",
+          )}
+        >
           <ChevronDown className="size-4 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200 group-data-[state=open]:hidden" />
           <ChevronUp className="size-4 rounded-[var(--radius-md)] hover:bg-[var(--bg-neutral-light)] shrink-0 text-[var(--text-tertiary)] transition-transform duration-200 group-data-[state=closed]:hidden" />
         </div>
