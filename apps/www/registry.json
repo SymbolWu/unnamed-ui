@@ -184,7 +184,8 @@
       "files": [
         {
           "path": "registry/wuhan/ui/popover.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/popover.tsx"
         }
       ]
     },
@@ -197,7 +198,94 @@
       "files": [
         {
           "path": "registry/wuhan/ui/resizable.tsx",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "components/ui/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-select",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-switch"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "dependencies": [
+        "@radix-ui/react-slider"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "label",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field.tsx"
         }
       ]
     },
@@ -732,7 +820,8 @@
       "title": "Select Card",
       "description": "Card selection item primitive with selected state",
       "registryDependencies": [
-        "style"
+        "style",
+        "toggle-button-01"
       ],
       "files": [
         {
@@ -1045,7 +1134,8 @@
       "title": "Accordion",
       "description": "Accordion primitives with Root, Item, Trigger, and Content components",
       "dependencies": [
-        "@radix-ui/react-accordion"
+        "@radix-ui/react-accordion",
+        "lucide-react"
       ],
       "registryDependencies": [
         "style"
@@ -1201,6 +1291,9 @@
       "type": "registry:block",
       "title": "Deep Thinking",
       "description": "Composed deep thinking collapsible block",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "deep-thinking-01"
       ],
@@ -1217,6 +1310,9 @@
       "type": "registry:block",
       "title": "Execution Result",
       "description": "Composed execution result list with sections",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "execution-result-01"
       ],
@@ -1235,7 +1331,8 @@
       "description": "Composed panel with tabs and selectable items",
       "registryDependencies": [
         "component-panel-01",
-        "tooltip-01"
+        "tooltip-01",
+        "select-card-01"
       ],
       "files": [
         {
@@ -1250,6 +1347,9 @@
       "type": "registry:block",
       "title": "Thinking Step Item",
       "description": "Composed step item with status, timeline, tools, and files",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "thinking-step-item-01"
       ],
@@ -1266,9 +1366,13 @@
       "type": "registry:block",
       "title": "Thinking Process",
       "description": "Composed thinking process with steps and content blocks",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "thinking-process-01",
-        "thinking-step-item"
+        "thinking-step-item",
+        "collapsible"
       ],
       "files": [
         {
@@ -1315,6 +1419,9 @@
       "type": "registry:block",
       "title": "Prompt",
       "description": "Composed prompt list with horizontal/vertical variants",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "prompt-01",
         "prompt-02"
@@ -1348,6 +1455,9 @@
       "type": "registry:block",
       "title": "Attachment List",
       "description": "Composed attachment list with cards",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "attachment-list-01"
       ],
@@ -1364,6 +1474,9 @@
       "type": "registry:block",
       "title": "Quote Content",
       "description": "Composed quote content display with close action",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "quote-content-01"
       ],
@@ -1396,6 +1509,9 @@
       "type": "registry:block",
       "title": "Avatar Header",
       "description": "Composed avatar header with name and time",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "avatar-header-01"
       ],
@@ -1412,10 +1528,14 @@
       "type": "registry:block",
       "title": "Sidebar",
       "description": "Composed sidebar with header, search, and history list",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "sidebar-01",
         "history-item-01",
-        "avatar-header-01"
+        "avatar-header-01",
+        "button"
       ],
       "files": [
         {
@@ -1655,7 +1775,8 @@
         "@ant-design/icons"
       ],
       "registryDependencies": [
-        "sources-sidebar-01"
+        "sources-sidebar-01",
+        "custom-sources"
       ],
       "files": [
         {
@@ -1723,7 +1844,8 @@
       "title": "Select Card",
       "description": "Composed card selection with single/multiple modes and grid layout",
       "registryDependencies": [
-        "select-card-01"
+        "select-card-01",
+        "tooltip-01"
       ],
       "files": [
         {
@@ -1771,7 +1893,6 @@
       "title": "BlockSelect",
       "description": "选择器",
       "dependencies": [
-        "radix-ui",
         "lucide-react"
       ],
       "registryDependencies": [
@@ -1847,6 +1968,9 @@
       "type": "registry:block",
       "title": "Tag",
       "description": "标签",
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "tag-01"
       ],
@@ -1938,7 +2062,8 @@
       "title": "Report Card",
       "description": "Composed report card with icon, title, description, and hover actions",
       "dependencies": [
-        "lucide-react"
+        "lucide-react",
+        "@radix-ui/react-popover"
       ],
       "registryDependencies": [
         "report-card-01",
