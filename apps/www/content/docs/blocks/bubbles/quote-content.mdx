@@ -4,13 +4,38 @@ description: Composed quote content display above input field
 author: AF
 ---
 
-<ComponentPreview
-  name="quote-content-demo"
-  description="Quote content display with enter icon, content, and close button"
-  className="mb-4"
-/>
+<ComponentPreview name="quote-content-demo" description="Quote content display with enter icon, content, and close button" className="mb-4" />
 
-Quote Content 是组合组件，用于在输入框上方显示引用内容，包含图标、内容与关闭动作。适用于聊天场景中的引用消息、回复内容等场景。需要深度定制时可使用 primitives。
+Quote Content 组件用于在输入框上方显示引用内容，包含图标、内容与关闭动作。适用于聊天场景中的引用消息、回复内容等场景。
+
+## 概述
+
+- **引用内容展示**：图标 + 内容 + 关闭按钮的完整布局
+- **业务数据适配**：支持泛型数据对象，通过 adapter 映射到组件属性
+- **灵活定制**：支持自定义图标、关闭按钮和插槽渲染
+- **类型安全**：完整的 TypeScript 类型定义
+- **开箱即用**：默认样式即可满足常见场景
+
+## 快速开始
+
+```tsx
+import { QuoteContentComposed } from "@/registry/wuhan/composed/quote-content/quote-content";
+
+export function Example() {
+  return (
+    <QuoteContentComposed content="这是一条引用内容" />
+  );
+}
+```
+
+## 特性
+
+- **默认样式**：直接使用即可看到完整 UI，无需额外配置
+- **自定义图标**：前缀图标和关闭图标均可自定义
+- **数据适配器**：通过 `quoteAdapter` 适配业务数据到组件属性
+- **插槽渲染**：支持 `renderLeading`、`renderContent`、`renderClose` 等插槽
+- **可控关闭**：支持 `closable` 控制是否显示关闭按钮
+- **回调支持**：提供 `onClose` 和 `onCloseQuote` 两种关闭回调
 
 ## 安装
 
@@ -33,14 +58,14 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/quote-content.json
 
 <Steps>
 
-<Step>Copy and paste the following code into your project.</Step>
+<Step>复制以下代码到你的项目</Step>
 
 <ComponentSource
   name="quote-content"
   title="registry/wuhan/composed/quote-content/quote-content.tsx"
 />
 
-<Step>Update the import paths to match your project setup.</Step>
+<Step>更新导入路径以匹配你的项目设置</Step>
 
 </Steps>
 
@@ -48,23 +73,27 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/quote-content.json
 
 </CodeTabs>
 
-## 概述
+## 代码演示
 
-- **定位**：引用/回复内容条（图标 + 内容 + 关闭）
-- **默认样式**：直接使用即可看到完整 UI
-- **扩展能力**：支持业务数据适配与插槽渲染
+### 基本用法
 
-## Usage
-
-### 基本
+最小示例，只传入引用内容。
 
 ```tsx
 import { QuoteContentComposed } from "@/registry/wuhan/composed/quote-content/quote-content";
 
-<QuoteContentComposed content="这是一条引用内容" />;
+<QuoteContentComposed content="这是一条引用内容" />
 ```
 
-### 自定义图标与关闭
+<ComponentPreview
+  name="quote-content-default"
+  description="基本用法"
+  className="mb-4"
+/>
+
+### 自定义图标
+
+自定义前缀图标与关闭图标。
 
 ```tsx
 <QuoteContentComposed
@@ -72,10 +101,18 @@ import { QuoteContentComposed } from "@/registry/wuhan/composed/quote-content/qu
   icon={<MyIcon />}
   closeIcon={<MyCloseIcon />}
   onClose={() => console.log("close")}
-/>;
+/>
 ```
 
+<ComponentPreview
+  name="quote-content-custom-icon"
+  description="自定义图标"
+  className="mb-4"
+/>
+
 ### 数据适配（推荐）
+
+业务数据适配，通过 `quoteAdapter` 将业务数据映射到组件属性。
 
 ```tsx
 const quote = { id: "q-1", text: "来自业务数据的引用内容" };
@@ -84,55 +121,8 @@ const quote = { id: "q-1", text: "来自业务数据的引用内容" };
   quote={quote}
   quoteAdapter={(item) => ({ content: item.text })}
   onCloseQuote={(item) => console.log("close", item.id)}
-/>;
+/>
 ```
-
-### 插槽渲染（高级）
-
-```tsx
-<QuoteContentComposed
-  content="自定义结构"
-  renderLeading={({ icon }) => <div>{icon}</div>}
-  renderContent={({ content }) => <div>{content}</div>}
-  renderClose={({ onClose }) => <button onClick={onClose}>关闭</button>}
-/>;
-```
-
-## 代码演示
-
-### 默认展示
-
-基础用法，包含回车图标、引用内容和关闭按钮。
-
-<ComponentPreview
-  name="quote-content-demo"
-  description="默认展示"
-  className="mb-4"
-/>
-
-### 基本
-
-只传内容的最小示例。
-
-<ComponentPreview
-  name="quote-content-default"
-  description="最小示例"
-  className="mb-4"
-/>
-
-### 自定义图标
-
-自定义前缀图标与关闭图标。
-
-<ComponentPreview
-  name="quote-content-custom-icon"
-  description="自定义图标"
-  className="mb-4"
-/>
-
-### 数据适配
-
-业务数据适配。
 
 <ComponentPreview
   name="quote-content-adapter"
@@ -140,30 +130,132 @@ const quote = { id: "q-1", text: "来自业务数据的引用内容" };
   className="mb-4"
 />
 
-### 自定义渲染
+### 自定义渲染（高级）
 
-自定义渲染结构。
+使用插槽完全自定义渲染结构。
+
+```tsx
+<QuoteContentComposed
+  content="自定义结构"
+  renderLeading={({ icon }) => <div>{icon}</div>}
+  renderContent={({ content }) => <div>{content}</div>}
+  renderClose={({ onClose }) => <button onClick={onClose}>关闭</button>}
+/>
+```
 
 <ComponentPreview
   name="quote-content-custom-render"
-  description="Custom layout"
+  description="自定义渲染"
   className="mb-4"
 />
 
-## API (Composed)
+## API
 
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
+### QuoteContentComposed
+
+引用内容组件，支持基础属性和高级定制。
+
+#### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
 | `content` | `ReactNode` | - | 引用内容（最常用） |
-| `quote` | `T` | - | 业务数据对象 |
-| `quoteAdapter` | `(quote) => { content, icon?, closeIcon? }` | - | 业务数据转组件数据 |
+| `quote` | `T` | - | 业务数据对象（泛型支持） |
+| `quoteAdapter` | `(quote: T) => AdaptedProps` | - | 业务数据转组件属性的适配器 |
 | `icon` | `ReactNode` | - | 前缀图标 |
 | `closeIcon` | `ReactNode` | - | 关闭图标 |
 | `onClose` | `() => void` | - | 关闭回调 |
-| `onCloseQuote` | `(quote) => void` | - | 关闭回调（带业务数据） |
+| `onCloseQuote` | `(quote: T) => void` | - | 关闭回调（带业务数据） |
 | `closable` | `boolean` | `true` | 是否显示关闭按钮 |
-| `renderQuote` | `(ctx) => ReactNode` | - | 覆盖整体渲染 |
-| `renderLeading` | `(ctx) => ReactNode` | - | 覆盖图标区域 |
-| `renderContent` | `(ctx) => ReactNode` | - | 覆盖内容区域 |
-| `renderClose` | `(ctx) => ReactNode` | - | 覆盖关闭按钮 |
+| `renderQuote` | `(ctx: RenderContext) => ReactNode` | - | 覆盖整体渲染 |
+| `renderLeading` | `(ctx: RenderContext) => ReactNode` | - | 覆盖图标区域 |
+| `renderContent` | `(ctx: RenderContext) => ReactNode` | - | 覆盖内容区域 |
+| `renderClose` | `(ctx: RenderContext) => ReactNode` | - | 覆盖关闭按钮 |
 | `className` | `string` | - | 外层容器样式 |
+
+#### Example
+
+```tsx
+import { QuoteContentComposed } from "@/registry/wuhan/composed/quote-content/quote-content";
+
+function ChatInput() {
+  const [quote, setQuote] = useState(null);
+  
+  return (
+    <div className="flex flex-col gap-2">
+      {/* 基础用法 */}
+      <QuoteContentComposed content="这是一条引用内容" />
+      
+      {/* 数据适配 */}
+      {quote && (
+        <QuoteContentComposed
+          quote={quote}
+          quoteAdapter={(item) => ({
+            content: item.text,
+            icon: <ReplyIcon />
+          })}
+          onCloseQuote={(item) => setQuote(null)}
+        />
+      )}
+      
+      {/* 完全自定义 */}
+      <QuoteContentComposed
+        content="高级定制"
+        renderContent={({ content }) => (
+          <div className="text-sm font-medium">{content}</div>
+        )}
+      />
+    </div>
+  );
+}
+```
+
+### AdaptedProps
+
+适配器返回的属性类型。
+
+```tsx
+type AdaptedProps = {
+  content?: ReactNode;
+  icon?: ReactNode;
+  closeIcon?: ReactNode;
+};
+```
+
+### RenderContext
+
+渲染函数的上下文参数。
+
+```tsx
+type RenderContext = {
+  content: ReactNode;
+  icon?: ReactNode;
+  closeIcon?: ReactNode;
+  onClose?: () => void;
+  closable: boolean;
+};
+```
+
+## 使用场景
+
+- **聊天引用**：在聊天输入框上方显示引用的消息内容
+- **回复消息**：论坛、评论系统中的回复功能
+- **编辑预览**：显示正在编辑或引用的内容
+- **引用卡片**：文章、文档中的引用块展示
+- **消息转发**：显示转发的消息来源和内容
+
+## 最佳实践
+
+1. **优先使用数据适配器**：当组件与业务数据绑定时，使用 `quoteAdapter` 可以保持类型安全和代码清晰
+2. **合理使用插槽**：只在需要深度定制布局时使用 `render*` 系列插槽
+3. **控制内容长度**：引用内容过长时应截断或限制行数，避免影响 UI 布局
+4. **回调处理**：使用 `onCloseQuote` 而非 `onClose` 可以直接获取业务数据，减少状态管理
+5. **图标一致性**：保持图标风格与整体设计系统一致
+
+## 注意事项
+
+- `quoteAdapter` 优先级高于直接传入的属性（如 `content`、`icon` 等）
+- 使用 `renderQuote` 会完全覆盖组件默认结构，需自行实现所有布局
+- `onCloseQuote` 只在提供 `quote` 属性时才会被调用
+- `closable={false}` 会隐藏关闭按钮，此时 `onClose` 和 `onCloseQuote` 不会被触发
+- 建议为引用内容设置最大宽度或截断策略，避免布局问题

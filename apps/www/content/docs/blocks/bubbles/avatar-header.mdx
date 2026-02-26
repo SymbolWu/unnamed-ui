@@ -118,6 +118,26 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/avatar-header.json
   className="mb-4"
 />
 
+### 带状态指示器
+
+结合状态标签显示用户状态。
+
+<ComponentPreview
+  name="avatar-header-status"
+  description="Avatar header with status indicators"
+  className="mb-4"
+/>
+
+### 响应式尺寸
+
+响应式尺寸适配不同屏幕。
+
+<ComponentPreview
+  name="avatar-header-responsive"
+  description="Avatar header with responsive sizes"
+  className="mb-4"
+/>
+
 ## API
 
 ### AvatarHeader
@@ -266,36 +286,5 @@ Avatar Header 基于以下原语组件构建：
 <AvatarHeader 
   name="用户"
   className="p-2 bg-gray-50 rounded-lg"
-/>
-```
-
-## 扩展示例
-
-### 带状态指示器
-
-```tsx
-import { AvatarHeader } from "@/registry/wuhan/composed/avatar-header/avatar-header";
-import { StatusTag } from "@/registry/wuhan/composed/status-tag/status-tag";
-
-function UserWithStatus() {
-  return (
-    <div className="flex items-center gap-2">
-      <AvatarHeader 
-        src="https://example.com/avatar.jpg"
-        name="在线用户"
-        time="刚刚"
-      />
-      <StatusTag status="success" text="在线" />
-    </div>
-  );
-}
-```
-
-### 响应式尺寸
-
-```tsx
-<AvatarHeader 
-  size={{ xs: 20, sm: 24, md: 32, lg: 40 }}
-  name="响应式头像"
 />
 ```

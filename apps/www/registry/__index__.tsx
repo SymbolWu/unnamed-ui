@@ -2032,6 +2032,7 @@ export const Index: Record<string, Record<string, any>> = {
         "sidebar-01",
         "history-item-01",
         "avatar-header-01",
+        "tooltip-01",
         "button",
       ],
       files: [
@@ -2331,7 +2332,8 @@ export const Index: Record<string, Record<string, any>> = {
         {
           path: "registry/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
           type: "registry:component",
-          target: "components/wuhan/composed/sources-sidebar.tsx",
+          target:
+            "components/wuhan/composed/sources-sidebar/sources-sidebar.tsx",
         },
       ],
       component: React.lazy(async () => {
@@ -3731,6 +3733,206 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "welcome-time-greeting": {
+      name: "welcome-time-greeting",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-time-greeting.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-time-greeting.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-time-greeting.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-personalized": {
+      name: "welcome-personalized",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-personalized.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-personalized.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-personalized.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-features": {
+      name: "welcome-features",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-features.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-features.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-features.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-branded": {
+      name: "welcome-branded",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-branded.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-branded.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-branded.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-animated": {
+      name: "welcome-animated",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-animated.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-animated.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-animated.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-complete-empty": {
+      name: "welcome-complete-empty",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome", "suggestion"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-complete-empty.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-complete-empty.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-complete-empty.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-loading": {
+      name: "welcome-loading",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-loading.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-loading.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-loading.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "welcome-multilingual": {
+      name: "welcome-multilingual",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["welcome"],
+      files: [
+        {
+          path: "registry/wuhan/examples/welcome/welcome-multilingual.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/welcome-multilingual.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/welcome/welcome-multilingual.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "message-demo": {
       name: "message-demo",
       description: "",
@@ -3906,6 +4108,81 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "message-streaming": {
+      name: "message-streaming",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-streaming.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-streaming.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-streaming.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-with-code": {
+      name: "message-with-code",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-with-code.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-with-code.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-with-code.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-retryable": {
+      name: "message-retryable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-retryable.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-retryable.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-retryable.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "message-list-demo": {
       name: "message-list-demo",
       description:
@@ -3922,6 +4199,106 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/message/message-list-demo.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-list-empty": {
+      name: "message-list-empty",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-list-empty.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-list-empty.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-list-empty.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-list-icon-avatar": {
+      name: "message-list-icon-avatar",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-list-icon-avatar.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-list-icon-avatar.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-list-icon-avatar.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-list-generating": {
+      name: "message-list-generating",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message-list", "message-01"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-list-generating.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-list-generating.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-list-generating.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "message-list-retryable": {
+      name: "message-list-retryable",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["message-list"],
+      files: [
+        {
+          path: "registry/wuhan/examples/message/message-list-retryable.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/message-list-retryable.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/message/message-list-retryable.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -4272,6 +4649,56 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/avatar-header/avatar-header-error.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "avatar-header-status": {
+      name: "avatar-header-status",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["avatar-header", "status-tag"],
+      files: [
+        {
+          path: "registry/wuhan/examples/avatar-header/avatar-header-status.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/avatar-header-status.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/avatar-header/avatar-header-status.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "avatar-header-responsive": {
+      name: "avatar-header-responsive",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["avatar-header"],
+      files: [
+        {
+          path: "registry/wuhan/examples/avatar-header/avatar-header-responsive.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/avatar-header-responsive.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/avatar-header/avatar-header-responsive.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>
@@ -5358,6 +5785,56 @@ export const Index: Record<string, Record<string, any>> = {
       categories: undefined,
       meta: undefined,
     },
+    "feedback-validated": {
+      name: "feedback-validated",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["feedback"],
+      files: [
+        {
+          path: "registry/wuhan/examples/feedback/feedback-validated.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/feedback-validated.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/feedback/feedback-validated.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "feedback-async": {
+      name: "feedback-async",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["feedback"],
+      files: [
+        {
+          path: "registry/wuhan/examples/feedback/feedback-async.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/feedback-async.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/feedback/feedback-async.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
     "toggle-button-demo": {
       name: "toggle-button-demo",
       description: "",
@@ -6399,6 +6876,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-with-extra.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "dynamic-form-custom-component": {
+      name: "dynamic-form-custom-component",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["dynamic-form"],
+      files: [
+        {
+          path: "registry/wuhan/examples/dynamic-form/dynamic-form-custom-component.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/dynamic-form-custom-component.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/dynamic-form/dynamic-form-custom-component.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

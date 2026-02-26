@@ -119,18 +119,38 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/message-list.json
 当没有消息时显示友好提示。
 
 <ComponentPreview
-  name="message-list-demo"
+  name="message-list-empty"
   description="Empty state example"
   className="mb-4"
 />
 
 ### 带头像的消息列表
 
-使用 AvatarHeader 组件显示头像、名称和时间。
+使用图标头像显示用户和 AI 助手。
 
 <ComponentPreview
-  name="message-list-demo"
-  description="Message list with avatars"
+  name="message-list-icon-avatar"
+  description="Message list with icon avatars"
+  className="mb-4"
+/>
+
+### 生成中状态
+
+展示 AI 消息的生成中状态。
+
+<ComponentPreview
+  name="message-list-generating"
+  description="Message with generating status"
+  className="mb-4"
+/>
+
+### 可重试的错误消息
+
+失败状态的消息支持重试功能。
+
+<ComponentPreview
+  name="message-list-retryable"
+  description="Retryable failed message"
   className="mb-4"
 />
 
@@ -428,7 +448,20 @@ function CustomMessageList() {
 - 消息列表高度需要自行设置，建议使用固定高度或 flex 布局
 - 头像显示在消息上方，使用 AvatarHeader 组件实现
 
-## 扩展示例
+## 与原语组件的关系
+
+MessageList 基于以下组件构建：
+
+- **AIMessage** - AI 消息组件（来自 `@/registry/wuhan/composed/message`）
+- **UserMessage** - 用户消息组件（来自 `@/registry/wuhan/composed/message`）
+- **AvatarHeader** - 头像头部组件（来自 `@/registry/wuhan/composed/avatar-header`）
+
+这些组件又基于原语组件构建：
+- **MessageAIPrimitive** - AI 消息容器原语
+- **MessageUserPrimitive** - 用户消息容器原语
+- **AvatarHeaderPrimitive** - 头像头部原语
+
+如果需要更深入的定制，可以直接使用 AIMessage、UserMessage 和 AvatarHeader 组件。
 
 ### 带头像的消息列表
 
