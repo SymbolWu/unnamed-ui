@@ -228,7 +228,7 @@ export const MessageList = React.forwardRef<HTMLDivElement, MessageListProps>(
               </UserMessage>
               {/* 反馈区域 - hover 时显示 */}
               {message.feedback && (
-                <div className="flex justify-end opacity-0 group-hover/message:opacity-100 transition-opacity min-h-[32px]">
+                <div className="flex justify-end opacity-0 group-hover/message:opacity-100 transition-opacity min-h-[32px] mt-[var(--gap-xs)]">
                   {message.feedback}
                 </div>
               )}
@@ -255,7 +255,7 @@ export const MessageList = React.forwardRef<HTMLDivElement, MessageListProps>(
             {message.feedback && (
               <div
                 className={cn(
-                  "flex justify-start min-h-[32px]",
+                  "flex justify-start min-h-[32px] mt-[var(--gap-xs)]",
                   !isLastAIMessage &&
                     "opacity-0 group-hover/message:opacity-100 transition-opacity",
                 )}
