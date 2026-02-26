@@ -541,6 +541,102 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "welcome-time-greeting",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-time-greeting.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-time-greeting.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-personalized",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-personalized.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-personalized.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-features",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-features.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-features.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-branded",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-branded.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-branded.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-animated",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-animated.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-animated.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-complete-empty",
+    type: "registry:example",
+    registryDependencies: ["welcome", "suggestion"],
+    files: [
+      {
+        path: "examples/welcome/welcome-complete-empty.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-complete-empty.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-loading",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-loading.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-loading.tsx",
+      },
+    ],
+  },
+  {
+    name: "welcome-multilingual",
+    type: "registry:example",
+    registryDependencies: ["welcome"],
+    files: [
+      {
+        path: "examples/welcome/welcome-multilingual.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/welcome-multilingual.tsx",
+      },
+    ],
+  },
   // message examples
   {
     name: "message-demo",
@@ -627,6 +723,42 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "message-streaming",
+    type: "registry:example",
+    registryDependencies: ["message"],
+    files: [
+      {
+        path: "examples/message/message-streaming.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-streaming.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-with-code",
+    type: "registry:example",
+    registryDependencies: ["message"],
+    files: [
+      {
+        path: "examples/message/message-with-code.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-with-code.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-retryable",
+    type: "registry:example",
+    registryDependencies: ["message"],
+    files: [
+      {
+        path: "examples/message/message-retryable.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-retryable.tsx",
+      },
+    ],
+  },
+  {
     name: "message-list-demo",
     type: "registry:example",
     title: "Message List Demo",
@@ -638,6 +770,54 @@ export const examples: Registry["items"] = [
         path: "examples/message/message-list-demo.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/message-list-demo.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-list-empty",
+    type: "registry:example",
+    registryDependencies: ["message-list"],
+    files: [
+      {
+        path: "examples/message/message-list-empty.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-list-empty.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-list-icon-avatar",
+    type: "registry:example",
+    registryDependencies: ["message-list"],
+    files: [
+      {
+        path: "examples/message/message-list-icon-avatar.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-list-icon-avatar.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-list-generating",
+    type: "registry:example",
+    registryDependencies: ["message-list", "message-01"],
+    files: [
+      {
+        path: "examples/message/message-list-generating.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-list-generating.tsx",
+      },
+    ],
+  },
+  {
+    name: "message-list-retryable",
+    type: "registry:example",
+    registryDependencies: ["message-list"],
+    files: [
+      {
+        path: "examples/message/message-list-retryable.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/message-list-retryable.tsx",
       },
     ],
   },
@@ -809,6 +989,30 @@ export const examples: Registry["items"] = [
         path: "examples/avatar-header/avatar-header-error.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/avatar-header-error.tsx",
+      },
+    ],
+  },
+  {
+    name: "avatar-header-status",
+    type: "registry:example",
+    registryDependencies: ["avatar-header", "status-tag"],
+    files: [
+      {
+        path: "examples/avatar-header/avatar-header-status.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/avatar-header-status.tsx",
+      },
+    ],
+  },
+  {
+    name: "avatar-header-responsive",
+    type: "registry:example",
+    registryDependencies: ["avatar-header"],
+    files: [
+      {
+        path: "examples/avatar-header/avatar-header-responsive.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/avatar-header-responsive.tsx",
       },
     ],
   },
@@ -1343,6 +1547,30 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "feedback-validated",
+    type: "registry:example",
+    registryDependencies: ["feedback"],
+    files: [
+      {
+        path: "examples/feedback/feedback-validated.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/feedback-validated.tsx",
+      },
+    ],
+  },
+  {
+    name: "feedback-async",
+    type: "registry:example",
+    registryDependencies: ["feedback"],
+    files: [
+      {
+        path: "examples/feedback/feedback-async.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/feedback-async.tsx",
+      },
+    ],
+  },
   // toggle-button examples
   {
     name: "toggle-button-demo",
@@ -1837,6 +2065,18 @@ export const examples: Registry["items"] = [
         path: "examples/dynamic-form/dynamic-form-with-extra.tsx",
         type: "registry:example",
         target: "components/wuhan/examples/dynamic-form-with-extra.tsx",
+      },
+    ],
+  },
+  {
+    name: "dynamic-form-custom-component",
+    type: "registry:example",
+    registryDependencies: ["dynamic-form"],
+    files: [
+      {
+        path: "examples/dynamic-form/dynamic-form-custom-component.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/dynamic-form-custom-component.tsx",
       },
     ],
   },

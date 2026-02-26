@@ -41,6 +41,7 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "dayjs": "^1.11.19",
+    "framer-motion": "^12.34.3",
     "fumadocs-core": "16.0.10",
     "fumadocs-mdx": "13.0.7",
     "fumadocs-ui": "16.0.10",
