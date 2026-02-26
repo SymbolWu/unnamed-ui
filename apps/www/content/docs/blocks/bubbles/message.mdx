@@ -122,6 +122,36 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/message.json
   className="mb-4"
 />
 
+### 流式消息渲染
+
+模拟流式响应，逐字显示消息内容。
+
+<ComponentPreview
+  name="message-streaming"
+  description="Streaming message rendering"
+  className="mb-4"
+/>
+
+### 带代码高亮
+
+消息中包含代码块的示例。
+
+<ComponentPreview
+  name="message-with-code"
+  description="Message with code block"
+  className="mb-4"
+/>
+
+### 可重试的错误消息
+
+失败状态的消息支持重试功能。
+
+<ComponentPreview
+  name="message-retryable"
+  description="Retryable failed message"
+  className="mb-4"
+/>
+
 ## API
 
 ### AIMessage
@@ -280,170 +310,4 @@ Message 基于以下原语组件构建：
 <UserMessage className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
   自定义背景的用户消息
 </UserMessage>
-```
-
-## 扩展示例
-
-### 带头像的消息
-
-```tsx
-import { AIMessage, UserMessage } from "@/registry/wuhan/composed/message";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-
-function MessageWithAvatar() {
-  return (
-    <div className="space-y-4">
-      <div className="flex gap-3">
-        <Avatar>
-          <AvatarImage src="/user-avatar.png" />
-          <AvatarFallback>U</AvatarFallback>
-        </Avatar>
-        <UserMessage>用户的消息</UserMessage>
-      </div>
-      
-      <div className="flex gap-3">
-        <Avatar>
-          <AvatarImage src="/ai-avatar.png" />
-          <AvatarFallback>AI</AvatarFallback>
-        </Avatar>
-        <AIMessage status="idle" content="AI 的回复" />
-      </div>
-    </div>
-  );
-}
-```
-
-### 流式消息渲染
-
-```tsx
-import { AIMessage } from "@/registry/wuhan/composed/message";
-import { useState, useEffect } from "react";
-
-function StreamingMessage() {
-  const [content, setContent] = useState("");
-  const [status, setStatus] = useState<"generating" | "idle">("generating");
-  
-  useEffect(() => {
-    // 模拟流式响应
-    const fullText = "这是一段流式生成的文本...";
-    let index = 0;
-    
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setContent(fullText.slice(0, index + 1));
-        index++;
-      } else {
-        setStatus("idle");
-        clearInterval(interval);
-      }
-    }, 50);
-    
-    return () => clearInterval(interval);
-  }, []);
-  
-  return (
-    <AIMessage 
-      status={status}
-      content={content}
-    />
-  );
-}
-```
-
-### 带代码高亮的消息
-
-```tsx
-import { AIMessage } from "@/registry/wuhan/composed/message";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
-function MessageWithCode() {
-  return (
-    <AIMessage status="idle">
-      <div className="space-y-2">
-        <p>这是一个 React 组件示例：</p>
-        <SyntaxHighlighter language="tsx">
-          {`function Example() {
-  return <div>Hello World</div>;
-}`}
-        </SyntaxHighlighter>
-      </div>
-    </AIMessage>
-  );
-}
-```
-
-### 可重试的错误消息
-
-```tsx
-import { AIMessage } from "@/registry/wuhan/composed/message";
-import { RefreshCw } from "lucide-react";
-
-function RetryableMessage() {
-  const [status, setStatus] = useState<"failed" | "generating" | "idle">("failed");
-  
-  const handleRetry = () => {
-    setStatus("generating");
-    // 执行重试逻辑
-    setTimeout(() => setStatus("idle"), 2000);
-  };
-  
-  return (
-    <AIMessage status={status} content={status === "idle" ? "成功生成的内容" : undefined}>
-      {status === "failed" && (
-        <div className="space-y-2">
-          <p className="text-destructive">消息生成失败</p>
-          <button 
-            onClick={handleRetry}
-            className="flex items-center gap-2 px-3 py-1.5 bg-primary text-primary-foreground rounded"
-          >
-            <RefreshCw className="w-4 h-4" />
-            重试
-          </button>
-        </div>
-      )}
-    </AIMessage>
-  );
-}
-```
-
-### 消息列表
-
-```tsx
-import { AIMessage, UserMessage } from "@/registry/wuhan/composed/message";
-import { ThumbsUp, Copy } from "lucide-react";
-
-function MessageList() {
-  const messages = [
-    { role: "user", content: "什么是 React？" },
-    { role: "ai", content: "React 是一个用于构建用户界面的 JavaScript 库..." },
-    { role: "user", content: "它有什么优势？" },
-    { role: "ai", content: "React 的主要优势包括组件化、虚拟 DOM、生态丰富等..." },
-  ];
-  
-  return (
-    <div className="space-y-4 max-w-3xl">
-      {messages.map((msg, index) => (
-        msg.role === "user" ? (
-          <UserMessage key={index}>{msg.content}</UserMessage>
-        ) : (
-          <AIMessage 
-            key={index}
-            status="idle"
-            content={msg.content}
-            feedback={
-              <div className="flex gap-2 mt-2">
-                <button className="p-1 hover:bg-muted rounded">
-                  <ThumbsUp className="w-4 h-4" />
-                </button>
-                <button className="p-1 hover:bg-muted rounded">
-                  <Copy className="w-4 h-4" />
-                </button>
-              </div>
-            }
-          />
-        )
-      ))}
-    </div>
-  );
-}
 ```

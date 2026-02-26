@@ -154,6 +154,26 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/feedback.json
   className="mb-4"
 />
 
+### 带验证的反馈表单
+
+多选模式下的表单验证示例。
+
+<ComponentPreview
+  name="feedback-validated"
+  description="Feedback form with validation"
+  className="mb-4"
+/>
+
+### 异步提交
+
+异步提交反馈数据的示例。
+
+<ComponentPreview
+  name="feedback-async"
+  description="Feedback with async submit"
+  className="mb-4"
+/>
+
 ### 按需显示输入框
 
 仅当选中「其他」选项时才显示输入框，适用于希望用户在选定预设选项后补充说明的场景。
@@ -183,6 +203,26 @@ export function Example() {
   );
 }
 ```
+
+### 带验证的反馈表单
+
+多选模式下的表单验证示例。
+
+<ComponentPreview
+  name="feedback-validated"
+  description="Feedback with validation"
+  className="mb-4"
+/>
+
+### 异步提交
+
+支持异步提交的反馈表单。
+
+<ComponentPreview
+  name="feedback-async"
+  description="Async feedback submission"
+  className="mb-4"
+/>
 
 ## API
 
@@ -352,100 +392,7 @@ function CustomFeedback() {
 }
 ```
 
-## 扩展示例
-
-### 带验证的反馈表单（多选模式）
-
-```tsx
-import { FeedbackComposed } from "@/registry/wuhan/composed/feedback/feedback";
-import { useState } from "react";
-
-function ValidatedFeedback() {
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = (data: { selectedIds: string[]; inputValue: string }) => {
-    // 验证
-    if (data.selectedIds.length === 0) {
-      setError("请至少选择一个反馈类型");
-      return;
-    }
-    if (!data.inputValue.trim()) {
-      setError("请输入详细描述");
-      return;
-    }
-
-    // 提交
-    console.log("提交反馈:", data);
-    setError("");
-  };
-
-  return (
-    <div>
-      <FeedbackComposed
-        options={[
-          { id: "bug", label: "Bug" },
-          { id: "feature", label: "功能" },
-          { id: "other", label: "其他" },
-        ]}
-        selectedIds={selectedIds}
-        onSelectChange={setSelectedIds}
-        inputValue={inputValue}
-        onInputChange={setInputValue}
-        onSubmit={handleSubmit}
-      />
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-    </div>
-  );
-}
-```
-
-### 异步提交的反馈表单
-
-```tsx
-import { FeedbackComposed } from "@/registry/wuhan/composed/feedback/feedback";
-import { useState } from "react";
-
-function AsyncFeedback() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const handleSubmit = async (data: { selectedIds: string[]; inputValue: string }) => {
-    setLoading(true);
-    try {
-      await fetch("/api/feedback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      setSuccess(true);
-    } catch (error) {
-      console.error("提交失败:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (success) {
-    return <div className="text-green-600">感谢您的反馈！</div>;
-  }
-
-  return (
-    <FeedbackComposed
-      options={[
-        { id: "good", label: "👍 很好" },
-        { id: "helpful", label: "有帮助" },
-        { id: "bad", label: "👎 不好" },
-      ]}
-      submitLabel={loading ? "提交中..." : "提交"}
-      onSubmit={handleSubmit}
-    />
-  );
-}
-```
-
-## Primitive Components
+## 原语组件
 
 Feedback 组件基于以下原语组件构建，可用于需要完全自定义的场景。
 
