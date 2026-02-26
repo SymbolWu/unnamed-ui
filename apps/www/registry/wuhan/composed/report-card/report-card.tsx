@@ -316,23 +316,23 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
                 <Ellipsis className="size-4 text-[var(--text-secondary)]" />
               </span>
             </Popover.Trigger>
-              <Popover.Portal>
-                <Popover.Content
-                  side="bottom"
-                  align="end"
-                  sideOffset={8}
-                  onMouseEnter={clearCloseTimer}
-                  onMouseLeave={scheduleClose}
-                  className={cn("z-50")}
-                >
-                  <CardActionsMenu
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                    onDuplicate={onDuplicate}
-                  />
-                </Popover.Content>
-              </Popover.Portal>
-            </Popover.Root>
+            <Popover.Portal>
+              <Popover.Content
+                side="bottom"
+                align="end"
+                sideOffset={8}
+                onMouseEnter={clearCloseTimer}
+                onMouseLeave={scheduleClose}
+                className={cn("z-50")}
+              >
+                <CardActionsMenu
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onDuplicate={onDuplicate}
+                />
+              </Popover.Content>
+            </Popover.Portal>
+          </Popover.Root>
         ) : null}
       </ReportCardContainerPrimitive>
     );
