@@ -2352,7 +2352,7 @@ export const Index: Record<string, Record<string, any>> = {
       description:
         "Composed toggle button with single and multiple selection modes",
       type: "registry:block",
-      registryDependencies: ["toggle-button-01"],
+      registryDependencies: ["toggle-button-01", "tooltip"],
       files: [
         {
           path: "registry/wuhan/composed/toggle-button/toggle-button.tsx",
@@ -5548,6 +5548,31 @@ export const Index: Record<string, Record<string, any>> = {
       component: React.lazy(async () => {
         const mod =
           await import("@/registry/wuhan/examples/toggle-button/toggle-button-filter.tsx");
+        const exportName =
+          Object.keys(mod).find(
+            (key) =>
+              typeof mod[key] === "function" || typeof mod[key] === "object",
+          ) || item.name;
+        return { default: mod.default || mod[exportName] };
+      }),
+      categories: undefined,
+      meta: undefined,
+    },
+    "toggle-button-icon": {
+      name: "toggle-button-icon",
+      description: "",
+      type: "registry:example",
+      registryDependencies: ["toggle-button"],
+      files: [
+        {
+          path: "registry/wuhan/examples/toggle-button/toggle-button-icon.tsx",
+          type: "registry:example",
+          target: "components/wuhan/examples/toggle-button-icon.tsx",
+        },
+      ],
+      component: React.lazy(async () => {
+        const mod =
+          await import("@/registry/wuhan/examples/toggle-button/toggle-button-icon.tsx");
         const exportName =
           Object.keys(mod).find(
             (key) =>

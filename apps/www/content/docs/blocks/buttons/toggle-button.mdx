@@ -12,6 +12,7 @@ Toggle Button 组件提供了用于选择和多选场景的开关按钮样式，
 
 - **两种变体样式**：default（默认，高度 32px）和 compact（紧凑，使用 CSS 变量）
 - **单选和多选模式**：支持单选按钮组和多选按钮组
+- **图标支持**：支持 `icon` 选项，设置后仅显示图标不显示 label，适用于工具栏等紧凑场景
 - **清晰的状态反馈**：选中/未选中视觉反馈明确
 - **禁用选项支持**：可单独禁用某些选项
 - **类型安全**：完整的 TypeScript 类型定义
@@ -42,6 +43,7 @@ export function Example() {
 ## 特性
 
 - **两种变体样式**：default 适用于反馈组件等场景，compact 适用于 sender 组件等场景
+- **Tooltip 支持**：通过 `option.tooltip` 由组件内部正确包裹，DOM 结构为 Tooltip > button
 - **单选模式**：点击选中，再次点击取消选择
 - **多选模式**：可同时选中多个选项
 - **禁用状态**：支持单独禁用某些选项，禁用的选项无法被选中
@@ -134,22 +136,29 @@ npx shadcn@latest add http://localhost:3000/r/wuhan/toggle-button.json
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | `options` | `ToggleOption[]` | - | 按钮选项列表（必填） |
-| `value` | `string` | - | 当前选中的选项 ID（单选模式） |
-| `values` | `string[]` | - | 当前选中的选项 ID 列表（多选模式） |
+| `value` | `string` | - | 当前选中的选项 ID（单选模式，受控） |
+| `values` | `string[]` | - | 当前选中的选项 ID 列表（多选模式，受控） |
+| `defaultValue` | `string` | - | 单选模式默认值（非受控） |
+| `defaultValues` | `string[]` | - | 多选模式默认值（非受控） |
 | `onChange` | `(value: string \| undefined) => void` | - | 选项变化回调（单选模式） |
 | `onValuesChange` | `(values: string[]) => void` | - | 选项变化回调（多选模式） |
 | `multiple` | `boolean` | `false` | 是否为多选模式 |
 | `variant` | `"default" \| "compact"` | `"default"` | 按钮变体样式 |
+| `ariaLabel` | `string` | - | 按钮组的 aria-label（无障碍） |
 | `className` | `string` | - | 按钮自定义类名 |
 | `groupClassName` | `string` | - | 按钮容器自定义类名 |
+| `renderOption` | `(option, context) => ReactNode` | - | 自定义选项渲染，复杂场景使用 |
 
 #### ToggleOption Type
 
 ```tsx
 interface ToggleOption {
-  id: string;        // 选项唯一标识
-  label: string;     // 选项显示文本
-  disabled?: boolean; // 是否禁用
+  id: string;              // 选项唯一标识
+  label: string;           // 选项显示文本（兼作 aria-label）
+  icon?: React.ReactNode;  // 图标（设置后仅显示图标，不显示 label）
+  tooltip?: React.ReactNode; // 悬停提示（由组件内部正确包裹 Tooltip）
+  disabled?: boolean;     // 是否禁用
+  className?: string;      // 单个选项的类名
 }
 ```
 
@@ -237,7 +246,8 @@ function ModeSelector() {
 
 ## 注意事项
 
-- 单选模式使用 `value` 和 `onChange`，多选模式使用 `values` 和 `onValuesChange`
+- 单选模式使用 `value`/`onChange`，多选模式使用 `values`/`onValuesChange`，不能混用
+- 不传 `value`/`values` 时可使用 `defaultValue`/`defaultValues` 实现非受控模式
 - 单选模式下点击已选中的选项会取消选择（value 变为 undefined）
 - 多选模式下，选中状态的背景色根据 `multiple` 属性自动调整
 - 禁用的选项无法被选中或取消选中
@@ -306,7 +316,43 @@ Sender 组件中的模式切换示例。
   className="mb-4"
 />
 
-### 带图标的开关按钮
+### 仅图标的开关按钮
+
+使用 `option.tooltip` 由组件内部正确包裹 Tooltip（Tooltip > button），适用于工具栏等紧凑场景。
+
+<ComponentPreview
+  name="toggle-button-icon"
+  description="仅图标的开关按钮"
+  className="mb-4"
+/>
+
+```tsx
+import { ToggleButton } from "@/registry/wuhan/composed/toggle-button";
+import { Globe } from "lucide-react";
+
+function IconOnlyToggleButton() {
+  const [webSearchEnabled, setWebSearchEnabled] = useState<string | undefined>();
+
+  return (
+    <ToggleButton
+      options={[
+        {
+          id: "web-search",
+          label: "联网搜索",
+          icon: <Globe className="size-4" />,
+          tooltip: "联网搜索",
+        },
+      ]}
+      value={webSearchEnabled}
+      onChange={setWebSearchEnabled}
+      variant="compact"
+      className="p-2"
+    />
+  );
+}
+```
+
+### 带图标的开关按钮（图标+文本）
 
 ```tsx
 import { ToggleButton } from "@/registry/wuhan/composed/toggle-button";

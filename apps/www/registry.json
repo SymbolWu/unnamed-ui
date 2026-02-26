@@ -184,8 +184,7 @@
       "files": [
         {
           "path": "registry/wuhan/ui/popover.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/popover.tsx"
+          "type": "registry:ui"
         }
       ]
     },
@@ -198,94 +197,7 @@
       "files": [
         {
           "path": "registry/wuhan/ui/resizable.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/resizable.tsx"
-        }
-      ]
-    },
-    {
-      "name": "input",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "registry/wuhan/ui/input.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/input.tsx"
-        }
-      ]
-    },
-    {
-      "name": "label",
-      "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-label"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/label.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/label.tsx"
-        }
-      ]
-    },
-    {
-      "name": "select",
-      "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-select",
-        "lucide-react"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/select.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/select.tsx"
-        }
-      ]
-    },
-    {
-      "name": "switch",
-      "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-switch"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/switch.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/switch.tsx"
-        }
-      ]
-    },
-    {
-      "name": "slider",
-      "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-slider"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/slider.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/slider.tsx"
-        }
-      ]
-    },
-    {
-      "name": "field",
-      "type": "registry:ui",
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "label",
-        "separator"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/field.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/field.tsx"
+          "type": "registry:ui"
         }
       ]
     },
@@ -1792,7 +1704,8 @@
       "title": "Toggle Button",
       "description": "Composed toggle button with single and multiple selection modes",
       "registryDependencies": [
-        "toggle-button-01"
+        "toggle-button-01",
+        "tooltip"
       ],
       "files": [
         {
@@ -3668,6 +3581,20 @@
           "path": "registry/wuhan/examples/toggle-button/toggle-button-filter.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/toggle-button-filter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-button-icon",
+      "type": "registry:example",
+      "registryDependencies": [
+        "toggle-button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/toggle-button/toggle-button-icon.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/toggle-button-icon.tsx"
         }
       ]
     },
