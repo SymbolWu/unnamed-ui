@@ -1,0 +1,73 @@
+{
+  "name": "Wuhan UI Components",
+  "version": "1.0.0",
+  "description": "Complete list of all Wuhan UI components",
+  "baseUrl": "https://your-vercel-domain.vercel.app",
+  "components": {
+    "base": [
+      "avatar",
+      "progress",
+      "status-tag",
+      "tag",
+      "tooltip",
+      "custom-sources"
+    ],
+    "buttons": [
+      "block-button",
+      "icon-button",
+      "prompt",
+      "quick-action",
+      "suggestion",
+      "toggle-button"
+    ],
+    "bubbles": [
+      "avatar-header",
+      "confirm-panel",
+      "dynamic-form",
+      "feedback",
+      "message",
+      "message-list",
+      "quote-content",
+      "task-list",
+      "welcome"
+    ],
+    "cards": [
+      "agent-card",
+      "document-card",
+      "file-card",
+      "goal-card",
+      "report-card",
+      "select-card",
+      "task-card"
+    ],
+    "inputs": [
+      "block-input",
+      "block-select",
+      "checkbox",
+      "radio",
+      "sender",
+      "responsive-sender",
+      "upload"
+    ],
+    "layout": [
+      "divider",
+      "page-header",
+      "sidebar",
+      "sources-sidebar",
+      "triple-split-pane"
+    ],
+    "lists": [
+      "attachment-list",
+      "component-panel",
+      "history-item"
+    ],
+    "steps": [
+      "block-accordion",
+      "deep-thinking",
+      "execution-result",
+      "thinking-process",
+      "thinking-process-01",
+      "thinking-step-item"
+    ]
+  }
+}
