@@ -64,7 +64,7 @@ for (const [category, componentList] of Object.entries(components)) {
     
     try {
       console.log(`  ⏳ 安装 ${component}...`);
-      execSync(`npx shadcn@latest add -y "${url}"`, {
+      execSync(`npx shadcn@latest add -y -o "${url}"`, {
         stdio: 'inherit'
       });
       console.log(`  ✅ ${component} 安装成功`);
