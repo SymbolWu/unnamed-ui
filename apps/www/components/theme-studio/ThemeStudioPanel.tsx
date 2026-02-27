@@ -828,7 +828,7 @@ export function ThemeStudioPanel({ className }: { className?: string }) {
               <Copy className="size-4" />
             </Button>
             <ModeSwitcher />
-            <CopyCodeButton variant="outline" size="sm" />
+            <CopyCodeButton variant="outline" size="sm" overridesByMode={overridesByMode} />
           </div>
         </div>
 
