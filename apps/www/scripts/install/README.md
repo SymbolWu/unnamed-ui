@@ -6,10 +6,10 @@
 
 ### 核心安装脚本
 
-- **install-components.js** ⭐ 推荐
+- **install-components.cjs** ⭐ 推荐
   - Node.js 脚本，跨平台支持（Windows/macOS/Linux）
   - 带进度显示和错误处理
-  - 使用：`node install-components.js <BASE_URL>`
+  - 使用：`node install-components.cjs <BASE_URL>`
 
 - **install-all-components.sh**
   - Bash 脚本，适用于 macOS/Linux
@@ -39,18 +39,18 @@ pnpm dev
 
 # 在另一个终端执行安装
 cd apps/www/scripts/install
-node install-components.js http://localhost:3000
+node install-components.cjs http://localhost:3000
 ```
 
 ### 生产环境（Vercel 部署后）
 
 ```bash
 # 用户可以从任何位置执行
-curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.js | node - https://your-domain.vercel.app
+curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs | node - https://your-domain.vercel.app
 
 # 或下载后执行
-curl -O https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.js
-node install-components.js https://your-domain.vercel.app
+curl -O https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs
+node install-components.cjs https://your-domain.vercel.app
 ```
 
 ## 📚 文档
@@ -63,7 +63,7 @@ node install-components.js https://your-domain.vercel.app
 如果需要添加新组件到批量安装列表：
 
 1. 更新 `components-list.json`
-2. 在 `install-components.js` 和 `install-all-components.sh` 中添加对应的安装命令
+2. 在 `install-components.cjs` 和 `install-all-components.sh` 中添加对应的安装命令
 3. 在 `test-components-urls.sh` 中添加对应的测试
 
 ## 🧪 测试

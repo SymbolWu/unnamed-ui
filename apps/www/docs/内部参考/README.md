@@ -20,7 +20,7 @@
 
 ### 安装脚本
 位置：`apps/www/scripts/install/`
-- install-components.js
+- install-components.cjs
 - install-all-components.sh
 - test-components-urls.sh
 - components-list.json

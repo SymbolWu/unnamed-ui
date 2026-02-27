@@ -8,11 +8,11 @@
 
 ```bash
 # 方式 1: 下载后执行
-curl -O https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.js
-node install-components.js https://your-domain.vercel.app
+curl -O https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs
+node install-components.cjs https://your-domain.vercel.app
 
 # 方式 2: 一行命令（推荐）
-curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.js | node - https://your-domain.vercel.app
+curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs | node - https://your-domain.vercel.app
 ```
 
 ### 安装单个组件

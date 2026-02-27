@@ -4,11 +4,11 @@
  * 批量安装 Wuhan UI 组件
  * 
  * 使用方法：
- *   npx wuhan-install [BASE_URL]
+ *   node install-components.js [BASE_URL]
  *   
  * 示例：
- *   npx wuhan-install https://your-domain.vercel.app
- *   npx wuhan-install http://localhost:3000
+ *   node install-components.js https://your-domain.vercel.app
+ *   node install-components.js http://localhost:3000
  */
 
 const { execSync } = require('child_process');
