@@ -133,64 +133,120 @@ ResponsiveInputRow.displayName = "ResponsiveInputRow";
 
 // ==================== 响应式文本域 ====================
 
+const SINGLE_LINE_MIN_HEIGHT = 30;
+const MULTI_LINE_HEIGHT = 120;
+const MULTI_LINE_MAX_HEIGHT = 200;
+
 export const ResponsiveTextarea = React.forwardRef<
   HTMLTextAreaElement,
   ResponsiveTextareaProps
->(({ isOverflow, onOverflowChange, className, ...props }) => {
+>(({ isOverflow, onOverflowChange, className, ...props }, ref) => {
   const localRef = React.useRef<HTMLTextAreaElement>(null);
+  const setRef = React.useCallback(
+    (el: HTMLTextAreaElement | null) => {
+      (localRef as React.MutableRefObject<HTMLTextAreaElement | null>).current =
+        el;
+      if (typeof ref === "function") ref(el);
+      else if (ref) ref.current = el;
+    },
+    [ref],
+  );
+  const [singleLineHeight, setSingleLineHeight] = React.useState(
+    SINGLE_LINE_MIN_HEIGHT,
+  );
+  const onOverflowChangeRef = React.useRef(onOverflowChange);
+  onOverflowChangeRef.current = onOverflowChange;
 
-  React.useEffect(() => {
-    if (!localRef.current) return;
-    const textarea = localRef.current;
-    // 保存初始宽度（flex-row 时的宽度）
-    let baseWidth = 0;
+  const singleLineWidthRef = React.useRef<number>(0);
 
-    const checkHeight = () => {
-      // 保存当前样式
-      const originalHeight = textarea.style.height;
-      const originalWidth = textarea.style.width;
+  const runCheck = React.useCallback(
+    (textarea: HTMLTextAreaElement, measureWidth: number) => {
+      const origH = textarea.style.height;
+      const origW = textarea.style.width;
 
-      // 如果还没有基准宽度，保存当前宽度
-      if (baseWidth === 0) {
-        baseWidth = textarea.offsetWidth;
-      }
-
-      // 固定宽度为基准宽度，重置高度以获取真实的 scrollHeight
-      textarea.style.width = `${baseWidth}px`;
+      textarea.style.width = `${measureWidth}px`;
       textarea.style.height = "auto";
       const scrollHeight = textarea.scrollHeight;
 
-      // 恢复原样式
-      textarea.style.height = originalHeight;
-      textarea.style.width = originalWidth;
+      textarea.style.height = origH;
+      textarea.style.width = origW;
 
-      // 计算单行高度（包括 padding）
-      const computedStyle = window.getComputedStyle(textarea);
-      const lineHeight = parseFloat(computedStyle.lineHeight);
-      const paddingTop = parseFloat(computedStyle.paddingTop);
-      const paddingBottom = parseFloat(computedStyle.paddingBottom);
+      const cs = window.getComputedStyle(textarea);
+      const lineHeight = parseFloat(cs.lineHeight) || 20;
+      const pt = parseFloat(cs.paddingTop) || 0;
+      const pb = parseFloat(cs.paddingBottom) || 0;
+      const contentHeight = scrollHeight - pt - pb;
+      const lines = Math.ceil(contentHeight / lineHeight) || 1;
 
-      const contentHeight = scrollHeight - paddingTop - paddingBottom;
-      const lines = Math.ceil(contentHeight / lineHeight);
+      // 单行高度取 lineHeight+padding 与实测 scrollHeight 的较大值，避免硬编码导致滚动条
+      const oneLineHeight = Math.ceil(lineHeight + pt + pb);
+      const newHeight = Math.max(
+        SINGLE_LINE_MIN_HEIGHT,
+        lines === 1 ? Math.max(oneLineHeight, scrollHeight) : oneLineHeight,
+      );
+      setSingleLineHeight(newHeight);
+      onOverflowChangeRef.current?.(lines > 1);
+    },
+    [],
+  );
 
-      // 当超过 1 行时，切换为列布局
-      onOverflowChange?.(lines > 1);
+  React.useEffect(() => {
+    const textarea = localRef.current;
+    if (!textarea) return;
+
+    const checkHeight = () => {
+      const width =
+        isOverflow && singleLineWidthRef.current > 0
+          ? singleLineWidthRef.current
+          : textarea.offsetWidth;
+      if (!isOverflow) singleLineWidthRef.current = textarea.offsetWidth;
+      runCheck(textarea, width);
     };
 
-    // 初始检查
     checkHeight();
 
-    // 监听输入事件
-    textarea.addEventListener("input", checkHeight);
+    const handleInput = () => {
+      // 延迟到事件处理完成后再测量，避免同步修改 width/height 干扰浏览器输入，导致删除卡住
+      requestAnimationFrame(() => {
+        checkHeight();
+      });
+    };
+    textarea.addEventListener("input", handleInput);
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (!isOverflow) singleLineWidthRef.current = textarea.offsetWidth;
+      runCheck(
+        textarea,
+        isOverflow && singleLineWidthRef.current > 0
+          ? singleLineWidthRef.current
+          : textarea.offsetWidth,
+      );
+    });
+    resizeObserver.observe(textarea);
 
     return () => {
-      textarea.removeEventListener("input", checkHeight);
+      textarea.removeEventListener("input", handleInput);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [runCheck, isOverflow]);
+
+  // 布局切换后重新检查：从多行切回单行时，textarea 宽度会变化，需在布局稳定后重测
+  React.useEffect(() => {
+    if (isOverflow) return;
+    const textarea = localRef.current;
+    if (!textarea) return;
+
+    const rafId = requestAnimationFrame(() => {
+      singleLineWidthRef.current = textarea.offsetWidth;
+      runCheck(textarea, textarea.offsetWidth);
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, [isOverflow, runCheck]);
+
   return (
     <>
       <Textarea
-        ref={localRef}
+        ref={setRef}
         className={cn(
           "p-1 border !border-[transparent] rounded resize-none overflow-auto",
           "shadow-none focus-visible:ring-0",
@@ -201,9 +257,13 @@ export const ResponsiveTextarea = React.forwardRef<
         placeholder="输入内容..."
         rows={1}
         style={{
-          minHeight: "30px",
-          height: isOverflow ? "120px" : "30px",
-          maxHeight: isOverflow ? "200px" : "30px",
+          minHeight: `${singleLineHeight}px`,
+          height: isOverflow
+            ? `${MULTI_LINE_HEIGHT}px`
+            : `${singleLineHeight}px`,
+          maxHeight: isOverflow
+            ? `${MULTI_LINE_MAX_HEIGHT}px`
+            : `${singleLineHeight}px`,
           width: isOverflow ? "100%" : "auto",
           flex: isOverflow ? "none" : "1",
         }}
