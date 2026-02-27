@@ -9,7 +9,8 @@
 - **install-components.cjs** ⭐ 推荐
   - Node.js 脚本，跨平台支持（Windows/macOS/Linux）
   - 带进度显示和错误处理
-  - 使用：`node install-components.cjs <BASE_URL>`
+  - 使用 `-y -o` 参数自动覆盖安装
+  - 用法：`node install-components.cjs <BASE_URL>`
 
 - **install-all-components.sh**
   - Bash 脚本，适用于 macOS/Linux

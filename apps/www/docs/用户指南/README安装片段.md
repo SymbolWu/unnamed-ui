@@ -20,7 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/
 如果只需要特定组件：
 
 ```bash
-npx shadcn@latest add -y "https://your-domain.vercel.app/r/wuhan/avatar.json"
+npx shadcn@latest add -y -o "https://your-domain.vercel.app/r/wuhan/avatar.json"
 ```
 
 ### 查看所有可用组件
