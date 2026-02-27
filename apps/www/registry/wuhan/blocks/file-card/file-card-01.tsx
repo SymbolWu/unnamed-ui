@@ -81,6 +81,8 @@ export interface FileCardContainerPrimitiveProps extends React.HTMLAttributes<HT
   selected?: boolean;
   /** 是否禁用（禁用时不可交互） */
   disabled?: boolean;
+  /** 是否显示边框 */
+  bordered?: boolean;
 }
 
 /**
@@ -207,6 +209,8 @@ export interface FileCardPrimitiveProps {
   selected?: boolean;
   /** 是否禁用（禁用时不可交互） */
   disabled?: boolean;
+  /** 是否显示边框 */
+  bordered?: boolean;
   /** 选中状态变化回调 */
   onSelectChange?: (selected: boolean, id: string) => void;
   /** 操作按钮点击回调 */
@@ -255,7 +259,15 @@ export interface FileCardPrimitiveProps {
 export const FileCardContainerPrimitive = React.memo(
   React.forwardRef<HTMLDivElement, FileCardContainerPrimitiveProps>(
     (
-      { children, selected, disabled = false, className, onClick, ...props },
+      {
+        children,
+        selected,
+        disabled = false,
+        bordered = false,
+        className,
+        onClick,
+        ...props
+      },
       ref,
     ) => {
       const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -283,6 +295,8 @@ export const FileCardContainerPrimitive = React.memo(
             "rounded-[var(--radius-xl)]",
             "p-[var(--padding-com-md)]",
             "transition-all duration-200",
+            // 边框样式
+            bordered && "border border-[var(--border-neutral)]",
             // 交互状态
             disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
             // hover 状态（非禁用）
@@ -977,6 +991,7 @@ export const FileCardPrimitive = React.memo(
         status,
         selected = false,
         disabled = false,
+        bordered = false,
         onSelectChange,
         onActionClick,
         actionMenuItems,
@@ -1094,6 +1109,7 @@ export const FileCardPrimitive = React.memo(
           ref={ref}
           selected={selected}
           disabled={disabled}
+          bordered={bordered}
           className={cn("group/file-card", className)}
           style={style}
           onClick={handleContainerClick}

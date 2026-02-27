@@ -144,6 +144,16 @@ npm install lucide-react
   className="mb-4"
 />
 
+### 带边框样式
+
+展示带边框的文件卡片和列表。
+
+<ComponentPreview
+  name="file-card-bordered"
+  description="带边框样式"
+  className="mb-4"
+/>
+
 ## API
 
 ### FileCard
@@ -160,6 +170,7 @@ npm install lucide-react
 | `fileIcon` | `React.ReactNode` | - | 文件图标 |
 | `status` | `FileCardStatus` | `"default"` | 状态 |
 | `selected` | `boolean` | `false` | 选中状态 |
+| `bordered` | `boolean` | `false` | 是否显示边框 |
 | `onSelectChange` | `(selected: boolean) => void` | - | 选中状态变化回调 |
 | `onActionClick` | `() => void` | - | 操作按钮点击回调 |
 | `className` | `string` | - | 自定义类名 |
@@ -198,6 +209,7 @@ function FileExample() {
 | `onActionClick` | `(id: string) => void` | - | 操作按钮点击回调 |
 | `layout` | `"vertical" \| "horizontal"` | `"vertical"` | 布局方向（纵向或横向） |
 | `spacing` | `number \| string` | `16` (var(--gap-sm)) | 卡片间距，数字表示 px，字符串支持 CSS 变量 |
+| `bordered` | `boolean` | `false` | 是否显示边框 |
 | `multiSelect` | `boolean` | `true` | 是否支持多选 |
 | `className` | `string` | - | 自定义类名 |
 

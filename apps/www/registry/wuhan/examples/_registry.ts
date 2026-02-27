@@ -3271,6 +3271,18 @@ export const examples: Registry["items"] = [
       },
     ],
   },
+  {
+    name: "file-card-bordered",
+    type: "registry:example",
+    registryDependencies: ["file-card"],
+    files: [
+      {
+        path: "examples/file-card/file-card-bordered.tsx",
+        type: "registry:example",
+        target: "components/wuhan/examples/file-card-bordered.tsx",
+      },
+    ],
+  },
   // accordion examples
   {
     name: "accordion-demo",

@@ -6318,6 +6318,20 @@
       ]
     },
     {
+      "name": "file-card-bordered",
+      "type": "registry:example",
+      "registryDependencies": [
+        "file-card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/file-card/file-card-bordered.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/file-card-bordered.tsx"
+        }
+      ]
+    },
+    {
       "name": "accordion-demo",
       "type": "registry:example",
       "registryDependencies": [

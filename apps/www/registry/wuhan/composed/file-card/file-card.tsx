@@ -72,6 +72,8 @@ export interface FileCardComposedProps {
   actionMenuItems?: FileCardActionMenuItemProps[];
   /** 是否禁用（禁用时不可交互） */
   disabled?: boolean;
+  /** 是否显示边框 */
+  bordered?: boolean;
   /** 选中状态变化回调 */
   onSelectChange?: (selected: boolean, id: string) => void;
   /** 操作按钮点击回调 */
@@ -95,6 +97,8 @@ export interface FileCardListProps {
   selectedIds?: Set<string> | string[];
   /** 是否禁用 */
   disabled?: boolean;
+  /** 是否显示边框 */
+  bordered?: boolean;
   /** 选中状态变化回调（表单组件属性，推荐使用） */
   onChange?: (selectedIds: Set<string>) => void;
   /** 选中状态变化回调（已废弃，请使用 onChange） */
@@ -261,6 +265,7 @@ export const FileCard = React.memo(
       selected = false,
       actionMenuItems,
       disabled = false,
+      bordered = false,
       onSelectChange,
       onActionClick,
       className,
@@ -290,6 +295,7 @@ export const FileCard = React.memo(
         selected={selected}
         actionMenuItems={actionMenuItems}
         disabled={disabled}
+        bordered={bordered}
         onSelectChange={handleSelectChange}
         onActionClick={handleActionClick}
         className={className}
@@ -403,6 +409,7 @@ export const FileCardList = React.memo(
       value,
       selectedIds,
       disabled = false,
+      bordered = false,
       onChange,
       onSelectionChange,
       onSelectAll,
@@ -557,6 +564,7 @@ export const FileCardList = React.memo(
                 actionMenuItems={file.actionMenuItems}
                 selected={selectedSet.has(file.id)}
                 disabled={disabled || file.disabled}
+                bordered={bordered}
                 onSelectChange={(checked) =>
                   handleSelectChange(file.id, checked)
                 }
