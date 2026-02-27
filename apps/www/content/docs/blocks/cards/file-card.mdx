@@ -104,6 +104,56 @@ npm install lucide-react
   className="mb-4"
 />
 
+### FileCardList 受控组件
+
+展示如何使用受控组件方式管理文件选中状态。
+
+<ComponentPreview
+  name="file-card-list-controlled"
+  description="受控组件示例"
+  className="mb-4"
+/>
+
+### FileCardList 横向布局
+
+文件列表横向排列，支持自定义间距。
+
+<ComponentPreview
+  name="file-card-list-horizontal"
+  description="横向布局"
+  className="mb-4"
+/>
+
+### FileCardList 纵向布局
+
+文件列表纵向排列，支持自定义间距。
+
+<ComponentPreview
+  name="file-card-list-vertical"
+  description="纵向布局"
+  className="mb-4"
+/>
+
+### FileCardList 自定义间距
+
+展示不同间距设置的效果。
+
+<ComponentPreview
+  name="file-card-list-custom-spacing"
+  description="自定义间距"
+  className="mb-4"
+/>
+
+### 带边框样式
+
+展示带边框的文件卡片和列表。
+
+<ComponentPreview
+  name="file-card-bordered"
+  description="带边框样式"
+  className="mb-4"
+/>
+
 ## API
 
 ### FileCard
@@ -120,6 +170,7 @@ npm install lucide-react
 | `fileIcon` | `React.ReactNode` | - | 文件图标 |
 | `status` | `FileCardStatus` | `"default"` | 状态 |
 | `selected` | `boolean` | `false` | 选中状态 |
+| `bordered` | `boolean` | `false` | 是否显示边框 |
 | `onSelectChange` | `(selected: boolean) => void` | - | 选中状态变化回调 |
 | `onActionClick` | `() => void` | - | 操作按钮点击回调 |
 | `className` | `string` | - | 自定义类名 |
@@ -142,7 +193,7 @@ function FileExample() {
 
 ### FileCardList
 
-文件卡片列表组件，展示多个文件卡片，支持选中状态管理。
+文件卡片列表组件，展示多个文件卡片，支持选中状态管理和灵活的布局配置。
 
 #### Props
 
@@ -150,28 +201,17 @@ function FileExample() {
 |------|------|---------|-------------|
 | `title` | `string` | `"文件列表"` | 列表标题 |
 | `files` | `FileItem[]` | `[]` | 文件列表数据 |
-| `selectedIds` | `Set<string> \| string[]` | `[]` | 选中的文件 ID |
-| `onSelectionChange` | `(selectedIds: Set<string>) => void` | - | 选中状态变化回调 |
+| `value` | `Set<string> \| string[]` | - | 选中的文件 ID（表单组件属性，推荐） |
+| `selectedIds` | `Set<string> \| string[]` | `[]` | 选中的文件 ID（已废弃，请使用 value） |
+| `onChange` | `(selectedIds: Set<string>) => void` | - | 选中状态变化回调（表单组件属性，推荐） |
+| `onSelectionChange` | `(selectedIds: Set<string>) => void` | - | 选中状态变化回调（已废弃，请使用 onChange） |
 | `onSelectAll` | `(select: boolean) => void` | - | 全选/取消全选回调 |
 | `onActionClick` | `(id: string) => void` | - | 操作按钮点击回调 |
+| `layout` | `"vertical" \| "horizontal"` | `"vertical"` | 布局方向（纵向或横向） |
+| `spacing` | `number \| string` | `16` (var(--gap-sm)) | 卡片间距，数字表示 px，字符串支持 CSS 变量 |
+| `bordered` | `boolean` | `false` | 是否显示边框 |
 | `multiSelect` | `boolean` | `true` | 是否支持多选 |
 | `className` | `string` | - | 自定义类名 |
-
-#### Example
-
-```tsx
-import { FileCardList, type FileItem } from "@/registry/wuhan/composed/file-card/file-card";
-
-function FileListExample() {
-  const files: FileItem[] = [
-    { id: "1", title: "项目需求文档.pdf", date: "2024-01-15" },
-    { id: "2", title: "设计稿.png", date: "2024-01-14" },
-    { id: "3", title: "数据统计表.xlsx", date: "2024-01-13" },
-  ];
-
-  return <FileCardList title="我的文件" files={files} />;
-}
-```
 
 ### FileItem
 
