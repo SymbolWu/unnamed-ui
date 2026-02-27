@@ -104,8 +104,25 @@ npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/style.json
 **第六步：安装 Welcome 组件（用于验证）**
 
 ```bash
-npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/welcome.json
+npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/welcome.json"
 ```
+
+**第七步：批量安装所有组件（可选）**
+
+如果想一次性安装所有组件（共 54 个），可以使用批量安装脚本：
+
+```bash
+# 方式 1: 下载并执行安装脚本（推荐）
+curl -O https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs
+node install-components.cjs https://unnamed-ui.vercel.app
+
+# 方式 2: 一行命令直接安装
+curl -fsSL https://raw.githubusercontent.com/your-username/unnamed-ui/main/apps/www/scripts/install/install-components.cjs | node - https://unnamed-ui.vercel.app
+```
+
+批量安装包含所有 54 个组件，约需 3-5 分钟。安装过程会自动覆盖已存在的文件，无需手动确认。
+
+> 如果只想安装特定组件，可以跳过此步骤，在需要时按照后续章节的说明逐个安装。
 
 ### 1.3 验证安装
 
@@ -144,15 +161,15 @@ export default function App() {
 **安装所需组件**（在项目根目录执行）：
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/page-header.json
+npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/page-header.json"
 ```
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/triple-split-pane.json
+npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/triple-split-pane.json"
 ```
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/sources-sidebar.json
+npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/sources-sidebar.json"
 ```
 
 **示例代码**（导入路径以 `components.json` 为准）：
@@ -194,7 +211,7 @@ export default function ProposalPage() {
 
 **目标**：实现消息问答交互，支持 AI 消息的**流式输出**。
 
-在对话区域中，我们将集成多种类型的 AI 响应能力。以下组件需先通过 `npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/<组件名>.json` 安装，详见各组件文档。
+在对话区域中，我们将集成多种类型的 AI 响应能力。以下组件需先通过 `npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/<组件名>.json"` 安装，详见各组件文档。
 
 ### 3.1 基础布局与输入
 
@@ -253,7 +270,7 @@ import { AIMessage } from "@/components/wuhan/composed/message";
 
 ## 4. UWS 组件 (UWS Components)
 
-在右侧或辅助区域，利用业务组件增强 Proposal 的信息密度。以下组件需先通过 `npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/<组件名>.json` 安装：
+在右侧或辅助区域，利用业务组件增强 Proposal 的信息密度。以下组件需先通过 `npx shadcn@latest add -y -o "https://unnamed-ui.vercel.app/r/wuhan/<组件名>.json"` 安装：
 
 - **折叠内容**: 使用 `Accordion`（`block-accordion.json`）收纳长文档。
 - **任务管理**: 使用 `Task Card`（`task-card.json`）或 `Task List`（`task-list.json`）展示关联任务。
