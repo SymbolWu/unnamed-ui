@@ -161,11 +161,7 @@ export function MessageFeedbackActions({
           onClick={handleCopy}
           disabled={!textToCopy}
         >
-          {copied ? (
-            <Check className="size-4" />
-          ) : (
-            <Copy className="size-4" />
-          )}
+          {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
         </IconButton>
         {role === "ai" && (
           <>

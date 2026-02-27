@@ -7,19 +7,67 @@ description: AI 原生应用的基础构建模块，按组件形态分类
 
 ## 分类概览
 
-| 形态 | 组件 | 说明 |
-|------|------|------|
-| **气泡/容器** | message, message-list, feedback, confirm-panel, dynamic-form, task-list, welcome, avatar-header, quote-content | 内容块 + 圆角背景，用于消息、表单、反馈等 |
-| **卡片** | report-card, document-card, file-card, goal-card, agent-card, select-card, task-card | 可选中、可交互的卡片，支持状态与进度 |
-| **列表** | attachment-list, component-panel, history-item | 列表、可编辑项 |
-| **折叠/步骤** | thinking-process, thinking-step-item, accordion, deep-thinking, execution-result | 可展开/折叠的步骤，用于 AI 思考过程展示 |
-| **输入控件** | block-input, block-select, checkbox, radio, upload, sender, sender-responsive | 表单控件与输入区 |
-| **按钮** | block-button, icon-button, toggle-button, quick-action, prompt, suggestion | 各类按钮与快捷操作 |
-| **布局** | sidebar, split-pane, page-header, divider, sources-sidebar | 页面布局与分割 |
-| **基础** | avatar, tag, status-tag, progress, tooltip, custom-sources | 基础 UI 元素 |
+<table>
+  <colgroup>
+    <col style={{ width: '140px' }} />
+    <col />
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>形态</th>
+      <th>组件</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>气泡/容器</strong></td>
+      <td>message, message-list, feedback, confirm-panel, dynamic-form, task-list, welcome, avatar-header, quote-content</td>
+      <td>内容块 + 圆角背景，用于消息、表单、反馈等</td>
+    </tr>
+    <tr>
+      <td><strong>卡片</strong></td>
+      <td>report-card, document-card, file-card, goal-card, agent-card, select-card, task-card</td>
+      <td>可选中、可交互的卡片，支持状态与进度</td>
+    </tr>
+    <tr>
+      <td><strong>列表</strong></td>
+      <td>attachment-list, component-panel, history-item</td>
+      <td>列表、可编辑项</td>
+    </tr>
+    <tr>
+      <td><strong>折叠/步骤</strong></td>
+      <td>thinking-process, thinking-step-item, accordion, deep-thinking, execution-result</td>
+      <td>可展开/折叠的步骤，用于 AI 思考过程展示</td>
+    </tr>
+    <tr>
+      <td><strong>输入控件</strong></td>
+      <td>block-input, block-select, checkbox, radio, upload, sender, sender-responsive</td>
+      <td>表单控件与输入区</td>
+    </tr>
+    <tr>
+      <td><strong>按钮</strong></td>
+      <td>block-button, icon-button, toggle-button, quick-action, prompt, suggestion</td>
+      <td>各类按钮与快捷操作</td>
+    </tr>
+    <tr>
+      <td><strong>布局</strong></td>
+      <td>sidebar, split-pane, page-header, divider, sources-sidebar</td>
+      <td>页面布局与分割</td>
+    </tr>
+    <tr>
+      <td><strong>基础</strong></td>
+      <td>avatar, tag, status-tag, progress, tooltip, custom-sources</td>
+      <td>基础 UI 元素</td>
+    </tr>
+  </tbody>
+</table>
 
 ## 使用说明
 
 - **Blocks** 为原语层，主要提供样式和布局，不含业务逻辑
 - **Composed** 为组合层，由 blocks 组合而成，包含完整交互逻辑
 - 从左侧导航按分类浏览，或使用搜索快速定位组件
+
+> **重要提示**：各组件文档中的示例代码路径（如 `@/components/...` 或 `@/registry/...`）需根据您项目的实际配置（如 `components.json`、路径别名等）进行调整，请勿直接复制使用。
