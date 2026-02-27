@@ -15,104 +15,32 @@ description: Unnamed UI 新手指南
 
 ## 1. 环境准备与安装
 
-在开始之前，请确保您的开发环境满足基础要求（参考现代前端标准）：
+在开始之前，请确保您的开发环境满足基础要求：
 
 - **Node.js**: 18 或更高版本
-- **React**: 19 (推荐) 或 18
-- **Next.js / Vite**: 支持 App Router 或标准 Vite 配置
+- **pnpm**（推荐）或 npm / yarn
 
-### 1.1 初始化项目
+### 1.1 推荐：使用 Unnamed UI 脚手架（最快）
 
-如果您是新项目，推荐使用 Vite 快速初始化（参考 Ant Design X 流程）：
+我们提供了开箱即用的 [Vite 脚手架](https://github.com/fancn21th/unnamed-ui-starter-template)，已预配置 Tailwind、PostCSS、shadcn 及 Unnamed UI 样式，省去繁琐的手动配置。
+
+**第一步：克隆并安装**
 
 ```bash
-npm create vite unnamed-demo --template react-ts
+git clone https://github.com/fancn21th/unnamed-ui-starter-template.git unnamed-demo
 cd unnamed-demo
-npm install
+pnpm install
 ```
 
-> 使用 `--template react-ts` 可生成 TypeScript 项目；若偏好 JavaScript，可改用 `--template react`。
-
-### 1.2 安装 Unnamed UI
-
-安装前需先完成样式环境配置，按以下顺序操作。
-
-**第一步：安装依赖**
-
-```bash
-npm install -D tailwindcss @tailwindcss/postcss postcss tw-animate-css
-```
-
-在项目根目录创建 `postcss.config.mjs`：
-
-```js
-const config = { plugins: ["@tailwindcss/postcss"] };
-export default config;
-```
-
-**第二步：配置 `tailwind.config.js`**
-
-在项目根目录新建 `tailwind.config.js`：
-
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
-}
-```
-
-**第三步：添加 Tailwind 导入**
-
-在 `src/index.css`（Vite）或 `app/globals.css`（Next.js）**最顶部**添加：
-
-```css
-@import "tailwindcss";
-@import "tw-animate-css";
-```
-
-**第四步：配置 `@/*` 路径别名**
-
-在根目录 `tsconfig.json` 的 `compilerOptions` 中添加（必须写在 `compilerOptions` 内部）：
-
-```json
-"baseUrl": ".",
-"paths": {
-  "@/*": ["./src/*"],
-  "@/components/*": ["./components/*"]
-}
-```
-
-> shadcn 会将组件安装到 `components/` 目录，添加 `@/components/*` 映射便于导入。若使用 project references（有 `tsconfig.app.json`），需在根 `tsconfig.json` 中同样添加；并在 `vite.config.ts` 中配置 `resolve.alias`，详见 [样式与主题](/docs/unnamed-ui/howto/styles)。
-
-**第五步：安装样式**
-
-```bash
-npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/style.json
-```
-
-首次执行会提示创建 `components.json`，选择 `yes`。
-
-> 样式安装后，需要将样式导入到你的全局样式文件中。  
-以 Next.js 为例，请在 `app/globals.css` 文件顶部引入（Vite 项目一般为 `src/index.css`）：
-
-```css
-@import "tailwindcss";
-@import "tw-animate-css";
-/* 根据实际情况修改路径，以项目为准 */
-@import "./components/globals.css"; 
-```
-
-**第六步：安装 Welcome 组件（用于验证）**
+**第二步：安装 Welcome 组件（用于验证）**
 
 ```bash
 npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/welcome.json
 ```
 
-### 1.3 验证安装
+**第三步：验证**
 
-在 `src/App.tsx` 中引入 Welcome 组件进行验证（导入路径以 `components.json` 为准，通常为 `@/components/...`）：
+在 `src/App.tsx` 中引入 Welcome 组件：
 
 ```tsx
 import { WelcomeMessage } from "@/components/wuhan/composed/welcome";
@@ -130,7 +58,110 @@ export default function App() {
 }
 ```
 
-若导入路径报错，请检查 `tsconfig.json` 的 `paths` 是否包含 `@/components/*` 映射；shadcn 初始化时通常会自动配置。
+运行 `pnpm dev`，若页面正常显示，说明环境已就绪。
+
+---
+
+### 1.2 可选：从零开始手动配置
+
+若需在现有项目或非 Vite 环境中集成，可参考以下步骤（已通过多轮验证）。
+
+> 若无现有项目，可先创建 Vite 项目：`npm create vite@latest 项目名 -- --template react-ts`，然后 `cd 项目名 && npm install`。
+
+**第一步：安装依赖**
+
+```bash
+npm install -D tailwindcss @tailwindcss/postcss postcss tw-animate-css
+```
+
+在项目根目录创建 `postcss.config.mjs`：
+
+```js
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+**第二步：添加 Tailwind 导入**
+
+在 `src/index.css`（Vite）或 `app/globals.css`（Next.js）**最顶部**添加：
+
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+```
+
+> Tailwind v4 采用 CSS-first 配置，无需 `tailwind.config.js`；若项目已有该文件可保留，shadcn 会读取。
+
+**第三步：配置 `@/*` 路径别名**
+
+shadcn 会将组件安装到 `src/components/`，路径别名需与之对应。
+
+在根目录 `tsconfig.json` 的 `compilerOptions` 中添加（Vite 默认使用 project references，根 `tsconfig.json` 可能仅有 `references`，此时需新增 `compilerOptions` 块，否则 shadcn init 会报错）：
+
+```json
+"baseUrl": ".",
+"paths": {
+  "@/*": ["./src/*"],
+  "@/components/*": ["./src/components/*"]
+}
+```
+
+若使用 project references，在 `tsconfig.app.json` 的 `compilerOptions` 中同样添加上述 `baseUrl` 和 `paths`。
+
+若使用 Vite，还需在 `vite.config.ts` 中配置 `resolve.alias`：
+
+```ts
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@/components": path.resolve(__dirname, "./src/components"),
+    },
+  },
+});
+```
+
+**第四步：初始化 shadcn 并安装样式**
+
+先创建 `components.json`（脚本/CI 场景必需；交互式场景下，首次 `add` 时选择 yes 创建亦可）：
+
+```bash
+npx shadcn@latest init --yes --src-dir --base-color neutral --no-base-style
+```
+
+再安装 Unnamed UI 样式：
+
+```bash
+npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/style.json -y -o
+```
+
+样式安装后，在 `src/index.css`（或 `app/globals.css`）顶部追加引入：
+
+```css
+@import "./components/globals.css";
+```
+
+> `globals.css` 会安装到 `src/components/`，故从 `src/index.css` 用 `@import "./components/globals.css"` 引用。若 style 安装时生成了 `src/postcss.config.mjs`，可删除，PostCSS 使用根目录配置即可。
+
+**第五步：安装 Welcome 组件（用于验证）**
+
+```bash
+npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/welcome.json -y -o
+```
+
+**注意事项与常见问题**
+
+- **init 报错 "No import alias found"**：在根 `tsconfig.json` 中补充 `compilerOptions.baseUrl` 和 `paths`。
+- **add 卡在 components.json 提示**：先执行 `shadcn init`，脚本/CI 场景下 `add -y` 无法跳过该提示。
+- **布局未占满视口**：在 `index.css` 中添加 `html, body, #root { height: 100%; }`。
+- **构建时 @keyframes 警告**：来自 globals.css，可忽略，不影响构建。
+- 使用 pnpm 时，将 `npm install` 替换为 `pnpm add`。
 
 ---
 
@@ -147,41 +178,67 @@ export default function App() {
 **安装所需组件**（在项目根目录执行）：
 
 ```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/page-header.json
-```
-
-```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/triple-split-pane.json
-```
-
-```bash
-npx shadcn@latest add http://localhost:3000/r/wuhan/sources-sidebar.json
+npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/page-header.json
+npx shadcn@latest add https://unnamed-ui.vercel.app/r/wuhan/triple-split-pane.json
 ```
 
 **示例代码**（导入路径以 `components.json` 为准）：
 
 ```tsx
-import { PageHeader } from "@/components/wuhan/composed/page-header";
 import { TripleSplitPane } from "@/components/wuhan/composed/triple-split-pane";
-import SourcesSidebar  from "@/components/wuhan/composed/sources-sidebar/sources-sidebar";
+import {
+  PageHeader,
+  PageHeaderUser,
+} from "@/components/wuhan/composed/page-header";
 
 export default function ProposalPage() {
   return (
-    <div className="h-screen flex flex-col">
-      {/* 顶部导航 */}
-      <PageHeader title="Proposal: 新手引导设计" />
-
-      {/* 主体布局：左侧对话，右侧素材/UWS */}
+    <div className="h-full p-3 flex flex-col gap-3 overflow-hidden bg-[var(--bg-neutral-light)]">
+      <PageHeader
+        logo={
+          <div className="flex items-center justify-center w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
+            <span className="text-white font-bold text-xs">AI</span>
+          </div>
+        }
+        title="Proposal: 新手引导设计"
+        actions={
+          <>
+            <PageHeaderUser
+              name="User"
+              avatarSrc="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop"
+            />
+          </>
+        }
+      />
       <TripleSplitPane
-        left={{ title: "对话", children: <div className="chat-container">{/* 对话区域 */}</div> }}
+        className="w-full flex-1 overflow-hidden"
+        left={{
+          title: "数据来源",
+          width: "240px",
+          collapsedWidth: "0px",
+          minWidth: "240px",
+          children: <div>数据来源</div>,
+          classNames: { body: "px-2 py-4" },
+        }}
+        leftPopover={{
+          enabled: true,
+          width: "240px",
+          height: "520px",
+          className: "px-2! py-4!",
+          content: <div>数据来源</div>,
+        }}
+        center={{
+          title: "对话",
+          minWidth: "280px",
+          children: <div>对话</div>,
+        }}
         right={{
           title: "UWS",
-          children: (
-            <SourcesSidebar
-              sources={[]}
-              onClose={() => {}}
-            />
-          ),
+          width: "360px",
+          collapsedWidth: "48px",
+          minWidth: "360px",
+          children: <div>工作空间</div>,
+          classNames: { body: "p-4" },
         }}
       />
     </div>
@@ -189,7 +246,7 @@ export default function ProposalPage() {
 }
 ```
 
-> `SourcesSidebar` 需要 `sources`、`onClose` 等 props，详见 [Sources Sidebar](/docs/blocks/layout/sources-sidebar) 文档。
+> 右侧 UWS 区域可替换为 `SourcesSidebar` 等组件，详见 [Sources Sidebar](/docs/blocks/layout/sources-sidebar) 文档。
 
 ---
 
