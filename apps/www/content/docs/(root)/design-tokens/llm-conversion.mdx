@@ -1,0 +1,131 @@
+---
+title: Figma 样式转 Tailwind（LLM 参考）
+description: 供大模型参考：将 Figma 复制的 CSS 变量转换为 Unnamed UI Tailwind className
+---
+
+本文档供 **AI 助手 / 大模型** 参考。当用户提供从 Figma 复制的 CSS 或样式代码时，请按以下规则将其转换为 Unnamed UI 项目中的 Tailwind `className`。
+
+---
+
+## 转换规则
+
+### 1. 输出格式
+
+- 输出为 React/JSX 的 `className` 字符串
+- 使用 Tailwind 任意值语法：`[var(--VariableName)]`
+- 不输出内联 `style`，全部用 `className`
+
+### 2. 变量名映射（Figma → Tailwind）
+
+| Figma/CSS 属性 | Tailwind 写法 |
+|----------------|---------------|
+| `background: var(--Container-bg-*)` | `bg-[var(--Container-bg-brand)]` 等（将 `*` 替换为具体语义） |
+| `color: var(--Text-text-*)` | `text-[var(--Text-text-primary)]` 等 |
+| `border-color: var(--Border-border-*)` | `border border-[var(--Border-border-neutral)]` 等（将 `*` 替换为具体语义如 neutral/brand） |
+| `box-shadow` 含 focusring | `focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)]` |
+| `border-radius` | `rounded-[var(--radius-md)]` 等 |
+
+### 3. 常用变量速查
+
+**背景：**
+- `--Container-bg-container` 容器背景
+- `--Container-bg-brand` 主按钮/品牌色
+- `--Container-bg-brand-light` 品牌浅色背景
+- `--Container-bg-brand-light-hover` 品牌浅色 hover
+- `--Container-bg-neutral-light` 中性浅色背景
+- `--Container-bg-neutral-light-hover` 中性浅色 hover
+- `--Container-bg-neutral` 深色中性背景
+- `--Container-bg-success` 成功色
+- `--Container-bg-error` 错误色
+- `--Page-bg-page` 页面背景
+
+**文字：**
+- `--Text-text-title` 标题
+- `--Text-text-primary` 正文
+- `--Text-text-secondary` 次要
+- `--Text-text-placeholder` 占位符
+- `--Text-text-brand` 品牌色文字
+- `--Text-text-inverse` 反色（白字）
+
+**边框：**
+- `--Border-border-neutral` 中性边框
+- `--Border-border-brand` 品牌边框
+- `--Border-divider-neutral-basic` 分割线
+
+**焦点：**
+- `--Focusring-focusring-brand` focus 环
+
+**圆角：**
+- `--radius-sm` 4px
+- `--radius-md` 6px
+- `--radius-lg` 8px
+- `--radius-xl` 12px
+
+### 4. 保留 var() 中的变量名
+
+- **不要** 将 `var(--Container-bg-brand-light-hover, #DFE9FF)` 替换为 `#DFE9FF`
+- **始终** 使用变量名：`var(--Container-bg-brand-light-hover)`
+- fallback 色值可忽略，输出时只写 `var(--VariableName)`
+
+### 5. 状态处理
+
+- `:hover` → `hover:bg-[var(--xxx-hover)]` 或对应 hover 变量
+- `:active` → `active:bg-[var(--xxx-active)]`
+- `:focus` → `focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)] focus:outline-none`
+- `:disabled` → `disabled:opacity-50 disabled:cursor-not-allowed`
+
+### 6. 色值到变量的推断
+
+当用户只提供 HEX 色值（如 `#DFE9FF`）时，根据用途推断变量：
+
+| 色值/用途 | 推断变量 |
+|-----------|----------|
+| 浅蓝背景、品牌相关 | `--Container-bg-brand-light` 或 `--Container-bg-brand-light-hover` |
+| 深蓝、主按钮 | `--Container-bg-brand` |
+| 灰背景 | `--Container-bg-neutral-light` 或 `--Container-bg-container` |
+| 深灰文字 | `--Text-text-primary` 或 `--Text-text-title` |
+| 浅灰文字 | `--Text-text-secondary` 或 `--Text-text-placeholder` |
+| 灰色边框 | `--Border-border-neutral` |
+| 成功绿 | `--Container-bg-success` / `--Text-text-success` |
+| 错误红 | `--Container-bg-error` / `--Text-text-error` |
+
+---
+
+## 转换示例
+
+### 输入（Figma 复制）
+
+```
+background: var(--Container-bg-brand-light-hover, #DFE9FF);
+color: var(--Text-text-primary, #403F4D);
+border: 1px solid var(--Border-border-neutral, #E1E0E7);
+border-radius: 6px;
+```
+
+### 输出（Tailwind className）
+
+```
+className="bg-[var(--Container-bg-brand-light-hover)] text-[var(--Text-text-primary)] border border-[var(--Border-border-neutral)] rounded-[var(--radius-md)]"
+```
+
+### 输入（含 hover）
+
+```
+background: #EDF2FF;
+hover: background: #DFE9FF;
+```
+
+### 输出
+
+```
+className="bg-[var(--Container-bg-brand-light)] hover:bg-[var(--Container-bg-brand-light-hover)]"
+```
+
+---
+
+## 注意事项
+
+1. **不硬编码颜色**：即使用户给的是 `#4A56FF`，也应转换为 `var(--Container-bg-brand)` 等变量
+2. **语义优先**：根据元素用途选变量，如按钮用 `Container-bg-brand`，链接用 `Text-text-brand`
+3. **保持简洁**：能合并的 Tailwind 类合并，如 `border border-[var(--Border-border-neutral)]`
+4. **响应式**：若设计稿有断点，使用 `sm:`、`md:` 等前缀

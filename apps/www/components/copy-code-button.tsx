@@ -220,8 +220,14 @@ function hexToHsl(hex: string): string {
   return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`
 }
 
-function isPaletteScaleVar(name: string): boolean {
+/** 旧版 palette 变量（如 brand-600、neutral-0，已移除，复制时不再使用） */
+function isLegacyPaletteVar(name: string): boolean {
   return /^(neutral|brand|success|warning|error)-\d+$/.test(name)
+}
+
+/** Figma  palette 变量（Light-Brand-brand-600 等），复制时优先使用 */
+function isFigmaPaletteVar(name: string): boolean {
+  return /^(Light|Dark)-(Neutral|Brand|Success|Warning|Error)-\w+-\d+$/.test(name)
 }
 
 function normalizeColorForCompare(value: string): string | null {
@@ -257,6 +263,7 @@ function normalizeColorForCompare(value: string): string | null {
 function buildBestVarByColor(vars: Record<string, string>): Map<string, string> {
   const out = new Map<string, string>()
   for (const [name, value] of Object.entries(vars)) {
+    if (isLegacyPaletteVar(name)) continue // 不再使用旧变量名
     const key = normalizeColorForCompare(value)
     if (!key) continue
     const existing = out.get(key)
@@ -264,8 +271,10 @@ function buildBestVarByColor(vars: Record<string, string>): Map<string, string> 
       out.set(key, name)
       continue
     }
-    // Prefer palette scales (brand-600 etc.) as alias targets.
-    if (isPaletteScaleVar(name) && !isPaletteScaleVar(existing)) {
+    // 优先使用 Figma 变量名，其次使用非旧版变量
+    if (isLegacyPaletteVar(existing)) {
+      out.set(key, name)
+    } else if (isFigmaPaletteVar(name) && !isFigmaPaletteVar(existing)) {
       out.set(key, name)
     }
   }
@@ -339,21 +348,10 @@ function getAllCSSVariables(isDark: boolean = false): Record<string, string> {
     "destructive", "destructive-foreground", "border", "input", "ring",
     "surface", "surface-foreground", "code", "code-foreground", "code-highlight", "code-number",
     "selection", "selection-foreground",
-    // Neutral colors
-    "neutral-0", "neutral-10", "neutral-50", "neutral-100", "neutral-200", "neutral-300",
-    "neutral-400", "neutral-500", "neutral-600", "neutral-700", "neutral-800", "neutral-900", "neutral-1000",
-    // Brand colors
-    "brand-50", "brand-100", "brand-200", "brand-300", "brand-400", "brand-500",
-    "brand-600", "brand-700", "brand-800", "brand-900", "brand-1000",
-    // Success colors
-    "success-50", "success-100", "success-200", "success-300", "success-400", "success-500",
-    "success-600", "success-700", "success-800", "success-900", "success-1000", "success", "success-foreground",
-    // Warning colors
-    "warning-50", "warning-100", "warning-200", "warning-300", "warning-400", "warning-500",
-    "warning-600", "warning-700", "warning-800", "warning-900", "warning-1000", "warning-10000", "warning", "warning-foreground",
-    // Error colors
-    "error-50", "error-100", "error-200", "error-300", "error-400", "error-500",
-    "error-600", "error-700", "error-800", "error-900", "error-1000", "error-10000", "error", "error-foreground",
+    // Figma 原语变量（从 stylesheet 读取，此处仅作 fallback 补充）
+    "Light-Neutral-neutral-0", "Light-Brand-brand-600", "Dark-Neutral-neutral-0", "Dark-Brand-brand-600",
+    // 语义变量
+    "success", "success-foreground", "warning", "warning-foreground", "error", "error-foreground",
     // Text colors
     "text-primary", "text-secondary", "text-tertiary", "text-disable", "text-placeholder",
     "text-brand", "text-brand-hover", "text-brand-active", "text-title", "text-inverse",
@@ -469,7 +467,7 @@ function getThemeCodeOKLCH(
         if (best && best !== key) {
           return "  --" + key + ": var(--" + best + ");"
         }
-        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+        if (isFigmaPaletteVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
           const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
           return "  --" + key + ": " + oklch + ";"
         }
@@ -487,7 +485,7 @@ function getThemeCodeOKLCH(
         if (best && best !== key) {
           return "  --" + key + ": var(--" + best + ");"
         }
-        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+        if (isFigmaPaletteVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
           const oklch = value.startsWith("oklch(") ? value : hexToOklch(value || "#000000")
           return "  --" + key + ": " + oklch + ";"
         }
@@ -523,14 +521,14 @@ function getThemeCodeHSLV4(
         if (best && best !== key) {
           return "  --" + key + ": var(--" + best + ");"
         }
-        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+        if (isFigmaPaletteVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
           // hexToHsl returns "H S% L%"; wrap into hsl(...)
           const hslTriplet = value.startsWith("hsl(") ? value : hexToHsl(value || "#000000")
           const out = value.startsWith("hsl(") ? value : `hsl(${hslTriplet})`
           return "  --" + key + ": " + out + ";"
         }
         // If user provided raw "H S% L%" value, wrap it.
-        if (isPaletteScaleVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
+        if (isFigmaPaletteVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
           return "  --" + key + ": hsl(" + value + ");"
         }
         return "  --" + key + ": " + value + ";"
@@ -547,12 +545,12 @@ function getThemeCodeHSLV4(
         if (best && best !== key) {
           return "  --" + key + ": var(--" + best + ");"
         }
-        if (isPaletteScaleVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
+        if (isFigmaPaletteVar(key) && (value.match(/^#[0-9A-Fa-f]{3,6}$/) || value.match(/^rgba?\(/))) {
           const hslTriplet = value.startsWith("hsl(") ? value : hexToHsl(value || "#000000")
           const out = value.startsWith("hsl(") ? value : `hsl(${hslTriplet})`
           return "  --" + key + ": " + out + ";"
         }
-        if (isPaletteScaleVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
+        if (isFigmaPaletteVar(key) && value.includes("%") && !value.startsWith("hsl(")) {
           return "  --" + key + ": hsl(" + value + ");"
         }
         return "  --" + key + ": " + value + ";"
@@ -1033,10 +1031,6 @@ export function CopyCodeButton({
           </Button>
         </DrawerTrigger>
         <DrawerContent className="h-auto">
-          <DrawerHeader>
-            <DrawerTitle className="capitalize">{colorTheme}</DrawerTitle>
-            <DrawerDescription>{description}</DrawerDescription>
-          </DrawerHeader>
           <CustomizerCode themeName={colorTheme} overridesByMode={overridesByMode} />
         </DrawerContent>
       </Drawer>
@@ -1054,10 +1048,6 @@ export function CopyCodeButton({
           </Button>
         </DialogTrigger>
         <DialogContent className="rounded-[var(--radius-xl)] border-none bg-clip-padding shadow-2xl ring-4 ring-neutral-200/80 outline-none md:max-w-2xl dark:bg-neutral-800 dark:ring-neutral-900">
-          <DialogHeader>
-            <DialogTitle className="capitalize">{colorTheme}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
-          </DialogHeader>
           <CustomizerCode themeName={colorTheme} overridesByMode={overridesByMode} />
         </DialogContent>
       </Dialog>
