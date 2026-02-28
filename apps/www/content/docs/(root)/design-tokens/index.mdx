@@ -1,0 +1,237 @@
+---
+title: 设计变量使用指南
+description: 从 Figma 复制样式到 Tailwind：理解并正确使用设计变量
+---
+
+当您从 Figma 设计稿复制样式时，经常会看到类似 `background: var(--Container-bg-brand-light-hover, #DFE9FF)` 的代码。本文档帮助您理解这些变量的含义，并在 Tailwind CSS 中正确使用它们。
+
+## 目录
+
+1. [从设计稿到代码](#1-从设计稿到代码)
+2. [变量命名规则](#2-变量命名规则)
+3. [常用变量速查表](#3-常用变量速查表)
+4. [在 Tailwind 中使用](#4-在-tailwind-中使用)
+5. [常见场景示例](#5-常见场景示例)
+6. [主题与深浅色](#6-主题与深浅色)
+7. [常见问题](#7-常见问题)
+
+---
+
+## 1. 从设计稿到代码
+
+### 为什么是变量而不是颜色值？
+
+Figma 导出的代码通常长这样：
+
+```css
+background: var(--Container-bg-brand-light-hover, #DFE9FF);
+```
+
+- **`var(--Container-bg-brand-light-hover)`**：设计变量名，会随主题（浅色/深色）自动切换
+- **`#DFE9FF`**：fallback 兜底色，当变量未加载时显示
+
+**重要**：请始终使用变量名，不要直接写 `#DFE9FF`。否则切换主题时颜色不会变化。
+
+---
+
+## 2. 变量命名规则
+
+变量名采用 **「类别-用途-语义」** 结构，便于从名称推断用途。
+
+### 类别前缀
+
+| 前缀 | 含义 | 典型用途 |
+|------|------|----------|
+| `Container` | 容器/背景 | 卡片、按钮、输入框背景 |
+| `Text` | 文字颜色 | 标题、正文、占位符 |
+| `Border` | 边框 | 分割线、输入框边框 |
+| `Focusring` | 焦点环 | 输入框 focus 高亮 |
+| `Page` | 页面级 | 页面背景、次级背景 |
+
+### 语义后缀
+
+| 后缀 | 含义 | 示例 |
+|------|------|------|
+| `-brand` | 品牌色 | 主按钮、链接 |
+| `-neutral` | 中性色 | 背景、边框、正文 |
+| `-success` | 成功色 | 成功状态、确认 |
+| `-warning` | 警告色 | 警告提示 |
+| `-error` | 错误色 | 错误提示、危险操作 |
+| `-light` | 浅色变体 | 次要背景、hover 前 |
+| `-light-hover` | 浅色 hover | 悬停时背景 |
+| `-light-active` | 浅色 active | 按下时背景 |
+
+### 命名示例
+
+- `--Container-bg-brand`：品牌色背景（主按钮）
+- `--Container-bg-brand-light-hover`：品牌色浅色背景的 hover 态
+- `--Text-text-primary`：主要文字颜色
+- `--Border-border-neutral`：中性色边框
+
+---
+
+## 3. 常用变量速查表
+
+### 背景 (Container-bg-xxx，xxx 为 container、brand、neutral 等)
+
+| 变量名 | 用途 |
+|--------|------|
+| `--Container-bg-container` | 卡片、弹窗等容器背景 |
+| `--Container-bg-container-secondary` | 次级容器背景 |
+| `--Container-bg-brand` | 主按钮、品牌色块 |
+| `--Container-bg-brand-light` | 品牌色浅色背景 |
+| `--Container-bg-brand-light-hover` | 品牌色浅色 hover |
+| `--Container-bg-neutral-light` | 中性浅色背景 |
+| `--Container-bg-neutral-light-hover` | 中性浅色 hover |
+| `--Container-bg-neutral` | 深色中性背景（深色按钮） |
+| `--Container-bg-success` | 成功色背景 |
+| `--Container-bg-error` | 错误色背景 |
+| `--Page-bg-page` | 页面主背景 |
+| `--Page-bg-page-secondary` | 页面次级背景 |
+
+### 文字 (Text-text-*)
+
+| 变量名 | 用途 |
+|--------|------|
+| `--Text-text-title` | 标题 |
+| `--Text-text-primary` | 主要正文 |
+| `--Text-text-secondary` | 次要文字 |
+| `--Text-text-tertiary` | 辅助文字 |
+| `--Text-text-placeholder` | 占位符 |
+| `--Text-text-brand` | 品牌色文字（链接） |
+| `--Text-text-inverse` | 反色文字（深色背景上的白字） |
+
+### 边框 (Border-border-*，* 为 neutral/brand 等)
+
+| 变量名 | 用途 |
+|--------|------|
+| `--Border-border-neutral` | 中性边框 |
+| `--Border-border-brand` | 品牌色边框 |
+| `--Border-divider-neutral-basic` | 分割线 |
+| `--Border-divider-neutral-strong` | 强调分割线 |
+
+### 焦点环 (Focusring-focusring-*)
+
+| 变量名 | 用途 |
+|--------|------|
+| `--Focusring-focusring-brand` | 输入框 focus 高亮 |
+| `--Focusring-focusring-error` | 错误态 focus |
+
+---
+
+## 4. 在 Tailwind 中使用
+
+Tailwind 通过 **任意值语法** `[var(--xxx)]` 使用 CSS 变量。
+
+### 基本写法
+
+```tsx
+// 背景
+className="bg-[var(--Container-bg-brand)]"
+
+// 文字
+className="text-[var(--Text-text-primary)]"
+
+// 边框
+className="border border-[var(--Border-border-neutral)]"
+
+// 圆角（使用 radius 变量）
+className="rounded-[var(--radius-lg)]"
+```
+
+### 状态变体
+
+```tsx
+// hover
+className="bg-[var(--Container-bg-neutral-light)] hover:bg-[var(--Container-bg-neutral-light-hover)]"
+
+// focus
+className="focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)] focus:border-[var(--Border-border-brand)]"
+
+// active
+className="active:bg-[var(--Container-bg-brand-light-active)]"
+```
+
+### 与 shadcn 的关系
+
+项目中的 shadcn 组件使用语义化别名（如 `--primary`、`--muted`），这些别名底层指向上述 Figma 变量。因此：
+
+- **使用 shadcn 组件时**：可直接用 `bg-primary`、`text-muted-foreground` 等
+- **自定义样式时**：使用 `bg-[var(--Container-bg-brand)]` 等精确控制
+
+---
+
+## 5. 常见场景示例
+
+### 主按钮
+
+```tsx
+<button className="bg-[var(--Container-bg-brand)] text-[var(--Text-text-inverse)] hover:bg-[var(--Container-bg-brand-hover)] active:bg-[var(--Container-bg-brand-active)] rounded-[var(--radius-md)] px-4 py-2">
+  确认
+</button>
+```
+
+### 次要按钮（浅色背景）
+
+```tsx
+<button className="bg-[var(--Container-bg-neutral-light)] text-[var(--Text-text-primary)] hover:bg-[var(--Container-bg-neutral-light-hover)] active:bg-[var(--Container-bg-neutral-light-active)] border border-[var(--Border-border-neutral)] rounded-[var(--radius-md)] px-4 py-2">
+  取消
+</button>
+```
+
+### 输入框
+
+```tsx
+<input
+  className="w-full border border-[var(--Border-border-neutral)] rounded-[var(--radius-md)] px-3 py-2 text-[var(--Text-text-primary)] placeholder:text-[var(--Text-text-placeholder)] focus:outline-none focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)] focus:border-[var(--Border-border-brand)]"
+  placeholder="请输入"
+/>
+```
+
+### 卡片
+
+```tsx
+<div className="bg-[var(--Container-bg-container)] border border-[var(--Border-border-neutral)] rounded-[var(--radius-lg)] p-4">
+  <h3 className="text-[var(--Text-text-title)] mb-2">标题</h3>
+  <p className="text-[var(--Text-text-secondary)]">内容</p>
+</div>
+```
+
+### 品牌色链接
+
+```tsx
+<a href="#" className="text-[var(--Text-text-brand)] hover:text-[var(--Text-text-brand-hover)]">
+  查看详情
+</a>
+```
+
+---
+
+## 6. 主题与深浅色
+
+变量会随 `data-theme="light"` 或 `data-theme="dark"` 自动切换。确保您的应用根元素或 `.theme-container` 正确设置了主题，变量即可生效。
+
+- **不要** 在代码中写死 `#DFE9FF` 等颜色值
+- **始终** 使用 `var(--Container-bg-brand-light-hover)` 等形式
+
+---
+
+## 7. 常见问题
+
+### 变量不生效、显示为空白？
+
+1. 确认已引入 Unnamed UI 的 `globals.css`
+2. 确认元素在 `.theme-container` 内（或根元素已应用主题）
+3. 检查变量名拼写是否正确（区分大小写）
+
+### 设计稿只有色值，没有变量名？
+
+参考 [常用变量速查表](#3-常用变量速查表)，根据用途选择最接近的变量。例如浅蓝色背景通常是 `--Container-bg-brand-light` 或 `--Container-bg-brand-light-hover`。
+
+### 如何自定义主题色？
+
+可使用主题工作台（Theme Studio）或直接修改 `globals.css` 中的变量定义。详见新手指南中的 [Token 定制说明](/docs/starter#token-定制)。
+
+### 需要把 Figma 复制的 CSS 转成 Tailwind？
+
+可将复制的内容提供给 AI 助手，并附上 [Figma 样式转 Tailwind（LLM 参考）](/docs/design-tokens/llm-conversion) 作为参考，让模型按规范输出 Tailwind className。也可使用项目中的 `docs/llm/design-tokens-conversion-prompt.md` 将提示词复制到 AI 对话中。
