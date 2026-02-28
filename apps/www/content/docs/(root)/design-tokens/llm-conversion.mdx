@@ -24,6 +24,10 @@ description: 供大模型参考：将 Figma 复制的 CSS 变量转换为 Unname
 | `border-color: var(--Border-border-*)` | `border border-[var(--Border-border-neutral)]` 等（将 `*` 替换为具体语义如 neutral/brand） |
 | `box-shadow` 含 focusring | `focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)]` |
 | `border-radius` | `rounded-[var(--radius-md)]` 等 |
+| `font-size` | `font-size-2`（预定义类）或 `text-[length:var(--font-size-2)]`，**不要**用 `text-[var(--font-size-2)]`（易与颜色混淆） |
+| `line-height` | `leading-[var(--line-height-2)]` |
+
+**font-size 与 line-height 顺序**：`leading-[...]` 在前，font-size 在后，例如 `leading-[var(--line-height-2)] font-size-2`。
 
 ### 3. 常用变量速查
 
@@ -60,6 +64,10 @@ description: 供大模型参考：将 Figma 复制的 CSS 变量转换为 Unname
 - `--radius-md` 6px
 - `--radius-lg` 8px
 - `--radius-xl` 12px
+
+**字号与行高：**
+- `font-size-1`～`font-size-6`：预定义类（12px～28px），或 `text-[length:var(--font-size-2)]`
+- `leading-[var(--line-height-2)]`：行高，与 font-size 同时使用时放前面
 
 ### 4. 保留 var() 中的变量名
 
