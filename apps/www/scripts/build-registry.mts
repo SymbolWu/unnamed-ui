@@ -155,9 +155,12 @@ async function buildRegistryJsonFile(styleName: string) {
   // 3. Fix the path for registry items and convert block dependencies to full URLs.
   // Get the base URL for the registry (can be configured via environment variable)
   // This matches the logic in code-block-command.tsx but for build-time (no window.location.origin)
-  // Priority: NEXT_PUBLIC_SITE_URL > VERCEL_URL (auto-set by Vercel) > REGISTRY_BASE_URL > localhost
+  // Priority: NEXT_PUBLIC_SITE_URL > VERCEL_PROJECT_PRODUCTION_URL > VERCEL_URL > REGISTRY_BASE_URL > localhost
+  // Note: VERCEL_PROJECT_PRODUCTION_URL gives stable production domain (e.g., unnamed-ui.vercel.app)
+  //       VERCEL_URL gives per-deployment preview domain (e.g., unnamed-pe8wx5co4-fanyjs-projects.vercel.app)
   const registryBaseUrl = 
     process.env.NEXT_PUBLIC_SITE_URL ?? 
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined) ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined) ??
     process.env.REGISTRY_BASE_URL ?? 
     "http://localhost:3000"
