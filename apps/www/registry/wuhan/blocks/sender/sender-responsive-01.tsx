@@ -141,8 +141,7 @@ ResponsiveInputRow.displayName = "ResponsiveInputRow";
 // ==================== 响应式文本域 ====================
 
 const SINGLE_LINE_MIN_HEIGHT = 30;
-const MULTI_LINE_HEIGHT = 120;
-const MULTI_LINE_MAX_HEIGHT = 200;
+const MAX_LINES = 5;
 
 export const ResponsiveTextarea = React.forwardRef<
   HTMLTextAreaElement,
@@ -161,10 +160,16 @@ export const ResponsiveTextarea = React.forwardRef<
   const [singleLineHeight, setSingleLineHeight] = React.useState(
     SINGLE_LINE_MIN_HEIGHT,
   );
+  const [contentHeight, setContentHeight] = React.useState(
+    SINGLE_LINE_MIN_HEIGHT,
+  );
+  const [multiLineMaxHeight, setMultiLineMaxHeight] = React.useState(120);
   const onOverflowChangeRef = React.useRef(onOverflowChange);
   onOverflowChangeRef.current = onOverflowChange;
 
   const singleLineWidthRef = React.useRef<number>(0);
+  const rafRef = React.useRef<number | null>(null);
+  const lastHeightsRef = React.useRef({ single: 0, content: 0, multiMax: 0 });
 
   const runCheck = React.useCallback(
     (textarea: HTMLTextAreaElement, measureWidth: number) => {
@@ -182,16 +187,35 @@ export const ResponsiveTextarea = React.forwardRef<
       const lineHeight = parseFloat(cs.lineHeight) || 20;
       const pt = parseFloat(cs.paddingTop) || 0;
       const pb = parseFloat(cs.paddingBottom) || 0;
-      const contentHeight = scrollHeight - pt - pb;
-      const lines = Math.ceil(contentHeight / lineHeight) || 1;
+      const contentHeightCalc = scrollHeight - pt - pb;
+      const lines = Math.ceil(contentHeightCalc / lineHeight) || 1;
 
       // 单行高度取 lineHeight+padding 与实测 scrollHeight 的较大值，避免硬编码导致滚动条
       const oneLineHeight = Math.ceil(lineHeight + pt + pb);
-      const newHeight = Math.max(
+      const newSingleHeight = Math.max(
         SINGLE_LINE_MIN_HEIGHT,
         lines === 1 ? Math.max(oneLineHeight, scrollHeight) : oneLineHeight,
       );
-      setSingleLineHeight(newHeight);
+      const fiveLineHeight = Math.ceil(lineHeight * MAX_LINES + pt + pb);
+      const newContentHeight = Math.min(
+        Math.max(scrollHeight, newSingleHeight),
+        fiveLineHeight,
+      );
+
+      // 仅当值变化时 setState，避免 ResizeObserver 触发循环和闪烁
+      const last = lastHeightsRef.current;
+      if (last.single !== newSingleHeight) {
+        last.single = newSingleHeight;
+        setSingleLineHeight(newSingleHeight);
+      }
+      if (last.multiMax !== fiveLineHeight) {
+        last.multiMax = fiveLineHeight;
+        setMultiLineMaxHeight(fiveLineHeight);
+      }
+      if (last.content !== newContentHeight) {
+        last.content = newContentHeight;
+        setContentHeight(newContentHeight);
+      }
       onOverflowChangeRef.current?.(lines > 1);
     },
     [],
@@ -202,12 +226,9 @@ export const ResponsiveTextarea = React.forwardRef<
     if (!textarea) return;
 
     const checkHeight = () => {
-      const width =
-        isOverflow && singleLineWidthRef.current > 0
-          ? singleLineWidthRef.current
-          : textarea.offsetWidth;
+      // 多行时用实际显示宽度测量，确保高度与当前换行一致，避免多余空白行
       if (!isOverflow) singleLineWidthRef.current = textarea.offsetWidth;
-      runCheck(textarea, width);
+      runCheck(textarea, textarea.offsetWidth);
     };
 
     checkHeight();
@@ -221,18 +242,18 @@ export const ResponsiveTextarea = React.forwardRef<
     textarea.addEventListener("input", handleInput);
 
     const resizeObserver = new ResizeObserver(() => {
-      if (!isOverflow) singleLineWidthRef.current = textarea.offsetWidth;
-      runCheck(
-        textarea,
-        isOverflow && singleLineWidthRef.current > 0
-          ? singleLineWidthRef.current
-          : textarea.offsetWidth,
-      );
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        if (!isOverflow) singleLineWidthRef.current = textarea.offsetWidth;
+        runCheck(textarea, textarea.offsetWidth);
+      });
     });
     resizeObserver.observe(textarea);
 
     return () => {
       textarea.removeEventListener("input", handleInput);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       resizeObserver.disconnect();
     };
   }, [runCheck, isOverflow]);
@@ -255,7 +276,7 @@ export const ResponsiveTextarea = React.forwardRef<
       <Textarea
         ref={setRef}
         className={cn(
-          "p-1 border !border-[transparent] rounded resize-none overflow-auto",
+          "p-1 border !border-[transparent] rounded resize-none",
           "shadow-none focus-visible:ring-0",
           "text-sm",
           "caret-[var(--primary)]",
@@ -266,13 +287,19 @@ export const ResponsiveTextarea = React.forwardRef<
         style={{
           minHeight: `${singleLineHeight}px`,
           height: isOverflow
-            ? `${MULTI_LINE_HEIGHT}px`
+            ? `${contentHeight}px`
             : `${singleLineHeight}px`,
           maxHeight: isOverflow
-            ? `${MULTI_LINE_MAX_HEIGHT}px`
+            ? `${multiLineMaxHeight}px`
             : `${singleLineHeight}px`,
           width: isOverflow ? "100%" : "auto",
           flex: isOverflow ? "none" : "1",
+          overflowX: "hidden",
+          overflowY: isOverflow
+            ? contentHeight >= multiLineMaxHeight
+              ? "auto"
+              : "hidden"
+            : "hidden",
         }}
         {...props}
       />

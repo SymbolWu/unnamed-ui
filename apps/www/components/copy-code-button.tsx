@@ -640,10 +640,52 @@ function ColorIndicator({ color }: { color: string }) {
   )
 }
 
-function CustomizerCode({ themeName }: { themeName: string }) {
+function getOverridesOnlyCss(overridesByMode: {
+  light: Record<string, string>;
+  dark: Record<string, string>;
+}): string {
+  const lightEntries = Object.entries(overridesByMode.light)
+    .filter(([, v]) => v && v.trim())
+    .sort(([a], [b]) => a.localeCompare(b));
+  const darkEntries = Object.entries(overridesByMode.dark)
+    .filter(([, v]) => v && v.trim())
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  const parts: string[] = [];
+  if (lightEntries.length > 0) {
+    const lines = lightEntries.map(([k, v]) => `  --${k}: ${v};`).join("\n");
+    parts.push(`:root {\n${lines}\n}`);
+  }
+  if (darkEntries.length > 0) {
+    const lines = darkEntries.map(([k, v]) => `  --${k}: ${v};`).join("\n");
+    parts.push(`.dark {\n${lines}\n}`);
+  }
+  if (parts.length === 0) return "";
+  return parts.join("\n\n") + "\n";
+}
+
+type OverridesByMode = {
+  light: Record<string, string>;
+  dark: Record<string, string>;
+};
+
+function CustomizerCode({
+  themeName,
+  overridesByMode,
+}: {
+  themeName: string;
+  overridesByMode?: OverridesByMode;
+}) {
   const [hasCopied, setHasCopied] = React.useState(false)
   const [tailwindVersion, setTailwindVersion] = React.useState("v4-oklch")
   const { resolvedTheme } = useTheme()
+
+  // 仅输出用户修改的变量（与 Copy 图标一致）
+  const overridesOnlyCode = React.useMemo(
+    () => (overridesByMode ? getOverridesOnlyCss(overridesByMode) : null),
+    [overridesByMode],
+  )
+  const hasOverrides = Boolean(overridesOnlyCode && overridesOnlyCode.trim())
   
   // Get radius value from CSS (keep original value)
   const radiusValue = React.useMemo(() => {
@@ -776,6 +818,71 @@ function CustomizerCode({ themeName }: { themeName: string }) {
     URL.revokeObjectURL(url)
   }
 
+  // 有 overrides 时：仅输出用户修改的变量，简化 UI
+  if (overridesByMode !== undefined) {
+    if (!hasOverrides) {
+      return (
+        <div className="text-muted-foreground rounded-lg border border-dashed px-4 py-8 text-center text-sm">
+          <p>暂无修改</p>
+          <p className="mt-1 text-xs">
+            在颜色、基础色卡或其他面板中调整变量后可复制
+          </p>
+        </div>
+      )
+    }
+    return (
+      <figure className="!mx-0 mt-0 rounded-[var(--radius-lg)]">
+        <figcaption className="text-code-foreground [&_svg]:text-code-foreground flex items-center gap-2 [&_svg]:size-4 [&_svg]:opacity-70">
+          <Icons.css className="fill-foreground" />
+          theme.css
+        </figcaption>
+        <p className="text-muted-foreground mb-2 text-xs">
+          粘贴到 theme.css，在入口最后引入
+        </p>
+        <pre className="no-scrollbar max-h-[300px] min-w-0 overflow-x-auto px-4 py-3.5 outline-none md:max-h-[450px] relative">
+          <div className="absolute top-3 right-2 z-10 flex gap-1">
+            <Button
+              data-slot="copy-button"
+              size="icon"
+              variant="ghost"
+              className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+              onClick={() => {
+                navigator.clipboard.writeText(overridesOnlyCode!)
+                setHasCopied(true)
+              }}
+            >
+              <span className="sr-only">Copy</span>
+              {hasCopied ? <Check className="size-4" /> : <Copy className="size-4" />}
+            </Button>
+            <Button
+              data-slot="download-button"
+              size="icon"
+              variant="ghost"
+              className="bg-code text-code-foreground size-7 shadow-none hover:opacity-100 focus-visible:opacity-100"
+              onClick={() => {
+                const blob = new Blob([overridesOnlyCode!], { type: "text/css" })
+                const url = URL.createObjectURL(blob)
+                const a = document.createElement("a")
+                a.href = url
+                a.download = "theme.css"
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                URL.revokeObjectURL(url)
+              }}
+            >
+              <span className="sr-only">Download</span>
+              <Download className="size-4" />
+            </Button>
+          </div>
+          <code className="text-code-foreground whitespace-pre">
+            {overridesOnlyCode}
+          </code>
+        </pre>
+      </figure>
+    )
+  }
+
   return (
     <>
       <Tabs
@@ -900,8 +1007,11 @@ function CustomizerCode({ themeName }: { themeName: string }) {
 
 export function CopyCodeButton({
   className,
+  overridesByMode,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: React.ComponentProps<typeof Button> & {
+  overridesByMode?: OverridesByMode;
+}) {
   let { activeTheme: activeThemeName = "neutral" } = useThemeConfig()
   activeThemeName = activeThemeName === "default" ? "neutral" : activeThemeName
   
@@ -909,6 +1019,10 @@ export function CopyCodeButton({
   const colorTheme = activeThemeName.split(" ").find(t => 
     ["neutral", "brand", "success", "warning", "error"].includes(t)
   ) || "neutral"
+
+  const description = overridesByMode
+    ? "复制你修改的变量，粘贴到 theme.css 并在入口最后引入。"
+    : "Copy and paste the following code into your CSS file."
 
   return (
     <>
@@ -921,11 +1035,9 @@ export function CopyCodeButton({
         <DrawerContent className="h-auto">
           <DrawerHeader>
             <DrawerTitle className="capitalize">{colorTheme}</DrawerTitle>
-            <DrawerDescription>
-              Copy and paste the following code into your CSS file.
-            </DrawerDescription>
+            <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-          <CustomizerCode themeName={colorTheme} />
+          <CustomizerCode themeName={colorTheme} overridesByMode={overridesByMode} />
         </DrawerContent>
       </Drawer>
       <Dialog>
@@ -944,11 +1056,9 @@ export function CopyCodeButton({
         <DialogContent className="rounded-[var(--radius-xl)] border-none bg-clip-padding shadow-2xl ring-4 ring-neutral-200/80 outline-none md:max-w-2xl dark:bg-neutral-800 dark:ring-neutral-900">
           <DialogHeader>
             <DialogTitle className="capitalize">{colorTheme}</DialogTitle>
-            <DialogDescription>
-              Copy and paste the following code into your CSS file.
-            </DialogDescription>
+            <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
-          <CustomizerCode themeName={colorTheme} />
+          <CustomizerCode themeName={colorTheme} overridesByMode={overridesByMode} />
         </DialogContent>
       </Dialog>
     </>
