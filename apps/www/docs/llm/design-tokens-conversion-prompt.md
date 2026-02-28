@@ -18,7 +18,9 @@
    - border-color → border border-[var(--Border-border-neutral)] 等
    - focus ring → focus:ring-2 focus:ring-[var(--Focusring-focusring-brand)]
    - border-radius → rounded-[var(--radius-md)]
-4. 常用变量：Container-bg-brand, Container-bg-brand-light-hover, Text-text-primary, Text-text-secondary, Border-border-neutral, Focusring-focusring-brand
+   - font-size → font-size-2（预定义类）或 text-[length:var(--font-size-2)]，不要用 text-[var(--font-size-2)]
+   - line-height → leading-[var(--line-height-2)]，与 font-size 同时使用时 leading 放前面
+4. 常用变量：Container-bg-brand, Text-text-primary, Border-border-neutral, font-size-1～6, line-height-1～9
 5. 圆角：--radius-sm(4px), --radius-md(6px), --radius-lg(8px)
 6. hover/active 用对应 -hover/-active 后缀变量
 ```
