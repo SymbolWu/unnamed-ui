@@ -131,7 +131,6 @@ export const AccordionTriggerPrimitive = React.forwardRef<
             "font-size-2",
             "group flex flex-1 items-center justify-between gap-2",
             "text-left transition-all outline-none",
-            "hover:bg-[var(--Container-bg-neutral-light-hover)]",
             "focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
           )}
           {...props}

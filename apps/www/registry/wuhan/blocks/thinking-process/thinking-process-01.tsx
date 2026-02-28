@@ -340,6 +340,7 @@ const ThinkingStepHeaderPrimitive = React.forwardRef<
           "cursor-pointer",
           "transition-colors",
           "gap-[var(--Gap-gap-sm)]",
+          "justify-start",
           className,
         )}
         {...props}
